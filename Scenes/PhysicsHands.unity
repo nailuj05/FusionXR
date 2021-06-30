@@ -6452,6 +6452,7 @@ MonoBehaviour:
   releaseThreshold: 0.4
   grabPoints:
   - {fileID: 1063976761}
+  - {fileID: 1509801747}
 --- !u!54 &3691421086489835618
 Rigidbody:
   m_ObjectHideFlags: 0

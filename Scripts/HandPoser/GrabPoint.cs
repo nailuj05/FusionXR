@@ -18,7 +18,7 @@ namespace Fusion.XR
 
         public GrabPointType grabPointType;
 
-        public bool isActive;
+       public bool isActive = true;
 
         public bool hasCustomPose;
         public HandPose pose;
