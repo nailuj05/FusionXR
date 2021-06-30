@@ -41,6 +41,8 @@ namespace Fusion.XR
         [Header("Hand State")]
         public InputActionReference pinchReference;
         public InputActionReference grabReference;
+        public Hand hand;
+        private HandPose currentCustomPose;
 
         [Header("Debug Hand State")]
         private float pinchValue;
@@ -63,7 +65,9 @@ namespace Fusion.XR
 
             if (isAttached)
             {
-                renderHand.transform.position = attachedObj.TransformPoint(-palm.localPosition);
+                Vector3 palmOffset = -palm.localPosition;
+
+                renderHand.transform.position = attachedObj.TransformPoint(palmOffset); //Change this for left hand (?)
                 renderHand.transform.rotation = attachedObj.transform.rotation;
             }
 
@@ -155,6 +159,8 @@ namespace Fusion.XR
             poseLocked = true;
             isAttached = true;
             attachedObj = attachmentPoint;
+
+            currentCustomPose = pose;
 
             if (physicalPose)
             {

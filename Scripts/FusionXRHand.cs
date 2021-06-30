@@ -41,12 +41,24 @@ namespace Fusion.XR
         public TrackingMode trackingMode;
 
         private Vector3 targetPosition;
+
+        [HideInInspector]
+        public Vector3 posWithOffset;
+
         private Quaternion targetRotation;
+
+        [HideInInspector]
+        public Quaternion rotWithOffset;
+
         private Rigidbody rb;
 
         //Velocity Tracking
         public float positionStrength = 15;
         public float rotationStrength = 30;
+
+        [Tooltip("How many Frames (Fixed Frames) of Velcity should be stored?")]
+        [SerializeField] private int storedVelocityHistory;
+        private List<Vector3> lastVelocities;
 
         //Inputs
         public InputActionReference grabReference;
@@ -83,7 +95,7 @@ namespace Fusion.XR
         #endregion
 
         #region Start and Update
-        void Start()
+        private void Start()
         {
             rb = GetComponent<Rigidbody>();
             followObject = trackedController;
@@ -94,9 +106,11 @@ namespace Fusion.XR
 
             pinchReference.action.started += OnPinched;
             pinchReference.action.canceled += OnPinchedCancelled;
+
+            lastVelocities = new List<Vector3>();
         }
 
-        void Update()
+        private void Update()
         {
             targetPosition = followObject.position;
             targetRotation = followObject.rotation;
@@ -112,6 +126,19 @@ namespace Fusion.XR
                     TrackPositionVelocity(targetPosition, followObject);
                     break;
             }
+        }
+
+        private void FixedUpdate()
+        {
+            //if (lastVelocities.Count >= storedVelocityHistory)
+            //{
+            //    lastVelocities.RemoveAt(0);
+            //    lastVelocities.Add(rb.velocity);
+            //}
+            //else
+            //{
+            //    lastVelocities.Add(rb.velocity);
+            //}
         }
 
         #endregion
@@ -142,7 +169,7 @@ namespace Fusion.XR
                 return;
             }
 
-            if(grabbedObject.TryGetClosestGrapPoint(transform.position, out Transform grabPoint))
+            if(grabbedObject.TryGetClosestGrapPoint(transform.position, hand, out Transform grabPoint))
             {
                 StartCoroutine(GrabObject(closestColl, grabPoint));
             }
@@ -213,17 +240,31 @@ namespace Fusion.XR
             yield return null;
         }
 
-        //If no GrabPoint is set;
+        //If no GrabPoint is set, auto generate
         IEnumerator GrabObject(Collider closestColl)
         {
             //Grab Point
             grabSpot = new GameObject().transform;
             grabSpot.position = closestColl.ClosestPoint(palm.position);
-            grabSpot.localRotation = transform.rotation; //grabbedObject.CalculateRotationOffset(this);
+            grabSpot.localRotation = transform.rotation;
             grabSpot.parent = grabbedObject.transform;
 
-
             generatedPoint = true;
+
+            //Raycasting to find GrabSpots Normal
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position, grabSpot.position - transform.position);
+
+            if(Physics.Raycast(ray, out hit))
+            {
+                if(hit.collider == closestColl)
+                {
+                    Debug.DrawRay(ray.origin, ray.direction.normalized * 0.3f, Color.red, 4f);
+                    Debug.Log("Raycast successfull | defining normal");
+
+                    grabSpot.rotation = Quaternion.FromToRotation(grabSpot.up, hit.normal) * grabSpot.rotation;
+                }
+            }
 
             StartCoroutine(GrabObject(closestColl, grabSpot));
 
@@ -245,11 +286,24 @@ namespace Fusion.XR
             if (grabbedObject != null)
             {
                 grabbedObject.Release(this);
+                grabbedObject.GetComponent<Rigidbody>().velocity = rb.velocity;
                 grabSpot = null;
                 grabbedObject = null;
             }
 
             handPoser.ReleaseHand();
+        }
+
+        Vector3 AvgVel()
+        {
+            Vector3 allVel = new Vector3();
+
+            for (int i = 0; i < lastVelocities.Count; i++)
+            {
+                allVel += lastVelocities[i];
+            }
+
+            return allVel / storedVelocityHistory;
         }
 
         GameObject ClosestGrabable(out Collider closestColl)
@@ -282,7 +336,7 @@ namespace Fusion.XR
 
         void TrackPositionVelocity(Vector3 targetPos, Transform followObj)
         {
-            var posWithOffset = followObj.TransformPoint(positionOffset);
+            posWithOffset = followObj.TransformPoint(positionOffset);
 
             var vel = (posWithOffset - transform.position).normalized * positionStrength * Vector3.Distance(posWithOffset, transform.position);
             rb.velocity = vel;
@@ -290,8 +344,7 @@ namespace Fusion.XR
 
         void TrackRotationVelocity(Quaternion targetRot)
         {
-            var rotWithOffset = targetRot * Quaternion.Euler(rotationOffset);
-
+            rotWithOffset = targetRot * Quaternion.Euler(rotationOffset);
 
             Quaternion deltaRotation = rotWithOffset * Quaternion.Inverse(transform.rotation);
 

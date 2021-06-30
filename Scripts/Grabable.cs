@@ -16,7 +16,7 @@ namespace Fusion.XR
         public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
         public bool isGrabbed;
         public float releaseThreshold = 0.4f;
-        [SerializeField] private Transform[] grabPoints;
+        [SerializeField] private GrabPoint[] grabPoints;
 
         private List<FusionXRHand> attachedHands = new List<FusionXRHand>();
 
@@ -52,18 +52,18 @@ namespace Fusion.XR
                 handsPosOffset[0] = attachedHands[0].grabSpot.localPosition;
                 handsPosOffset[1] = attachedHands[1].grabSpot.localPosition;
 
-                handsRotOffset[0] = attachedHands[0].transform.rotation * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation);
-                handsRotOffset[1] = attachedHands[1].transform.rotation * Quaternion.Inverse(attachedHands[1].grabSpot.localRotation);
+                handsRotOffset[0] = attachedHands[0].rotWithOffset * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation);
+                handsRotOffset[1] = attachedHands[1].rotWithOffset * Quaternion.Inverse(attachedHands[1].grabSpot.localRotation);
 
                 avgRot = Quaternion.Lerp(handsRotOffset[0], handsRotOffset[1], 0.5f);
-                avgPos = Vector3.Lerp(attachedHands[0].palm.position, attachedHands[1].palm.position, 0.5f);
+                avgPos = Vector3.Lerp(attachedHands[0].posWithOffset, attachedHands[1].posWithOffset, 0.5f);
 
                 offsetPos = Vector3.Lerp(handsPosOffset[0], handsPosOffset[1], .5f);
             }
             else
             {
-                avgRot = attachedHands[0].transform.rotation * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation); //Quaternion.Euler(attachedHands[0].RotOffset);
-                avgPos = attachedHands[0].palm.position;
+                avgRot = attachedHands[0].rotWithOffset * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation); //Quaternion.Euler(attachedHands[0].RotOffset);
+                avgPos = attachedHands[0].posWithOffset;
                 offsetPos = attachedHands[0].grabSpot.localPosition;
             }
 
@@ -123,42 +123,34 @@ namespace Fusion.XR
         #endregion
 
         #region Functions
-        public bool TryGetClosestGrapPoint(Vector3 point, out Transform GrapPoint)
+
+        public bool TryGetClosestGrapPoint(Vector3 point, Hand desiredHand, out Transform GrapPoint)
         {
-            GrapPoint = ClosestTransform(grabPoints, point);
+            GrapPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
 
             return GrapPoint != null;
         }
 
-        Transform ClosestTransform(Transform[] transforms, Vector3 point)
+        Transform ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Hand desiredHand)
         {
-            Transform closestTransform = null;
+            Transform closestGrabPoint = null;
             float distance = float.MaxValue;
 
-            if (transforms != null)
+            if (grabPoints != null)
             {
-                foreach (Transform currentTransform in transforms)
+                foreach (GrabPoint currentGrabPoint in grabPoints)
                 {
-                    if ((currentTransform.position - point).sqrMagnitude < distance)
+                    if (currentGrabPoint.CorrectHand(desiredHand) && currentGrabPoint.isActive) //Check if the GrapPoint is for the correct Hand and if it isActive
                     {
-                        closestTransform = currentTransform;
-                        distance = (currentTransform.position - point).sqrMagnitude;
+                        if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
+                        {
+                            closestGrabPoint = currentGrabPoint.transform;
+                            distance = (currentGrabPoint.transform.position - point).sqrMagnitude; //New (smaller) distance
+                        }
                     }
                 }
             }
-            return closestTransform;
-        }
-
-        void UpdatePivotPoint()
-        {
-            if(attachedHands.Count > 0)
-            {
-                rb.centerOfMass = attachedHands[0].grabSpot.localPosition;
-            }
-            else
-            {
-                rb.ResetCenterOfMass();
-            }
+            return closestGrabPoint;
         }
 
         //Tracking Functions
@@ -172,10 +164,6 @@ namespace Fusion.XR
             {
                 rb.velocity = Vector3.MoveTowards(rb.velocity, velocityTarget, 20f);
             }
-            //Vector3 velocity = rb.GetPointVelocity(transform.TransformPoint(offset));
-
-            //rb.AddForceAtPosition(2000f * positionDelta / rb.mass, transform.TransformPoint(offset), ForceMode.Acceleration);         //spring
-            //rb.AddForceAtPosition(-50f * velocity / Mathf.Sqrt(rb.mass + 2), transform.TransformPoint(offset), ForceMode.Acceleration);   //damp
         }
 
         void TrackRotationVelocity(Quaternion targetRot)
@@ -194,9 +182,6 @@ namespace Fusion.XR
                 Vector3 angularTarget = axis * (Mathf.Deg2Rad * angle * 10);
 
                 rb.angularVelocity = Vector3.MoveTowards(rb.angularVelocity, angularTarget, 30f);
-
-                //rb.angularVelocity += angularTarget * .5f / rb.mass; // spring
-                //rb.angularVelocity -= rb.angularVelocity / 2 * rb.mass; // damp
             }
         }
         #endregion
@@ -208,7 +193,7 @@ namespace Fusion.XR
 
             if (grabPoints.Length > 0)
             {
-                Transform grabPoint = ClosestTransform(grabPoints, hand.transform.position);
+                Transform grabPoint = ClosestGrabPoint(grabPoints, hand.transform.position, hand.hand);
 
                 offset = grabPoint.position - transform.position;
             }
@@ -226,7 +211,7 @@ namespace Fusion.XR
 
             if (grabPoints.Length > 0)
             {
-                Transform grabPoint = ClosestTransform(grabPoints, hand.transform.position);
+                Transform grabPoint = ClosestGrabPoint(grabPoints, hand.transform.position, hand.hand);
 
                 rotationOffset = grabPoint.rotation;
             }

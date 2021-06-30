@@ -8,6 +8,7 @@ namespace Fusion.XR
     [System.Serializable]
     public class HandPose : ScriptableObject
     {
+        public bool isLeftHand = false;
         public Quaternion[] thumbRots = new Quaternion[3];
         public Quaternion[] indexRots = new Quaternion[3];
         public Quaternion[] middleRots = new Quaternion[3];
