@@ -49,6 +49,7 @@ namespace Fusion.XR
         {
             if((int)hand == (int)grabPointType) //TRUE: if hands match
             {
+                Debug.Log(grabPointType);
                 return true;
             }
             else if(grabPointType == GrabPointType.Both) //TRUE: if both hands are allowed
