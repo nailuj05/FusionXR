@@ -14,10 +14,11 @@ namespace Fusion.XR
             p_capsuleCollider = GetComponent<CapsuleCollider>();
         }
 
-        public override void UpdateCollision(float p_height, Vector3 p_localPositionOffset)
+        public override void UpdateCollision(float p_height, Vector3 p_localPositionOffset, float p_CollisionRadius)
         {
             p_capsuleCollider.height = p_height;
-            p_capsuleCollider.center = p_localPositionOffset + Vector3.up * p_height / 2;
+            p_capsuleCollider.center = p_localPositionOffset;
+            p_capsuleCollider.radius = p_CollisionRadius;
         }
     }
 }

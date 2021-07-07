@@ -3605,7 +3605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575785941}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.081, y: 0.91449773, z: -1.329}
+  m_LocalPosition: {x: 0.339, y: 0.91449773, z: -1.325}
   m_LocalScale: {x: 0.1644, y: 0.1644, z: 0.1644}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3941,8 +3941,8 @@ GameObject:
   - component: {fileID: 1823267144}
   - component: {fileID: 1823267146}
   - component: {fileID: 1823267149}
-  - component: {fileID: 1823267147}
   - component: {fileID: 1823267148}
+  - component: {fileID: 1823267147}
   m_Layer: 3
   m_Name: XR Rig
   m_TagString: Untagged
@@ -4008,13 +4008,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1823267143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1de7387fed50e44f9af48d6f00b3104, type: 3}
+  m_Script: {fileID: 11500000, guid: 345afe44b87d7c748958895731a744ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   p_XRRig: {fileID: 1823267145}
   p_VRCamera: {fileID: 253293241}
---- !u!136 &1823267148
-CapsuleCollider:
+  p_CollisionRadius: 0.2
+--- !u!143 &1823267148
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4023,10 +4024,14 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1823267149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4040,7 +4045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 0}
-  collisionAdjuster: {fileID: 1823267147}
+  collisionAdjuster: {fileID: 0}
 --- !u!1 &1864952047
 GameObject:
   m_ObjectHideFlags: 0
