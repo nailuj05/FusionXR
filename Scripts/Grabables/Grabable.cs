@@ -14,11 +14,14 @@ namespace Fusion.XR
     public class Grabable : MonoBehaviour
     {
         public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
-        [HideInInspector] public bool isGrabbed;
         public float releaseThreshold = 0.4f;
+
+        [HideInInspector] public bool isGrabbed;
         [SerializeField] private GrabPoint[] grabPoints;
 
         [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
+
+        private GrabMode grabMode;
 
         public bool projectOntoJointAxis = false;
         private Joint joint;
@@ -33,7 +36,14 @@ namespace Fusion.XR
         #region UnityFunctions
         public virtual void Start()
         {
-            gameObject.layer = LayerMask.NameToLayer("Interactable");
+            try
+            {
+                gameObject.layer = LayerMask.NameToLayer("Interactables");
+            }
+            catch
+            {
+                Debug.LogError("Layers need to be setup correctly!");
+            }
 
             if (projectOntoJointAxis)
             {
@@ -47,6 +57,9 @@ namespace Fusion.XR
         public virtual void FixedUpdate()
         {
             if (!isGrabbed)
+                return;
+
+            if (grabMode == GrabMode.Joint) //Calculations not needed when using Joints
                 return;
 
             Vector3 avgPos = Vector3.zero;
@@ -76,8 +89,22 @@ namespace Fusion.XR
                 offsetPos = attachedHands[0].grabSpot.localPosition;
             }
 
-            TrackRotationVelocity(avgRot);
-            TrackPositionVelocity(avgPos, offsetPos);
+            Vector3 targetPos = avgPos - transform.TransformPoint(offsetPos);
+
+            switch (grabMode)
+            {
+                case GrabMode.Kinematic:
+                    TrackPositionKinematic(targetPos);
+                    TrackRotationKinematic(avgRot);
+                    break;
+                case GrabMode.Velocity:
+                    TrackPositionVelocity(targetPos);
+                    TrackRotationVelocity(avgRot);
+                    break;
+                case GrabMode.Joint:
+                    //Joint needs no tracking done
+                    break;
+            }
 
             return;
         }
@@ -85,29 +112,32 @@ namespace Fusion.XR
         #endregion
 
         #region Events
-        public void Grab(FusionXRHand hand) 
+        public void Grab(FusionXRHand hand, GrabMode mode) 
         {
-            foreach(Collider coll in GetComponents<Collider>())
-            {
-                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, true);
-            }
+            grabMode = mode;
 
-            //Case: Switch Hands
-            if(twoHandedMode == TwoHandedMode.SwitchHand)
+            if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
             {
-                if(attachedHands.Count > 0)
+                //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
+                if (attachedHands.Count > 0)
                     attachedHands[0].Release();
 
                 attachedHands.Add(hand);
             }
-            //Case: Averaging Between Hands;
-            else if(twoHandedMode == TwoHandedMode.Average)
+            else if(twoHandedMode == TwoHandedMode.Average) //Case: Averaging Between Hands;
             {
                 attachedHands.Add(hand);
             }
 
-            isGrabbed = true;
-            //UpdatePivotPoint();
+            foreach (Collider coll in GetComponents<Collider>())
+            {
+                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, true);
+            }
+
+            isGrabbed = true; //This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
+
+            if (grabMode == GrabMode.Joint)
+                AttachJoint(hand);
         }
 
         public void Release(FusionXRHand hand)
@@ -117,7 +147,7 @@ namespace Fusion.XR
                 Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, false);
             }
 
-            attachedHands.Remove(hand.Instance);
+            attachedHands.Remove(hand);
 
             if(attachedHands.Count == 0)
             {
@@ -126,7 +156,8 @@ namespace Fusion.XR
                 isGrabbed = false;
             }
 
-            //UpdatePivotPoint();
+            if (grabMode == GrabMode.Joint)
+                ReleaseJoint(hand);
         }
 
         #endregion
@@ -162,25 +193,22 @@ namespace Fusion.XR
             return closestGrabPoint;
         }
 
-        //Tracking Functions
-        void TrackPositionVelocity(Vector3 targetPos, Vector3 offset)
+        #endregion
+
+        #region Tracking Functions
+        void TrackPositionVelocity(Vector3 targetPos)
         {
-            var positionDelta = targetPos - transform.TransformPoint(offset);
-
-            Vector3 velocityTarget = positionDelta;
-
             if(!projectOntoJointAxis)
-                velocityTarget *= 60f;
+                targetPos *= 60f;
 
-            if (float.IsNaN(velocityTarget.x) == false)
+            if (float.IsNaN(targetPos.x) == false)
             {
-                velocityTarget = Vector3.MoveTowards(rb.velocity, velocityTarget, 20f);
+                targetPos = Vector3.MoveTowards(rb.velocity, targetPos, 20f);
 
                 if(projectOntoJointAxis)
-                    velocityTarget = Vector3.ProjectOnPlane(velocityTarget, joint.transform.TransformDirection(joint.axis));    //TEST THIS
-                Debug.DrawRay(transform.TransformPoint(offset), velocityTarget);
+                    targetPos = Vector3.ProjectOnPlane(targetPos, joint.transform.TransformDirection(joint.axis));    //TEST THIS
 
-                rb.velocity = velocityTarget;
+                rb.velocity = targetPos;
             }
         }
 
@@ -202,6 +230,33 @@ namespace Fusion.XR
                 rb.angularVelocity = Vector3.MoveTowards(rb.angularVelocity, angularTarget, 30f);
             }
         }
+
+        void TrackPositionKinematic(Vector3 targetPos)
+        {
+            transform.position = targetPos;
+        }
+
+        void TrackRotationKinematic(Quaternion targetRot)
+        {
+            transform.rotation = targetRot;
+        }
+
+        void AttachJoint(FusionXRHand hand)
+        {
+            Joint grabJoint = hand.gameObject.AddComponent<FixedJoint>();
+            grabJoint.connectedBody = rb;
+
+            grabJoint.autoConfigureConnectedAnchor = false;
+
+            grabJoint.anchor = hand.transform.InverseTransformPoint(hand.palm.position);
+            grabJoint.connectedAnchor = transform.InverseTransformPoint(hand.grabSpot.position);
+        }
+
+        void ReleaseJoint(FusionXRHand hand)
+        {
+            Destroy(hand.gameObject.GetComponent<Joint>());
+        }
+
         #endregion
 
         #region Deprecated Functions

@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.732
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 492995990}
-  m_IndirectSpecularColor: {r: 0.20876189, g: 0.27172872, b: 0.36082307, a: 0.732}
+  m_IndirectSpecularColor: {r: 0.2073488, g: 0.2706019, b: 0.36681688, a: 0.732}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 20862937}
   - component: {fileID: 20862938}
   - component: {fileID: 20862939}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrabPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &89298462
 BoxCollider:
@@ -377,8 +377,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGlobal: 1
-  priority: 0
+  priority: 1
   blendDistance: 0
   weight: 0
   sharedProfile: {fileID: 11400000, guid: 522d309ae3cf8cd4fbec841706115266, type: 2}
@@ -664,6 +664,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConstructionLight_Low
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -708,6 +724,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb011e0893b26f4d9c8a3b5ab8dc988, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
 --- !u!1 &208611384 stripped
@@ -1011,6 +1031,7 @@ Transform:
   - {fileID: 196693333}
   - {fileID: 147224784}
   - {fileID: 205899127}
+  - {fileID: 1404641979}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1028,7 +1049,7 @@ GameObject:
   - component: {fileID: 313881362}
   - component: {fileID: 313881361}
   - component: {fileID: 313881360}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grabable (6)
   m_TagString: Grabable
   m_Icon: {fileID: 0}
@@ -1048,8 +1069,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 1
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints:
   - {fileID: 1469176438}
   - {fileID: 547079742}
@@ -1294,7 +1315,7 @@ MonoBehaviour:
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabRange: 0.1
-  grabMode: 1
+  grabMode: 2
   palm: {fileID: 624306671}
   reachDist: 0.1
   grabSpot: {fileID: 0}
@@ -1346,7 +1367,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &446333547
 Transform:
@@ -1437,8 +1458,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -1471,7 +1492,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1528,13 +1549,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 492995989}
-  m_LocalRotation: {x: 0.29260203, y: -0.38156965, z: 0.21020219, w: 0.85123664}
+  m_LocalRotation: {x: 0.47345188, y: -0.32634032, z: 0.19292216, w: 0.7950638}
   m_LocalPosition: {x: 1.1242486, y: 1.9153244, z: -0.52873826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 279476819}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 41.19, y: -44.409, z: 10.301}
+  m_LocalEulerAnglesHint: {x: 61.494, y: -44.792, z: -0.269}
 --- !u!1 &510572439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1570,7 @@ GameObject:
   - component: {fileID: 510572440}
   - component: {fileID: 510572444}
   - component: {fileID: 510572445}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grabable
   m_TagString: Grabable
   m_Icon: {fileID: 0}
@@ -1661,8 +1682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -1676,7 +1697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 547079741}
   - component: {fileID: 547079742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrabPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1975,8 +1996,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -2034,7 +2055,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &639560611
 Transform:
@@ -2125,8 +2146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -2177,7 +2198,7 @@ GameObject:
   - component: {fileID: 713184333}
   - component: {fileID: 713184337}
   - component: {fileID: 713184338}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2292,8 +2313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 1
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints:
   - {fileID: 20862938}
   - {fileID: 1311453294}
@@ -2402,7 +2423,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &854901923
 Transform:
@@ -2493,8 +2514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -2646,8 +2667,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -2722,7 +2743,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &977188414
 Transform:
@@ -2813,8 +2834,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -2833,7 +2854,7 @@ GameObject:
   - component: {fileID: 978024885}
   - component: {fileID: 978024884}
   - component: {fileID: 978024889}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2981,8 +3002,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 1
@@ -3003,7 +3024,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &988372479
 BoxCollider:
@@ -3092,7 +3113,7 @@ GameObject:
   - component: {fileID: 1063976760}
   - component: {fileID: 1063976761}
   - component: {fileID: 1063976762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrabPointR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3286,7 +3307,7 @@ MonoBehaviour:
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabRange: 0.1
-  grabMode: 1
+  grabMode: 2
   palm: {fileID: 367066752}
   reachDist: 0.1
   grabSpot: {fileID: 0}
@@ -3308,7 +3329,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1118429191
 Transform:
@@ -3399,8 +3420,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -3472,7 +3493,7 @@ GameObject:
   - component: {fileID: 1246951699}
   - component: {fileID: 1246951698}
   - component: {fileID: 1246951703}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grabable (2)
   m_TagString: Grabable
   m_Icon: {fileID: 0}
@@ -3584,8 +3605,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -3648,7 +3669,7 @@ GameObject:
   - component: {fileID: 1311453292}
   - component: {fileID: 1311453294}
   - component: {fileID: 1311453293}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrabPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3701,6 +3722,70 @@ MonoBehaviour:
   isActive: 1
   hasCustomPose: 0
   pose: {fileID: 0}
+--- !u!1 &1404641978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1404641979}
+  - component: {fileID: 1404641980}
+  m_Layer: 0
+  m_Name: Reflection Probe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1404641979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404641978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.86, y: -0.1, z: -0.195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 279476819}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!215 &1404641980
+ReflectionProbe:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404641978}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Type: 0
+  m_Mode: 0
+  m_RefreshMode: 0
+  m_TimeSlicingMode: 0
+  m_Resolution: 128
+  m_UpdateFrequency: 0
+  m_BoxSize: {x: 10, y: 10, z: 10}
+  m_BoxOffset: {x: 0, y: 0, z: 0}
+  m_NearClip: 0.3
+  m_FarClip: 1000
+  m_ShadowDistance: 100
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IntensityMultiplier: 1
+  m_BlendDistance: 1
+  m_HDR: 1
+  m_BoxProjection: 0
+  m_RenderDynamicObjects: 0
+  m_UseOcclusionCulling: 1
+  m_Importance: 1
+  m_CustomBakedTexture: {fileID: 0}
 --- !u!1 &1459331690
 GameObject:
   m_ObjectHideFlags: 0
@@ -3715,7 +3800,7 @@ GameObject:
   - component: {fileID: 1459331692}
   - component: {fileID: 1459331691}
   - component: {fileID: 1459331696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grabable (3)
   m_TagString: Grabable
   m_Icon: {fileID: 0}
@@ -3827,8 +3912,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 1
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -3890,7 +3975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1469176437}
   - component: {fileID: 1469176438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrabPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3996,7 +4081,7 @@ GameObject:
   - component: {fileID: 1509801745}
   - component: {fileID: 1509801747}
   - component: {fileID: 1509801746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrabPointL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4093,7 +4178,7 @@ GameObject:
   - component: {fileID: 1575785942}
   - component: {fileID: 1575785947}
   - component: {fileID: 1575785946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Kugel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4189,8 +4274,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -4421,7 +4506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778558028}
   - component: {fileID: 1778558029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrabPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4518,7 +4603,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1790645499
 Transform:
@@ -4634,7 +4719,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823267143}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9d83037440e05764f97897441e42c8e0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.1
@@ -4911,7 +4996,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1893352110
 Transform:
@@ -4999,7 +5084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1918444010}
   - component: {fileID: 1918444011}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrabPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5108,7 +5193,7 @@ GameObject:
   - component: {fileID: 1945161857}
   - component: {fileID: 1945161856}
   - component: {fileID: 1945161861}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grabable (4)
   m_TagString: Grabable
   m_Icon: {fileID: 0}
@@ -5220,8 +5305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 1
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -5239,7 +5324,7 @@ GameObject:
   - component: {fileID: 1969320482}
   - component: {fileID: 1969320481}
   - component: {fileID: 1969320486}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grabable (1)
   m_TagString: Grabable
   m_Icon: {fileID: 0}
@@ -5351,8 +5436,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -5370,7 +5455,7 @@ GameObject:
   - component: {fileID: 1979489546}
   - component: {fileID: 1979489545}
   - component: {fileID: 1979489550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grabable (5)
   m_TagString: Grabable
   m_Icon: {fileID: 0}
@@ -5482,8 +5567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -5507,7 +5592,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1994583008
 Transform:
@@ -6104,7 +6189,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &919132149613144541
 BoxCollider:
@@ -7674,7 +7759,7 @@ GameObject:
   - component: {fileID: 3090033766264469563}
   - component: {fileID: 3090033766264469564}
   - component: {fileID: 3090033766264469566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Connector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7770,8 +7855,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0
@@ -8027,7 +8112,7 @@ GameObject:
   - component: {fileID: 3691421086489835620}
   - component: {fileID: 3691421086489835621}
   - component: {fileID: 3691421086489835622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hammer_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8047,8 +8132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints:
   - {fileID: 1063976761}
   - {fileID: 1509801747}
@@ -9378,8 +9463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints:
   - {fileID: 1266934372}
   attachedHands: []
@@ -9792,8 +9877,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints:
   - {fileID: 213071327}
   attachedHands: []
@@ -9853,7 +9938,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!54 &6111806426405147492
 Rigidbody:
@@ -10656,7 +10741,7 @@ GameObject:
   - component: {fileID: 7798738554979287427}
   - component: {fileID: 7798738554979287428}
   - component: {fileID: 7798738554979287429}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PunchingBag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10706,8 +10791,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  isGrabbed: 0
   releaseThreshold: 0.4
+  isGrabbed: 0
   grabPoints: []
   attachedHands: []
   projectOntoJointAxis: 0

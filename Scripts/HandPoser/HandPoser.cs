@@ -164,12 +164,12 @@ namespace Fusion.XR
 
             if (physicalPose)
             {
-                Debug.Log("Physical Pose");
+                //Debug.Log("Physical Pose");
                 TryLerpToPose(pose, poseLerpSpeed, 1);
             }
             else
             {
-                Debug.Log("Static Pose");
+                //Debug.Log("Static Pose");
                 LerpToPose(pose, poseLerpSpeed, 1);
             }
         }

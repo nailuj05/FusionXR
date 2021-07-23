@@ -23,6 +23,7 @@ namespace Fusion.XR
     {
         Kinematic = 0,
         Velocity = 1,
+        Joint = 2
     }
     #endregion
 
@@ -92,12 +93,6 @@ namespace Fusion.XR
         {
             get { return rotOffset; }
             set { rotOffset = value; }
-        }
-
-        private FusionXRHand instance;
-        public FusionXRHand Instance
-        {
-            get { return this; }
         }
 
         #endregion
@@ -219,7 +214,7 @@ namespace Fusion.XR
             grabSpot = givenGrabPoint;
 
             isGrabbing = true;
-            grabbedObject.Grab(this);
+            grabbedObject.Grab(this, grabMode);
 
             //Freeze
             rb.velocity = Vector3.zero;
@@ -279,8 +274,8 @@ namespace Fusion.XR
             {
                 if(hit.collider == closestColl)
                 {
-                    Debug.DrawRay(ray.origin, ray.direction.normalized * 0.3f, Color.red, 4f);
-                    Debug.Log("Raycast successfull | defining normal");
+                    //Debug.DrawRay(ray.origin, ray.direction.normalized * 0.3f, Color.red, 4f);
+                    //Debug.Log("Raycast successfull | defining normal");
 
                     grabSpot.rotation = Quaternion.FromToRotation(grabSpot.up, hit.normal) * grabSpot.rotation;
                     grabSpot.position = grabSpot.TransformPoint(Vector3.up * 0.05f);    //TEST THIS
@@ -440,7 +435,7 @@ namespace Fusion.XR
         }
 
         //The Target Velcity of the Joint should be the the velcity of the contoller
-        //ToDo: Add Camera Velocity
+        //ToDo: Add Camera Velocity (maybe (?))
         void UpdateTargetVelocity(Vector3 targetPos)
         {
             var currentControllerPos = playerRB.transform.InverseTransformPoint(targetPos);
