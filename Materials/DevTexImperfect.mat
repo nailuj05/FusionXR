@@ -80,7 +80,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_b45a924117ce414da0dedf70986702c8: 0.27
+    - Vector1_b45a924117ce414da0dedf70986702c8: 0.36
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

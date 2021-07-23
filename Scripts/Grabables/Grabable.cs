@@ -20,6 +20,8 @@ namespace Fusion.XR
 
         [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
 
+        public bool projectOntoJointAxis = false;
+        private Joint joint;
         private Rigidbody rb;
 
         //If 2 Handed:
@@ -31,6 +33,11 @@ namespace Fusion.XR
         #region UnityFunctions
         public virtual void Start()
         {
+            if (projectOntoJointAxis)
+            {
+                joint = GetComponent<Joint>();
+            }
+
             rb = GetComponent<Rigidbody>();
             gameObject.tag = "Grabable";
         }
@@ -158,11 +165,20 @@ namespace Fusion.XR
         {
             var positionDelta = targetPos - transform.TransformPoint(offset);
 
-            Vector3 velocityTarget = (positionDelta * 60f);
+            Vector3 velocityTarget = positionDelta;
+
+            if(!projectOntoJointAxis)
+                velocityTarget *= 60f;
 
             if (float.IsNaN(velocityTarget.x) == false)
             {
-                rb.velocity = Vector3.MoveTowards(rb.velocity, velocityTarget, 20f);
+                velocityTarget = Vector3.MoveTowards(rb.velocity, velocityTarget, 20f);
+
+                if(projectOntoJointAxis)
+                    velocityTarget = Vector3.ProjectOnPlane(velocityTarget, joint.transform.TransformDirection(joint.axis));    //TEST THIS
+                Debug.DrawRay(transform.TransformPoint(offset), velocityTarget);
+
+                rb.velocity = velocityTarget;
             }
         }
 
@@ -179,7 +195,7 @@ namespace Fusion.XR
 
             if (angle != 0 && float.IsNaN(axis.x) == false && float.IsInfinity(axis.x) == false)
             {
-                Vector3 angularTarget = axis * (Mathf.Deg2Rad * angle * 10);
+                Vector3 angularTarget = axis * (Mathf.Deg2Rad * angle * 20);
 
                 rb.angularVelocity = Vector3.MoveTowards(rb.angularVelocity, angularTarget, 30f);
             }

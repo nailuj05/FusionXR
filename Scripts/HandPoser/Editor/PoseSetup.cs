@@ -8,7 +8,7 @@ namespace Fusion.XR
 #if UNITY_EDITOR
     public class PoseSetup : EditorWindow
     {
-        [MenuItem("FusionXR/Pose/Add Grab Point")]
+        [MenuItem("Fusion/XR/Pose/Add Grab Point")]
         static void AddGrabPoint()
         {
             GameObject[] gameObjects = Selection.gameObjects;
@@ -31,7 +31,7 @@ namespace Fusion.XR
             grabPoint.AddComponent<GrabPoint>();
         }
 
-        [MenuItem("FusionXR/Pose/Add Pose Editor")]
+        [MenuItem("Fusion/XR/Pose/Add Pose Editor")]
         static void SetupGrabPoint()
         {
             GameObject[] gameObjects = Selection.gameObjects;
