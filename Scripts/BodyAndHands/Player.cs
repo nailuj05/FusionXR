@@ -8,6 +8,9 @@ namespace Fusion.XR
     {
         public static Player main;
 
+        public FusionXRHand LeftHand;
+        public FusionXRHand RightHand;
+
         public Movement movement;
 
         public CollisionAdjuster collisionAdjuster;

@@ -16,6 +16,7 @@ namespace Fusion.XR
     {
         Kinematic = 0,
         Velocity = 1,
+        Joint = 2
     }
 
     public enum GrabMode
@@ -101,6 +102,11 @@ namespace Fusion.XR
             followObject = trackedController;
             handPoser = GetComponent<HandPoser>();
 
+            if(trackingMode == TrackingMode.Joint)
+            {
+                SetupHandJoints();
+            }
+
             grabReference.action.started += OnGrabbed;
             grabReference.action.canceled += OnLetGo;
 
@@ -124,6 +130,9 @@ namespace Fusion.XR
                 case 1:             //Case: velocity tracking;
                     TrackRotationVelocity(targetRotation);
                     TrackPositionVelocity(targetPosition, followObject);
+                    break;
+                case 2:             //Case: joint tracking
+
                     break;
             }
         }
@@ -267,6 +276,7 @@ namespace Fusion.XR
                     Debug.Log("Raycast successfull | defining normal");
 
                     grabSpot.rotation = Quaternion.FromToRotation(grabSpot.up, hit.normal) * grabSpot.rotation;
+                    grabSpot.position = grabSpot.TransformPoint(Vector3.up * 0.05f);    //TEST THIS
                 }
             }
 
@@ -371,6 +381,16 @@ namespace Fusion.XR
         void TrackRotationKinematic(Vector3 targetRot)
         {
             transform.eulerAngles = targetRot;
+        }
+
+        void SetupHandJoints()
+        {
+
+        }
+
+        void TrackPosRotJoint()
+        {
+
         }
         #endregion
     }
