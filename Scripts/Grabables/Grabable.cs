@@ -33,6 +33,8 @@ namespace Fusion.XR
         #region UnityFunctions
         public virtual void Start()
         {
+            gameObject.layer = LayerMask.NameToLayer("Interactable");
+
             if (projectOntoJointAxis)
             {
                 joint = GetComponent<Joint>();
