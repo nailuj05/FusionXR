@@ -12,12 +12,15 @@ namespace Fusion.XR
         public FusionXRHand RightHand;
 
         public Movement movement;
-
         public CollisionAdjuster collisionAdjuster;
+
+        [HideInInspector]
+        public Rigidbody rigidbody;
 
         private void Awake()
         {
             main = this;
+            rigidbody = GetComponent<Rigidbody>();
         }
     }
 }
