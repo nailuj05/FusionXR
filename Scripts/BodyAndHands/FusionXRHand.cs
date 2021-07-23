@@ -41,15 +41,8 @@ namespace Fusion.XR
 
         public TrackingMode trackingMode;
 
-        private Vector3 targetPosition;
-
-        [HideInInspector]
-        public Vector3 posWithOffset;
-
-        private Quaternion targetRotation;
-
-        [HideInInspector]
-        public Quaternion rotWithOffset;
+        [HideInInspector] public Vector3 posWithOffset;
+        [HideInInspector] public Quaternion rotWithOffset;
 
         public Rigidbody rb;
 
@@ -60,6 +53,20 @@ namespace Fusion.XR
         [Tooltip("How many Frames (Fixed Frames) of Velcity should be stored?")]
         [SerializeField] private int storedVelocityHistory;
         private List<Vector3> lastVelocities;
+
+        //Joint Tracking
+        private ConfigurableJoint armJoint;
+        private Rigidbody playerRB;
+
+        private Vector3 lastControllerPos;
+
+        public float positionSpring = 5000;
+        public float positionDamper = 1000;
+        public float maxForce = 1500;
+
+        public float slerpSpring = 3000;
+        public float slerpDamper = 200;
+        public float slerpMaxForce = 1500;
 
         //Inputs
         public InputActionReference grabReference;
@@ -104,7 +111,7 @@ namespace Fusion.XR
 
             if(trackingMode == TrackingMode.Joint)
             {
-                SetupHandJoints();
+                SetupHandJoint();
             }
 
             grabReference.action.started += OnGrabbed;
@@ -118,21 +125,21 @@ namespace Fusion.XR
 
         private void Update()
         {
-            targetPosition = followObject.position;
-            targetRotation = followObject.rotation;
+            posWithOffset = followObject.TransformPoint(positionOffset);
+            rotWithOffset = followObject.rotation * Quaternion.Euler(rotationOffset);
 
             switch ((int)trackingMode)
             {
                 case 0:             //Case: kinematic tracking
-                    TrackPositionKinematic(targetPosition);
-                    TrackRotationKinematic(targetRotation.eulerAngles);
+                    TrackPositionKinematic(posWithOffset);
+                    TrackRotationKinematic(rotWithOffset);
                     break;
                 case 1:             //Case: velocity tracking;
-                    TrackRotationVelocity(targetRotation);
-                    TrackPositionVelocity(targetPosition, followObject);
+                    TrackPositionVelocity(posWithOffset);
+                    TrackRotationVelocity(rotWithOffset);
                     break;
                 case 2:             //Case: joint tracking
-
+                    TrackPosRotJoint(posWithOffset, rotWithOffset);
                     break;
             }
         }
@@ -348,19 +355,15 @@ namespace Fusion.XR
             return ClosestGameObj;
         }
 
-        void TrackPositionVelocity(Vector3 targetPos, Transform followObj)
+        void TrackPositionVelocity(Vector3 targetPos)
         {
-            posWithOffset = followObj.TransformPoint(positionOffset);
-
-            var vel = (posWithOffset - transform.position).normalized * positionStrength * Vector3.Distance(posWithOffset, transform.position);
+            var vel = (targetPos - transform.position).normalized * positionStrength * Vector3.Distance(targetPos, transform.position);
             rb.velocity = vel;
         }
 
         void TrackRotationVelocity(Quaternion targetRot)
         {
-            rotWithOffset = targetRot * Quaternion.Euler(rotationOffset);
-
-            Quaternion deltaRotation = rotWithOffset * Quaternion.Inverse(transform.rotation);
+            Quaternion deltaRotation = targetRot * Quaternion.Inverse(transform.rotation);
 
             deltaRotation.ToAngleAxis(out var angle, out var axis);
             
@@ -378,19 +381,73 @@ namespace Fusion.XR
             transform.position = targetPos;
         }
 
-        void TrackRotationKinematic(Vector3 targetRot)
+        void TrackRotationKinematic(Quaternion targetRot)
         {
-            transform.eulerAngles = targetRot;
+            transform.rotation = targetRot;
         }
 
-        void SetupHandJoints()
+        void TrackPosRotJoint(Vector3 targetPos, Quaternion targetRot)
         {
+            if(armJoint != null)
+            {
+                UpdateHandJointDrives();
+            }
+            else
+            {
+                SetupHandJoint();
+            }
 
+            armJoint.targetPosition = playerRB.transform.InverseTransformPoint(targetPos);
+            armJoint.targetRotation = Quaternion.Inverse(playerRB.rotation) * targetRot;
+
+            UpdateTargetVelocity(targetPos);
         }
 
-        void TrackPosRotJoint()
+        void SetupHandJoint()
         {
+            playerRB = Player.main.rigidbody;
 
+            armJoint = Player.main.gameObject.AddComponent<ConfigurableJoint>();
+            armJoint.connectedBody = this.rb;
+            armJoint.autoConfigureConnectedAnchor = false;
+            armJoint.anchor = Vector3.zero;
+            armJoint.connectedAnchor = Vector3.zero;
+
+            armJoint.enableCollision = false;
+            armJoint.enablePreprocessing = false;
+
+            armJoint.rotationDriveMode = RotationDriveMode.Slerp;
+
+            UpdateHandJointDrives();
+        }
+
+        //Incase the Joint Drive Values need to be modified
+        void UpdateHandJointDrives()
+        {
+            var drive = new JointDrive();
+            drive.positionSpring = positionSpring;
+            drive.positionDamper = positionDamper;
+            drive.maximumForce = maxForce;
+
+            armJoint.xDrive = armJoint.yDrive = armJoint.zDrive = drive;
+
+            var slerpDrive = new JointDrive();
+            slerpDrive.positionSpring = slerpSpring;
+            slerpDrive.positionDamper = slerpDamper;
+            slerpDrive.maximumForce = slerpMaxForce;
+
+            armJoint.slerpDrive = slerpDrive;
+        }
+
+        //The Target Velcity of the Joint should be the the velcity of the contoller
+        //ToDo: Add Camera Velocity
+        void UpdateTargetVelocity(Vector3 targetPos)
+        {
+            var currentControllerPos = playerRB.transform.InverseTransformPoint(targetPos);
+            var velocity = (currentControllerPos - lastControllerPos) / Time.fixedDeltaTime;
+            lastControllerPos = currentControllerPos;
+
+            armJoint.targetVelocity = velocity;
         }
         #endregion
     }
