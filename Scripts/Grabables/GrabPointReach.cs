@@ -52,7 +52,7 @@ namespace Fusion.XR
 #endif
     }
 
-    [CustomEditor(typeof(GrabPointReach))]
+    [CustomEditor(typeof(GrabPointReach))] [CanEditMultipleObjects]
     public class GrabPointReachEditor : Editor
     {
         GUIStyle rightStyle;

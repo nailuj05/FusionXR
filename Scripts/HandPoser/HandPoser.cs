@@ -6,9 +6,18 @@ using UnityEditor;
 
 namespace Fusion.XR
 {
-    //[ExecuteAlways]
+    public enum HandState
+    {
+        open = 0,
+        grab = 1,
+        pinch = 2,
+        point = 3
+    }
+
     public class HandPoser : MonoBehaviour
     {
+        public FusionXRHand xrHand;
+
         [Header("Poses")]
         [Tooltip("The Pose of an open Hand")]
         public HandPose handOpen;
@@ -26,16 +35,20 @@ namespace Fusion.XR
 
         [Header("Attachment")]
         [SerializeField] private bool isAttached;
-        [SerializeField] private Transform attachedObj;
+        [HideInInspector] public Transform attachedObj;
         [SerializeField] private bool poseLocked;
+        [SerializeField] private bool notCustomPose;
         public Transform palm;
+        private Vector3 palmOffset;
         public Transform renderHand;
+
+        [SerializeField] public Vector3 deltaTransformationPosition = new Vector3(0f, 0.025f, 0f);
+        [SerializeField] public Vector3 deltaTransformationRotation = new Vector3(27f, -0f, -183f);
 
         [Header("Fingers")]
         public Finger[] fingers;
         public Vector3 fingerOffset;
         public float fingerTipRadius;
-        public float fingerIncrement;
         public LayerMask collMask;
 
         [Header("Hand State")]
@@ -51,26 +64,26 @@ namespace Fusion.XR
         public float pinchState;
         public float grabState;
 
-        public bool openPosed;
-        public bool grabPosed;
-        public bool pinchPosed;
-        public bool pointPosed;
+        public HandState handState = HandState.open;
+
+        private void Awake()
+        {
+            palmOffset = -palm.localPosition;
+
+            xrHand = GetComponent<FusionXRHand>();
+        }
 
         public void Update()
         {
             pinchValue = pinchReference.action.ReadValue<float>();
-            grabValue  =  grabReference.action.ReadValue<float>();
-
-            //Pose Fingers Here
+            grabValue = grabReference.action.ReadValue<float>();
 
             if (isAttached)
             {
-                Vector3 palmOffset = -palm.localPosition;
-
-                renderHand.transform.position = attachedObj.TransformPoint(palmOffset); //Change this for left hand (?)
-                renderHand.transform.rotation = attachedObj.transform.rotation;
+                PlaceRenderHand();
             }
 
+            //Pose Fingers Here
             if (poseLocked)
                 return;
 
@@ -79,73 +92,107 @@ namespace Fusion.XR
             //Open Hand
             if (pinchValue == 0 && grabValue == 0)
             {
-                if (openPosed)
+                if (handState == HandState.open)
                     return;
 
                 pinchState = grabState = 0;
 
-                openPosed = true;
-                grabPosed = false;
-                pinchPosed = false;
-                pointPosed = false;
+                handState = HandState.open;
 
                 LerpToPose(handOpen, poseLerpSpeed, 1);
             }
             //Grabbing
-            if(pinchValue == 1 && grabValue == 1)
+            if (pinchValue == 1 && grabValue == 1)
             {
-                if (grabPosed)
+                if (handState == HandState.grab)
                     return;
 
                 pinchState = grabState = 1;
 
-                openPosed = false;
-                grabPosed = true;
-                pinchPosed = false;
-                pointPosed = false;
+                handState = HandState.grab;
 
                 LerpToPose(handClosed, poseLerpSpeed, 1);
             }
             //Pinching
             if (pinchValue == 1 && grabValue == 0)
             {
-                if (pinchPosed)
+                if (handState == HandState.pinch)
                     return;
 
                 pinchState = 1;
                 grabState = 0;
 
-                openPosed = false;
-                grabPosed = false;
-                pinchPosed = true;
-                pointPosed = false;
+                handState = HandState.pinch;
 
                 LerpToPose(handPinch, poseLerpSpeed, 1);
             }
             //Pointing
             if (pinchValue == 0 && grabValue == 1)
             {
-                if (pointPosed)
+                if (handState == HandState.point)
                     return;
 
                 pinchState = 0;
                 grabState = 1;
 
-                openPosed = false;
-                grabPosed = false;
-                pinchPosed = false;
-                pointPosed = true;
+                handState = HandState.point;
 
                 LerpToPose(handPoint, poseLerpSpeed, 1);
             }
             #endregion
         }
 
+        #region RenderHand Movement
+
+        public void PlaceRenderHand()
+        {
+            renderHand.transform.position = attachedObj.TransformPoint(palmOffset); //Change this for left hand (?)
+            renderHand.transform.rotation = attachedObj.transform.rotation;
+
+            if (hand == Hand.Left)
+            {
+                if (Application.isPlaying && xrHand.generatedPoint)
+                    return;
+
+                if (!notCustomPose)
+                {
+                    AddLeftHandDeltaPosition(attachedObj);
+                    AddLeftHandDeltaRotation(attachedObj);
+                }
+            }
+        }
+
+        public void AddLeftHandDeltaPosition(Transform attachedObj)
+        {
+            if (Application.isPlaying)
+            {
+                renderHand.transform.position = attachedObj.TransformPoint(deltaTransformationPosition);
+            }
+            else
+            {
+                renderHand.transform.position += attachedObj.TransformDirection(new Vector3(0f, -0.01f, 0f));
+            }
+        }
+
+        public void AddLeftHandDeltaRotation(Transform attachedObj)
+        {
+            if (Application.isPlaying)
+            {
+                renderHand.transform.rotation = attachedObj.rotation * Quaternion.Euler(deltaTransformationRotation);
+            }
+            else
+            {
+                renderHand.transform.rotation = attachedObj.rotation * Quaternion.Euler(27f, -0f, -183f);
+            }
+        }
+
+        #endregion
 
         #region Posing Functions
 
         public void AttachHand(Transform attachmentPoint)
         {
+            notCustomPose = true;
             AttachHand(attachmentPoint, handClosed, true);
         }
 
@@ -178,6 +225,7 @@ namespace Fusion.XR
         {
             poseLocked = false;
             isAttached = false;
+            notCustomPose = false;
 
             attachedObj = null;
 
@@ -209,7 +257,6 @@ namespace Fusion.XR
             {
                 finger.offset = fingerOffset;
                 finger.radius = fingerTipRadius;
-                finger.increment = fingerIncrement;
                 finger.collMask = collMask;
             }
         }

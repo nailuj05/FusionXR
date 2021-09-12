@@ -16,12 +16,7 @@ namespace Fusion.XR
 
         public override void Move(Vector3 direction)
         {
-            controller.Move(direction * Time.deltaTime * playerSpeed);
-        }
-
-        public override void Move(Vector3 direction, float customSpeed)
-        {
-            controller.Move(direction * Time.deltaTime * customSpeed);
+            controller.Move(direction * Time.deltaTime);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Fusion.XR
         }
     }
 
-    [CustomEditor(typeof(GrabPoint))]
+    [CustomEditor(typeof(GrabPoint))] [CanEditMultipleObjects]
     public class GrabPointEditor : Editor
     {
         GUIStyle rightStyle;

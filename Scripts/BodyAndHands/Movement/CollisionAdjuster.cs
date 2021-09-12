@@ -12,6 +12,9 @@ namespace Fusion.XR
         [Range(0.1f, 0.5f)]
         public float p_CollisionRadius = 0.2f;
 
+        [HideInInspector]
+        public float p_localHeight;
+
         private void Awake()
         {
             p_VRCamera = Camera.main.transform;
@@ -24,6 +27,9 @@ namespace Fusion.XR
 
             //the local Position of the Camera within the XRRig and half the height of the camera so it is exactly in the middle between floor and head
             Vector3 p_localCameraPosition = (p_VRCamera.position - p_XRRig.position) - Vector3.up * p_height / 2;
+
+            //Store players local height globally so other scripts can access it
+            p_localHeight = p_localCameraPosition.y;
 
             //The Update Function is called, all overrides will interpret the data different now
             UpdateCollision(p_height, p_localCameraPosition, p_CollisionRadius);

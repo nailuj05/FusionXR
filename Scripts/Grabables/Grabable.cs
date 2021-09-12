@@ -22,9 +22,6 @@ namespace Fusion.XR
         [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
 
         private GrabMode grabMode;
-
-        public bool projectOntoJointAxis = false;
-        private Joint joint;
         private Rigidbody rb;
 
         //If 2 Handed:
@@ -34,6 +31,7 @@ namespace Fusion.XR
         private Vector3 refVel;
 
         #region UnityFunctions
+
         public virtual void Start()
         {
             try
@@ -43,11 +41,6 @@ namespace Fusion.XR
             catch
             {
                 Debug.LogError("Layers need to be setup correctly!");
-            }
-
-            if (projectOntoJointAxis)
-            {
-                joint = GetComponent<Joint>();
             }
 
             rb = GetComponent<Rigidbody>();
@@ -84,7 +77,14 @@ namespace Fusion.XR
             }
             else
             {
-                avgRot = attachedHands[0].rotWithOffset * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation); //Quaternion.Euler(attachedHands[0].RotOffset);
+                if(attachedHands[0].hand == Hand.Right)
+                {
+                    avgRot = attachedHands[0].rotWithOffset * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation);
+                }
+                else
+                {
+                    avgRot = attachedHands[0].rotWithOffset * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation * Quaternion.Euler(0, 0, 180)); //Left Hand needs to be rotated
+                }
                 avgPos = attachedHands[0].posWithOffset;
                 offsetPos = attachedHands[0].grabSpot.localPosition;
             }
@@ -198,15 +198,11 @@ namespace Fusion.XR
         #region Tracking Functions
         void TrackPositionVelocity(Vector3 targetPos)
         {
-            if(!projectOntoJointAxis)
-                targetPos *= 60f;
+            targetPos *= 60f;
 
             if (float.IsNaN(targetPos.x) == false)
             {
                 targetPos = Vector3.MoveTowards(rb.velocity, targetPos, 20f);
-
-                if(projectOntoJointAxis)
-                    targetPos = Vector3.ProjectOnPlane(targetPos, joint.transform.TransformDirection(joint.axis));    //TEST THIS
 
                 rb.velocity = targetPos;
             }
@@ -243,18 +239,57 @@ namespace Fusion.XR
 
         void AttachJoint(FusionXRHand hand)
         {
-            Joint grabJoint = hand.gameObject.AddComponent<FixedJoint>();
-            grabJoint.connectedBody = rb;
+            //Rotate Grabable
+            //transform.rotation = hand.rotWithOffset * Quaternion.Inverse(hand.grabSpot.localRotation);
+            if (attachedHands[0].hand == Hand.Right)
+            {
+                transform.rotation = hand.rotWithOffset * Quaternion.Inverse(hand.grabSpot.localRotation);
+            }
+            else
+            {
+                transform.rotation = hand.rotWithOffset * Quaternion.Inverse(hand.grabSpot.localRotation * Quaternion.Euler(0, 0, 180)); //Left Hand needs to be rotated
+            }
 
-            grabJoint.autoConfigureConnectedAnchor = false;
+            //Setup Joint
+            Joint attachedJoint = hand.gameObject.AddComponent<ConfigurableJoint>();
+            attachedJoint.connectedBody = rb;
 
-            grabJoint.anchor = hand.transform.InverseTransformPoint(hand.palm.position);
-            grabJoint.connectedAnchor = transform.InverseTransformPoint(hand.grabSpot.position);
+            attachedJoint.autoConfigureConnectedAnchor = false;
+
+            attachedJoint.anchor = hand.transform.InverseTransformPoint(hand.palm.position);
+            attachedJoint.connectedAnchor = transform.InverseTransformPoint(hand.grabSpot.position);
+
+            if(hand.gameObject.TryGetComponent(out ConfigurableJoint configurableJoint))
+            {
+                configurableJoint.xMotion = configurableJoint.yMotion = configurableJoint.zMotion = ConfigurableJointMotion.Locked;
+
+                configurableJoint.rotationDriveMode = RotationDriveMode.Slerp;
+
+                var slerpDrive = new JointDrive();
+                slerpDrive.positionSpring = 1000;
+                slerpDrive.positionDamper = 75;
+                slerpDrive.maximumForce = 500;
+
+                configurableJoint.slerpDrive = slerpDrive;
+            }
+        }
+
+        void TrackJointRotation(Quaternion targetRot)
+        {
+            foreach (FusionXRHand hand in attachedHands)
+            {
+                if (hand.gameObject.TryGetComponent(out ConfigurableJoint configurableJoint))
+                {
+                    configurableJoint.targetRotation = hand.rotWithOffset * Quaternion.Inverse(hand.grabSpot.localRotation);
+                }
+            }
         }
 
         void ReleaseJoint(FusionXRHand hand)
         {
-            Destroy(hand.gameObject.GetComponent<Joint>());
+            Joint jointToRemove = hand.gameObject.GetComponent<Joint>();
+
+            Destroy(jointToRemove);
         }
 
         #endregion
