@@ -537,6 +537,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8720531137120670778, guid: ae8556cba35d73448bc5447f084ae4c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720531137120670778, guid: ae8556cba35d73448bc5447f084ae4c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.364
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae8556cba35d73448bc5447f084ae4c2, type: 3}
 --- !u!4 &147224784 stripped
@@ -1999,10 +2007,18 @@ MonoBehaviour:
   coll: {fileID: 630538629}
   volume: 0.64
   customVolume: 0.64
-  waterDrag: 3
-  waterAngularDrag: 1
+  dampeningFactor: 0.1
   inFluid: 1
   fluid: {fileID: 1131078815}
+  simulateWaterTurbulence: 0
+  turbulenceStrength: 1
+  rndTimeOffset:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   floatStrength: 14.69
 --- !u!54 &630538628 stripped
 Rigidbody:
