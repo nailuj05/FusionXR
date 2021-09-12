@@ -28,7 +28,7 @@ namespace Fusion.XR
 
             deltaVelocity *= -1;
 
-            Player.main.movement.Move(deltaVelocity.normalized, deltaVelocity.magnitude);
+            Player.main.movement.Move(deltaVelocity);
         }
     }
 }

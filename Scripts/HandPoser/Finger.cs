@@ -9,12 +9,12 @@ public class Finger : MonoBehaviour
 
     [HideInInspector] public Vector3 offset;
     [HideInInspector] public float radius;
-    [HideInInspector] public float increment;
     [HideInInspector] public LayerMask collMask;
 
     private Quaternion[] targetPose;
 
     private float lerp = 0;
+
 
     //Rotate to Pose instantly rotates to the pose
 
@@ -71,9 +71,11 @@ public class Finger : MonoBehaviour
 
         Quaternion originalRot = bone.localRotation;
 
+        yield return new WaitForFixedUpdate();
+
         while (lerp < maxLerp)
         {
-            Collider[] colliders = Physics.OverlapSphere(bone.TransformPoint(offset), radius, collMask);
+            Collider[] colliders = Physics.OverlapSphere(bone.TransformPoint(GetFingerCollisionOffset(index)), radius, collMask);
 
             if (colliders.Length == 0) //Only rotate if we didn't hit anything
             {
@@ -82,7 +84,7 @@ public class Finger : MonoBehaviour
 
             lerp += Time.deltaTime * lerpTime;
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -110,13 +112,30 @@ public class Finger : MonoBehaviour
                 fingerBones[i] = fingerBones[i - 1].GetChild(0);
         }
     }
+
+    public Vector3 GetFingerCollisionOffset(int fingerIndex)
+    {
+        Vector3 fingerCollisionOffset = new Vector3();
+
+        if(fingerIndex < fingerBones.Length - 1) //If the index is not the last finger
+        {
+            fingerCollisionOffset = fingerBones[fingerIndex + 1].localPosition;
+        }
+        else
+        {
+            fingerCollisionOffset = fingerBones[fingerIndex].localPosition + offset;
+        }
+
+        return fingerCollisionOffset;
+    }
+
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
-        foreach (Transform finger in fingerBones)
+        for (int i = 0; i < fingerBones.Length; i++)
         {
             Gizmos.color = new Color(0, 0, 1, .4f);
-            Gizmos.DrawSphere(finger.TransformPoint(offset), radius);
+            Gizmos.DrawSphere(fingerBones[i].TransformPoint(GetFingerCollisionOffset(i)), radius);
         }
     }
 #endif

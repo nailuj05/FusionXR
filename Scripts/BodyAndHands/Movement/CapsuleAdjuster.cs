@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Fusion.XR
 {
     [RequireComponent(typeof(CapsuleCollider))]
-    public class CapsulAdjuster : CollisionAdjuster
+    public class CapsuleAdjuster : CollisionAdjuster
     {
         private CapsuleCollider p_capsuleCollider;
 

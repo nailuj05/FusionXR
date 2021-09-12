@@ -16,6 +16,7 @@ namespace Fusion.XR
         //public TextAsset Pose;
         public HandPose pose;
         public string displayName = "";
+        private HandPoser handPoser;
 
         private GameObject prevHand;
         private Vector3 palmOffset = new Vector3(-0.35f, -0.21f, -0.012f);
@@ -24,12 +25,11 @@ namespace Fusion.XR
         {
             //Get mesh Hand and place it
             prevHand = Resources.Load<GameObject>("PrevHandPrefab") as GameObject;
-            Transform palm = prevHand.GetComponent<HandPoser>().palm;
-
             prevHand = Instantiate(prevHand);
 
-            prevHand.transform.rotation = transform.rotation;
-            prevHand.transform.position = transform.position;
+            handPoser = prevHand.GetComponent<HandPoser>();
+            handPoser.attachedObj = this.transform;
+            Transform palm = handPoser.palm;
 
             StartCoroutine(UpdateHandPos(obj, palm));
         }
@@ -41,15 +41,11 @@ namespace Fusion.XR
 
         public void LoadPose()
         {
-            HandPoser handPoser = prevHand.GetComponent<HandPoser>();
-
             handPoser.RotateToPose(pose);
         }
 
         public void SavePose()
         {
-            HandPoser handPoser = prevHand.GetComponent<HandPoser>();
-
             pose.SetAllRotations(handPoser.SavePose());
             pose.isLeftHand = isLeftHand;
         }
@@ -58,8 +54,7 @@ namespace Fusion.XR
         {
             while (isEditingPose)
             {
-                prevHand.transform.rotation = transform.rotation;
-                prevHand.transform.position = transform.position;
+                handPoser.PlaceRenderHand();
 
                 yield return null;
             }
@@ -67,21 +62,19 @@ namespace Fusion.XR
 
         public void SwitchHand(Hand hand)
         {
-            Vector3 handLocalScale = prevHand.transform.localScale;
+            handPoser.hand = hand;
 
-            switch ((int)hand)
+            if(hand == Hand.Left)
             {
-                case 0:     //Left hand
-                    handLocalScale.x = -1 * Mathf.Abs(handLocalScale.x);
-                    isLeftHand = true;
-                    break;
-                case 1:     //Right hand
-                    handLocalScale.x = Mathf.Abs(handLocalScale.x);
-                    isLeftHand = false;
-                    break;
+                prevHand.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            if (hand == Hand.Right)
+            {
+                prevHand.transform.localScale = new Vector3(1, 1, 1);
             }
 
-            prevHand.transform.localScale = handLocalScale;
+            //Refresh RenderHand, because Editor Update() is not reliable
+            handPoser.PlaceRenderHand();
         }
     }
 
@@ -91,8 +84,8 @@ namespace Fusion.XR
     {
         bool hasCustomPose = false;
 
-        GUIStyle leftStyle;
-        GUIStyle rightStyle;
+        [SerializeField] GUIStyle leftStyle;
+        [SerializeField] GUIStyle rightStyle;
 
         private void Awake()
         {

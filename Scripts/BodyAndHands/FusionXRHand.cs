@@ -84,7 +84,7 @@ namespace Fusion.XR
         private HandPoser handPoser;
 
         public Transform grabSpot;
-        private bool generatedPoint;
+        public bool generatedPoint;
 
         private Rigidbody targetBody;
 
@@ -168,17 +168,10 @@ namespace Fusion.XR
             if (closestGrabable == null)
                 return;
 
-            //Possible TODO: Add Check for Parent rb
-            if (closestGrabable.TryGetComponent(out Rigidbody objectRigidbody))
-            {
-                grabbedObject = closestGrabable.GetComponent<Grabable>();
+            //Get Grabable and RB
+            grabbedObject = closestGrabable.GetComponentInParent<Grabable>();
 
-                targetBody = objectRigidbody;
-            }
-            else
-            {
-                return;
-            }
+            targetBody = grabbedObject.GetComponent<Rigidbody>();
 
             if(grabbedObject.TryGetClosestGrapPoint(transform.position, hand, out Transform grabPoint))
             {
