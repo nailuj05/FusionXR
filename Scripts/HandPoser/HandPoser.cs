@@ -6,14 +6,6 @@ using UnityEditor;
 
 namespace Fusion.XR
 {
-    public enum HandState
-    {
-        open = 0,
-        grab = 1,
-        pinch = 2,
-        point = 3
-    }
-
     public class HandPoser : MonoBehaviour
     {
         public FusionXRHand xrHand;
@@ -83,7 +75,6 @@ namespace Fusion.XR
                 PlaceRenderHand();
             }
 
-            //Pose Fingers Here
             if (poseLocked)
                 return;
 
@@ -142,51 +133,11 @@ namespace Fusion.XR
             #endregion
         }
 
-        #region RenderHand Movement
-
         public void PlaceRenderHand()
         {
-            renderHand.transform.position = attachedObj.TransformPoint(palmOffset); //Change this for left hand (?)
+            renderHand.transform.position = attachedObj.TransformPoint(palmOffset);
             renderHand.transform.rotation = attachedObj.transform.rotation;
-
-            if (hand == Hand.Left)
-            {
-                if (Application.isPlaying && xrHand.generatedPoint)
-                    return;
-
-                if (!notCustomPose)
-                {
-                    AddLeftHandDeltaPosition(attachedObj);
-                    AddLeftHandDeltaRotation(attachedObj);
-                }
-            }
         }
-
-        public void AddLeftHandDeltaPosition(Transform attachedObj)
-        {
-            if (Application.isPlaying)
-            {
-                renderHand.transform.position = attachedObj.TransformPoint(deltaTransformationPosition);
-            }
-            else
-            {
-                renderHand.transform.position += attachedObj.TransformDirection(new Vector3(0f, -0.01f, 0f));
-            }
-        }
-
-        public void AddLeftHandDeltaRotation(Transform attachedObj)
-        {
-            if (Application.isPlaying)
-            {
-                renderHand.transform.rotation = attachedObj.rotation * Quaternion.Euler(deltaTransformationRotation);
-            }
-            else
-            {
-                renderHand.transform.rotation = attachedObj.rotation * Quaternion.Euler(27f, -0f, -183f);
-            }
-        }
-
-        #endregion
 
         #region Posing Functions
 

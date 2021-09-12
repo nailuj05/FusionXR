@@ -5,18 +5,6 @@ using UnityEngine.InputSystem;
 
 namespace Fusion.XR
 {
-    public enum MovementDirection
-    {
-        HeadOriented = 0,
-        HandOriented = 1,
-    }
-
-    public enum TurnMode
-    {
-        SnapTurn = 0,
-        //SmoothTurn = 1 //Not working
-    }
-
     public class Movement : MonoBehaviour
     {
         [Header("Basic Movement")]
