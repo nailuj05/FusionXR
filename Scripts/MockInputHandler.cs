@@ -12,6 +12,22 @@ namespace Fusion.XR
 
         public float mouseSensitivity = 1f;
 
+        public Transform leftHand;
+        public Transform rightHand;
+
+        private Transform currentHand;
+
+        public float scrollFactor = 0.5f;
+        private float scrollDelta = 1f;
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+
+            currentHand = rightHand;
+        }
+
         private void Update()
         {
             ///Mouse Look
@@ -44,6 +60,17 @@ namespace Fusion.XR
             }
 
             ///Arms
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                currentHand = (currentHand == rightHand) ? leftHand : rightHand;
+                scrollDelta = 0.5f * scrollFactor;
+            }
+
+            scrollDelta += Input.mouseScrollDelta.y;
+
+            Vector3 localPos = currentHand.localPosition;
+            localPos.z = scrollDelta * scrollFactor;
+            currentHand.localPosition = localPos;
         }
     }
 }

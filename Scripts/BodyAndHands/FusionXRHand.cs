@@ -19,9 +19,11 @@ namespace Fusion.XR
         public Vector3 rotationOffset;
 
         public TrackingMode trackingMode;
+        [HideInInspector]
+        public TrackDriver trackDriver;
 
-        [HideInInspector] public Vector3 posWithOffset;
-        [HideInInspector] public Quaternion rotWithOffset;
+        private Vector3 targetPosition;
+        private Quaternion targetRotation;
 
         public Rigidbody rb;
 
@@ -31,7 +33,7 @@ namespace Fusion.XR
 
         //Grabbing
         public float grabRange = 0.1f;
-        public GrabMode grabMode;
+        public TrackingMode grabbedTrackingMode;
         public Transform palm;
         [SerializeField] private float reachDist = 0.1f; //, joinDist = 0.05f;
 
@@ -46,6 +48,11 @@ namespace Fusion.XR
             rb = GetComponent<Rigidbody>();
             followObject = trackedController;
 
+            ///Set the tracking Mode accordingly
+            var newTrackDriver = Utilities.DriverFromEnum(trackingMode);
+            ChangeTrackDriver(newTrackDriver);
+
+            ///Subscribe to the actions
             grabReference.action.started += OnGrabbed;
             grabReference.action.canceled += OnLetGo;
 
@@ -53,9 +60,12 @@ namespace Fusion.XR
             pinchReference.action.canceled += OnPinchedCancelled;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
+            targetPosition = followObject.TransformPoint(positionOffset);
+            targetRotation = followObject.rotation * Quaternion.Euler(rotationOffset);
 
+            trackDriver.UpdateTrack(targetPosition, targetRotation);
         }
 
         #endregion
@@ -104,13 +114,22 @@ namespace Fusion.XR
         #endregion
 
         #region Functions
-        //Always with a defined GrabPoint, if there is none, overload will generate one
+        public void ChangeTrackDriver(TrackDriver newDriver)
+        {
+            if (trackDriver != null) ///End the current trackDriver if it exists
+                trackDriver.EndTrack();
+
+            trackDriver = newDriver;
+            trackDriver.StartTrack(transform);
+        }
+
+        ///Always with a defined GrabPoint, if there is none, overload will generate one
         IEnumerator GrabObject(Collider closestColl, Transform givenGrabPoint)
         {
             yield return null;
         }
 
-        //A function so it can also be called from a grabbable that wants to switch hands
+        ///A function so it can also be called from a grabbable that wants to switch hands
         public void Release()
         {
             isGrabbing = false;

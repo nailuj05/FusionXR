@@ -4,16 +4,33 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public enum Direction
+    public static class Utilities
     {
-        North = 0,
-        South = 1,
-        West = 2,
-        East = 3
-    }
+        public static TrackDriver DriverFromEnum(TrackingMode trackingMode)
+        {
+            //Defaulting to Kinematic Driver
+            TrackDriver driver = new KinematicDriver();
 
-    public class Utilities : MonoBehaviour
-    {
+            switch (trackingMode)
+            {
+                case TrackingMode.Kinematic:
+                    driver = new KinematicDriver();
+                    break;
+                case TrackingMode.Velocity:
+                    driver = new VelocityDriver();
+                    break;
+                case TrackingMode.ActiveJoint:
+                    break;
+                case TrackingMode.PassiveJoint:
+                    break;
+                default:
+                    Debug.LogError("No matching TrackDriver was setup for the given trackingMode enum, defaulting to a Kinematic Driver. Define a matching TrackDriver and declare it in Utilities.cs");
+                    break;
+            }
+
+            return driver;
+        }
+
         public static Direction GetDirectionFromVector(Vector2 input)
         {
             var angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;

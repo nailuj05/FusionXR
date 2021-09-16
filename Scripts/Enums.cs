@@ -15,14 +15,8 @@ namespace Fusion.XR
     {
         Kinematic = 0,
         Velocity = 1,
-        Joint = 2
-    }
-
-    public enum GrabMode
-    {
-        Kinematic = 0,
-        Velocity = 1,
-        Joint = 2
+        ActiveJoint = 2,
+        PassiveJoint = 3,
     }
 
     public enum TwoHandedMode
@@ -52,5 +46,13 @@ namespace Fusion.XR
     {
         SnapTurn = 0,
         //SmoothTurn = 1 //Not working
+    }
+
+    public enum Direction
+    {
+        North = 0,
+        South = 1,
+        West = 2,
+        East = 3
     }
 }

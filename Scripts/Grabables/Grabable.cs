@@ -14,7 +14,7 @@ namespace Fusion.XR
 
         [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
 
-        private GrabMode grabMode;
+        private TrackingMode grabbedTrackingMode;
         private Rigidbody rb;
 
         //If 2 Handed:
@@ -49,9 +49,9 @@ namespace Fusion.XR
         #endregion
 
         #region Events
-        public void Grab(FusionXRHand hand, GrabMode mode) 
+        public void Grab(FusionXRHand hand, TrackingMode mode) 
         {
-            grabMode = mode;
+            grabbedTrackingMode = mode;
 
             if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
             {
