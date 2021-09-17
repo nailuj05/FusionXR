@@ -62,7 +62,7 @@ namespace Fusion.XR
             pinchReference.action.canceled += OnPinchedCancelled;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             targetPosition = followObject.TransformPoint(positionOffset);
             targetRotation = followObject.rotation * Quaternion.Euler(rotationOffset);

@@ -20,12 +20,12 @@ namespace Fusion.XR
 
         //Active Joint Tracking
         [Header("Active Joint Tracking")]
-        [SerializeField] public float positionSpring = 5000;
-        [SerializeField] public float positionDamper = 1000;
+        [SerializeField] public float positionSpring = 3000;
+        [SerializeField] public float positionDamper = 250;
         [SerializeField] public float maxForce = 1500;
 
         [SerializeField] public float slerpSpring = 3000;
-        [SerializeField] public float slerpDamper = 200;
+        [SerializeField] public float slerpDamper = 250;
         [SerializeField] public float slerpMaxForce = 1500;
     }
 

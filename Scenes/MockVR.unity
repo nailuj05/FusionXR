@@ -2697,11 +2697,11 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
-    positionSpring: 5000
-    positionDamper: 1000
+    positionSpring: 3000
+    positionDamper: 250
     maxForce: 1500
     slerpSpring: 3000
-    slerpDamper: 200
+    slerpDamper: 250
     slerpMaxForce: 1500
   rb: {fileID: 0}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -4253,11 +4253,11 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
-    positionSpring: 5000
-    positionDamper: 1000
+    positionSpring: 3000
+    positionDamper: 250
     maxForce: 1500
     slerpSpring: 3000
-    slerpDamper: 200
+    slerpDamper: 250
     slerpMaxForce: 1500
   rb: {fileID: 0}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
