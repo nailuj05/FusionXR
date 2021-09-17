@@ -19,12 +19,14 @@ namespace Fusion.XR
         public Vector3 rotationOffset;
 
         public TrackingMode trackingMode;
-        [HideInInspector]
-        public TrackDriver trackDriver;
+
+        public TrackingBase trackingBase;
+        private TrackDriver trackDriver;
 
         private Vector3 targetPosition;
         private Quaternion targetRotation;
 
+        [HideInInspector]
         public Rigidbody rb;
 
         //Inputs
@@ -43,14 +45,14 @@ namespace Fusion.XR
         #endregion
 
         #region Start and Update
-        private void Start()
+        private void Awake()
         {
             rb = GetComponent<Rigidbody>();
             followObject = trackedController;
 
             ///Set the tracking Mode accordingly
             var newTrackDriver = Utilities.DriverFromEnum(trackingMode);
-            ChangeTrackDriver(newTrackDriver);
+            trackDriver = ChangeTrackDriver(newTrackDriver);
 
             ///Subscribe to the actions
             grabReference.action.started += OnGrabbed;
@@ -114,13 +116,13 @@ namespace Fusion.XR
         #endregion
 
         #region Functions
-        public void ChangeTrackDriver(TrackDriver newDriver)
+        public TrackDriver ChangeTrackDriver(TrackDriver newDriver)
         {
             if (trackDriver != null) ///End the current trackDriver if it exists
                 trackDriver.EndTrack();
 
-            trackDriver = newDriver;
-            trackDriver.StartTrack(transform);
+            newDriver.StartTrack(transform, trackingBase);
+            return newDriver;
         }
 
         ///Always with a defined GrabPoint, if there is none, overload will generate one

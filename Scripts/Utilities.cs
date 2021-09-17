@@ -20,8 +20,10 @@ namespace Fusion.XR
                     driver = new VelocityDriver();
                     break;
                 case TrackingMode.ActiveJoint:
+                    driver = new ActiveJointDriver();
                     break;
                 case TrackingMode.PassiveJoint:
+                    driver = new PassiveJointDriver();
                     break;
                 default:
                     Debug.LogError("No matching TrackDriver was setup for the given trackingMode enum, defaulting to a Kinematic Driver. Define a matching TrackDriver and declare it in Utilities.cs");
