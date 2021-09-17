@@ -171,7 +171,7 @@ namespace Fusion.XR
             }
 
             activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos);
-            activeJoint.targetRotation = Quaternion.Inverse(objectRB.rotation) * targetRot;
+            activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;
         }
 
         private void UpdateHandJointDrives()
