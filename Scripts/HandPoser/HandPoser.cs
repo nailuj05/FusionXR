@@ -44,6 +44,8 @@ namespace Fusion.XR
         public LayerMask collMask;
 
         [Header("Hand State")]
+        [Tooltip("Debug Mode is used to control the grab and pinch values form script, rather than using controller data")]
+        public bool debugMode;
         public InputActionReference pinchReference;
         public InputActionReference grabReference;
         public Hand hand;
@@ -67,8 +69,11 @@ namespace Fusion.XR
 
         public void Update()
         {
-            pinchValue = pinchReference.action.ReadValue<float>();
-            grabValue = grabReference.action.ReadValue<float>();
+            if (!debugMode)
+            {
+                pinchValue = pinchReference.action.ReadValue<float>();
+                grabValue = grabReference.action.ReadValue<float>();
+            }
 
             if (isAttached)
             {
