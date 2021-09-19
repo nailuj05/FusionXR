@@ -21,7 +21,7 @@ namespace Fusion.XR
         public override void Move(Vector3 direction)
         {
             //Ground Check: Raycast from players head downwards, with max distance being the players height + a small epsilon and the radius of the players collider
-            //if(Physics.SphereCast(head.position, Player.main.collisionAdjuster.p_CollisionRadius, Vector3.down, out RaycastHit hit, Player.main.collisionAdjuster.p_localHeight + 0.1f))
+            //if(Physics.SphereCast(head.position, Player.main.collisionAdjuster.p_CollisionRadius, Vector3.down, out RaycastHit hit, Player.main.collisionAdjuster.p_localHeight + 0.3f))
 
             vel = direction * Time.deltaTime * 50;
             rigidBody.velocity = vel + Vector3.up * rigidBody.velocity.y;
