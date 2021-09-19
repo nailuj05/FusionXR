@@ -27,6 +27,8 @@ namespace Fusion.XR
         [SerializeField] public float slerpSpring = 3000;
         [SerializeField] public float slerpDamper = 250;
         [SerializeField] public float slerpMaxForce = 1500;
+
+        [HideInInspector] public GameObject tracker;
     }
 
     public class TrackDriver
@@ -203,19 +205,56 @@ namespace Fusion.XR
 
     public class PassiveJointDriver : TrackDriver
     {
+        private Rigidbody objectRB;
+        private Rigidbody trackerRB;
+
+        private Joint joint;
+
         public override void StartTrack(Transform objectToTrack, TrackingBase assignedTrackingBase)
         {
-            base.StartTrack(objectToTrack, assignedTrackingBase);   
+            base.StartTrack(objectToTrack, assignedTrackingBase);
+
+            try
+            {
+                trackerRB = trackingBase.tracker.GetComponent<Rigidbody>();
+                objectRB = objectToTrack.GetComponent<Rigidbody>();
+            }
+            catch
+            {
+                Debug.Log("Target and Tracking Object need to have a Rigidbody attached, " +
+                    "this should be used for grabbing, not for moving the hand (Use Active Joint Tracking for that");
+            }
         }
 
         public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
         {
-            
+            if (joint == null)
+                SetupJoint(targetPosition, targetRotation);
         }
 
         public override void EndTrack()
         {
-            
+            DestroyJoint();
+        }
+
+        private void SetupJoint(Vector3 targetPosition, Quaternion targetRotation)
+        {
+            objectRB.transform.position = targetPosition;
+            objectRB.transform.rotation = targetRotation;
+
+            joint = trackerRB.gameObject.AddComponent<FixedJoint>();
+            joint.connectedBody = objectRB;
+
+            joint.enableCollision = false;
+            joint.enablePreprocessing = false;
+        }
+
+        private void DestroyJoint()
+        {
+            if (joint != null)
+                Object.Destroy(joint);
+
+            joint = null;
         }
     }
 }
