@@ -54,6 +54,9 @@ namespace Fusion.XR
             var newTrackDriver = Utilities.DriverFromEnum(trackingMode);
             trackDriver = ChangeTrackDriver(newTrackDriver);
 
+            trackingBase.tracker = this.gameObject;
+            trackDriver.StartTrack(transform, trackingBase);
+
             ///Subscribe to the actions
             grabReference.action.started += OnGrabbed;
             grabReference.action.canceled += OnLetGo;
@@ -120,8 +123,6 @@ namespace Fusion.XR
         {
             if (trackDriver != null) ///End the current trackDriver if it exists
                 trackDriver.EndTrack();
-
-            newDriver.StartTrack(transform, trackingBase);
             return newDriver;
         }
 
