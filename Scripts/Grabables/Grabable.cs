@@ -95,11 +95,11 @@ namespace Fusion.XR
 
         #region Functions
 
-        public bool TryGetClosestGrapPoint(Vector3 point, Hand desiredHand, out Transform GrapPoint)
+        public Transform GetClosestGrabPoint(Vector3 point, Hand desiredHand)
         {
-            GrapPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
+            Transform grabPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
 
-            return GrapPoint != null;
+            return grabPoint;
         }
 
         Transform ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Hand desiredHand)
@@ -111,7 +111,7 @@ namespace Fusion.XR
             {
                 foreach (GrabPoint currentGrabPoint in grabPoints)
                 {
-                    if (currentGrabPoint.CorrectHand(desiredHand) && currentGrabPoint.isActive) //Check if the GrapPoint is for the correct Hand and if it isActive
+                    if (currentGrabPoint.CorrectHand(desiredHand) && currentGrabPoint.isActive) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
                         {
