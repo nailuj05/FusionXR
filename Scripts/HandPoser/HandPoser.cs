@@ -98,7 +98,7 @@ namespace Fusion.XR
                 LerpToPose(handOpen, poseLerpSpeed, 1);
             }
             //Grabbing
-            if (pinchValue == 1 && grabValue == 1)
+            if (pinchValue > 0 && grabValue > 0)
             {
                 if (handState == HandState.grab)
                     return;
@@ -110,7 +110,7 @@ namespace Fusion.XR
                 LerpToPose(handClosed, poseLerpSpeed, 1);
             }
             //Pinching
-            if (pinchValue == 1 && grabValue == 0)
+            if (pinchValue > 0 && grabValue == 0)
             {
                 if (handState == HandState.pinch)
                     return;
@@ -123,7 +123,7 @@ namespace Fusion.XR
                 LerpToPose(handPinch, poseLerpSpeed, 1);
             }
             //Pointing
-            if (pinchValue == 0 && grabValue == 1)
+            if (pinchValue == 0 && grabValue > 0)
             {
                 if (handState == HandState.point)
                     return;
@@ -142,6 +142,12 @@ namespace Fusion.XR
         {
             renderHand.transform.position = attachedObj.TransformPoint(palmOffset);
             renderHand.transform.rotation = attachedObj.transform.rotation;
+        }
+
+        public void SetPinchGrabDebug(float pinch, float grab)
+        {
+            pinchValue = pinch;
+            grabValue = grab;
         }
 
         #region Posing Functions
