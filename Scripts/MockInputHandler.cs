@@ -117,6 +117,44 @@ namespace Fusion.XR
             }
             #endregion
 
+            #region Hands (Poser and Grabbing)
+            float pinchTarget = Input.GetMouseButton(0) ? 1 : 0;
+            float grabTarget = Input.GetMouseButton(1) ? 1 : 0;
+
+            mockPinch = Mathf.MoveTowards(mockPinch, pinchTarget, Time.deltaTime * 3);
+            mockGrab = Mathf.MoveTowards(mockGrab, grabTarget, Time.deltaTime * 3);
+
+            if (currentHand == leftHand)
+            {
+                //Apply mock Pinch/Grab to Hand/HandPoser here
+                if (l_hand)
+                {
+                    if (mockGrab > 0f)
+                        l_hand.DebugGrab();
+                    else
+                        l_hand.DebugLetGo();
+                }
+                if (l_handPoser)
+                {
+                    l_handPoser.SetPinchGrabDebug(mockPinch, mockGrab);
+                }
+            }
+            else if(currentHand == rightHand)
+            {
+                //Apply mock Pinch/Grab to Hand/HandPoser here
+                if (r_hand)
+                {
+                    if (mockGrab > 0f)
+                        r_hand.DebugGrab();
+                    else
+                        r_hand.DebugLetGo();
+                }
+                if (r_handPoser)
+                {
+                    r_handPoser.SetPinchGrabDebug(mockPinch, mockGrab);
+                }
+            }
+            #endregion
         }
     }
 }

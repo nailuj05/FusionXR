@@ -2671,7 +2671,7 @@ MonoBehaviour:
   collMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  debugMode: 0
+  debugMode: 1
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 1
@@ -4229,7 +4229,7 @@ MonoBehaviour:
   collMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  debugMode: 0
+  debugMode: 1
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 0
