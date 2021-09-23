@@ -33,13 +33,13 @@ namespace Fusion.XR
 
     public class TrackDriver
     {
-        protected Transform trackTarget;
+        protected Transform objectToTrack;
 
         protected TrackingBase trackingBase;
 
-        public virtual void StartTrack(Transform objectToTrack, TrackingBase assignedTrackingBase)
+        public virtual void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            trackTarget = objectToTrack;
+            objectToTrack = assignedObjectToTrack;
             trackingBase = assignedTrackingBase;
         }
 
@@ -56,15 +56,15 @@ namespace Fusion.XR
 
     public class KinematicDriver : TrackDriver
     {
-        public override void StartTrack(Transform objectToTrack, TrackingBase assignedTrackingBase)
+        public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            base.StartTrack(objectToTrack, assignedTrackingBase);
+            base.StartTrack(assignedObjectToTrack, assignedTrackingBase);
         }
 
         public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
         {
-            trackTarget.position = targetPosition;
-            trackTarget.rotation = targetRotation;
+            objectToTrack.position = targetPosition;
+            objectToTrack.rotation = targetRotation;
         }
 
         public override void EndTrack()
@@ -77,21 +77,21 @@ namespace Fusion.XR
     {
         private Rigidbody rb;
 
-        public override void StartTrack(Transform objectToTrack, TrackingBase assignedTrackingBase)
+        public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            rb = objectToTrack.GetComponent<Rigidbody>();
-            base.StartTrack(objectToTrack, assignedTrackingBase);
+            rb = assignedObjectToTrack.GetComponent<Rigidbody>();
+            base.StartTrack(assignedObjectToTrack, assignedTrackingBase);
         }
 
         public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
         {
             //Track Position
-            Vector3 deltaVelocity = (targetPosition - trackTarget.position) * trackingBase.positionStrength;
+            Vector3 deltaVelocity = (targetPosition - objectToTrack.position) * trackingBase.positionStrength;
 
             rb.velocity = deltaVelocity;
 
             //Track Rotation
-            Quaternion deltaRotation = targetRotation * Quaternion.Inverse(trackTarget.rotation);
+            Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
 
             deltaRotation.ToAngleAxis(out var angle, out var axis);
 
@@ -118,9 +118,9 @@ namespace Fusion.XR
 
         private Vector3 lastControllerPos;
 
-        public override void StartTrack(Transform objectToTrack, TrackingBase assignedTrackingBase)
+        public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            base.StartTrack(objectToTrack, assignedTrackingBase);
+            base.StartTrack(assignedObjectToTrack, assignedTrackingBase);
 
             jointRB = Object.FindObjectOfType<Player>().GetComponent<Rigidbody>();
             objectRB = objectToTrack.GetComponent<Rigidbody>();
@@ -210,9 +210,9 @@ namespace Fusion.XR
 
         private Joint joint;
 
-        public override void StartTrack(Transform objectToTrack, TrackingBase assignedTrackingBase)
+        public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            base.StartTrack(objectToTrack, assignedTrackingBase);
+            base.StartTrack(assignedObjectToTrack, assignedTrackingBase);
 
             try
             {
