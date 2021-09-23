@@ -7,7 +7,6 @@ namespace Fusion.XR
 {
     public class FusionXRHand : MonoBehaviour
     {
-
         #region Variables
 
         //Tracking
@@ -18,13 +17,15 @@ namespace Fusion.XR
         public Vector3 positionOffset;
         public Vector3 rotationOffset;
 
+        //Tracking for Hands (and trackingBase for Grabables)
         public TrackingMode trackingMode;
 
         public TrackingBase trackingBase;
         private TrackDriver trackDriver;
 
-        private Vector3 targetPosition;
-        private Quaternion targetRotation;
+        ///The Transformation the hand WANTS to reach, public get for access from Grabable
+        public Vector3 targetPosition { get; private set; }
+        public Quaternion targetRotation { get; private set; }
 
         [HideInInspector]
         public Rigidbody rb;
@@ -41,6 +42,7 @@ namespace Fusion.XR
 
         private bool isGrabbing;
         private Grabable grabbedGrabable;
+        public Transform grabPoint { get; private set; }
 
         #endregion
 
