@@ -201,6 +201,13 @@ namespace Fusion.XR
             }
             return ClosestGameObj;
         }
+
+        public TrackDriver ChangeTrackDriver(TrackDriver newDriver)
+        {
+            if (trackDriver != null) ///End the current trackDriver if it exists
+                trackDriver.EndTrack();
+            return newDriver;
+        }
         #endregion
     }
 }
