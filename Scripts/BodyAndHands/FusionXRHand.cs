@@ -77,75 +77,102 @@ namespace Fusion.XR
 
         #endregion
 
-        #region Events 
-        //Grab Event Called if Grab Action is performed
-        void OnGrabbed(InputAction.CallbackContext obj)
+        #region Events
+        private void OnGrabbed(InputAction.CallbackContext obj)
         {
-            if (isGrabbing)
-            {
-                return;
-            }
-
-            GameObject closestGrabable = ClosestGrabable(out Collider closestColl);
-
-            if (closestGrabable == null)
-                return;
-
-            grabbedGrabable = closestGrabable.GetComponentInParent<Grabable>();
-
-            if(grabbedGrabable.TryGetClosestGrapPoint(transform.position, hand, out Transform grabPoint))
-            {
-                StartCoroutine(GrabObject(closestColl, grabPoint));
-            }
-            else
-            {
-                StartCoroutine(GrabObject(closestColl, null));
-            }
+            GrabObject();
         }
 
-        void OnLetGo(InputAction.CallbackContext obj)
+        private void OnLetGo(InputAction.CallbackContext obj)
         {
             Release();
         }
 
-        void OnPinched(InputAction.CallbackContext obj)
+        private void OnPinched(InputAction.CallbackContext obj)
         {
 
         }
 
-        void OnPinchedCancelled(InputAction.CallbackContext obj)
+        private void OnPinchedCancelled(InputAction.CallbackContext obj)
         {
 
         }
 
         #endregion
 
-        #region Functions
-        public TrackDriver ChangeTrackDriver(TrackDriver newDriver)
+        #region DebugEvents
+        public void DebugGrab()
         {
-            if (trackDriver != null) ///End the current trackDriver if it exists
-                trackDriver.EndTrack();
-            return newDriver;
+            GrabObject();
         }
 
-        ///Always with a defined GrabPoint, if there is none, overload will generate one
-        IEnumerator GrabObject(Collider closestColl, Transform givenGrabPoint)
+        public void DebugLetGo()
         {
-            yield return null;
+            if (isGrabbing)
+                Release();
+        }
+        #endregion
+
+        #region Functions
+        ///Always with a defined GrabPoint, if there is none, overload will generate one
+        void GrabObject()
+        {
+            ///Return if already grabbing
+            if (isGrabbing)
+                return;
+
+            ///Check for grabable in Range, if none return
+            GameObject closestGrabable = ClosestGrabable(out Collider closestColl);
+
+            if (closestGrabable == null)
+                return;
+
+            ///Get grabable component and possible grab points
+            grabbedGrabable = closestGrabable.GetComponentInParent<Grabable>();
+
+            grabPoint = grabbedGrabable.GetClosestGrabPoint(transform.position, hand);
+
+            ///Generate a GrabPoint if there is no given one
+            if (grabPoint == null)
+            {
+                grabPoint = GenerateGrabPoint(closestColl, grabbedGrabable);
+            }
+
+            isGrabbing = true;
+
+            grabbedGrabable.Grab(this, grabbedTrackingMode, trackingBase);
+
+            Debug.Log($"Grab {grabbedGrabable.gameObject.name}");
         }
 
         ///A function so it can also be called from a grabbable that wants to switch hands
         public void Release()
         {
             isGrabbing = false;
-            followObject = trackedController;
+            
+            //Destory the grabPoint
+            if (grabPoint != null)
+            {
+                Destroy(grabPoint.gameObject);
+            }
 
+            //Release the Grabable and reset the hand
             if (grabbedGrabable != null)
             {
                 grabbedGrabable.Release(this);
-                grabbedGrabable.GetComponent<Rigidbody>().velocity = rb.velocity;
+                grabbedGrabable.GetComponent<Rigidbody>().velocity = rb.velocity;   //NOTE: Apply Better velocity for throwing here
                 grabbedGrabable = null;
             }
+        }
+
+        Transform GenerateGrabPoint(Collider closestCollider, Grabable grabable)
+        {
+            Transform grabSpot = new GameObject().transform;
+            grabSpot.position = closestCollider.ClosestPoint(palm.position);
+            grabSpot.localRotation = transform.rotation;
+            grabSpot.parent = grabable.transform;
+
+            return grabSpot;
         }
 
         GameObject ClosestGrabable(out Collider closestColl)
