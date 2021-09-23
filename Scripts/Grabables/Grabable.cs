@@ -40,7 +40,7 @@ namespace Fusion.XR
             gameObject.tag = "Grabable";
         }
 
-        public virtual void FixedUpdate()
+        public virtual void Update()
         {
             if (!isGrabbed)
                 return;

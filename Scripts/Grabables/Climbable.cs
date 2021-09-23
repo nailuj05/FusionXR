@@ -11,7 +11,7 @@ namespace Fusion.XR
             gameObject.tag = "Grabable";
         }
 
-        public override void FixedUpdate()
+        public override void Update()
         {
             Vector3 deltaVelocity = Vector3.zero;
 
