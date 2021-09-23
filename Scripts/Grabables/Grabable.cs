@@ -14,7 +14,7 @@ namespace Fusion.XR
 
         [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
 
-        private TrackingMode grabbedTrackingMode;
+        private TrackDriver trackDriver;
         private Rigidbody rb;
 
         //If 2 Handed:
@@ -44,51 +44,56 @@ namespace Fusion.XR
         {
             if (!isGrabbed)
                 return;
+
+            Quaternion targetRotation = Quaternion.identity;
+            Vector3 targetPosition = Vector3.zero;
+
+            int handsCount = attachedHands.Count;
+
+            if(handsCount == 1)
+            {
+                //Get GrabPoint Offsets
+                Vector3 offsetPos    = attachedHands[0].grabPoint.localPosition;
+                Quaternion offsetRot = attachedHands[0].grabPoint.localRotation;
+
+                //Delta Vector/Quaternion from Grabable (+ offset) to hand
+                targetPosition = attachedHands[0].targetPosition - transform.TransformVector(offsetPos);
+                targetRotation = attachedHands[0].targetRotation * Quaternion.Inverse(offsetRot);
+            }
+            else
+            {
+                Debug.Log(handsCount);
+            }
+
+            trackDriver.UpdateTrack(targetPosition, targetRotation);
         }
 
         #endregion
 
         #region Events
-        public void Grab(FusionXRHand hand, TrackingMode mode) 
+        public void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase) 
         {
-            grabbedTrackingMode = mode;
+            ///Setup and Start Track Driver
+            trackDriver = Utilities.DriverFromEnum(mode);
+            trackDriver.StartTrack(transform, trackingBase);
 
-            if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
-            {
-                //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
-                if (attachedHands.Count > 0)
-                    attachedHands[0].Release();
+            ManageNewHand(hand);
 
-                attachedHands.Add(hand);
-            }
-            else if(twoHandedMode == TwoHandedMode.Average) //Case: Averaging Between Hands;
-            {
-                attachedHands.Add(hand);
-            }
+            EnableOrDisableCollisions(hand, true);
 
-            foreach (Collider coll in GetComponents<Collider>())
-            {
-                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, true);
-            }
-
-            isGrabbed = true; //This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
+            ///This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
+            isGrabbed = true; 
         }
 
         public void Release(FusionXRHand hand)
         {
-            foreach (Collider coll in GetComponents<Collider>())
-            {
-                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, false);
-            }
+            EnableOrDisableCollisions(hand, false);
 
-            attachedHands.Remove(hand);
+            RemoveHand(hand);
 
-            if(attachedHands.Count == 0)
-            {
-                rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-                rb.interpolation = RigidbodyInterpolation.None;
-                isGrabbed = false;
-            }
+            //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
+            if (!isGrabbed)
+                trackDriver.EndTrack();
         }
 
         #endregion
@@ -122,6 +127,42 @@ namespace Fusion.XR
                 }
             }
             return closestGrabPoint;
+        }
+
+        void ManageNewHand(FusionXRHand hand)
+        {
+            if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
+            {
+                //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
+                if (attachedHands.Count > 0)
+                    attachedHands[0].Release();
+
+                attachedHands.Add(hand);
+            }
+            else if (twoHandedMode == TwoHandedMode.Average) //Case: Averaging Between Hands;
+            {
+                attachedHands.Add(hand);
+            }
+        }
+
+        void RemoveHand(FusionXRHand hand)
+        {
+            attachedHands.Remove(hand);
+
+            if (attachedHands.Count == 0)
+            {
+                rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                rb.interpolation = RigidbodyInterpolation.None;
+                isGrabbed = false;
+            }
+        }
+
+        void EnableOrDisableCollisions(FusionXRHand hand, bool disable)
+        {
+            foreach (Collider coll in GetComponents<Collider>())
+            {
+                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, disable);
+            }
         }
 
         #endregion
