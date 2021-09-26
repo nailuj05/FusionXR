@@ -2054,6 +2054,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: valve_controller_knu_1_0_right
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 92659a0585a153841bb448b08fbb1890, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548378484523903591, guid: 92659a0585a153841bb448b08fbb1890, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92659a0585a153841bb448b08fbb1890, type: 3}
 --- !u!4 &529904290 stripped
@@ -2543,7 +2551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 814818071}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shoulders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3208,7 +3216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 911174200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3720,7 +3728,7 @@ GameObject:
   - component: {fileID: 1033683499}
   - component: {fileID: 1033683498}
   - component: {fileID: 1033683497}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mock Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4497,7 +4505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1185954186}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HeadOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4921,7 +4929,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1366268933}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5291,9 +5299,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 106390584999872295, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
       propertyPath: m_Name
       value: valve_controller_knu_1_0_left
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3025583462011494309, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6508,7 +6524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1845226320}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MockControllerRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7023,7 +7039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1949655611}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MockControllerLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
