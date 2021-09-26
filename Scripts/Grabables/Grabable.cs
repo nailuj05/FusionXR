@@ -73,11 +73,12 @@ namespace Fusion.XR
         #region Events
         public void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase) 
         {
+            ///Manage new hand first (so the last driver gets removed before a new one is added)
+            ManageNewHand(hand);
+
             ///Setup and Start Track Driver
             trackDriver = Utilities.DriverFromEnum(mode);
             trackDriver.StartTrack(transform, trackingBase);
-
-            ManageNewHand(hand);
 
             EnableOrDisableCollisions(hand, true);
 
@@ -92,8 +93,7 @@ namespace Fusion.XR
             RemoveHand(hand);
 
             //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
-            if (!isGrabbed)
-                trackDriver.EndTrack();
+            trackDriver.EndTrack();
         }
 
         #endregion
@@ -133,11 +133,16 @@ namespace Fusion.XR
         {
             if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
             {
+                Debug.Log("1");
                 //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
                 if (attachedHands.Count > 0)
+                {
+                    //This will also call the release function on this grabable, with this structure the hand can also be forced to release whatever it is holding
                     attachedHands[0].Release();
+                }
 
                 attachedHands.Add(hand);
+                Debug.Log(attachedHands[0].name);
             }
             else if (twoHandedMode == TwoHandedMode.Average) //Case: Averaging Between Hands;
             {

@@ -2709,7 +2709,7 @@ MonoBehaviour:
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabRange: 0.1
-  grabbedTrackingMode: 3
+  grabbedTrackingMode: 1
   palm: {fileID: 1563749726}
   reachDist: 0.1
 --- !u!54 &822546836
@@ -3800,7 +3800,7 @@ CapsuleCollider:
   m_Radius: 0.2
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1033683500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4267,7 +4267,7 @@ MonoBehaviour:
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabRange: 0.1
-  grabbedTrackingMode: 3
+  grabbedTrackingMode: 1
   palm: {fileID: 169951278}
   reachDist: 0.1
 --- !u!54 &1126147299
@@ -4298,7 +4298,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.12, y: 0.045, z: 0.2}
-  m_Center: {x: -0.03, y: 0.045, z: 0.01}
+  m_Center: {x: 0.03, y: 0.045, z: 0.01}
 --- !u!1 &1144407191
 GameObject:
   m_ObjectHideFlags: 0
