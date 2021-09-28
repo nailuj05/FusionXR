@@ -14,7 +14,7 @@ namespace Fusion.XR
 
         [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
 
-        private TrackDriver trackDriver;
+        //private TrackDriver trackDriver;
         private Rigidbody rb;
 
         //If 2 Handed:
@@ -45,27 +45,49 @@ namespace Fusion.XR
             if (!isGrabbed)
                 return;
 
+            //Reset Target Position and Rotation
             Quaternion targetRotation = Quaternion.identity;
             Vector3 targetPosition = Vector3.zero;
 
             int handsCount = attachedHands.Count;
 
-            if(handsCount == 1)
+            if (handsCount == 1) //If there is one hand grabbing
             {
                 //Get GrabPoint Offsets
-                Vector3 offsetPos    = attachedHands[0].grabPoint.localPosition;
+                Vector3 offsetPos = attachedHands[0].grabPoint.localPosition;
                 Quaternion offsetRot = attachedHands[0].grabPoint.localRotation;
 
                 //Delta Vector/Quaternion from Grabable (+ offset) to hand
                 targetPosition = attachedHands[0].targetPosition - transform.TransformVector(offsetPos);
                 targetRotation = attachedHands[0].targetRotation * Quaternion.Inverse(offsetRot);
-            }
-            else
-            {
-                Debug.Log(handsCount);
-            }
 
-            trackDriver.UpdateTrack(targetPosition, targetRotation);
+                //Apply Target Transformation to hand
+                attachedHands[0].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
+            }
+            else //If there is two hands grabbing 
+            {
+                Vector3[] posTargets = new Vector3[handsCount];
+                Quaternion[] rotTargets = new Quaternion[handsCount];
+
+                for (int i = 0; i < handsCount; i++)
+                {
+                    //Get GrabPoint Offsets
+                    Vector3 offsetPos = attachedHands[i].grabPoint.localPosition;
+                    Quaternion offsetRot = attachedHands[i].grabPoint.localRotation;
+
+                    //Delta Vector/Quaternion from Grabable (+ offset) to hand
+                    posTargets[i] = attachedHands[i].targetPosition - transform.TransformVector(offsetPos);
+                    rotTargets[i] = attachedHands[i].targetRotation * Quaternion.Inverse(offsetRot);
+                }
+
+                //Average target transformation
+                targetPosition = Vector3.Lerp(posTargets[0], posTargets[1], 0.5f);
+                targetRotation = Quaternion.Lerp(rotTargets[0], rotTargets[1], 0.5f);
+
+                //Apply Target Transformation to hands
+                attachedHands[0].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
+                attachedHands[1].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
+            }
         }
 
         #endregion
@@ -77,8 +99,8 @@ namespace Fusion.XR
             ManageNewHand(hand);
 
             ///Setup and Start Track Driver
-            trackDriver = Utilities.DriverFromEnum(mode);
-            trackDriver.StartTrack(transform, trackingBase);
+            hand.grabbedTrackDriver = Utilities.DriverFromEnum(mode);
+            hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
 
             EnableOrDisableCollisions(hand, true);
 
@@ -93,7 +115,7 @@ namespace Fusion.XR
             RemoveHand(hand);
 
             //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
-            trackDriver.EndTrack();
+            hand.grabbedTrackDriver.EndTrack();
         }
 
         #endregion

@@ -42,6 +42,8 @@ namespace Fusion.XR
 
         private bool isGrabbing;
         private Grabable grabbedGrabable;
+        [HideInInspector]
+        public TrackDriver grabbedTrackDriver;
         public Transform grabPoint { get; private set; }
 
         #endregion
