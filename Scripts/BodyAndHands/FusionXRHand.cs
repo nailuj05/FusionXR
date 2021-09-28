@@ -41,7 +41,9 @@ namespace Fusion.XR
         [SerializeField] private float reachDist = 0.1f; //, joinDist = 0.05f;
 
         private bool isGrabbing;
+        private bool generatedGrabPoint;
         private Grabable grabbedGrabable;
+
         [HideInInspector]
         public TrackDriver grabbedTrackDriver;
         public Transform grabPoint { get; private set; }
@@ -123,6 +125,9 @@ namespace Fusion.XR
             if (isGrabbing)
                 return;
 
+            isGrabbing = true;
+            generatedGrabPoint = false;
+
             ///Check for grabable in Range, if none return
             GameObject closestGrabable = ClosestGrabable(out Collider closestColl);
 
@@ -138,9 +143,8 @@ namespace Fusion.XR
             if (grabPoint == null)
             {
                 grabPoint = GenerateGrabPoint(closestColl, grabbedGrabable);
+                generatedGrabPoint = true;
             }
-
-            isGrabbing = true;
 
             grabbedGrabable.Grab(this, grabbedTrackingMode, trackingBase);
 
@@ -153,7 +157,7 @@ namespace Fusion.XR
             isGrabbing = false;
             
             //Destory the grabPoint
-            if (grabPoint != null)
+            if (grabPoint != null && generatedGrabPoint)
             {
                 Destroy(grabPoint.gameObject);
             }
