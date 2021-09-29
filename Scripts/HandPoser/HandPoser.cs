@@ -8,17 +8,20 @@ namespace Fusion.XR
 {
     public class HandPoser : MonoBehaviour
     {
-        public FusionXRHand xrHand;
-
         [Header("Poses")]
+
         [Tooltip("The Pose of an open Hand")]
         public HandPose handOpen;
+
         [Tooltip("The Pose of an closed Hand")]
         public HandPose handClosed;
+
         [Tooltip("The Pose of an even more open (strechted open) Hand to be called just before grabbing")]
         public HandPose handAwait;
+
         [Tooltip("The Pose of an Hand Pinching with Thump and Index Finger")]
         public HandPose handPinch;
+
         [Tooltip("The Pose of an closed Hand with the Index Finger pointing outwards")]
         public HandPose handPoint;
 
@@ -30,12 +33,10 @@ namespace Fusion.XR
         [HideInInspector] public Transform attachedObj;
         [SerializeField] private bool poseLocked;
         [SerializeField] private bool notCustomPose;
+
         public Transform palm;
         private Vector3 palmOffset;
         public Transform renderHand;
-
-        [SerializeField] public Vector3 deltaTransformationPosition = new Vector3(0f, 0.025f, 0f);
-        [SerializeField] public Vector3 deltaTransformationRotation = new Vector3(27f, -0f, -183f);
 
         [Header("Fingers")]
         public Finger[] fingers;
@@ -63,8 +64,6 @@ namespace Fusion.XR
         private void Awake()
         {
             palmOffset = -palm.localPosition;
-
-            xrHand = GetComponent<FusionXRHand>();
         }
 
         public void Update()
