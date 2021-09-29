@@ -5,18 +5,6 @@ using UnityEngine.InputSystem;
 
 namespace Fusion.XR
 {
-    public enum MovementDirection
-    {
-        HeadOriented = 0,
-        HandOriented = 1,
-    }
-
-    public enum TurnMode
-    {
-        SnapTurn = 0,
-        //SmoothTurn = 1 //Not working
-    }
-
     public class Movement : MonoBehaviour
     {
         [Header("Basic Movement")]
@@ -54,7 +42,7 @@ namespace Fusion.XR
         {
             //Subscribe to Movement Actions
             movementAction.action.performed += PreprocessMovement;
-            turnAction.action.performed += Turn;
+            turnAction.action.performed += Turn; //This working with overrides?
 
             //Set Movement Direction Initially
             SetMovementDirection(movementDirection);
@@ -66,7 +54,9 @@ namespace Fusion.XR
         private void Update()
         {
             if(useGravity && canMove)
+            {
                 QueueMove(gravity.normalized, gravity.magnitude);
+            }
         }
 
         private void Turn(InputAction.CallbackContext obj)
@@ -78,7 +68,15 @@ namespace Fusion.XR
 
             Direction direction = Utilities.GetDirectionFromVector(turnDirection);
 
-            if(direction != Direction.North || direction != Direction.South)
+            Turn(direction);
+        }
+
+        public void Turn(Direction direction)
+        {
+            if (waitForTurn)
+                return;
+
+            if (direction != Direction.North || direction != Direction.South)
             {
                 if (turnMode == TurnMode.SnapTurn)
                 {
@@ -114,7 +112,7 @@ namespace Fusion.XR
 
             movementInput.Set(movementInput.x, 0, movementInput.y);
 
-            if(movementInput.magnitude >= activationThreshold)
+            if (movementInput.magnitude >= activationThreshold)
             {
                 movementInput = currentMovementDirection.TransformDirection(movementInput);
                 movementInput = Vector3.ProjectOnPlane(movementInput, Vector3.up);
@@ -132,6 +130,13 @@ namespace Fusion.XR
         public void QueueMove(Vector3 direction)
         {
             MovementProcessing(direction);
+        }
+
+        public void MovementProcessing(Vector3 direction)
+        {
+            direction = movementOverrides[movementOverrides.Count - 1].ProcessMovement(direction);
+
+            Move(direction);
         }
 
         public void AddMovementOverride(MovementOverride newMovementOverride)
@@ -154,13 +159,6 @@ namespace Fusion.XR
         public void RemoveMovementOverride(MovementOverride movementOverrideToRemove)
         {
             movementOverrides.Remove(movementOverrideToRemove);
-        }
-
-        public void MovementProcessing(Vector3 direction)
-        {
-            direction = movementOverrides[movementOverrides.Count-1].ProcessMovement(direction);
-
-            Move(direction);
         }
 
         #endregion

@@ -6,14 +6,6 @@ using UnityEditor;
 
 namespace Fusion.XR
 {
-    public enum HandState
-    {
-        open = 0,
-        grab = 1,
-        pinch = 2,
-        point = 3
-    }
-
     public class HandPoser : MonoBehaviour
     {
         public FusionXRHand xrHand;
@@ -52,6 +44,8 @@ namespace Fusion.XR
         public LayerMask collMask;
 
         [Header("Hand State")]
+        [Tooltip("Debug Mode is used to control the grab and pinch values form script, rather than using controller data")]
+        public bool debugMode;
         public InputActionReference pinchReference;
         public InputActionReference grabReference;
         public Hand hand;
@@ -75,15 +69,17 @@ namespace Fusion.XR
 
         public void Update()
         {
-            pinchValue = pinchReference.action.ReadValue<float>();
-            grabValue = grabReference.action.ReadValue<float>();
+            if (!debugMode)
+            {
+                pinchValue = pinchReference.action.ReadValue<float>();
+                grabValue = grabReference.action.ReadValue<float>();
+            }
 
             if (isAttached)
             {
                 PlaceRenderHand();
             }
 
-            //Pose Fingers Here
             if (poseLocked)
                 return;
 
@@ -102,7 +98,7 @@ namespace Fusion.XR
                 LerpToPose(handOpen, poseLerpSpeed, 1);
             }
             //Grabbing
-            if (pinchValue == 1 && grabValue == 1)
+            if (pinchValue > 0 && grabValue > 0)
             {
                 if (handState == HandState.grab)
                     return;
@@ -114,7 +110,7 @@ namespace Fusion.XR
                 LerpToPose(handClosed, poseLerpSpeed, 1);
             }
             //Pinching
-            if (pinchValue == 1 && grabValue == 0)
+            if (pinchValue > 0 && grabValue == 0)
             {
                 if (handState == HandState.pinch)
                     return;
@@ -127,7 +123,7 @@ namespace Fusion.XR
                 LerpToPose(handPinch, poseLerpSpeed, 1);
             }
             //Pointing
-            if (pinchValue == 0 && grabValue == 1)
+            if (pinchValue == 0 && grabValue > 0)
             {
                 if (handState == HandState.point)
                     return;
@@ -142,51 +138,17 @@ namespace Fusion.XR
             #endregion
         }
 
-        #region RenderHand Movement
-
         public void PlaceRenderHand()
         {
-            renderHand.transform.position = attachedObj.TransformPoint(palmOffset); //Change this for left hand (?)
+            renderHand.transform.position = attachedObj.TransformPoint(palmOffset);
             renderHand.transform.rotation = attachedObj.transform.rotation;
-
-            if (hand == Hand.Left)
-            {
-                if (Application.isPlaying && xrHand.generatedPoint)
-                    return;
-
-                if (!notCustomPose)
-                {
-                    AddLeftHandDeltaPosition(attachedObj);
-                    AddLeftHandDeltaRotation(attachedObj);
-                }
-            }
         }
 
-        public void AddLeftHandDeltaPosition(Transform attachedObj)
+        public void SetPinchGrabDebug(float pinch, float grab)
         {
-            if (Application.isPlaying)
-            {
-                renderHand.transform.position = attachedObj.TransformPoint(deltaTransformationPosition);
-            }
-            else
-            {
-                renderHand.transform.position += attachedObj.TransformDirection(new Vector3(0f, -0.01f, 0f));
-            }
+            pinchValue = pinch;
+            grabValue = grab;
         }
-
-        public void AddLeftHandDeltaRotation(Transform attachedObj)
-        {
-            if (Application.isPlaying)
-            {
-                renderHand.transform.rotation = attachedObj.rotation * Quaternion.Euler(deltaTransformationRotation);
-            }
-            else
-            {
-                renderHand.transform.rotation = attachedObj.rotation * Quaternion.Euler(27f, -0f, -183f);
-            }
-        }
-
-        #endregion
 
         #region Posing Functions
 

@@ -4,13 +4,6 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public enum TwoHandedMode
-    {
-        SwitchHand = 0,
-        Average = 1,
-        //AttachHand = 2
-    }
-
     public class Grabable : MonoBehaviour
     {
         public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
@@ -21,7 +14,7 @@ namespace Fusion.XR
 
         [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
 
-        private GrabMode grabMode;
+        //private TrackDriver trackDriver;
         private Rigidbody rb;
 
         //If 2 Handed:
@@ -47,128 +40,93 @@ namespace Fusion.XR
             gameObject.tag = "Grabable";
         }
 
-        public virtual void FixedUpdate()
+        public virtual void Update()
         {
             if (!isGrabbed)
                 return;
 
-            if (grabMode == GrabMode.Joint) //Calculations not needed when using Joints
-                return;
+            //Reset Target Position and Rotation
+            Quaternion targetRotation = Quaternion.identity;
+            Vector3 targetPosition = Vector3.zero;
 
-            Vector3 avgPos = Vector3.zero;
-            Quaternion avgRot = Quaternion.identity;
-            Vector3 offsetPos = Vector3.zero;
+            int handsCount = attachedHands.Count;
 
-            if (attachedHands.Count > 1)
+            if (handsCount == 1) //If there is one hand grabbing
             {
-                Vector3[] handsPosOffset = new Vector3[2];
-                Quaternion[] handsRotOffset = new Quaternion[2];
+                //Get GrabPoint Offsets
+                Vector3 offsetPos = attachedHands[0].grabPoint.localPosition;
+                Quaternion offsetRot = attachedHands[0].grabPoint.localRotation;
 
-                handsPosOffset[0] = attachedHands[0].grabSpot.localPosition;
-                handsPosOffset[1] = attachedHands[1].grabSpot.localPosition;
+                //Delta Vector/Quaternion from Grabable (+ offset) to hand
+                targetPosition = attachedHands[0].targetPosition - transform.TransformVector(offsetPos);
+                targetRotation = attachedHands[0].targetRotation * Quaternion.Inverse(offsetRot);
 
-                handsRotOffset[0] = attachedHands[0].rotWithOffset * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation);
-                handsRotOffset[1] = attachedHands[1].rotWithOffset * Quaternion.Inverse(attachedHands[1].grabSpot.localRotation);
-
-                avgRot = Quaternion.Lerp(handsRotOffset[0], handsRotOffset[1], 0.5f);
-                avgPos = Vector3.Lerp(attachedHands[0].posWithOffset, attachedHands[1].posWithOffset, 0.5f);
-
-                offsetPos = Vector3.Lerp(handsPosOffset[0], handsPosOffset[1], .5f);
+                //Apply Target Transformation to hand
+                attachedHands[0].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
             }
-            else
+            else //If there is two hands grabbing 
             {
-                if(attachedHands[0].hand == Hand.Right)
+                Vector3[] posTargets = new Vector3[handsCount];
+                Quaternion[] rotTargets = new Quaternion[handsCount];
+
+                for (int i = 0; i < handsCount; i++)
                 {
-                    avgRot = attachedHands[0].rotWithOffset * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation);
+                    //Get GrabPoint Offsets
+                    Vector3 offsetPos = attachedHands[i].grabPoint.localPosition;
+                    Quaternion offsetRot = attachedHands[i].grabPoint.localRotation;
+
+                    //Delta Vector/Quaternion from Grabable (+ offset) to hand
+                    posTargets[i] = attachedHands[i].targetPosition - transform.TransformVector(offsetPos);
+                    rotTargets[i] = attachedHands[i].targetRotation * Quaternion.Inverse(offsetRot);
                 }
-                else
-                {
-                    avgRot = attachedHands[0].rotWithOffset * Quaternion.Inverse(attachedHands[0].grabSpot.localRotation * Quaternion.Euler(0, 0, 180)); //Left Hand needs to be rotated
-                }
-                avgPos = attachedHands[0].posWithOffset;
-                offsetPos = attachedHands[0].grabSpot.localPosition;
+
+                //Average target transformation
+                targetPosition = Vector3.Lerp(posTargets[0], posTargets[1], 0.5f);
+                targetRotation = Quaternion.Lerp(rotTargets[0], rotTargets[1], 0.5f);
+
+                //Apply Target Transformation to hands
+                attachedHands[0].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
+                attachedHands[1].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
             }
-
-            Vector3 targetPos = avgPos - transform.TransformPoint(offsetPos);
-
-            switch (grabMode)
-            {
-                case GrabMode.Kinematic:
-                    TrackPositionKinematic(targetPos);
-                    TrackRotationKinematic(avgRot);
-                    break;
-                case GrabMode.Velocity:
-                    TrackPositionVelocity(targetPos);
-                    TrackRotationVelocity(avgRot);
-                    break;
-                case GrabMode.Joint:
-                    //Joint needs no tracking done
-                    break;
-            }
-
-            return;
         }
 
         #endregion
 
         #region Events
-        public void Grab(FusionXRHand hand, GrabMode mode) 
+        public void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase) 
         {
-            grabMode = mode;
+            ///Manage new hand first (so the last driver gets removed before a new one is added)
+            ManageNewHand(hand);
 
-            if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
-            {
-                //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
-                if (attachedHands.Count > 0)
-                    attachedHands[0].Release();
+            ///Setup and Start Track Driver
+            hand.grabbedTrackDriver = Utilities.DriverFromEnum(mode);
+            hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
 
-                attachedHands.Add(hand);
-            }
-            else if(twoHandedMode == TwoHandedMode.Average) //Case: Averaging Between Hands;
-            {
-                attachedHands.Add(hand);
-            }
+            EnableOrDisableCollisions(hand, true);
 
-            foreach (Collider coll in GetComponents<Collider>())
-            {
-                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, true);
-            }
-
-            isGrabbed = true; //This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
-
-            if (grabMode == GrabMode.Joint)
-                AttachJoint(hand);
+            ///This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
+            isGrabbed = true; 
         }
 
         public void Release(FusionXRHand hand)
         {
-            foreach (Collider coll in GetComponents<Collider>())
-            {
-                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, false);
-            }
+            EnableOrDisableCollisions(hand, false);
 
-            attachedHands.Remove(hand);
+            RemoveHand(hand);
 
-            if(attachedHands.Count == 0)
-            {
-                rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-                rb.interpolation = RigidbodyInterpolation.None;
-                isGrabbed = false;
-            }
-
-            if (grabMode == GrabMode.Joint)
-                ReleaseJoint(hand);
+            //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
+            hand.grabbedTrackDriver.EndTrack();
         }
 
         #endregion
 
         #region Functions
 
-        public bool TryGetClosestGrapPoint(Vector3 point, Hand desiredHand, out Transform GrapPoint)
+        public Transform GetClosestGrabPoint(Vector3 point, Hand desiredHand)
         {
-            GrapPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
+            Transform grabPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
 
-            return GrapPoint != null;
+            return grabPoint;
         }
 
         Transform ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Hand desiredHand)
@@ -180,7 +138,7 @@ namespace Fusion.XR
             {
                 foreach (GrabPoint currentGrabPoint in grabPoints)
                 {
-                    if (currentGrabPoint.CorrectHand(desiredHand) && currentGrabPoint.isActive) //Check if the GrapPoint is for the correct Hand and if it isActive
+                    if (currentGrabPoint.CorrectHand(desiredHand) && currentGrabPoint.isActive) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
                         {
@@ -193,144 +151,46 @@ namespace Fusion.XR
             return closestGrabPoint;
         }
 
-        #endregion
-
-        #region Tracking Functions
-        void TrackPositionVelocity(Vector3 targetPos)
+        void ManageNewHand(FusionXRHand hand)
         {
-            targetPos *= 60f;
-
-            if (float.IsNaN(targetPos.x) == false)
+            if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
             {
-                targetPos = Vector3.MoveTowards(rb.velocity, targetPos, 20f);
-
-                rb.velocity = targetPos;
-            }
-        }
-
-        void TrackRotationVelocity(Quaternion targetRot)
-        {
-            Quaternion deltaRotation = targetRot * Quaternion.Inverse(transform.rotation);
-
-            deltaRotation.ToAngleAxis(out var angle, out var axis);
-
-            if (angle > 180f)
-            {
-                angle -= 360;
-            }
-
-            if (angle != 0 && float.IsNaN(axis.x) == false && float.IsInfinity(axis.x) == false)
-            {
-                Vector3 angularTarget = axis * (Mathf.Deg2Rad * angle * 20);
-
-                rb.angularVelocity = Vector3.MoveTowards(rb.angularVelocity, angularTarget, 30f);
-            }
-        }
-
-        void TrackPositionKinematic(Vector3 targetPos)
-        {
-            transform.position = targetPos;
-        }
-
-        void TrackRotationKinematic(Quaternion targetRot)
-        {
-            transform.rotation = targetRot;
-        }
-
-        void AttachJoint(FusionXRHand hand)
-        {
-            //Rotate Grabable
-            //transform.rotation = hand.rotWithOffset * Quaternion.Inverse(hand.grabSpot.localRotation);
-            if (attachedHands[0].hand == Hand.Right)
-            {
-                transform.rotation = hand.rotWithOffset * Quaternion.Inverse(hand.grabSpot.localRotation);
-            }
-            else
-            {
-                transform.rotation = hand.rotWithOffset * Quaternion.Inverse(hand.grabSpot.localRotation * Quaternion.Euler(0, 0, 180)); //Left Hand needs to be rotated
-            }
-
-            //Setup Joint
-            Joint attachedJoint = hand.gameObject.AddComponent<ConfigurableJoint>();
-            attachedJoint.connectedBody = rb;
-
-            attachedJoint.autoConfigureConnectedAnchor = false;
-
-            attachedJoint.anchor = hand.transform.InverseTransformPoint(hand.palm.position);
-            attachedJoint.connectedAnchor = transform.InverseTransformPoint(hand.grabSpot.position);
-
-            if(hand.gameObject.TryGetComponent(out ConfigurableJoint configurableJoint))
-            {
-                configurableJoint.xMotion = configurableJoint.yMotion = configurableJoint.zMotion = ConfigurableJointMotion.Locked;
-
-                configurableJoint.rotationDriveMode = RotationDriveMode.Slerp;
-
-                var slerpDrive = new JointDrive();
-                slerpDrive.positionSpring = 1000;
-                slerpDrive.positionDamper = 75;
-                slerpDrive.maximumForce = 500;
-
-                configurableJoint.slerpDrive = slerpDrive;
-            }
-        }
-
-        void TrackJointRotation(Quaternion targetRot)
-        {
-            foreach (FusionXRHand hand in attachedHands)
-            {
-                if (hand.gameObject.TryGetComponent(out ConfigurableJoint configurableJoint))
+                Debug.Log("1");
+                //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
+                if (attachedHands.Count > 0)
                 {
-                    configurableJoint.targetRotation = hand.rotWithOffset * Quaternion.Inverse(hand.grabSpot.localRotation);
+                    //This will also call the release function on this grabable, with this structure the hand can also be forced to release whatever it is holding
+                    attachedHands[0].Release();
                 }
+
+                attachedHands.Add(hand);
+                Debug.Log(attachedHands[0].name);
+            }
+            else if (twoHandedMode == TwoHandedMode.Average) //Case: Averaging Between Hands;
+            {
+                attachedHands.Add(hand);
             }
         }
 
-        void ReleaseJoint(FusionXRHand hand)
+        void RemoveHand(FusionXRHand hand)
         {
-            Joint jointToRemove = hand.gameObject.GetComponent<Joint>();
+            attachedHands.Remove(hand);
 
-            Destroy(jointToRemove);
+            if (attachedHands.Count == 0)
+            {
+                rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                rb.interpolation = RigidbodyInterpolation.None;
+                isGrabbed = false;
+            }
         }
 
-        #endregion
-
-        #region Deprecated Functions
-        public Vector3 CalculateOffset(FusionXRHand hand)
+        void EnableOrDisableCollisions(FusionXRHand hand, bool disable)
         {
-            Vector3 offset = Vector3.zero;
-
-            if (grabPoints.Length > 0)
+            foreach (Collider coll in GetComponents<Collider>())
             {
-                Transform grabPoint = ClosestGrabPoint(grabPoints, hand.transform.position, hand.hand);
-
-                offset = grabPoint.position - transform.position;
+                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, disable);
             }
-            else
-            {
-                offset = transform.position - hand.transform.position;
-            }
-
-            return offset;
         }
-
-        public Quaternion CalculateRotationOffset(FusionXRHand hand)
-        {
-            Quaternion rotationOffset;
-
-            if (grabPoints.Length > 0)
-            {
-                Transform grabPoint = ClosestGrabPoint(grabPoints, hand.transform.position, hand.hand);
-
-                rotationOffset = grabPoint.rotation;
-            }
-            else
-            {
-                rotationOffset = hand.transform.rotation * Quaternion.Inverse(transform.rotation);
-            }
-
-            return rotationOffset;
-        }
-
 
         #endregion
     }
