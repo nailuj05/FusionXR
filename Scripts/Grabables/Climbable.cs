@@ -6,29 +6,36 @@ namespace Fusion.XR
 {
     public class Climbable : Grabable
     {
-        public override void Start()
-        {
-            gameObject.tag = "Grabable";
-        }
+        //private Vector3 targetVelocity;
 
-        public override void Update()
-        {
-            Vector3 deltaVelocity = Vector3.zero;
+        //public override void Start()
+        //{
+        //    gameObject.tag = "Grabable";
+        //}
 
-            if (attachedHands.Count > 1)
-            {
-                //Take the velocity of the grabbing hand
-                deltaVelocity = attachedHands[0].rb.velocity;
-            }
-            else
-            {
-                //Average the Velocity between the 2 hands grabbing the object
-                deltaVelocity = Vector3.Lerp(attachedHands[0].rb.velocity, attachedHands[0].rb.velocity, 0.5f);
-            }
+        //public override void Update()
+        //{
+        //    if (attachedHands.Count == 0)
+        //        return;
 
-            deltaVelocity *= -1;
+        //    Vector3 deltaVelocity = Vector3.zero;
 
-            Player.main.movement.Move(deltaVelocity);
-        }
+        //    if (attachedHands.Count > 1)
+        //    {
+        //        //Take the velocity of the grabbing hand
+        //        deltaVelocity = attachedHands[0].rb.velocity;
+        //    }
+        //    else
+        //    {
+        //        //Average the Velocity between the 2 hands grabbing the object
+        //        deltaVelocity = Vector3.Lerp(attachedHands[0].rb.velocity, attachedHands[0].rb.velocity, 0.5f);
+        //    }
+
+        //    deltaVelocity *= -1;
+
+        //    targetVelocity = Vector3.MoveTowards(targetVelocity, deltaVelocity * 5, 1);
+
+        //    Player.main.movement.Move(targetVelocity);
+        //}
     }
 }

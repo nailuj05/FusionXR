@@ -354,7 +354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89298461}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6740a43f43345e344ac5d6d1a03db31c, type: 3}
   m_Name: 
@@ -1525,7 +1525,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446333546}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6740a43f43345e344ac5d6d1a03db31c, type: 3}
   m_Name: 
@@ -2221,7 +2221,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639560610}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6740a43f43345e344ac5d6d1a03db31c, type: 3}
   m_Name: 
@@ -2702,7 +2702,7 @@ MonoBehaviour:
   trackedController: {fileID: 1845226320}
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
-  trackingMode: 1
+  trackingMode: 2
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
@@ -2717,7 +2717,7 @@ MonoBehaviour:
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabRange: 0.1
-  grabbedTrackingMode: 1
+  grabbedTrackingMode: 3
   palm: {fileID: 1563749726}
   reachDist: 0.1
 --- !u!54 &822546836
@@ -2939,7 +2939,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854901922}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6740a43f43345e344ac5d6d1a03db31c, type: 3}
   m_Name: 
@@ -3391,7 +3391,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977188413}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6740a43f43345e344ac5d6d1a03db31c, type: 3}
   m_Name: 
@@ -4137,7 +4137,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118429190}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6740a43f43345e344ac5d6d1a03db31c, type: 3}
   m_Name: 
@@ -4260,7 +4260,7 @@ MonoBehaviour:
   trackedController: {fileID: 1949655611}
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
-  trackingMode: 1
+  trackingMode: 2
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
@@ -4275,7 +4275,7 @@ MonoBehaviour:
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabRange: 0.1
-  grabbedTrackingMode: 1
+  grabbedTrackingMode: 3
   palm: {fileID: 169951278}
   reachDist: 0.1
 --- !u!54 &1126147299
