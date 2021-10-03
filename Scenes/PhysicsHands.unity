@@ -2008,7 +2008,7 @@ MonoBehaviour:
   volume: 0.64
   customVolume: 0.64
   dampeningFactor: 0.1
-  inFluid: 1
+  inFluidCount: 0
   fluid: {fileID: 1131078815}
   simulateWaterTurbulence: 0
   turbulenceStrength: 1
@@ -3262,6 +3262,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990065377}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1059226836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1059226837}
+  - component: {fileID: 1059226838}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1059226837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059226836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0817806, y: 1.817, z: -0.82385504}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1059226838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059226836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547a9a97ec12a034eac25a82c4b8bfe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEditingPose: 0
+  isLeftHand: 0
+  pose: {fileID: 11400000, guid: 4ad07f40a729d264b807d241a8e39880, type: 2}
+  displayName: Awaitng
 --- !u!1 &1118429190
 GameObject:
   m_ObjectHideFlags: 0
@@ -11840,7 +11887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc777142e534bc40973ae3595a57e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xrHand: {fileID: 8622627593513699865}
   handOpen: {fileID: 11400000, guid: 052d3d1e23f42e64f80bde336208a63d, type: 2}
   handClosed: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
   handAwait: {fileID: 11400000, guid: 4ad07f40a729d264b807d241a8e39880, type: 2}
@@ -11853,8 +11899,6 @@ MonoBehaviour:
   notCustomPose: 0
   palm: {fileID: 8622627593758503776}
   renderHand: {fileID: 8622627593563208552}
-  deltaTransformationPosition: {x: 0, y: 0.025, z: 0}
-  deltaTransformationRotation: {x: 27, y: -0, z: -183}
   fingers:
   - {fileID: 5997832362670621638}
   - {fileID: 783105950259459021}
@@ -11866,6 +11910,7 @@ MonoBehaviour:
   collMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  debugMode: 0
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 1
@@ -12268,7 +12313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc777142e534bc40973ae3595a57e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xrHand: {fileID: 8622627594202557811}
   handOpen: {fileID: 11400000, guid: 052d3d1e23f42e64f80bde336208a63d, type: 2}
   handClosed: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
   handAwait: {fileID: 11400000, guid: 4ad07f40a729d264b807d241a8e39880, type: 2}
@@ -12281,8 +12325,6 @@ MonoBehaviour:
   notCustomPose: 0
   palm: {fileID: 8622627593493029903}
   renderHand: {fileID: 8622627594742576129}
-  deltaTransformationPosition: {x: 0, y: 0.025, z: 0}
-  deltaTransformationRotation: {x: 27, y: -0, z: -183}
   fingers:
   - {fileID: 5997832362618446452}
   - {fileID: 783105950244426363}
@@ -12294,6 +12336,7 @@ MonoBehaviour:
   collMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  debugMode: 0
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 0

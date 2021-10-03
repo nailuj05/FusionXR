@@ -171,7 +171,7 @@ namespace Fusion.XR
             }
         }
 
-        Transform GenerateGrabPoint(Collider closestCollider, Grabable grabable)
+        public Transform GenerateGrabPoint(Collider closestCollider, Grabable grabable)
         {
             Transform grabSpot = new GameObject().transform;
             grabSpot.position = closestCollider.ClosestPoint(palm.position);

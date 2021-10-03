@@ -11,7 +11,6 @@ namespace Fusion.XR
     public class PoseEditor : MonoBehaviour
     {
         public bool isEditingPose;
-        public bool isLeftHand;
 
         //public TextAsset Pose;
         public HandPose pose;
@@ -47,7 +46,6 @@ namespace Fusion.XR
         public void SavePose()
         {
             pose.SetAllRotations(handPoser.SavePose());
-            pose.isLeftHand = isLeftHand;
         }
 
         private IEnumerator UpdateHandPos(Transform obj, Transform palm)
@@ -116,7 +114,6 @@ namespace Fusion.XR
                 {
                     poseEditor.isEditingPose = true;
                     poseEditor.pose = CreateInstance<HandPose>();
-                    poseEditor.isLeftHand = false;
                     hasCustomPose = false;
                     poseEditor.displayName = "";
 

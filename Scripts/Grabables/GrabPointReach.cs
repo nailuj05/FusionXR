@@ -52,6 +52,7 @@ namespace Fusion.XR
 #endif
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(GrabPointReach))] [CanEditMultipleObjects]
     public class GrabPointReachEditor : Editor
     {
@@ -147,4 +148,5 @@ namespace Fusion.XR
             serializedObject.ApplyModifiedProperties();
         }
     }
+#endif
 }

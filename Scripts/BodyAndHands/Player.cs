@@ -30,6 +30,7 @@ namespace Fusion.XR
         }
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(Player))]
     public class PlayerEditor : Editor
     {
@@ -121,4 +122,5 @@ namespace Fusion.XR
                 DestroyImmediate(cc);
         }
     }
+#endif
 }

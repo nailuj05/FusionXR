@@ -170,6 +170,8 @@ namespace Fusion.XR
 
             currentCustomPose = pose;
 
+            RotateToPose(handAwait);
+
             if (physicalPose)
             {
                 //Debug.Log("Physical Pose");
@@ -262,6 +264,7 @@ namespace Fusion.XR
     }
 
     #region Editor
+#if UNITY_EDITOR
     [CustomEditor(typeof(HandPoser))] [CanEditMultipleObjects]
     public class HandPoserEditor : Editor
     {
@@ -277,5 +280,6 @@ namespace Fusion.XR
             }
         }
     }
-    #endregion
+#endif
+#endregion
 }
