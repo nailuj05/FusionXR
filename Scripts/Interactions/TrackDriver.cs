@@ -100,7 +100,7 @@ namespace Fusion.XR
                 angle -= 360;
             }
 
-            if (Mathf.Abs(axis.magnitude) != Mathf.Infinity)
+            if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
                 rb.angularVelocity = axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad);
         }
 
