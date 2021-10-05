@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: d4d2e6d9182e88c40aed0c58b992c19a, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: f4b696dfac74c6544a2feafba3768ce7, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 19ef42a7ba097c74d990131f03a36517, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -281,11 +281,6 @@ MonoBehaviour:
   - {fileID: 115612520}
   - {fileID: 1407059934}
   - {fileID: 33804416}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &123152009
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,11 +752,6 @@ MonoBehaviour:
   - {fileID: 1161563610}
   - {fileID: 741733382}
   - {fileID: 885881981}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &352174666
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,11 +907,6 @@ MonoBehaviour:
   - {fileID: 442971449}
   - {fileID: 1072757295}
   - {fileID: 984031239}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &450530345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,11 +1215,6 @@ MonoBehaviour:
   - {fileID: 528509940}
   - {fileID: 1584280027}
   - {fileID: 1401282254}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &555980305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,11 +1394,6 @@ MonoBehaviour:
   - {fileID: 681539910}
   - {fileID: 145564135}
   - {fileID: 1721796259}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &687519540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,9 +1587,9 @@ MonoBehaviour:
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
-  notCustomPose: 0
   palm: {fileID: 1563749726}
   renderHand: {fileID: 863190381}
+  fingerDriver: 0
   fingers:
   - {fileID: 1575666801}
   - {fileID: 1659498373}
@@ -2051,9 +2026,9 @@ MonoBehaviour:
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
-  notCustomPose: 0
   palm: {fileID: 169951278}
   renderHand: {fileID: 1144407192}
+  fingerDriver: 0
   fingers:
   - {fileID: 115612521}
   - {fileID: 2113964167}
@@ -2404,11 +2379,6 @@ MonoBehaviour:
   - {fileID: 1556807222}
   - {fileID: 313385389}
   - {fileID: 2094629657}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &1349470176
 GameObject:
   m_ObjectHideFlags: 0
@@ -3008,11 +2978,6 @@ MonoBehaviour:
   - {fileID: 1575666800}
   - {fileID: 819472445}
   - {fileID: 1417636948}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &1584280026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,11 +3149,6 @@ MonoBehaviour:
   - {fileID: 1659498372}
   - {fileID: 1593130392}
   - {fileID: 1773085077}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &1660171515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3237,11 +3197,6 @@ MonoBehaviour:
   - {fileID: 1660171516}
   - {fileID: 1867376765}
   - {fileID: 204181373}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &1698078629
 GameObject:
   m_ObjectHideFlags: 0
@@ -3784,11 +3739,6 @@ MonoBehaviour:
   - {fileID: 2113964166}
   - {fileID: 1755816022}
   - {fileID: 1782864692}
-  offset: {x: 0, y: 0.4, z: 0}
-  radius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!4 &113399173998196445
 Transform:
   m_ObjectHideFlags: 0

@@ -25,20 +25,22 @@ namespace Fusion.XR
         [Tooltip("The Pose of an closed Hand with the Index Finger pointing outwards")]
         public HandPose handPoint;
 
-        [Range(0.05f, 2f)]
+        [Range(0.5f, 5f)]
         public float poseLerpSpeed = 0.1f;
 
         [Header("Attachment")]
+        //Whether the Renderhand is attached to something of following the controller
         [SerializeField] private bool isAttached;
+        //The Object the Renderhand is following if it is attached
         [HideInInspector] public Transform attachedObj;
+        //Whether the hand is grabbing something and the pose should not be overridden by the HandState
         [SerializeField] private bool poseLocked;
-        [SerializeField] private bool notCustomPose;
 
         public Transform palm;
-        private Vector3 palmOffset;
         public Transform renderHand;
 
         [Header("Fingers")]
+        public FingerTrackingMode fingerDriver;
         public Finger[] fingers;
         public Vector3 fingerOffset;
         public float fingerTipRadius;
@@ -50,7 +52,11 @@ namespace Fusion.XR
         public InputActionReference pinchReference;
         public InputActionReference grabReference;
         public Hand hand;
-        private HandPose currentCustomPose;
+
+        private HandPose currentPose;
+        private List<Quaternion[]> lastHandState;
+
+        private float currentLerp;
 
         [Header("Debug Hand State")]
         private float pinchValue;
@@ -61,9 +67,13 @@ namespace Fusion.XR
 
         public HandState handState = HandState.open;
 
-        private void Awake()
+        void Start()
         {
-            palmOffset = -palm.localPosition;
+            //Default Setup and tracking Base Config
+            UpdateDriverAndTracking(fingerDriver);
+
+            currentPose = handOpen;
+            lastHandState = SavePose();
         }
 
         public void Update()
@@ -79,67 +89,68 @@ namespace Fusion.XR
                 PlaceRenderHand();
             }
 
-            if (poseLocked)
-                return;
+            FingerUpdate();
 
             #region HandState
-
-            //Open Hand
-            if (pinchValue == 0 && grabValue == 0)
+            if (!poseLocked)
             {
-                if (handState == HandState.open)
-                    return;
+                //Open Hand
+                if (pinchValue == 0 && grabValue == 0)
+                {
+                    if (handState == HandState.open)
+                        return;
 
-                pinchState = grabState = 0;
+                    pinchState = grabState = 0;
 
-                handState = HandState.open;
+                    handState = HandState.open;
 
-                LerpToPose(handOpen, poseLerpSpeed, 1);
-            }
-            //Grabbing
-            if (pinchValue > 0 && grabValue > 0)
-            {
-                if (handState == HandState.grab)
-                    return;
+                    SetPoseTarget(handOpen);
+                }
+                //Grabbing
+                if (pinchValue > 0 && grabValue > 0)
+                {
+                    if (handState == HandState.grab)
+                        return;
 
-                pinchState = grabState = 1;
+                    pinchState = grabState = 1;
 
-                handState = HandState.grab;
+                    handState = HandState.grab;
 
-                LerpToPose(handClosed, poseLerpSpeed, 1);
-            }
-            //Pinching
-            if (pinchValue > 0 && grabValue == 0)
-            {
-                if (handState == HandState.pinch)
-                    return;
+                    SetPoseTarget(handClosed);
+                }
+                //Pinching
+                if (pinchValue > 0 && grabValue == 0)
+                {
+                    if (handState == HandState.pinch)
+                        return;
 
-                pinchState = 1;
-                grabState = 0;
+                    pinchState = 1;
+                    grabState = 0;
 
-                handState = HandState.pinch;
+                    handState = HandState.pinch;
 
-                LerpToPose(handPinch, poseLerpSpeed, 1);
-            }
-            //Pointing
-            if (pinchValue == 0 && grabValue > 0)
-            {
-                if (handState == HandState.point)
-                    return;
+                    SetPoseTarget(handPinch);
+                }
+                //Pointing
+                if (pinchValue == 0 && grabValue > 0)
+                {
+                    if (handState == HandState.point)
+                        return;
 
-                pinchState = 0;
-                grabState = 1;
+                    pinchState = 0;
+                    grabState = 1;
 
-                handState = HandState.point;
+                    handState = HandState.point;
 
-                LerpToPose(handPoint, poseLerpSpeed, 1);
+                    SetPoseTarget(handPoint);
+                }
             }
             #endregion
         }
 
         public void PlaceRenderHand()
         {
-            renderHand.transform.position = attachedObj.TransformPoint(palmOffset);
+            renderHand.transform.position = attachedObj.TransformPoint(-palm.localPosition);
             renderHand.transform.rotation = attachedObj.transform.rotation;
         }
 
@@ -153,7 +164,6 @@ namespace Fusion.XR
 
         public void AttachHand(Transform attachmentPoint)
         {
-            notCustomPose = true;
             AttachHand(attachmentPoint, handClosed, true);
         }
 
@@ -168,19 +178,26 @@ namespace Fusion.XR
             isAttached = true;
             attachedObj = attachmentPoint;
 
-            currentCustomPose = pose;
-
             RotateToPose(handAwait);
 
-            if (physicalPose)
+            SetPoseTarget(pose);
+        }
+
+        private void SetPoseTarget(HandPose pose)
+        {
+            lastHandState = SavePose();
+            currentPose = pose;
+
+            currentLerp = 0;
+        }
+
+        private void FingerUpdate()
+        {
+            currentLerp += currentLerp <= 1f ? Time.deltaTime * poseLerpSpeed : 0;
+
+            for (int i = 0; i < fingers.Length; i++)
             {
-                //Debug.Log("Physical Pose");
-                TryLerpToPose(pose, poseLerpSpeed, 1);
-            }
-            else
-            {
-                //Debug.Log("Static Pose");
-                LerpToPose(pose, poseLerpSpeed, 1);
+                fingers[i].FingerUpdate(lastHandState[i], currentPose.GetRotationByIndex(i), currentLerp);
             }
         }
 
@@ -188,39 +205,27 @@ namespace Fusion.XR
         {
             poseLocked = false;
             isAttached = false;
-            notCustomPose = false;
 
             attachedObj = null;
 
-            LerpToPose(handOpen, poseLerpSpeed, 1);
+            SetPoseTarget(handOpen);
 
             renderHand.transform.localPosition = Vector3.zero;
             renderHand.transform.localRotation = Quaternion.identity;
         }
 
-        public void LerpToPose(HandPose pose, float lerpTime, float maxLerp)
+        public void UpdateDriverAndTracking(FingerTrackingMode driver)
         {
-            for (int i = 0; i < fingers.Length; i++)
+            foreach (var finger in fingers)
             {
-                fingers[i].LerpToPose(pose.GetRotationByIndex(i), lerpTime, maxLerp);
-            }
-        }
+                FingerTrackingBase fingerTrackingBase = new FingerTrackingBase();
+                fingerTrackingBase.fingers = finger.fingerBones;
+                fingerTrackingBase.offset = fingerOffset;
+                fingerTrackingBase.radius = fingerTipRadius;
+                fingerTrackingBase.collMask = collMask;
 
-        public void TryLerpToPose(HandPose pose, float lerpTime, float maxLerp)
-        {
-            for (int i = 0; i < fingers.Length; i++)
-            {
-                fingers[i].TryLerpToPose(pose.GetRotationByIndex(i), lerpTime, maxLerp);
-            }
-        }
-
-        public void SetupFingers()
-        {
-            foreach (Finger finger in fingers)
-            {
-                finger.offset = fingerOffset;
-                finger.radius = fingerTipRadius;
-                finger.collMask = collMask;
+                finger.ChangeTrackingBase(fingerTrackingBase);
+                finger.ChangeFingerDriver(Utilities.FingerDriverFromEnum(driver));
             }
         }
 
@@ -228,13 +233,11 @@ namespace Fusion.XR
 
         #region Pose Editor Functions
 
-        private void Start()
-        {
-            SetupFingers();
-        }
-
         public void RotateToPose(HandPose pose)
         {
+            //PoseTarget still needs to be set before rotating to Pose instantly
+            SetPoseTarget(handAwait);
+
             for (int i = 0; i < fingers.Length; i++)
             {
                 fingers[i].RotateToPose(pose.GetRotationByIndex(i));
@@ -264,6 +267,7 @@ namespace Fusion.XR
     }
 
     #region Editor
+
 #if UNITY_EDITOR
     [CustomEditor(typeof(HandPoser))] [CanEditMultipleObjects]
     public class HandPoserEditor : Editor
@@ -276,10 +280,11 @@ namespace Fusion.XR
 
             if (GUILayout.Button("UpdateFingerGizmos"))
             {
-                handPoser.SetupFingers();
+                handPoser.UpdateDriverAndTracking(handPoser.fingerDriver);
             }
         }
     }
 #endif
+
 #endregion
 }

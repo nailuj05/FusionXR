@@ -33,6 +33,24 @@ namespace Fusion.XR
             return driver;
         }
 
+        public static FingerDriver FingerDriverFromEnum(FingerTrackingMode fingerTrackingMode)
+        {
+            //Defaulting to Kinematic Driver
+            FingerDriver driver = new KinematicFingerDriver();
+
+            switch (fingerTrackingMode)
+            {
+                case FingerTrackingMode.Kinematic:
+                    driver = new KinematicFingerDriver();
+                    break;
+                default:
+                    Debug.LogError("No matching FingerDriver was setup for the given FingerTrackingMode enum, defaulting to a Kinematic Driver. Define a matching FingerDriver and declare it in Utilities.cs");
+                    break;
+            }
+
+            return driver;
+        }
+
         public static Direction GetDirectionFromVector(Vector2 input)
         {
             var angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;

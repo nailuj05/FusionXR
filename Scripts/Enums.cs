@@ -35,6 +35,13 @@ namespace Fusion.XR
         point = 3
     }
 
+    public enum FingerTrackingMode
+    {
+        Kinematic = 0,
+        CollisionTest = 1,
+        ActiveJoint = 2
+    }
+
     //Used by Movement
     public enum MovementDirection
     {
