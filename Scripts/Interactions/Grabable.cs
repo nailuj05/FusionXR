@@ -124,14 +124,21 @@ namespace Fusion.XR
 
         public Transform GetClosestGrabPoint(Vector3 point, Hand desiredHand)
         {
-            Transform grabPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
+            GrabPoint grabPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
 
-            return grabPoint;
+            return grabPoint.transform;
         }
 
-        Transform ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Hand desiredHand)
+        public Transform GetClosestGrabPoint(Vector3 point, Hand desiredHand, out GrabPoint grabPoint)
         {
-            Transform closestGrabPoint = null;
+            grabPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
+
+            return grabPoint != null ? grabPoint.transform : null;
+        }
+
+        GrabPoint ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Hand desiredHand)
+        {
+            GrabPoint closestGrabPoint = null;
             float distance = float.MaxValue;
 
             if (grabPoints != null)
@@ -142,7 +149,7 @@ namespace Fusion.XR
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
                         {
-                            closestGrabPoint = currentGrabPoint.transform;
+                            closestGrabPoint = currentGrabPoint;
                             distance = (currentGrabPoint.transform.position - point).sqrMagnitude; //New (smaller) distance
                         }
                     }

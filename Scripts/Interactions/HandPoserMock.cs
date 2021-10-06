@@ -27,18 +27,23 @@ public class HandPoserMock : MonoBehaviour
         {
             if(hit.collider.TryGetComponent(out Grabable grabable))
             {
-                var grabPoint = grabable.GetClosestGrabPoint(hit.point, currentHandPoser.hand);
+                Transform grabPointTransform = grabable.GetClosestGrabPoint(hit.point, currentHandPoser.hand, out GrabPoint grabPoint);
 
                 if(grabPoint == null)
                 {
-                    grabPoint = new GameObject().transform;
-                    grabPoint.position = hit.point;
-                    grabPoint.up = hit.normal;
-                    grabPoint.parent = grabable.transform;
-                    grabPoint.transform.localPosition += Vector3.up * 0.01f;
+                    grabPointTransform = new GameObject().transform;
+                    grabPointTransform.position = hit.point;
+                    grabPointTransform.up = hit.normal;
+                    grabPointTransform.parent = grabable.transform;
+                    grabPointTransform.transform.localPosition += Vector3.up * 0.01f;
+                }
+                else if (grabPoint.hasCustomPose)
+                {
+                    currentHandPoser.AttachHand(grabPointTransform, grabPoint.pose);
+                    return;
                 }
 
-                currentHandPoser.AttachHand(grabPoint);
+                currentHandPoser.AttachHand(grabPointTransform);
             }
         }
     }
