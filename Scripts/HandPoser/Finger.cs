@@ -12,8 +12,6 @@ namespace Fusion.XR
         public FingerDriver fingerDriver;
         private FingerTrackingBase fingerTrackingBase;
 
-        private float lerp = 0;
-
         public void FingerUpdate(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
         {
             fingerDriver.UpdateTrack(lastTargetRotations, targetRotations, currentLerp);

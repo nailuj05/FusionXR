@@ -43,6 +43,9 @@ namespace Fusion.XR
                 case FingerTrackingMode.Kinematic:
                     driver = new KinematicFingerDriver();
                     break;
+                case FingerTrackingMode.CollisionTest:
+                    driver = new CollisionTestDriver();
+                    break;
                 default:
                     Debug.LogError("No matching FingerDriver was setup for the given FingerTrackingMode enum, defaulting to a Kinematic Driver. Define a matching FingerDriver and declare it in Utilities.cs");
                     break;
