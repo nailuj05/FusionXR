@@ -40,7 +40,7 @@ namespace Fusion.XR
         public Transform renderHand;
 
         [Header("Fingers")]
-        public FingerTrackingMode fingerDriver;
+        public FingerTrackingMode fingerTrackingMode;
         public Finger[] fingers;
         public Vector3 fingerOffset;
         public float fingerTipRadius;
@@ -70,7 +70,7 @@ namespace Fusion.XR
         void Start()
         {
             //Default Setup and tracking Base Config
-            UpdateDriverAndTracking(fingerDriver);
+            UpdateDriverAndTracking(fingerTrackingMode);
 
             currentPose = handOpen;
             lastHandState = SavePose();
@@ -164,19 +164,22 @@ namespace Fusion.XR
 
         public void AttachHand(Transform attachmentPoint)
         {
-            AttachHand(attachmentPoint, handClosed, true);
+            AttachHand(attachmentPoint, handClosed, false);
         }
 
         public void AttachHand(Transform attachmentPoint, HandPose pose)
         {
-            AttachHand(attachmentPoint, pose, false);
+            AttachHand(attachmentPoint, pose, true);
         }
 
-        public void AttachHand(Transform attachmentPoint, HandPose pose, bool physicalPose)
+        public void AttachHand(Transform attachmentPoint, HandPose pose, bool customPose)
         {
             poseLocked = true;
             isAttached = true;
             attachedObj = attachmentPoint;
+
+            //Whether we should use default or Kinematic tracking (for predfined poses)
+            UpdateTracking(customPose ? FingerTrackingMode.Kinematic : fingerTrackingMode);
 
             RotateToPose(handAwait);
 
@@ -216,6 +219,12 @@ namespace Fusion.XR
 
         public void UpdateDriverAndTracking(FingerTrackingMode driver)
         {
+            UpdateDriver();
+            UpdateTracking(driver);
+        }
+
+        public void UpdateDriver()
+        {
             foreach (var finger in fingers)
             {
                 FingerTrackingBase fingerTrackingBase = new FingerTrackingBase();
@@ -225,6 +234,13 @@ namespace Fusion.XR
                 fingerTrackingBase.collMask = collMask;
 
                 finger.ChangeTrackingBase(fingerTrackingBase);
+            }
+        }
+
+        public void UpdateTracking(FingerTrackingMode driver)
+        {
+            foreach (var finger in fingers)
+            {
                 finger.ChangeFingerDriver(Utilities.FingerDriverFromEnum(driver));
             }
         }
@@ -280,7 +296,7 @@ namespace Fusion.XR
 
             if (GUILayout.Button("UpdateFingerGizmos"))
             {
-                handPoser.UpdateDriverAndTracking(handPoser.fingerDriver);
+                handPoser.UpdateDriverAndTracking(handPoser.fingerTrackingMode);
             }
         }
     }
