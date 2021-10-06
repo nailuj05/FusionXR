@@ -30,7 +30,7 @@ namespace Fusion.XR
 
         [Header("External Factors")]
         public bool canMove = true;
-        public bool useGravity = false;
+        public bool usesGravity = false;
 
         public Vector3 gravity = Physics.gravity;
 
@@ -53,7 +53,7 @@ namespace Fusion.XR
 
         private void Update()
         {
-            if(useGravity && canMove)
+            if(usesGravity && canMove)
             {
                 QueueMove(gravity.normalized, gravity.magnitude);
             }

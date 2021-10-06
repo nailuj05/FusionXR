@@ -21,12 +21,12 @@ namespace Fusion.XR
         public CollisionAdjuster collisionAdjuster;
 
         [HideInInspector]
-        public Rigidbody rigidbody;
+        public Rigidbody rb;
 
         private void Awake()
         {
             main = this;
-            rigidbody = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
         }
     }
 

@@ -9,7 +9,7 @@ namespace Fusion.XR
     {
         public Rigidbody rigidBody;
 
-        bool useGravity => false;
+        new bool usesGravity => false;
 
         Vector3 vel;
 

@@ -1589,7 +1589,7 @@ MonoBehaviour:
   poseLocked: 0
   palm: {fileID: 1563749726}
   renderHand: {fileID: 863190381}
-  fingerDriver: 0
+  fingerTrackingMode: 1
   fingers:
   - {fileID: 1575666801}
   - {fileID: 1659498373}
@@ -2028,7 +2028,7 @@ MonoBehaviour:
   poseLocked: 0
   palm: {fileID: 169951278}
   renderHand: {fileID: 1144407192}
-  fingerDriver: 0
+  fingerTrackingMode: 1
   fingers:
   - {fileID: 115612521}
   - {fileID: 2113964167}
