@@ -222,6 +222,9 @@ namespace Fusion.XR
         {
             currentLerp += currentLerp <= 1f ? Time.deltaTime * poseLerpSpeed : 0;
 
+            if (currentLerp >= 1)
+                return;
+
             for (int i = 0; i < fingers.Length; i++)
             {
                 fingers[i].FingerUpdate(lastHandState[i], currentPose.GetRotationByIndex(i), currentLerp);
