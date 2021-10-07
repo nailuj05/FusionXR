@@ -36,6 +36,11 @@ namespace Fusion.XR
         //Whether the hand is grabbing something and the pose should not be overridden by the HandState
         [SerializeField] private bool poseLocked;
 
+        [Tooltip("The hand will smoothly move to its attachement Point allowing better proc fingerplacement")]
+        public bool smoothAttachment = true;
+        public float smoothAttachSpeed = 0.5f;
+        private float attachLerp = 0;
+
         public Transform palm;
         public Transform renderHand;
 
@@ -86,7 +91,14 @@ namespace Fusion.XR
 
             if (isAttached)
             {
-                PlaceRenderHand();
+                if (attachLerp > 1)
+                {
+                    PlaceRenderHand();
+                }
+                else
+                {
+                    LerpRenderHand();
+                }
             }
 
             FingerUpdate();
@@ -154,6 +166,17 @@ namespace Fusion.XR
             renderHand.transform.rotation = attachedObj.transform.rotation;
         }
 
+        public void LerpRenderHand()
+        {
+            var targetPos = attachedObj.TransformPoint(-palm.localPosition + Vector3.up * 0.003f);
+            var lerpPos = attachedObj.TransformPoint(-palm.localPosition);
+
+            renderHand.transform.position = Vector3.Lerp(lerpPos, targetPos, attachLerp);
+            renderHand.transform.rotation = attachedObj.transform.rotation;
+
+            attachLerp += Time.deltaTime / smoothAttachSpeed;
+        }
+
         public void SetPinchGrabDebug(float pinch, float grab)
         {
             pinchValue = pinch;
@@ -176,6 +199,7 @@ namespace Fusion.XR
         {
             poseLocked = true;
             isAttached = true;
+            attachLerp = 0;
             attachedObj = attachmentPoint;
 
             //Whether we should use default or Kinematic tracking (for predfined poses)

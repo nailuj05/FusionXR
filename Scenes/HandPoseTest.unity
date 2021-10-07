@@ -1587,6 +1587,8 @@ MonoBehaviour:
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
+  smoothAttachment: 1
+  smoothAttachSpeed: 0.5
   palm: {fileID: 1563749726}
   renderHand: {fileID: 863190381}
   fingerTrackingMode: 1
@@ -2026,6 +2028,8 @@ MonoBehaviour:
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
+  smoothAttachment: 1
+  smoothAttachSpeed: 1
   palm: {fileID: 169951278}
   renderHand: {fileID: 1144407192}
   fingerTrackingMode: 1
