@@ -15,6 +15,11 @@ public class HandPoserMock : MonoBehaviour
         currentHandPoser = handPoserR;
     }
 
+    public void SwitchHand()
+    {
+        currentHandPoser = currentHandPoser == handPoserR ? handPoserL : handPoserR;
+    }
+
     void Update()
     {
         var mousePos = Input.mousePosition;

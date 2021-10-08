@@ -91,12 +91,14 @@ namespace Fusion.XR
 
             if (isAttached)
             {
-                if (attachLerp > 1)
+
+                if (!smoothAttachment || attachLerp > 1)
                 {
                     PlaceRenderHand();
                 }
                 else
                 {
+                    Debug.Log("Smooth");
                     LerpRenderHand();
                 }
             }
