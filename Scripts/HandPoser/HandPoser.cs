@@ -254,9 +254,14 @@ namespace Fusion.XR
         {
             foreach (var finger in fingers)
             {
-                fingerSettings.fingers = finger.fingerBones;
+                //Create a new Tracking Base with the same values as "Finger Settings", won't work with a pointer to Finger Settings
+                FingerTrackingBase trackingBase = new FingerTrackingBase();
+                trackingBase.fingerBones = finger.fingerBones;
+                trackingBase.collMask = fingerSettings.collMask;
+                trackingBase.offset = fingerSettings.offset;
+                trackingBase.radius = fingerSettings.radius;
 
-                finger.ChangeTrackingBase(fingerSettings);
+                finger.ChangeTrackingBase(trackingBase);
             }
         }
 

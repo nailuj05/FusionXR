@@ -1657,7 +1657,7 @@ MonoBehaviour:
   smoothAttachSpeed: 0.5
   palm: {fileID: 1563749726}
   renderHand: {fileID: 863190381}
-  fingerTrackingMode: 0
+  fingerTrackingMode: 1
   fingerSettings:
     offset: {x: 0, y: 0.4, z: 0}
     radius: 0.0125
@@ -1667,7 +1667,7 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
-    fingers: []
+    fingerBones: []
   fingers:
   - {fileID: 1575666801}
   - {fileID: 1659498373}
@@ -2237,7 +2237,7 @@ MonoBehaviour:
   smoothAttachSpeed: 1
   palm: {fileID: 169951278}
   renderHand: {fileID: 1144407192}
-  fingerTrackingMode: 0
+  fingerTrackingMode: 1
   fingerSettings:
     offset: {x: 0, y: 0.4, z: 0}
     radius: 0.0125
@@ -2247,7 +2247,7 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
-    fingers: []
+    fingerBones: []
   fingers:
   - {fileID: 115612521}
   - {fileID: 2113964167}

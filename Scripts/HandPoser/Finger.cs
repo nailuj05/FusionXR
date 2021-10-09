@@ -79,13 +79,13 @@ namespace Fusion.XR
         {
             Vector3 fingerCollisionOffset = new Vector3();
 
-            if (fingerIndex < trackingBase.fingers.Length - 1) //If the index is not the last finger
+            if (fingerIndex < trackingBase.fingerBones.Length - 1) //If the index is not the last finger
             {
-                fingerCollisionOffset = trackingBase.fingers[fingerIndex + 1].localPosition;
+                fingerCollisionOffset = trackingBase.fingerBones[fingerIndex + 1].localPosition;
             }
             else
             {
-                fingerCollisionOffset = trackingBase.fingers[fingerIndex].localPosition + trackingBase.offset;
+                fingerCollisionOffset = trackingBase.fingerBones[fingerIndex].localPosition + trackingBase.offset;
             }
 
             return fingerCollisionOffset;

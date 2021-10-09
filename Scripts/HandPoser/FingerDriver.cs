@@ -16,7 +16,7 @@ namespace Fusion.XR
         [SerializeField] public float slerpMaxForce = 1500;
 
         [HideInInspector]
-        public Transform[] fingers;
+        public Transform[] fingerBones;
     }
 
     public class FingerDriver
@@ -26,7 +26,7 @@ namespace Fusion.XR
 
         public virtual void StartTrack(FingerTrackingBase fingerTrackingBase)
         {
-            fingers = fingerTrackingBase.fingers;
+            fingers = fingerTrackingBase.fingerBones;
             trackingBase = fingerTrackingBase;
         }
 
