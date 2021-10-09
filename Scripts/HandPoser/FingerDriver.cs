@@ -15,7 +15,8 @@ namespace Fusion.XR
         [SerializeField] public float slerpDamper = 250;
         [SerializeField] public float slerpMaxForce = 1500;
 
-        [HideInInspector] public Transform[] fingers;
+        [HideInInspector]
+        public Transform[] fingers;
     }
 
     public class FingerDriver

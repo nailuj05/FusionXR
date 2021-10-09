@@ -1657,18 +1657,23 @@ MonoBehaviour:
   smoothAttachSpeed: 0.5
   palm: {fileID: 1563749726}
   renderHand: {fileID: 863190381}
-  fingerTrackingMode: 1
+  fingerTrackingMode: 0
+  fingerSettings:
+    offset: {x: 0, y: 0.4, z: 0}
+    radius: 0.0125
+    collMask:
+      serializedVersion: 2
+      m_Bits: 383
+    slerpSpring: 3000
+    slerpDamper: 250
+    slerpMaxForce: 1500
+    fingers: []
   fingers:
   - {fileID: 1575666801}
   - {fileID: 1659498373}
   - {fileID: 681539911}
   - {fileID: 1660171517}
   - {fileID: 323680258}
-  fingerOffset: {x: 0, y: 0.4, z: 0}
-  fingerTipRadius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   debugMode: 1
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -2232,18 +2237,23 @@ MonoBehaviour:
   smoothAttachSpeed: 1
   palm: {fileID: 169951278}
   renderHand: {fileID: 1144407192}
-  fingerTrackingMode: 1
+  fingerTrackingMode: 0
+  fingerSettings:
+    offset: {x: 0, y: 0.4, z: 0}
+    radius: 0.0125
+    collMask:
+      serializedVersion: 2
+      m_Bits: 383
+    slerpSpring: 3000
+    slerpDamper: 250
+    slerpMaxForce: 1500
+    fingers: []
   fingers:
   - {fileID: 115612521}
   - {fileID: 2113964167}
   - {fileID: 528509941}
   - {fileID: 442971450}
   - {fileID: 1244533369}
-  fingerOffset: {x: 0, y: 0.4, z: 0}
-  fingerTipRadius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   debugMode: 1
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}

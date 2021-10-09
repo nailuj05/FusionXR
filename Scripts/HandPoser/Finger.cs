@@ -39,11 +39,20 @@ namespace Fusion.XR
             return rotations;
         }
 
+        /// <summary>
+        /// Changes the settings of the fingers. Does not update the driver itself
+        /// </summary>
+        /// <param name="newFingerTrackingBase"></param>
         public void ChangeTrackingBase(FingerTrackingBase newFingerTrackingBase)
         {
             fingerTrackingBase = newFingerTrackingBase;
         }
 
+        /// <summary>
+        /// Changes the driver of the fingers.
+        /// This does not update the TrackingSettings but uses the current ones
+        /// </summary>
+        /// <param name="newFingerDriver"></param>
         public void ChangeFingerDriver(FingerDriver newFingerDriver)
         {
             if (fingerDriver != null)

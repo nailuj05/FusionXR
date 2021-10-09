@@ -46,10 +46,8 @@ namespace Fusion.XR
 
         [Header("Fingers")]
         public FingerTrackingMode fingerTrackingMode;
+        public FingerTrackingBase fingerSettings = new FingerTrackingBase();
         public Finger[] fingers;
-        public Vector3 fingerOffset;
-        public float fingerTipRadius;
-        public LayerMask collMask;
 
         [Header("Hand State")]
         [Tooltip("Debug Mode is used to control the grab and pinch values form script, rather than using controller data")]
@@ -248,21 +246,17 @@ namespace Fusion.XR
 
         public void UpdateDriverAndTracking(FingerTrackingMode driver)
         {
-            UpdateDriver();
+            UpdateTrackingBase();
             UpdateTracking(driver);
         }
 
-        public void UpdateDriver()
+        public void UpdateTrackingBase()
         {
             foreach (var finger in fingers)
             {
-                FingerTrackingBase fingerTrackingBase = new FingerTrackingBase();
-                fingerTrackingBase.fingers = finger.fingerBones;
-                fingerTrackingBase.offset = fingerOffset;
-                fingerTrackingBase.radius = fingerTipRadius;
-                fingerTrackingBase.collMask = collMask;
+                fingerSettings.fingers = finger.fingerBones;
 
-                finger.ChangeTrackingBase(fingerTrackingBase);
+                finger.ChangeTrackingBase(fingerSettings);
             }
         }
 
