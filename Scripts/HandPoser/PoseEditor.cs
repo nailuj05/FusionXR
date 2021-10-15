@@ -58,6 +58,18 @@ namespace Fusion.XR
             }
         }
 
+        public void SwitchHand(GrabPointType type)
+        {
+            if(type == GrabPointType.Both || type == GrabPointType.Right)
+            {
+                SwitchHand(Hand.Right);
+            }
+            else
+            {
+                SwitchHand(Hand.Left);
+            }
+        }
+
         public void SwitchHand(Hand hand)
         {
             handPoser.hand = hand;
@@ -101,6 +113,12 @@ namespace Fusion.XR
                 normal = new GUIStyleState() { background = Texture2D.grayTexture },
             };
         }
+        
+        void OnLostFocus()
+        {
+            PoseEditor poseEditor = (PoseEditor)target;
+            poseEditor.isEditingPose = false;
+        }
 
         public override void OnInspectorGUI()
         {
@@ -122,6 +140,7 @@ namespace Fusion.XR
                     if (poseEditor.GetComponent<GrabPoint>() != null)
                     {
                         GrabPoint grabPoint = poseEditor.GetComponent<GrabPoint>();
+                        poseEditor.SwitchHand(grabPoint.grabPointType);
 
                         if (grabPoint.hasCustomPose)
                         {
