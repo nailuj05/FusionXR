@@ -4241,6 +4241,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1784969799}
     m_Modifications:
+    - target: {fileID: 799544394879435270, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
+      propertyPath: m_Name
+      value: GrabPointR
+      objectReference: {fileID: 0}
+    - target: {fileID: 799544394879435273, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 121.70801
+      objectReference: {fileID: 0}
+    - target: {fileID: 799544394879435273, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 259.888
+      objectReference: {fileID: 0}
+    - target: {fileID: 799544394879435273, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 77.356
+      objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_RootOrder
       value: 0
