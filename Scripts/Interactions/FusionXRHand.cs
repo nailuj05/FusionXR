@@ -44,9 +44,21 @@ namespace Fusion.XR
         private bool generatedGrabPoint;
         private Grabable grabbedGrabable;
 
+        public bool useHandPoser;
+        private HandPoser handPoser;
+
         [HideInInspector]
         public TrackDriver grabbedTrackDriver;
-        public Transform grabPoint { get; private set; }
+
+        /// <summary>
+        /// This stores the Transform of the grabPoint, doesn't matter wether it is generated or not
+        /// </summary>
+        public Transform grabPosition { get; private set; }
+
+        /// <summary>
+        /// This stores the actual grabPoint Component
+        /// </summary>
+        private GrabPoint grabPoint;
 
         #endregion
 
@@ -69,6 +81,11 @@ namespace Fusion.XR
 
             pinchReference.action.started += OnPinched;
             pinchReference.action.canceled += OnPinchedCancelled;
+
+            if (useHandPoser)
+            {
+                handPoser = GetComponent<HandPoser>();
+            }
         }
 
         private void Update()
@@ -126,6 +143,7 @@ namespace Fusion.XR
                 return;
 
             isGrabbing = true;
+            grabPoint = null;
             generatedGrabPoint = false;
 
             ///Check for grabable in Range, if none return
@@ -137,18 +155,30 @@ namespace Fusion.XR
             ///Get grabable component and possible grab points
             grabbedGrabable = closestGrabable.GetComponentInParent<Grabable>();
 
-            grabPoint = grabbedGrabable.GetClosestGrabPoint(transform.position, transform, hand);
+            grabPosition = grabbedGrabable.GetClosestGrabPoint(transform.position, transform, hand, out grabPoint);
 
             ///Generate a GrabPoint if there is no given one
-            if (grabPoint == null)
+            if (grabPosition == null)
             {
-                grabPoint = GenerateGrabPoint(closestColl, grabbedGrabable);
+                grabPosition = GenerateGrabPoint(closestColl, grabbedGrabable);
                 generatedGrabPoint = true;
             }
 
             grabbedGrabable.Grab(this, grabbedTrackingMode, trackingBase);
 
             Debug.Log($"Grab {grabbedGrabable.gameObject.name}");
+
+            if (!useHandPoser)
+                return;
+
+            if (!generatedGrabPoint && grabPoint.hasCustomPose)
+            {
+                handPoser.AttachHand(grabPosition, grabPoint.pose, false);
+            }
+            else
+            {
+                handPoser.AttachHand(grabPosition);
+            }
         }
 
         ///A function so it can also be called from a grabbable that wants to switch hands
@@ -157,9 +187,9 @@ namespace Fusion.XR
             isGrabbing = false;
             
             //Destory the grabPoint
-            if (grabPoint != null && generatedGrabPoint)
+            if (grabPosition != null && generatedGrabPoint)
             {
-                Destroy(grabPoint.gameObject);
+                Destroy(grabPosition.gameObject);
             }
 
             //Release the Grabable and reset the hand
@@ -169,14 +199,34 @@ namespace Fusion.XR
                 grabbedGrabable.GetComponent<Rigidbody>().velocity = rb.velocity;   //NOTE: Apply Better velocity for throwing here
                 grabbedGrabable = null;
             }
+
+            if (useHandPoser)
+            {
+                handPoser.ReleaseHand();
+            }
         }
 
         public Transform GenerateGrabPoint(Collider closestCollider, Grabable grabable)
         {
             Transform grabSpot = new GameObject().transform;
             grabSpot.position = closestCollider.ClosestPoint(palm.position);
-            grabSpot.localRotation = transform.rotation;
+
+            //Raycasting to find GrabSpots Normal
+            RaycastHit hit;
+            Vector3 grabPointPosOffset = grabSpot.TransformPoint(Vector3.up * 0.2f);
+            Ray ray = new Ray(grabPointPosOffset, grabSpot.position - grabPointPosOffset);
+
+            if (Physics.Raycast(ray, out hit, 1f, LayerMask.NameToLayer("Hands")))
+            {
+                grabSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), hit.normal);
+            }
+            else
+            {
+                grabSpot.localRotation = transform.rotation;
+            }
+
             grabSpot.parent = grabable.transform;
+            grabSpot.position = grabSpot.TransformPoint(-palm.localPosition + Vector3.up * 0.03f);
 
             return grabSpot;
         }
