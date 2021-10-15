@@ -32,7 +32,7 @@ public class HandPoserMock : MonoBehaviour
         {
             if(hit.collider.TryGetComponent(out Grabable grabable))
             {
-                Transform grabPointTransform = grabable.GetClosestGrabPoint(hit.point, currentHandPoser.hand, out GrabPoint grabPoint);
+                Transform grabPointTransform = grabable.GetClosestGrabPoint(hit.point, transform, currentHandPoser.hand, out GrabPoint grabPoint);
 
                 if(grabPoint == null)
                 {

@@ -137,7 +137,7 @@ namespace Fusion.XR
             ///Get grabable component and possible grab points
             grabbedGrabable = closestGrabable.GetComponentInParent<Grabable>();
 
-            grabPoint = grabbedGrabable.GetClosestGrabPoint(transform.position, hand);
+            grabPoint = grabbedGrabable.GetClosestGrabPoint(transform.position, transform, hand);
 
             ///Generate a GrabPoint if there is no given one
             if (grabPoint == null)

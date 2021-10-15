@@ -122,21 +122,29 @@ namespace Fusion.XR
 
         #region Functions
 
-        public Transform GetClosestGrabPoint(Vector3 point, Hand desiredHand)
+        public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand)
         {
-            GrabPoint grabPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
+            GrabPoint grabPoint = ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
 
             return grabPoint.transform;
         }
 
-        public Transform GetClosestGrabPoint(Vector3 point, Hand desiredHand, out GrabPoint grabPoint)
+        //For returning the transform and the GrabPoint
+        public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
         {
-            grabPoint = ClosestGrabPoint(grabPoints, point, desiredHand);
+            grabPoint = ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
 
-            return grabPoint != null ? grabPoint.transform : null;
+            if (grabPoint != null)
+            {
+                return grabPoint.transform;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        GrabPoint ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Hand desiredHand)
+        GrabPoint ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Transform handTransform, Hand desiredHand)
         {
             GrabPoint closestGrabPoint = null;
             float distance = float.MaxValue;
@@ -145,7 +153,7 @@ namespace Fusion.XR
             {
                 foreach (GrabPoint currentGrabPoint in grabPoints)
                 {
-                    if (currentGrabPoint.CorrectHand(desiredHand) && currentGrabPoint.isActive) //Check if the GrabPoint is for the correct Hand and if it isActive
+                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand) && currentGrabPoint.isActive) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
                         {

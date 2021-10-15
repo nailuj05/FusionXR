@@ -45,14 +45,10 @@ namespace Fusion.XR
             }
         }
 
-        public bool CorrectHand(Hand hand)
+        public virtual bool IsGrabPossible(Transform handTransform, Hand hand)
         {
-            if((int)hand == (int)grabPointType) //TRUE: if hands match
-            {
-                Debug.Log(grabPointType);
-                return true;
-            }
-            else if(grabPointType == GrabPointType.Both) //TRUE: if both hands are allowed
+            //If hands match or both hands are accepted
+            if((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both)
             {
                 return true;
             }
@@ -62,98 +58,4 @@ namespace Fusion.XR
             }
         }
     }
-
-#if UNITY_EDITOR
-    [CustomEditor(typeof(GrabPoint))] [CanEditMultipleObjects]
-    public class GrabPointEditor : Editor
-    {
-        GUIStyle rightStyle;
-        GUIStyle leftStyle;
-        GUIStyle bothStyle;
-
-        GUIStyle highlightedStyle;
-        GUIStyle unhighlightedStyle;
-
-        private void Awake()
-        {
-            highlightedStyle = new GUIStyle()
-            {
-                alignment = TextAnchor.MiddleCenter,
-                fontStyle = FontStyle.Bold,
-                normal = new GUIStyleState() { background = Texture2D.whiteTexture },
-            };
-
-            unhighlightedStyle = new GUIStyle()
-            {
-                alignment = TextAnchor.MiddleCenter,
-                fontStyle = FontStyle.Bold,
-                normal = new GUIStyleState() { background = Texture2D.grayTexture },
-            };
-
-            rightStyle = highlightedStyle;
-            leftStyle = unhighlightedStyle;
-            bothStyle = unhighlightedStyle;
-        }
-
-        public override void OnInspectorGUI()
-        {
-            GrabPoint grabPoint = (GrabPoint)target;
-
-            EditorGUILayout.BeginHorizontal("box");
-
-            rightStyle = unhighlightedStyle;
-            leftStyle = unhighlightedStyle;
-            bothStyle = unhighlightedStyle;
-
-            switch ((int)grabPoint.grabPointType)
-            {
-                case 0: //Left Hand
-                    leftStyle = highlightedStyle;
-                    break;
-                case 1: //Right Hand
-                    rightStyle = highlightedStyle;
-                    break;
-                case 2: //Both Hand
-                    bothStyle = highlightedStyle;
-                    break;
-            }
-
-            if (GUILayout.Button("Right", rightStyle))
-            {
-                grabPoint.grabPointType = GrabPointType.Right;
-
-                rightStyle = highlightedStyle;
-                leftStyle = unhighlightedStyle;
-                bothStyle = unhighlightedStyle;
-            }
-            if (GUILayout.Button("Left", leftStyle))
-            {
-                grabPoint.grabPointType = GrabPointType.Left;
-
-                rightStyle = unhighlightedStyle;
-                leftStyle = highlightedStyle;
-                bothStyle = unhighlightedStyle;
-            }
-            if (GUILayout.Button("Both", bothStyle))
-            {
-                grabPoint.grabPointType = GrabPointType.Both;
-
-                rightStyle = unhighlightedStyle;
-                leftStyle = unhighlightedStyle;
-                bothStyle = highlightedStyle;
-            }
-
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("hasCustomPose"));
-
-            if (grabPoint.hasCustomPose)
-            {
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("pose"));
-            }
-
-            serializedObject.ApplyModifiedProperties();
-        }
-    }
-#endif
 }
