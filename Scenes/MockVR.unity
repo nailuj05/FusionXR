@@ -2636,20 +2636,27 @@ MonoBehaviour:
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
+  smoothAttachment: 0
+  smoothAttachSpeed: 0.5
   palm: {fileID: 1563749726}
   renderHand: {fileID: 863190381}
-  fingerDriver: 0
+  fingerTrackingMode: 1
+  fingerSettings:
+    offset: {x: 0, y: 0.4, z: 0}
+    radius: 0.0125
+    collMask:
+      serializedVersion: 2
+      m_Bits: 383
+    slerpSpring: 3000
+    slerpDamper: 250
+    slerpMaxForce: 1500
+    fingerBones: []
   fingers:
   - {fileID: 1575666801}
   - {fileID: 1659498373}
   - {fileID: 681539911}
   - {fileID: 1660171517}
   - {fileID: 323680258}
-  fingerOffset: {x: 0, y: 0.4, z: 0}
-  fingerTipRadius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   debugMode: 1
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -2691,6 +2698,7 @@ MonoBehaviour:
   grabbedTrackingMode: 3
   palm: {fileID: 1563749726}
   reachDist: 0.1
+  useHandPoser: 1
 --- !u!54 &822546836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3763,7 +3771,7 @@ MonoBehaviour:
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   activationThreshold: 0.1
   canMove: 1
-  useGravity: 0
+  usesGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
   rigidBody: {fileID: 1033683503}
 --- !u!136 &1033683499
@@ -3798,7 +3806,7 @@ MonoBehaviour:
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   collisionAdjuster: {fileID: 1033683497}
-  rigidbody: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &1033683501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4177,7 +4185,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126147295}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bc777142e534bc40973ae3595a57e16, type: 3}
   m_Name: 
@@ -4191,20 +4199,27 @@ MonoBehaviour:
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
+  smoothAttachment: 0
+  smoothAttachSpeed: 0.5
   palm: {fileID: 169951278}
   renderHand: {fileID: 1144407192}
-  fingerDriver: 0
+  fingerTrackingMode: 1
+  fingerSettings:
+    offset: {x: 0, y: 0.4, z: 0}
+    radius: 0.0125
+    collMask:
+      serializedVersion: 2
+      m_Bits: 383
+    slerpSpring: 3000
+    slerpDamper: 250
+    slerpMaxForce: 1500
+    fingerBones: []
   fingers:
   - {fileID: 115612521}
   - {fileID: 2113964167}
   - {fileID: 528509941}
   - {fileID: 442971450}
   - {fileID: 1244533369}
-  fingerOffset: {x: 0, y: 0.4, z: 0}
-  fingerTipRadius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   debugMode: 1
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -4219,7 +4234,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126147295}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dde0ab0e0e48c714fa47402b36df239a, type: 3}
   m_Name: 
@@ -4246,6 +4261,7 @@ MonoBehaviour:
   grabbedTrackingMode: 3
   palm: {fileID: 169951278}
   reachDist: 0.1
+  useHandPoser: 1
 --- !u!54 &1126147299
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13512,6 +13528,7 @@ MonoBehaviour:
   grabbedTrackingMode: 0
   palm: {fileID: 8622627593758503776}
   reachDist: 0.1
+  useHandPoser: 0
 --- !u!54 &8622627593513699866
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13549,20 +13566,27 @@ MonoBehaviour:
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
+  smoothAttachment: 1
+  smoothAttachSpeed: 0.5
   palm: {fileID: 8622627593758503776}
   renderHand: {fileID: 0}
-  fingerDriver: 0
+  fingerTrackingMode: 0
+  fingerSettings:
+    offset: {x: 0, y: 0, z: 0}
+    radius: 0
+    collMask:
+      serializedVersion: 2
+      m_Bits: 0
+    slerpSpring: 3000
+    slerpDamper: 250
+    slerpMaxForce: 1500
+    fingerBones: []
   fingers:
   - {fileID: 5997832362670621638}
   - {fileID: 783105950259459021}
   - {fileID: 6011666714537389077}
   - {fileID: 9107562549525623690}
   - {fileID: 6767652696156624809}
-  fingerOffset: {x: 0, y: 0.4, z: 0}
-  fingerTipRadius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   debugMode: 0
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -13903,6 +13927,7 @@ MonoBehaviour:
   grabbedTrackingMode: 0
   palm: {fileID: 8622627593493029903}
   reachDist: 0.1
+  useHandPoser: 0
 --- !u!54 &8622627594202557812
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13940,20 +13965,27 @@ MonoBehaviour:
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
+  smoothAttachment: 1
+  smoothAttachSpeed: 0.5
   palm: {fileID: 8622627593493029903}
   renderHand: {fileID: 0}
-  fingerDriver: 0
+  fingerTrackingMode: 0
+  fingerSettings:
+    offset: {x: 0, y: 0, z: 0}
+    radius: 0
+    collMask:
+      serializedVersion: 2
+      m_Bits: 0
+    slerpSpring: 3000
+    slerpDamper: 250
+    slerpMaxForce: 1500
+    fingerBones: []
   fingers:
   - {fileID: 5997832362618446452}
   - {fileID: 783105950244426363}
   - {fileID: 6011666714594348451}
   - {fileID: 9107562549511311928}
   - {fileID: 6767652696175719959}
-  fingerOffset: {x: 0, y: 0.4, z: 0}
-  fingerTipRadius: 0.0125
-  collMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   debugMode: 0
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -14229,7 +14261,7 @@ MonoBehaviour:
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   collisionAdjuster: {fileID: 8622627594991174601}
-  rigidbody: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &8622627594991174597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14342,7 +14374,7 @@ MonoBehaviour:
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   activationThreshold: 0.1
   canMove: 1
-  useGravity: 1
+  usesGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
   controller: {fileID: 8622627594991174603}
 --- !u!143 &8622627594991174603

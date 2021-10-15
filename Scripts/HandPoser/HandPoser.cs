@@ -96,7 +96,6 @@ namespace Fusion.XR
                 }
                 else
                 {
-                    Debug.Log("Smooth");
                     LerpRenderHand();
                 }
             }
