@@ -91,20 +91,9 @@ namespace Fusion.XR
             return fingerCollisionOffset;
         }
 
-#region Unity Editor
-
-#if UNITY_EDITOR
-        void OnDrawGizmos()
-        {
-            for (int i = 0; i < fingerBones.Length; i++)
-            {
-                Gizmos.color = new Color(0, 0, 1, .4f);
-                Gizmos.DrawSphere(fingerBones[i].TransformPoint(GetFingerCollisionOffset(i, fingerTrackingBase)), fingerTrackingBase.radius);
-            }
-        }
-#endif
     }
 
+    #region Editor
 #if UNITY_EDITOR
     [CustomEditor(typeof(Finger))]
     [CanEditMultipleObjects]
@@ -125,5 +114,4 @@ namespace Fusion.XR
 #endif
 
 #endregion
-
 }
