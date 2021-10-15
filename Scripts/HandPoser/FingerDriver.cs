@@ -7,8 +7,9 @@ namespace Fusion.XR
     [System.Serializable]
     public class FingerTrackingBase
     {
-        [SerializeField] public Vector3 offset;
-        [SerializeField] public float radius;
+        [SerializeField] public Vector3 offset = new Vector3(0, 0.4f, 0f);
+        [SerializeField] public float radius = 0.0125f;
+        [Tooltip("The objects the fingers can collide with, this should be everything but the hands")]
         [SerializeField] public LayerMask collMask;
 
         [SerializeField] public float slerpSpring = 3000;
