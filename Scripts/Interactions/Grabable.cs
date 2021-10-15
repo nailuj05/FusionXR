@@ -54,8 +54,8 @@ namespace Fusion.XR
             if (handsCount == 1) //If there is one hand grabbing
             {
                 //Get GrabPoint Offsets
-                Vector3 offsetPos = attachedHands[0].grabPoint.localPosition;
-                Quaternion offsetRot = attachedHands[0].grabPoint.localRotation;
+                Vector3 offsetPos = attachedHands[0].grabPosition.localPosition;
+                Quaternion offsetRot = attachedHands[0].grabPosition.localRotation;
 
                 //Delta Vector/Quaternion from Grabable (+ offset) to hand
                 targetPosition = attachedHands[0].targetPosition - transform.TransformVector(offsetPos);
@@ -72,8 +72,8 @@ namespace Fusion.XR
                 for (int i = 0; i < handsCount; i++)
                 {
                     //Get GrabPoint Offsets
-                    Vector3 offsetPos = attachedHands[i].grabPoint.localPosition;
-                    Quaternion offsetRot = attachedHands[i].grabPoint.localRotation;
+                    Vector3 offsetPos = attachedHands[i].grabPosition.localPosition;
+                    Quaternion offsetRot = attachedHands[i].grabPosition.localRotation;
 
                     //Delta Vector/Quaternion from Grabable (+ offset) to hand
                     posTargets[i] = attachedHands[i].targetPosition - transform.TransformVector(offsetPos);
@@ -170,7 +170,6 @@ namespace Fusion.XR
         {
             if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
             {
-                Debug.Log("1");
                 //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
                 if (attachedHands.Count > 0)
                 {
@@ -179,7 +178,6 @@ namespace Fusion.XR
                 }
 
                 attachedHands.Add(hand);
-                Debug.Log(attachedHands[0].name);
             }
             else if (twoHandedMode == TwoHandedMode.Average) //Case: Averaging Between Hands;
             {
