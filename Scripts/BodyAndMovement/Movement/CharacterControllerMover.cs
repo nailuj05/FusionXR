@@ -16,6 +16,8 @@ namespace Fusion.XR
 
         public override void Move(Vector3 direction)
         {
+            //TODO: Check this
+            CurrentVelocity = direction / Time.deltaTime;
             controller.Move(direction * Time.deltaTime);
         }
     }

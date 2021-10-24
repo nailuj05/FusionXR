@@ -47,7 +47,7 @@ public class AntiClipping : MonoBehaviour
             isInWall = false;
         }
 
-        //Todo: Use DO BETWEEN
+        //Todo: Use DO-TWEEN
         volume.weight = Mathf.SmoothDamp(volume.weight, System.Convert.ToInt32(isInWall), ref refVel, smoothTime);
 
         if (volume.weight < 0.1f)
