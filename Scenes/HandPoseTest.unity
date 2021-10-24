@@ -432,13 +432,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169951277}
-  m_LocalRotation: {x: 1, y: 0, z: -0, w: 0.0000016242263}
-  m_LocalPosition: {x: -0.0337, y: 0.031, z: -0.012}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.033, y: 0.031, z: -0.012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1126147296}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &187317953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,8 +1606,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 822546833}
-  - component: {fileID: 822546837}
-  - component: {fileID: 822546836}
   - component: {fileID: 822546834}
   m_Layer: 7
   m_Name: HandRight
@@ -1681,35 +1679,6 @@ MonoBehaviour:
   pinchState: 0
   grabState: 0
   handState: 0
---- !u!54 &822546836
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822546832}
-  serializedVersion: 2
-  m_Mass: 20
-  m_Drag: 0.5
-  m_AngularDrag: 0.03
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
---- !u!65 &822546837
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822546832}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.12, y: 0.045, z: 0.2}
-  m_Center: {x: 0.035, y: 0.045, z: 0.01}
 --- !u!1 &863190380
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2174,7 @@ Transform:
   m_GameObject: {fileID: 1126147295}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0.0522, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1144407192}
   - {fileID: 169951278}
@@ -2318,7 +2287,7 @@ Transform:
   m_GameObject: {fileID: 1144407191}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 1349470177}
   - {fileID: 450530346}
