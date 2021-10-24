@@ -59,9 +59,7 @@ namespace Fusion.XR
                 ///Movement
                 Vector3 movementDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-                movementDir = Vector3.ProjectOnPlane(VRCamera.TransformVector(movementDir), Vector3.up);
-
-                movement.Move(movementDir.normalized);
+                movement.PreprocessMovement(movementDir);
             }
             #endregion
 
