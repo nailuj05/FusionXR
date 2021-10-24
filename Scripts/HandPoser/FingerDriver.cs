@@ -20,33 +20,24 @@ namespace Fusion.XR
         public Transform[] fingerBones;
     }
 
-    public class FingerDriver
+    public abstract class FingerDriver
     {
         protected Transform[] fingers;
         protected FingerTrackingBase trackingBase;
 
-        public virtual void StartTrack(FingerTrackingBase fingerTrackingBase)
-        {
-            fingers = fingerTrackingBase.fingerBones;
-            trackingBase = fingerTrackingBase;
-        }
+        public abstract void StartTrack(FingerTrackingBase fingerTrackingBase);
 
-        public virtual void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
-        {
+        public abstract void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp);
 
-        }
-
-        public virtual void EndTrack()
-        {
-
-        }
+        public abstract void EndTrack();
     }
 
     public class KinematicFingerDriver : FingerDriver
     {
         public override void StartTrack(FingerTrackingBase fingerTrackingBase)
         {
-            base.StartTrack(fingerTrackingBase);
+            fingers = fingerTrackingBase.fingerBones;
+            trackingBase = fingerTrackingBase;
         }
 
         public override void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
@@ -59,7 +50,7 @@ namespace Fusion.XR
 
         public override void EndTrack()
         {
-            base.EndTrack();
+
         }
     }
 
@@ -67,7 +58,8 @@ namespace Fusion.XR
     {
         public override void StartTrack(FingerTrackingBase fingerTrackingBase)
         {
-            base.StartTrack(fingerTrackingBase);
+            fingers = fingerTrackingBase.fingerBones;
+            trackingBase = fingerTrackingBase;
         }
 
         public override void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
@@ -85,7 +77,7 @@ namespace Fusion.XR
 
         public override void EndTrack()
         {
-            base.EndTrack();
+
         }
     }
 }

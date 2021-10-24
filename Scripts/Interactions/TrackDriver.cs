@@ -31,34 +31,25 @@ namespace Fusion.XR
         [HideInInspector] public GameObject tracker;
     }
 
-    public class TrackDriver
+    public abstract class TrackDriver
     {
         protected Transform objectToTrack;
 
         protected TrackingBase trackingBase;
 
-        public virtual void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
-        {
-            objectToTrack = assignedObjectToTrack;
-            trackingBase = assignedTrackingBase;
-        }
+        public abstract void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase);
 
-        public virtual void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
-        {
+        public abstract void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation);
 
-        }
-
-        public virtual void EndTrack()
-        {
-
-        }
+        public abstract void EndTrack();
     }
 
     public class KinematicDriver : TrackDriver
     {
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            base.StartTrack(assignedObjectToTrack, assignedTrackingBase);
+            objectToTrack = assignedObjectToTrack;
+            trackingBase = assignedTrackingBase;
         }
 
         public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
@@ -79,8 +70,10 @@ namespace Fusion.XR
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            rb = assignedObjectToTrack.GetComponent<Rigidbody>();
-            base.StartTrack(assignedObjectToTrack, assignedTrackingBase);
+            objectToTrack = assignedObjectToTrack;
+            trackingBase = assignedTrackingBase;
+
+            rb = objectToTrack.GetComponent<Rigidbody>();
         }
 
         public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
@@ -120,7 +113,8 @@ namespace Fusion.XR
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            base.StartTrack(assignedObjectToTrack, assignedTrackingBase);
+            objectToTrack = assignedObjectToTrack;
+            trackingBase = assignedTrackingBase;
 
             jointRB = Object.FindObjectOfType<Player>().GetComponent<Rigidbody>();
             objectRB = objectToTrack.GetComponent<Rigidbody>();
@@ -212,7 +206,8 @@ namespace Fusion.XR
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
-            base.StartTrack(assignedObjectToTrack, assignedTrackingBase);
+            objectToTrack = assignedObjectToTrack;
+            trackingBase = assignedTrackingBase;
 
             try
             {
