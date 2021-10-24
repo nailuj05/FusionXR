@@ -17,8 +17,9 @@ namespace Fusion.XR
         public string displayName = "";
         private HandPoser handPoser;
 
+        private Vector3 palmOffset = new Vector3(-0.035f, -0.021f, -0.0012f);
+
         private GameObject prevHand;
-        private Vector3 palmOffset = new Vector3(-0.35f, -0.21f, -0.012f);
 
         public void SpawnPoserHand(Transform obj)
         {
@@ -28,9 +29,8 @@ namespace Fusion.XR
 
             handPoser = prevHand.GetComponent<HandPoser>();
             handPoser.attachedObj = this.transform;
-            Transform palm = handPoser.palm;
 
-            StartCoroutine(UpdateHandPos(obj, palm));
+            StartCoroutine(UpdateHandPos());
         }
 
         public void RemovePoserHand()
@@ -48,7 +48,7 @@ namespace Fusion.XR
             pose.SetAllRotations(handPoser.SavePose());
         }
 
-        private IEnumerator UpdateHandPos(Transform obj, Transform palm)
+        private IEnumerator UpdateHandPos()
         {
             while (isEditingPose)
             {

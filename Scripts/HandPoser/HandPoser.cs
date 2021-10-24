@@ -161,8 +161,19 @@ namespace Fusion.XR
 
         public void PlaceRenderHand()
         {
-            renderHand.transform.position = attachedObj.TransformPoint(-palm.localPosition);
-            renderHand.transform.rotation = attachedObj.transform.rotation;
+            if (Application.isPlaying)
+            {
+                renderHand.transform.position = attachedObj.TransformPoint(-palm.localPosition);
+                renderHand.transform.rotation = attachedObj.transform.rotation;
+            }
+            else
+            {
+                if (hand == Hand.Left)
+                    renderHand.transform.position = attachedObj.TransformPoint(-new Vector3(-0.033f, 0.031f, -0.012f));
+                else
+                    renderHand.transform.position = attachedObj.TransformPoint(-new Vector3(0.033f, 0.031f, -0.012f));
+                renderHand.transform.rotation = attachedObj.transform.rotation;
+            }
         }
 
         public void LerpRenderHand()
@@ -182,7 +193,7 @@ namespace Fusion.XR
             grabValue = grab;
         }
 
-        #region Posing Functions
+#region Posing Functions
 
         public void AttachHand(Transform attachmentPoint)
         {
@@ -272,9 +283,9 @@ namespace Fusion.XR
             }
         }
 
-        #endregion
+#endregion
 
-        #region Pose Editor Functions
+#region Pose Editor Functions
 
         public void RotateToPose(HandPose pose)
         {
@@ -306,10 +317,10 @@ namespace Fusion.XR
             return allRots;
         }
 
-        #endregion
+#endregion
     }
 
-    #region Editor
+#region Editor
 
 #if UNITY_EDITOR
     [CustomEditor(typeof(HandPoser))] [CanEditMultipleObjects]
