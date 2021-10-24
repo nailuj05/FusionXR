@@ -151,7 +151,6 @@ namespace Fusion.XR
                     //    $", Distance: {(currentGrabPoint.transform.position - point).sqrMagnitude}" +
                     //    $", Closer? {(currentGrabPoint.transform.position - point).sqrMagnitude < distance}");
 
-                    //TODO: Why is it generating a GrabPoint if it could use another preset one
                     if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand)) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
