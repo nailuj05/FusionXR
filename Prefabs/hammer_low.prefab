@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799544394879435270}
   m_LocalRotation: {x: -0.20440355, y: 0.6419351, z: -0.7181511, w: 0.17434902}
-  m_LocalPosition: {x: -0.0546, y: 0.0321, z: 0.0217}
+  m_LocalPosition: {x: -0.06, y: 0.024, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4044798231639497073}
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 1
-  isActive: 1
   hasCustomPose: 1
   pose: {fileID: 11400000, guid: a6e74b938be2b8443ae006622d2bb90a, type: 2}
 --- !u!114 &799544394879435275
@@ -186,6 +185,7 @@ MonoBehaviour:
   isGrabbed: 0
   grabPoints:
   - {fileID: 799544394879435272}
+  - {fileID: 9045024089428162762}
   attachedHands: []
 --- !u!65 &4044798231639983442
 BoxCollider:
@@ -265,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5068974704239147335}
   m_LocalRotation: {x: 0.58337045, y: 0.19698325, z: 0.19061291, w: 0.7645543}
-  m_LocalPosition: {x: -0.1045, y: -0.0151, z: -0.0288}
+  m_LocalPosition: {x: -0.0625, y: 0.0229, z: -0.0001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4044798231639497073}
@@ -284,7 +284,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 0
-  isActive: 1
   hasCustomPose: 1
   pose: {fileID: 11400000, guid: a6e74b938be2b8443ae006622d2bb90a, type: 2}
 --- !u!114 &1838858492618053948
