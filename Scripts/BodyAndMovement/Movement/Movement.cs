@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Fusion.XR
 {
-    public class Movement : MonoBehaviour
+    public abstract class Movement : MonoBehaviour
     {
         [Header("Basic Movement")]
         public float playerSpeed = 2f;
@@ -34,6 +34,12 @@ namespace Fusion.XR
 
         public Vector3 gravity = Physics.gravity;
 
+        private Vector3 currentVelocity;
+        public Vector3 CurrentVelocity {
+            get { return currentVelocity; }
+            protected set { currentVelocity = value; }
+        }
+
         private List<MovementOverride> movementOverrides = new List<MovementOverride>();
 
         private bool waitForTurn = false;
@@ -41,13 +47,13 @@ namespace Fusion.XR
         private void Start()
         {
             //Subscribe to Movement Actions
-            movementAction.action.performed += PreprocessMovement;
+            movementAction.action.performed += PreprocessInput;
             turnAction.action.performed += Turn; //This working with overrides?
 
             //Set Movement Direction Initially
             SetMovementDirection(movementDirection);
 
-            //Add the standart Movement Override
+            //Add the standard Movement Override
             movementOverrides.Add(new MovementOverride());
         }
 
@@ -103,35 +109,62 @@ namespace Fusion.XR
 
         #region Queuing, Processing, Overrides
 
-        public virtual void PreprocessMovement(InputAction.CallbackContext obj)
+        /// <summary>
+        /// Subscribes to the Movement Action and transforms the Vec2 Input to Vec3
+        /// </summary>
+        /// <param name="obj"></param>
+        public virtual void PreprocessInput(InputAction.CallbackContext obj)
         {
             if (!canMove)
                 return;
 
+            //Transform to Vec3
             Vector3 movementInput = movementAction.action.ReadValue<Vector2>();
-
             movementInput.Set(movementInput.x, 0, movementInput.y);
 
+            PreprocessMovement(movementInput);
+        }
+
+        /// <summary>
+        /// Handles the movementInput and queues a move
+        /// </summary>
+        /// <param name="movementInput"></param>
+        public virtual void PreprocessMovement(Vector3 movementInput)
+        {
             if (movementInput.magnitude >= activationThreshold)
             {
                 movementInput = currentMovementDirection.TransformDirection(movementInput);
                 movementInput = Vector3.ProjectOnPlane(movementInput, Vector3.up);
 
-                QueueMove(movementInput.normalized, playerSpeed);
+                QueueMove(movementInput, playerSpeed);
             }
         }
 
-        //Queueing Moves allowes different preprocessing and multiple Movements being applied
+        /// <summary>
+        /// Queues a move.
+        /// Queueing Moves allowes different preprocessing and multiple Movements being applied
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="speed"></param>
         public void QueueMove(Vector3 direction, float speed)
         {
             QueueMove(direction.normalized * speed);
         }
 
+        /// <summary>
+        /// Queues a move.
+        /// Queueing Moves allowes different preprocessing and multiple Movements being applied.
+        /// </summary>
+        /// <param name="direction"></param>
         public void QueueMove(Vector3 direction)
         {
             MovementProcessing(direction);
         }
 
+        /// <summary>
+        /// Processes the movement by applying movement overrides.
+        /// </summary>
+        /// <param name="direction"></param>
         public void MovementProcessing(Vector3 direction)
         {
             direction = movementOverrides[movementOverrides.Count - 1].ProcessMovement(direction);
@@ -139,6 +172,10 @@ namespace Fusion.XR
             Move(direction);
         }
 
+        /// <summary>
+        /// Adds an override and sorts it into the stack
+        /// </summary>
+        /// <param name="newMovementOverride"></param>
         public void AddMovementOverride(MovementOverride newMovementOverride)
         {
             for (int i = movementOverrides.Count - 1; i != 0; i--)
@@ -156,6 +193,10 @@ namespace Fusion.XR
             }
         }
 
+        /// <summary>
+        /// Removes an movement override
+        /// </summary>
+        /// <param name="movementOverrideToRemove"></param>
         public void RemoveMovementOverride(MovementOverride movementOverrideToRemove)
         {
             movementOverrides.Remove(movementOverrideToRemove);
@@ -163,9 +204,14 @@ namespace Fusion.XR
 
         #endregion
 
-        //Override the following questions
-        public virtual void Move(Vector3 direction) { }
+        //Overriden by Movers
+        public abstract void Move(Vector3 direction);
         
+        /// <summary>
+        /// Performces a Snap Turn
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="angle"></param>
         public virtual void SnapTurn(Direction dir, float angle)
         {
             angle = dir == Direction.West ? -angle : angle;
@@ -175,6 +221,11 @@ namespace Fusion.XR
             StartCoroutine(WaitForTurn(turnCooldown));
         }
 
+        /// <summary>
+        /// Performs a smooth turn
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="speed"></param>
         public virtual void SmoothTurn(Direction dir, float speed)
         {
             speed = dir == Direction.West ? -speed : speed;
@@ -182,6 +233,11 @@ namespace Fusion.XR
             transform.Rotate(head.position, speed * Time.deltaTime);
         }
 
+        /// <summary>
+        /// Waits until next Turn is possible
+        /// </summary>
+        /// <param name="waitTime"></param>
+        /// <returns></returns>
         private IEnumerator WaitForTurn(float waitTime)
         {
             waitForTurn = true;
@@ -192,6 +248,10 @@ namespace Fusion.XR
         }
     }
 
+    //TODO, extent to base and default classes making base class abstract
+    /// <summary>
+    /// Base MovementOverride and default override
+    /// </summary>
     public class MovementOverride
     {
         public int priority = 0;
