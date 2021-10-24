@@ -12,7 +12,7 @@ namespace Fusion.XR
         public override bool IsGrabPossible(Transform handTransform, Hand hand)
         {
             //If hands match or both hands are accepted
-            if ((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both)
+            if (((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && isActive)
             {
                 if(Vector3.Distance(transform.position, handTransform.position) <= reachDistance)
                 {
@@ -20,6 +20,16 @@ namespace Fusion.XR
                 }
             }
             return false;
+        }
+
+        public override void BlockGrabPoint()
+        {
+            isActive = false;
+        }
+
+        public override void ReleaseGrabPoint()
+        {
+            isActive = true;
         }
 
 #if UNITY_EDITOR

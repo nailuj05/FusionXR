@@ -18,7 +18,7 @@ namespace Fusion.XR
 
         public GrabPointType grabPointType;
 
-        public bool isActive = true;
+        protected bool isActive = true;
 
         public bool hasCustomPose;
         public HandPose pose;
@@ -48,7 +48,7 @@ namespace Fusion.XR
         public virtual bool IsGrabPossible(Transform handTransform, Hand hand)
         {
             //If hands match or both hands are accepted
-            if((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both)
+            if(((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && isActive)
             {
                 return true;
             }
@@ -56,6 +56,16 @@ namespace Fusion.XR
             {
                 return false;
             }
+        }
+
+        public virtual void BlockGrabPoint()
+        {
+            isActive = false;
+        }
+
+        public virtual void ReleaseGrabPoint()
+        {
+            isActive = true;
         }
     }
 }

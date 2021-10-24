@@ -186,10 +186,16 @@ namespace Fusion.XR
         {
             isGrabbing = false;
             
-            //Destory the grabPoint
-            if (grabPosition != null && generatedGrabPoint)
+            //Destory the grabPoint, unlock if needed
+            if (generatedGrabPoint)
             {
-                Destroy(grabPosition.gameObject);
+                if(grabPosition != null)
+                    Destroy(grabPosition.gameObject);
+            }
+            else if(grabPoint != null)
+            {
+                //Release the GrabPoint to unlock it
+                grabPoint.ReleaseGrabPoint();
             }
 
             //Release the Grabable and reset the hand

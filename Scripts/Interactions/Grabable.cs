@@ -122,13 +122,6 @@ namespace Fusion.XR
 
         #region Functions
 
-        public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand)
-        {
-            GrabPoint grabPoint = ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
-
-            return grabPoint.transform;
-        }
-
         //For returning the transform and the GrabPoint
         public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
         {
@@ -136,6 +129,7 @@ namespace Fusion.XR
 
             if (grabPoint != null)
             {
+                grabPoint.BlockGrabPoint();
                 return grabPoint.transform;
             }
             else
@@ -153,12 +147,18 @@ namespace Fusion.XR
             {
                 foreach (GrabPoint currentGrabPoint in grabPoints)
                 {
-                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand) && currentGrabPoint.isActive) //Check if the GrabPoint is for the correct Hand and if it isActive
+                    //Debug.Log($"{currentGrabPoint.name}: grab possible? {currentGrabPoint.IsGrabPossible(handTransform, desiredHand)}" +
+                    //    $", Distance: {(currentGrabPoint.transform.position - point).sqrMagnitude}" +
+                    //    $", Closer? {(currentGrabPoint.transform.position - point).sqrMagnitude < distance}");
+
+                    //TODO: Why is it generating a GrabPoint if it could use another preset one
+                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand)) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
                         {
                             closestGrabPoint = currentGrabPoint;
                             distance = (currentGrabPoint.transform.position - point).sqrMagnitude; //New (smaller) distance
+                            //Debug.Log($"Grabbed, new distance: {distance}");
                         }
                     }
                 }
