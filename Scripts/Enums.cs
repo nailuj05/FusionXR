@@ -62,4 +62,12 @@ namespace Fusion.XR
         West = 2,
         East = 3
     }
+
+    //Used by Sockets
+    public enum AttractType
+    {
+        AllCollisionObjects,
+        Rigidbodys,
+        Grabables
+    }
 }
