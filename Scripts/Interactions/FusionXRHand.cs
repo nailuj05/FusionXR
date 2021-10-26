@@ -237,6 +237,7 @@ namespace Fusion.XR
             return grabSpot;
         }
 
+        //TODO: remove redunant find closest gameobject
         GameObject ClosestGrabable(out Collider closestColl)
         {
             Collider[] nearObjects = Physics.OverlapSphere(palm.position, reachDist);
