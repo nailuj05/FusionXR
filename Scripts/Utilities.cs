@@ -26,6 +26,60 @@ namespace Fusion.XR
 
     public static class Utilities
     {
+        public static GameObject ClosestGameobject(GameObject[] gameObjects, Vector3 pos)
+        {
+            if (gameObjects.Length == 0)
+            {
+                Debug.LogError("Given List was empty");
+                return null;
+            }
+
+            float dist = Mathf.Infinity;
+            GameObject closestObject = gameObjects[0];
+
+            if(gameObjects.Length != 1)
+            {
+                foreach (GameObject obj in gameObjects)
+                {
+                    float currDist = (obj.transform.position - pos).sqrMagnitude;
+                    if (currDist < dist)
+                    {
+                        dist = currDist;
+                        closestObject = obj;
+                    }
+                }
+            }
+
+            return closestObject;
+        }
+
+        public static GameObject ClosestGameobject(List<GameObject> gameObjects, Vector3 pos)
+        {
+            if (gameObjects.Count == 0)
+            {
+                Debug.LogError("Given List was empty");
+                return null;
+            }
+
+            float dist = Mathf.Infinity;
+            GameObject closestObject = gameObjects[0];
+
+            if (gameObjects.Count != 1)
+            {
+                foreach (GameObject obj in gameObjects)
+                {
+                    float currDist = (obj.transform.position - pos).sqrMagnitude;
+                    if (currDist < dist)
+                    {
+                        dist = currDist;
+                        closestObject = obj;
+                    }
+                }
+            }
+
+            return closestObject;
+        }
+
         public static TrackDriver DriverFromEnum(TrackingMode trackingMode)
         {
             //Defaulting to Kinematic Driver
