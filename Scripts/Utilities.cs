@@ -4,6 +4,26 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
+    public static class Extensions
+    {
+        public static GameObject GetChildByName(this GameObject gameObject, string name)
+        {
+            GameObject obj = null;
+
+            for (int i = 0; i < gameObject.transform.childCount; i++)
+            {
+                var child = gameObject.transform.GetChild(i);
+
+                if(child.name == name)
+                {
+                    obj = child.gameObject;
+                }
+            }
+
+            return obj;
+        }
+    }
+
     public static class Utilities
     {
         public static TrackDriver DriverFromEnum(TrackingMode trackingMode)

@@ -168,10 +168,7 @@ namespace Fusion.XR
             }
             else
             {
-                if (hand == Hand.Left)
-                    renderHand.transform.position = attachedObj.TransformPoint(-new Vector3(-0.033f, 0.031f, -0.012f));
-                else
-                    renderHand.transform.position = attachedObj.TransformPoint(-new Vector3(0.033f, 0.031f, -0.012f));
+                renderHand.transform.position = attachedObj.TransformPoint(-palm.localPosition);
                 renderHand.transform.rotation = attachedObj.transform.rotation;
             }
         }

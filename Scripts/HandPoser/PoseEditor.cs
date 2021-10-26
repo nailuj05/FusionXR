@@ -53,7 +53,6 @@ namespace Fusion.XR
             while (isEditingPose)
             {
                 handPoser.PlaceRenderHand();
-
                 yield return null;
             }
         }
@@ -76,11 +75,13 @@ namespace Fusion.XR
 
             if(hand == Hand.Left)
             {
-                prevHand.transform.localScale = new Vector3(-1, 1, 1);
+                prevHand.transform.GetChild(0).localScale = new Vector3(-1, 1, 1);
+                handPoser.palm = prevHand.GetChildByName("palmL").transform;
             }
             if (hand == Hand.Right)
             {
-                prevHand.transform.localScale = new Vector3(1, 1, 1);
+                prevHand.transform.GetChild(0).localScale = new Vector3(1, 1, 1);
+                handPoser.palm = prevHand.GetChildByName("palmR").transform;
             }
 
             //Refresh RenderHand, because Editor Update() is not reliable
