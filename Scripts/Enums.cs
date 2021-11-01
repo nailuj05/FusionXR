@@ -66,7 +66,6 @@ namespace Fusion.XR
     //Used by Sockets
     public enum AttractType
     {
-        AllCollisionObjects,
         Rigidbodys,
         Grabables
     }
