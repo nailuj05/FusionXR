@@ -127,9 +127,9 @@ namespace Fusion.XR
                 //Apply mock Pinch/Grab to Hand/HandPoser here
                 if (l_hand)
                 {
-                    if (mockGrab > 0f)
+                    if (Input.GetMouseButtonDown(1))
                         l_hand.DebugGrab();
-                    else
+                    if(Input.GetMouseButtonUp(1))
                         l_hand.DebugLetGo();
                 }
                 if (l_handPoser)
@@ -142,9 +142,9 @@ namespace Fusion.XR
                 //Apply mock Pinch/Grab to Hand/HandPoser here
                 if (r_hand)
                 {
-                    if (mockGrab > 0f)
+                    if (Input.GetMouseButtonDown(1))
                         r_hand.DebugGrab();
-                    else
+                    if (Input.GetMouseButtonUp(1))
                         r_hand.DebugLetGo();
                 }
                 if (r_handPoser)
