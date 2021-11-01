@@ -245,7 +245,8 @@ namespace Fusion.XR
 
             attachedObj = null;
 
-            SetPoseTarget(handOpen);
+            //SetPoseTarget(handOpen);
+            RotateToPose(handOpen);
 
             renderHand.transform.localPosition = Vector3.zero;
             renderHand.transform.localRotation = Quaternion.identity;
