@@ -2278,7 +2278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1314623111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.047, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1408044854}
@@ -2519,7 +2519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408044853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.258, y: 0.162, z: 0.157}
+  m_LocalPosition: {x: 0.193, y: 0.162, z: 0.157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1314623112}
@@ -2542,7 +2542,8 @@ MonoBehaviour:
   attractionRange: 0.4
   attractionZoneOffset: {x: 0, y: 0, z: 0}
   forceDetach: 0
-  attachedTrackingMode: 1
+  canBeGrabbed: 1
+  attachedTrackingMode: 0
   attachedTrackingBase:
     positionStrength: 15
     rotationStrength: 35
@@ -2554,6 +2555,7 @@ MonoBehaviour:
     slerpMaxForce: 1500
     tracker: {fileID: 0}
   attachedObject: {fileID: 0}
+  hasAttachedObject: 0
 --- !u!54 &1408044856
 Rigidbody:
   m_ObjectHideFlags: 0
