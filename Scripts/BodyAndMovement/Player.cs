@@ -80,11 +80,7 @@ namespace Fusion.XR
                 player.collisionAdjuster = adj;
                 player.movement = move;
 
-                try
-                {
-                    SetupAdjusterAndMovement(adj, move, player);
-                }
-                catch { }
+                SetupAdjusterAndMovement(adj, move, player);
             }
 
             EditorGUILayout.EndHorizontal();
@@ -93,7 +89,15 @@ namespace Fusion.XR
         void SetupAdjusterAndMovement(CollisionAdjuster adj, Movement move, Player player)
         {
             adj.p_VRCamera = GameObject.Find("Main Camera").transform;
-            adj.p_XRRig = GameObject.Find("XR Rig").transform;
+
+            try
+            {
+                adj.p_XRRig = GameObject.Find("XRRig").transform;
+            }
+            catch
+            {
+                adj.p_XRRig = GameObject.Find("Mock Rig").transform;
+            }
 
             move.head = GameObject.Find("Main Camera").transform;
             move.hand = GameObject.Find("HandLeft").transform;
