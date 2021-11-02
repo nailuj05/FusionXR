@@ -2105,6 +2105,7 @@ GameObject:
   - component: {fileID: 1033683502}
   - component: {fileID: 1033683501}
   - component: {fileID: 1033683500}
+  - component: {fileID: 1033683503}
   - component: {fileID: 1033683499}
   - component: {fileID: 1033683498}
   - component: {fileID: 1033683497}
@@ -2123,7 +2124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033683495}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1185954186}
@@ -2141,7 +2142,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1033683495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 345afe44b87d7c748958895731a744ff, type: 3}
+  m_Script: {fileID: 11500000, guid: c1de7387fed50e44f9af48d6f00b3104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   p_XRRig: {fileID: 1033683496}
@@ -2157,10 +2158,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1033683495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 717839ed9c83dfa4ca6bfe42948ea7ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 56bb5e71266297b438f5c4b7cb525a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 2
+  playerSpeed: 1.5
   head: {fileID: 8622627593387649078}
   hand: {fileID: 1126147296}
   movementDirection: 0
@@ -2174,9 +2175,9 @@ MonoBehaviour:
   canMove: 1
   usesGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
-  controller: {fileID: 0}
---- !u!143 &1033683499
-CharacterController:
+  rigidBody: {fileID: 1033683503}
+--- !u!136 &1033683499
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2185,13 +2186,9 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
   m_Radius: 0.2
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1033683500
 MonoBehaviour:
@@ -2244,6 +2241,22 @@ MonoBehaviour:
   l_hand: {fileID: 1126147298}
   r_hand: {fileID: 822546835}
   scrollFactor: 0.2
+--- !u!54 &1033683503
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033683495}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!4 &1126147296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2130366297943922199, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}

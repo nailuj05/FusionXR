@@ -34,6 +34,11 @@ namespace Fusion.XR
 
         public Vector3 gravity = Physics.gravity;
 
+        //Ground Check: Raycast from players head downwards, with max distance being the players height 
+        //+ a small epsilon and the radius of the players collider
+        protected bool isGrounded => Physics.SphereCast(head.position, Player.main.collisionAdjuster.p_CollisionRadius,
+                Vector3.down, out RaycastHit hit, Player.main.collisionAdjuster.p_localHeight * 2);
+
         private Vector3 currentVelocity;
         public Vector3 CurrentVelocity {
             get { return currentVelocity; }
