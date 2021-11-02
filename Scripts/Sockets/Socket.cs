@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace Fusion.XR
 {
@@ -20,25 +21,40 @@ namespace Fusion.XR
         [Tooltip("Should the socket release the object if the player grabs it?")]
         public bool canBeGrabbed = true;
 
+        [Tooltip("Should a hologram of the possible attachment be shown?")]
+        public bool showPreview = true;
+
+        [Tooltip("The material of the hologram")]
+        public Material prevMaterial;
+
+        private GameObject prevObject;
+        private MeshFilter prevMeshFilter;
+
         private SphereCollider _collider;
 
         [Header("Attachment")]
+        [Tooltip("The Track Driver used for attaching the object. Works best with Passive Joint and Velocity tracking.")]
         public TrackingMode attachedTrackingMode;
 
+        [Tooltip("The settings for the Track Driver")]
         public TrackingBase attachedTrackingBase = new TrackingBase();
         private TrackDriver trackDriver;
 
-        [HideInInspector]
+        [Tooltip("The object attached to this socket, can be set from the editor as a default attachment")]
         public GameObject attachedObject;
         private Grabable attachedGrabable;
 
         private bool hasAttachedObject;
 
-        private List<Grabable> checkIfReleased = new List<Grabable>();
+        private List<Grabable> possibleAttachObjects = new List<Grabable>();
 
         private void Start()
         {
             InitCollider();
+
+            if (attachedObject) Attach(attachedObject);
+
+            if (showPreview) InitPrevObject();
         }
 
         private void Update()
@@ -64,7 +80,7 @@ namespace Fusion.XR
                     }
                     else
                     {
-                        checkIfReleased.Add(grabable);
+                        possibleAttachObjects.Add(grabable);
                         return;
                     }
                 }
@@ -76,28 +92,26 @@ namespace Fusion.XR
 
         private void OnTriggerStay(Collider other)
         {
-            if (canBeGrabbed && attachedGrabable && attachedGrabable.isGrabbed)
-            {
-                Release();
-            }
+            if (canBeGrabbed && attachedGrabable && attachedGrabable.isGrabbed) Release();
 
-            if (hasAttachedObject)
-                return;
+            if (showPreview) DrawPrevObject();
 
-            for(int i = 0; i < checkIfReleased.Count; i++)
+            if (hasAttachedObject) return;
+
+            for (int i = 0; i < possibleAttachObjects.Count; i++)
             {
                 //Check whether a grabable has been released
-                if (!checkIfReleased[i].isGrabbed)
+                if (!possibleAttachObjects[i].isGrabbed)
                 {
-                    Attach(checkIfReleased[i].gameObject);
+                    Attach(possibleAttachObjects[i].gameObject);
                 }
             }
         }
 
         private void OnTriggerExit(Collider exitingColl)
         {
-            if (exitingColl.TryGetComponent(out Grabable grabable) && checkIfReleased.Contains(grabable))
-                checkIfReleased.Remove(grabable);
+            if (exitingColl.TryGetComponent(out Grabable grabable) && possibleAttachObjects.Contains(grabable))
+                possibleAttachObjects.Remove(grabable);
 
             if (hasAttachedObject && exitingColl.gameObject == attachedObject)
             {
@@ -138,9 +152,9 @@ namespace Fusion.XR
 
             if (attachedObject.TryGetComponent(out Grabable grabable))
             {
-                if (checkIfReleased.Contains(grabable))
+                if (possibleAttachObjects.Contains(grabable))
                 {
-                    checkIfReleased.Remove(grabable);
+                    possibleAttachObjects.Remove(grabable);
                 }
 
                 attachedGrabable = grabable;
@@ -149,26 +163,18 @@ namespace Fusion.XR
             hasAttachedObject = true;
         }
 
-        public virtual void InitCollider()
-        {
-            _collider = gameObject.AddComponent<SphereCollider>();
-            _collider.center = attractionZoneOffset;
-            _collider.radius = attractionRange;
-            _collider.isTrigger = true;
-        }
-
         public virtual bool CheckForAttachement(out List<GameObject> possibleObjects)
         {
-            var offsetPos         = transform.TransformPoint(attractionZoneOffset);
+            var offsetPos = transform.TransformPoint(attractionZoneOffset);
             Collider[] collisions = Physics.OverlapSphere(offsetPos, attractionRange);
-            possibleObjects       = new List<GameObject>();
+            possibleObjects = new List<GameObject>();
 
             if (collisions.Length == 0)
                 return false;
 
             foreach (var collider in collisions)
             {
-                if(ObjectMatchesAttractType(collider.gameObject, attractType))
+                if (ObjectMatchesAttractType(collider.gameObject, attractType))
                 {
                     possibleObjects.Add(collider.gameObject);
                 }
@@ -183,7 +189,7 @@ namespace Fusion.XR
         public static bool ObjectMatchesAttractType(GameObject obj, AttractType attractType)
         {
             //Dont attach hands
-            if(obj.TryGetComponent<FusionXRHand>(out FusionXRHand hand))
+            if (obj.TryGetComponent<FusionXRHand>(out FusionXRHand hand))
             {
                 return false;
             }
@@ -202,12 +208,49 @@ namespace Fusion.XR
             }
         }
 
+        public virtual void InitCollider()
+        {
+            _collider = gameObject.AddComponent<SphereCollider>();
+            _collider.center = attractionZoneOffset;
+            _collider.radius = attractionRange;
+            _collider.isTrigger = true;
+        }
+
+        public void DrawPrevObject()
+        {
+            prevObject.SetActive(!hasAttachedObject & possibleAttachObjects.Count > 0);
+
+            prevObject.transform.position = transform.position;
+            prevObject.transform.rotation = transform.rotation;
+
+            if (possibleAttachObjects.Count > 0)
+            {
+                prevMeshFilter.mesh = possibleAttachObjects[0].GetComponent<MeshFilter>().mesh;
+                prevObject.transform.localScale = possibleAttachObjects[0].transform.lossyScale;
+            }
+        }
+
+        public void InitPrevObject()
+        {
+            prevObject = new GameObject();
+            prevObject.transform.parent = transform;
+            prevObject.AddComponent<MeshRenderer>().material = prevMaterial;
+            prevMeshFilter = prevObject.AddComponent<MeshFilter>();
+        }
+
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             var offsetPos = transform.TransformPoint(attractionZoneOffset);
             Gizmos.color = new Color(0, 0, 1, 0.2f);
             Gizmos.DrawSphere(offsetPos, attractionRange);
+
+            if (showPreview & attachedObject & attachedObject.TryGetComponent(out MeshFilter filter))
+            {
+                Gizmos.DrawWireMesh(filter.sharedMesh, 
+                    transform.position, transform.rotation, 
+                    attachedObject.transform.lossyScale);
+            }
         }
 #endif
     }
