@@ -29,7 +29,7 @@ namespace Fusion.XR
             Vector3 p_localCameraPosition = (p_VRCamera.position - p_XRRig.position) - Vector3.up * p_height / 2;
 
             //Store players local height globally so other scripts can access it
-            p_localHeight = p_localCameraPosition.y;
+            p_localHeight = p_height;
 
             //The Update Function is called, all overrides will interpret the data different now
             UpdateCollision(p_height, p_localCameraPosition, p_CollisionRadius);
