@@ -17,6 +17,9 @@ namespace Fusion.XR
         [Tooltip("Should a grabable forcefully detach if it is still grabbed?")]
         public bool forceDetach;
 
+        [Tooltip("Should the socket release the object if the player grabs it?")]
+        public bool canBeGrabbed = true;
+
         private SphereCollider _collider;
 
         [Header("Attachment")]
@@ -27,6 +30,7 @@ namespace Fusion.XR
 
         [HideInInspector]
         public GameObject attachedObject;
+        private Grabable attachedGrabable;
 
         private bool hasAttachedObject;
 
@@ -35,6 +39,11 @@ namespace Fusion.XR
         private void Start()
         {
             InitCollider();
+        }
+
+        private void Update()
+        {
+            SocketTick();
         }
 
         public void OnTriggerEnter(Collider newColl)
@@ -67,6 +76,11 @@ namespace Fusion.XR
 
         private void OnTriggerStay(Collider other)
         {
+            if (canBeGrabbed && attachedGrabable && attachedGrabable.isGrabbed)
+            {
+                Release();
+            }
+
             if (hasAttachedObject)
                 return;
 
@@ -76,7 +90,6 @@ namespace Fusion.XR
                 if (!checkIfReleased[i].isGrabbed)
                 {
                     Attach(checkIfReleased[i].gameObject);
-                    checkIfReleased.RemoveAt(i);
                 }
             }
         }
@@ -89,38 +102,52 @@ namespace Fusion.XR
             if (hasAttachedObject && exitingColl.gameObject == attachedObject)
             {
                 //Release Object
-                Debug.Log($"Release object: {attachedObject.name}");
-
-                trackDriver.EndTrack();
-
-                hasAttachedObject = false;
+                Release();
             }
         }
 
-        private void Update()
-        {
-            SocketTick();
-        }
-
-        private void SocketTick()
+        protected virtual void SocketTick()
         {
             if (hasAttachedObject)
             {
+                Debug.Log($"Track {attachedGrabable.isGrabbed}");
+
                 trackDriver.UpdateTrack(transform.position, transform.rotation);
-                Debug.DrawRay(Vector3.zero, transform.position);
             }
+        }
+
+        public virtual void Release()
+        {
+            Debug.Log($"Release object: {attachedObject.name}");
+
+            trackDriver.EndTrack();
+
+            attachedGrabable = null;
+            attachedObject = null;
+            hasAttachedObject = false;
         }
 
         public virtual void Attach(GameObject objectToAttach)
         {
             Debug.Log($"Attach object: {objectToAttach.name}");
 
-            attachedTrackingBase.tracker = objectToAttach;
+            attachedTrackingBase.tracker = gameObject;
 
             trackDriver = Utilities.DriverFromEnum(attachedTrackingMode);
             trackDriver.StartTrack(objectToAttach.transform, attachedTrackingBase);
 
             attachedObject = objectToAttach;
+
+            if (attachedObject.TryGetComponent(out Grabable grabable))
+            {
+                if (checkIfReleased.Contains(grabable))
+                {
+                    checkIfReleased.Remove(grabable);
+                }
+
+                attachedGrabable = grabable;
+            }
+
             hasAttachedObject = true;
         }
 
