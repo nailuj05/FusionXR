@@ -255,4 +255,48 @@ namespace Fusion.XR
             joint = null;
         }
     }
+
+    public class ForceDriver : TrackDriver
+    {
+        private Rigidbody objectRigidbody;
+
+        private Rigidbody trackerRigidbody;
+
+        public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
+        {
+            objectToTrack = assignedObjectToTrack;
+            trackingBase = assignedTrackingBase;
+
+            objectRigidbody = objectToTrack.GetComponent<Rigidbody>();
+            trackerRigidbody = trackingBase.tracker.GetComponent<Rigidbody>();
+        }
+
+        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        {
+            //Track Position
+            Vector3 velocity = trackerRigidbody.GetPointVelocity(targetPosition);
+            Vector3 displacement = targetPosition - objectToTrack.position;
+
+            objectRigidbody.AddForce(displacement * 200f / objectRigidbody.mass, ForceMode.Acceleration);
+            objectRigidbody.AddForce(-20f * velocity / Mathf.Sqrt(objectRigidbody.mass), ForceMode.Acceleration);
+
+            //Track Rotation
+            Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
+
+            deltaRotation.ToAngleAxis(out var angle, out var axis);
+
+            if (angle > 180f)
+            {
+                angle -= 360;
+            }
+
+            if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
+                objectRigidbody.angularVelocity = axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad);
+        }
+
+        public override void EndTrack()
+        {
+
+        }
+    }
 }

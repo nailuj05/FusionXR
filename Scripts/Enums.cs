@@ -17,6 +17,7 @@ namespace Fusion.XR
         Velocity = 1,
         ActiveJoint = 2,
         PassiveJoint = 3,
+        Force = 4
     }
 
     public enum TwoHandedMode
