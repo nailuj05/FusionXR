@@ -110,15 +110,13 @@ namespace Fusion.XR
         {
             if (hasAttachedObject)
             {
-                Debug.Log($"Track {attachedGrabable.isGrabbed}");
-
                 trackDriver.UpdateTrack(transform.position, transform.rotation);
             }
         }
 
         public virtual void Release()
         {
-            Debug.Log($"Release object: {attachedObject.name}");
+            //Debug.Log($"Release object: {attachedObject.name}");
 
             trackDriver.EndTrack();
 
@@ -129,7 +127,7 @@ namespace Fusion.XR
 
         public virtual void Attach(GameObject objectToAttach)
         {
-            Debug.Log($"Attach object: {objectToAttach.name}");
+            //Debug.Log($"Attach object: {objectToAttach.name}");
 
             attachedTrackingBase.tracker = gameObject;
 
