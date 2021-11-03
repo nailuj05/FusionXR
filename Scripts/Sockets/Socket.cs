@@ -11,6 +11,12 @@ namespace Fusion.XR
         [Tooltip("The AttractType defines which kind of objects can be attracted (attached) to the Socket")]
         public AttractType attractType = AttractType.Grabables;
 
+        [Tooltip("The Layers used to filter the possible attachments")]
+        public LayerMask attractLayers = ~0;
+
+        [Tooltip("A list of tags used to filter the possible attachments. Leave empty if all tags are allowed.")]
+        public string[] tagMask = new string[0];
+
         [Min(0)]
         public float attractionRange = 0.1f;
         public Vector3 attractionZoneOffset = Vector3.zero;
@@ -52,7 +58,14 @@ namespace Fusion.XR
         {
             InitCollider();
 
-            if (attachedObject) Attach(attachedObject);
+            if (attachedObject)
+            {
+                //Does the inital attached object matches the requirements?
+                if (CheckAttachementRequirements(attachedObject))
+                    Attach(attachedObject);
+                else
+                    attachedObject = null;
+            }
 
             if (showPreview) InitPrevObject();
         }
@@ -67,7 +80,7 @@ namespace Fusion.XR
             if (hasAttachedObject)
                 return;
             
-            if (ObjectMatchesAttractType(newColl.gameObject, attractType))
+            if (CheckAttachementRequirements(newColl.gameObject))
             {
                 if(newColl.TryGetComponent(out Grabable grabable) && grabable.isGrabbed)
                 {
@@ -128,6 +141,7 @@ namespace Fusion.XR
             }
         }
 
+        //TODO: Make the public functions protected if possible
         public virtual void Release()
         {
             //Debug.Log($"Release object: {attachedObject.name}");
@@ -174,7 +188,7 @@ namespace Fusion.XR
 
             foreach (var collider in collisions)
             {
-                if (ObjectMatchesAttractType(collider.gameObject, attractType))
+                if (CheckAttachementRequirements(collider.gameObject))
                 {
                     possibleObjects.Add(collider.gameObject);
                 }
@@ -186,27 +200,22 @@ namespace Fusion.XR
                 return false;
         }
 
-        public static bool ObjectMatchesAttractType(GameObject obj, AttractType attractType)
+        public virtual bool CheckAttachementRequirements(GameObject obj)
         {
-            //Dont attach hands
-            if (obj.TryGetComponent<FusionXRHand>(out FusionXRHand hand))
-            {
-                return false;
-            }
+            //Check Tags
+            bool tagCorrect = Utilities.ObjectMatchesTags(obj, tagMask);
 
-            if (attractType == AttractType.Grabables)
-            {
-                return obj.TryGetComponent<Grabable>(out Grabable g);
-            }
-            else if (attractType == AttractType.Rigidbodys)
-            {
-                return obj.TryGetComponent<Rigidbody>(out Rigidbody r);
-            }
-            else //if (attractType == AttractType.AllCollisionObjects)
-            {
-                return true;
-            }
+            //Check Attract Type
+            bool typeCorrect = Utilities.ObjectMatchesAttractType(obj, attractType);
+
+            //Check Layers
+            bool layerCorrect = Utilities.ObjectMatchesLayermask(obj, attractLayers);
+
+            //All true?
+            return (layerCorrect & tagCorrect & typeCorrect);
         }
+
+        #region Initalizing
 
         public virtual void InitCollider()
         {
@@ -236,16 +245,20 @@ namespace Fusion.XR
             prevObject.transform.parent = transform;
             prevObject.AddComponent<MeshRenderer>().material = prevMaterial;
             prevMeshFilter = prevObject.AddComponent<MeshFilter>();
-        }
+        } 
+
+        #endregion
 
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
+            if (!attachedObject) return;
+
             var offsetPos = transform.TransformPoint(attractionZoneOffset);
             Gizmos.color = new Color(0, 0, 1, 0.2f);
             Gizmos.DrawSphere(offsetPos, attractionRange);
 
-            if (showPreview & attachedObject & attachedObject.TryGetComponent(out MeshFilter filter))
+            if (showPreview & attachedObject.TryGetComponent(out MeshFilter filter))
             {
                 Gizmos.DrawWireMesh(filter.sharedMesh, 
                     transform.position, transform.rotation, 
