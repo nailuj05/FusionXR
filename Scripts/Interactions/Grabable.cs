@@ -37,7 +37,6 @@ namespace Fusion.XR
             }
 
             rb = GetComponent<Rigidbody>();
-            gameObject.tag = "Grabable";
         }
 
         public virtual void Update()

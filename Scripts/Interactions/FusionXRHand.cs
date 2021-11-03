@@ -251,7 +251,7 @@ namespace Fusion.XR
             {
                 foreach (Collider coll in nearObjects)
                 {
-                    if(coll.gameObject.tag == "Grabable")
+                    if(coll.gameObject.layer == LayerMask.NameToLayer("Interactables"))
                     {
                         if ((coll.transform.position - transform.position).sqrMagnitude < Distance)
                         {
