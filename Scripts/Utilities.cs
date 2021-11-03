@@ -26,6 +26,55 @@ namespace Fusion.XR
 
     public static class Utilities
     {
+        #region Matching
+        public static bool ObjectMatchesTags(GameObject obj, string[] tags)
+        {
+            //When no tag mask is set
+            if (tags.Length == 0) return true;
+
+            foreach (string tag in tags)
+            {
+                if (obj.tag == tag) return true;
+            }
+
+            return false;
+        }
+
+        public static bool ObjectMatchesLayermask(GameObject obj, LayerMask mask)
+        {
+            if (mask == ~0) return true;
+
+            if (mask == (mask | (1 << obj.layer)))
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public static bool ObjectMatchesAttractType(GameObject obj, AttractType attractType)
+        {
+            //Dont attach hands
+            if (obj.TryGetComponent<FusionXRHand>(out FusionXRHand hand))
+            {
+                return false;
+            }
+
+            if (attractType == AttractType.Grabables)
+            {
+                return obj.TryGetComponent<Grabable>(out Grabable g);
+            }
+            else if (attractType == AttractType.Rigidbodys)
+            {
+                return obj.TryGetComponent<Rigidbody>(out Rigidbody r);
+            }
+            else //if (attractType == AttractType.AllCollisionObjects)
+            {
+                return true;
+            }
+        }
+        #endregion
+
+        #region ClosestObject
         public static GameObject ClosestGameobject(GameObject[] gameObjects, Vector3 pos)
         {
             if (gameObjects.Length == 0)
@@ -37,7 +86,7 @@ namespace Fusion.XR
             float dist = Mathf.Infinity;
             GameObject closestObject = gameObjects[0];
 
-            if(gameObjects.Length != 1)
+            if (gameObjects.Length != 1)
             {
                 foreach (GameObject obj in gameObjects)
                 {
@@ -79,7 +128,9 @@ namespace Fusion.XR
 
             return closestObject;
         }
+        #endregion
 
+        #region Drivers
         public static TrackDriver DriverFromEnum(TrackingMode trackingMode)
         {
             //Defaulting to Kinematic Driver
@@ -129,7 +180,8 @@ namespace Fusion.XR
             }
 
             return driver;
-        }
+        } 
+        #endregion
 
         public static Direction GetDirectionFromVector(Vector2 input)
         {
