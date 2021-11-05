@@ -14,7 +14,6 @@ namespace Fusion.XR
 
         [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
 
-        //private TrackDriver trackDriver;
         private Rigidbody rb;
 
         //If 2 Handed:
