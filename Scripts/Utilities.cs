@@ -6,6 +6,18 @@ namespace Fusion.XR
 {
     public static class Extensions
     {
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            if(gameObject.TryGetComponent<T>(out T t))
+            {
+                return t;
+            }
+            else
+            {
+                return gameObject.AddComponent<T>();
+            }
+        }
+
         public static GameObject GetChildByName(this GameObject gameObject, string name)
         {
             GameObject obj = null;
