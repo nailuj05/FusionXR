@@ -52,7 +52,11 @@ namespace Fusion.XR
 
         private bool hasAttachedObject;
 
+        private string storedTag;
+
         private List<Grabable> possibleAttachObjects = new List<Grabable>();
+
+        //-----------------------------//
 
         private void Start()
         {
@@ -77,9 +81,10 @@ namespace Fusion.XR
 
         public void OnTriggerEnter(Collider newColl)
         {
-            if (hasAttachedObject)
+            //If there already is a attached Object or the collider is also set to isTrigger
+            if (hasAttachedObject | newColl.isTrigger)
                 return;
-            
+
             if (CheckAttachementRequirements(newColl.gameObject))
             {
                 if(newColl.TryGetComponent(out Grabable grabable) && grabable.isGrabbed)
@@ -116,7 +121,16 @@ namespace Fusion.XR
                 //Check whether a grabable has been released
                 if (!possibleAttachObjects[i].isGrabbed)
                 {
-                    Attach(possibleAttachObjects[i].gameObject);
+                    //Check if the object is still possible to attach
+                    //Also checks if it has been attached by another object
+                    if (CheckAttachementRequirements(possibleAttachObjects[i].gameObject))
+                    {
+                        Attach(possibleAttachObjects[i].gameObject);
+                    }
+                    else
+                    {
+                        possibleAttachObjects.RemoveAt(i);
+                    }
                 }
             }
         }
@@ -148,6 +162,7 @@ namespace Fusion.XR
 
             trackDriver.EndTrack();
 
+            attachedObject.tag = storedTag;
             attachedGrabable = null;
             attachedObject = null;
             hasAttachedObject = false;
@@ -173,6 +188,16 @@ namespace Fusion.XR
 
                 attachedGrabable = grabable;
             }
+
+            //Tag the attached GameObject as "Attached"
+            //SOLVES: Multiple overlapping sockets can attach the same object, 
+            //because they don't know that a object is already attached by a different socket
+            //---------------------------------------------------------------------------------//
+            //This allows any object to be marked as attached, even if it has no scripts attached
+            //Needed because any rigidbody can be attached
+            storedTag = objectToAttach.tag;
+            try { objectToAttach.tag = "Attached"; }
+            catch { Debug.LogError("The 'Attached' Tag was not defined. Please make sure all layers and tags are properly setup."); }
 
             hasAttachedObject = true;
         }
@@ -202,6 +227,9 @@ namespace Fusion.XR
 
         public virtual bool CheckAttachementRequirements(GameObject obj)
         {
+            //Check if already attached
+            if (obj.tag == "Attached") { Debug.Log("Already attached"); return false; }
+
             //Check Tags
             bool tagCorrect = Utilities.ObjectMatchesTags(obj, tagMask);
 
@@ -219,7 +247,7 @@ namespace Fusion.XR
 
         public virtual void InitCollider()
         {
-            _collider = gameObject.AddComponent<SphereCollider>();
+            _collider = gameObject.GetOrAddComponent<SphereCollider>();
             _collider.center = attractionZoneOffset;
             _collider.radius = attractionRange;
             _collider.isTrigger = true;
