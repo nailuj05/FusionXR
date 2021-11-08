@@ -4335,7 +4335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922197, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: trackingMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922197, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: trackedController
@@ -4343,7 +4343,7 @@ PrefabInstance:
       objectReference: {fileID: 1949655611}
     - target: {fileID: 2130366297943922197, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: grabbedTrackingMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: debugMode
@@ -7122,6 +7122,10 @@ PrefabInstance:
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1845226320}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grabbedTrackingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: debugMode
       value: 1
