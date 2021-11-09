@@ -91,7 +91,7 @@ namespace Fusion.XR
         #endregion
 
         #region Events
-        public void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase) 
+        public virtual void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase) 
         {
             ///Manage new hand first (so the last driver gets removed before a new one is added)
             ManageNewHand(hand);
@@ -106,7 +106,7 @@ namespace Fusion.XR
             isGrabbed = true; 
         }
 
-        public void Release(FusionXRHand hand)
+        public virtual void Release(FusionXRHand hand)
         {
             EnableOrDisableCollisions(hand, false);
 
@@ -163,7 +163,7 @@ namespace Fusion.XR
             return closestGrabPoint;
         }
 
-        void ManageNewHand(FusionXRHand hand)
+        protected void ManageNewHand(FusionXRHand hand)
         {
             if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
             {
