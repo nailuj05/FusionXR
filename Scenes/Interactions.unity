@@ -915,7 +915,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483270068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.000000026076943, y: 0.00000023333769, z: -0.034097675}
+  m_LocalPosition: {x: 0, y: 0, z: 0.039}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1289438844}
@@ -1950,6 +1950,7 @@ GameObject:
   - component: {fileID: 1289438849}
   - component: {fileID: 1289438848}
   - component: {fileID: 1289438847}
+  - component: {fileID: 1289438845}
   m_Layer: 0
   m_Name: ButtonBase
   m_TagString: Untagged
@@ -1972,6 +1973,29 @@ Transform:
   m_Father: {fileID: 1875968877}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
+--- !u!114 &1289438845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289438843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9eb186b5f22df54a83105ec0ef3316e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  twoHandedMode: 0
+  releaseThreshold: 0.4
+  isGrabbed: 0
+  grabPoints: []
+  attachedHands: []
+  interactionLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  canBeGrabbed: 0
+  axis: {x: 1, y: 0, z: 0}
+  pressDistance: 0
 --- !u!64 &1289438847
 MeshCollider:
   m_ObjectHideFlags: 0

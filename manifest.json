@@ -1,0 +1,28 @@
+{
+  "name": "com.Fusion.XR",
+  "version": "0.0.6",
+  "displayName": "Fusion XR - Interaction Toolkit",
+  "description": "Lorem ipsum",
+  "unity": "2019.4",
+  "unityRelease": "16f1",
+  "documentationUrl": "https://github.com/nailuj05/FusionXR/blob/main/README.md",
+  "changelogUrl": "https://github.com/nailuj05/FusionXR/commits/main",
+  "licensesUrl": "https://github.com/nailuj05/FusionXR/blob/main/LICENSE",
+ "keywords": [
+    "VR",
+    "XR",
+    "Interaction",
+	"Toolkit",
+	"Interaction Toolkit",
+	"Physics",
+	"Boneworks",
+	"Physics-based",
+	"VR Interaction",
+	"Hands"
+  ],
+  "author": {
+    "name": "Julian",
+    "email": "sil3nt@gmx.de",
+    "url": "https://github.com/nailuj05"
+  }
+}
