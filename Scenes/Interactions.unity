@@ -176,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d530ffe6c4968843806085897955b9d, type: 2}
+  - {fileID: 2100000, guid: 17c44fb3e5be9644586a0728a5f5a386, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -418,7 +418,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d530ffe6c4968843806085897955b9d, type: 2}
+  - {fileID: 2100000, guid: 17c44fb3e5be9644586a0728a5f5a386, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -900,9 +900,11 @@ GameObject:
   - component: {fileID: 483270073}
   - component: {fileID: 483270072}
   - component: {fileID: 483270071}
-  m_Layer: 0
+  - component: {fileID: 483270070}
+  - component: {fileID: 483270074}
+  m_Layer: 8
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -921,6 +923,27 @@ Transform:
   m_Father: {fileID: 1289438844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &483270070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483270068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9eb186b5f22df54a83105ec0ef3316e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  twoHandedMode: 0
+  grabPoints: []
+  interactionLayers:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  canBeGrabbed: 1
+  axis: {x: 0, y: 0, z: 1}
+  pressDistance: -0.05
+  button: {fileID: 483270069}
 --- !u!64 &483270071
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -985,6 +1008,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483270068}
   m_Mesh: {fileID: -5447036705194824928, guid: d5b3985ea0e224c4ca4bb60ff0de005d, type: 3}
+--- !u!54 &483270074
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483270068}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &492995989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,7 +1989,6 @@ GameObject:
   - component: {fileID: 1289438849}
   - component: {fileID: 1289438848}
   - component: {fileID: 1289438847}
-  - component: {fileID: 1289438845}
   m_Layer: 0
   m_Name: ButtonBase
   m_TagString: Untagged
@@ -1973,29 +2011,6 @@ Transform:
   m_Father: {fileID: 1875968877}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
---- !u!114 &1289438845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289438843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9eb186b5f22df54a83105ec0ef3316e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
-  grabPoints: []
-  attachedHands: []
-  interactionLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  canBeGrabbed: 0
-  axis: {x: 1, y: 0, z: 0}
-  pressDistance: 0
 --- !u!64 &1289438847
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2480,10 +2495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!136 &1623543466
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2595,10 +2607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!64 &1695114467
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3025,10 +3034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!136 &2050517838
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3187,10 +3193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!1 &106942573761731612
 GameObject:
   m_ObjectHideFlags: 0
@@ -3485,10 +3488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!4 &612258567403043737
 Transform:
   m_ObjectHideFlags: 0
@@ -4836,7 +4836,7 @@ PrefabInstance:
       objectReference: {fileID: 1949655611}
     - target: {fileID: 2130366297943922197, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: grabbedTrackingMode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: debugMode
@@ -7452,10 +7452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!4 &6053253767476151682
 Transform:
   m_ObjectHideFlags: 0
@@ -7607,12 +7604,16 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1845226320}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grabbedTrackingMode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: debugMode
