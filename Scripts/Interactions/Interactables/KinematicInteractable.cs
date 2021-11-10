@@ -4,8 +4,21 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public abstract class KinematicInteractable : Grabable
+    public abstract class KinematicInteractable : MonoBehaviour, IGrabable
     {
+        #region IGrabable Implementation
+        public Transform Transform { get { return transform; } }
+        public GameObject GameObject { get { return gameObject; } }
+
+        public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
+
+        public bool isGrabbed { get; protected set; }
+
+        [SerializeField] private GrabPoint[] grabPoints;
+
+        public List<FusionXRHand> attachedHands { get; private set; } = new List<FusionXRHand>();
+        #endregion
+
         [SerializeField] [Tooltip("Used to filter which objects can interact besides grabbing the interactable")]
         protected LayerMask interactionLayers = ~0;
 
@@ -17,7 +30,7 @@ namespace Fusion.XR
 
         protected bool isInteracting = false;
 
-        public override void Update()
+        public void Update()
         {
             if (isInteracting)
             {
@@ -25,15 +38,25 @@ namespace Fusion.XR
             }
         }
 
-        public override void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase)
+        public void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase)
         {
-            ManageNewHand(hand);
+            Grabable.ManageNewHand(hand, attachedHands, twoHandedMode);
+
+            Grabable.EnableOrDisableCollisions(gameObject, hand, true);
+
+            isGrabbed = true;
 
             InteractionStart();
         }
 
-        public override void Release(FusionXRHand hand)
+        public void Release(FusionXRHand hand)
         {
+            Grabable.EnableOrDisableCollisions(gameObject, hand, false);
+
+            isGrabbed = false;
+
+            attachedHands.Remove(hand);
+
             InteractionEnd();
         }
 
@@ -42,5 +65,21 @@ namespace Fusion.XR
         protected abstract void InteractionStart();
 
         protected abstract void InteractionEnd();
+
+        //For returning the transform and the GrabPoint
+        public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
+        {
+            grabPoint = Utilities.ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
+
+            if (grabPoint != null)
+            {
+                grabPoint.BlockGrabPoint();
+                return grabPoint.transform;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
