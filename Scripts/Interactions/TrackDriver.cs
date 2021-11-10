@@ -268,6 +268,7 @@ namespace Fusion.XR
             trackerRigidbody = trackingBase.tracker.GetComponent<Rigidbody>();
         }
 
+        //TODO: Remove Magic Numbers (expose forceMultiplier and dampening via TrackingBase) and do Rotation by Force/Torque
         public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
         {
             //Track Position
@@ -275,7 +276,7 @@ namespace Fusion.XR
             Vector3 displacement = targetPosition - objectToTrack.position;
 
             objectRigidbody.AddForce(displacement * 200f / objectRigidbody.mass, ForceMode.Acceleration);
-            objectRigidbody.AddForce(-20f * velocity / Mathf.Sqrt(objectRigidbody.mass), ForceMode.Acceleration);
+            objectRigidbody.AddForce(-10f * velocity / Mathf.Sqrt(objectRigidbody.mass), ForceMode.Acceleration);
 
             //Track Rotation
             Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
