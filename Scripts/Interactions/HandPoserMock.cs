@@ -30,7 +30,7 @@ public class HandPoserMock : MonoBehaviour
 
         if (Physics.Raycast(mouseRay, out RaycastHit hit))
         {
-            if(hit.collider.TryGetComponent(out Grabable grabable))
+            if(hit.collider.TryGetComponent(out IGrabable grabable))
             {
                 Transform grabPointTransform = grabable.GetClosestGrabPoint(hit.point, transform, currentHandPoser.hand, out GrabPoint grabPoint);
 
@@ -39,7 +39,7 @@ public class HandPoserMock : MonoBehaviour
                     grabPointTransform = new GameObject().transform;
                     grabPointTransform.position = hit.point;
                     grabPointTransform.up = hit.normal;
-                    grabPointTransform.parent = grabable.transform;
+                    grabPointTransform.parent = grabable.Transform;
                     grabPointTransform.transform.localPosition += Vector3.up * 0.01f;
                 }
                 else if (grabPoint.hasCustomPose)

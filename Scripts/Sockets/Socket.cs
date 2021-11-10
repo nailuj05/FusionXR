@@ -48,13 +48,13 @@ namespace Fusion.XR
 
         [Tooltip("The object attached to this socket, can be set from the editor as a default attachment")]
         public GameObject attachedObject;
-        private Grabable attachedGrabable;
+        private IGrabable attachedGrabable;
 
         private bool hasAttachedObject;
 
         private string storedTag;
 
-        private List<Grabable> possibleAttachObjects = new List<Grabable>();
+        private List<IGrabable> possibleAttachObjects = new List<IGrabable>();
 
         //-----------------------------//
 
@@ -87,7 +87,7 @@ namespace Fusion.XR
 
             if (CheckAttachementRequirements(newColl.gameObject))
             {
-                if(newColl.TryGetComponent(out Grabable grabable) && grabable.isGrabbed)
+                if(newColl.TryGetComponent(out IGrabable grabable) && grabable.isGrabbed)
                 {
                     if (forceDetach)
                     {
@@ -110,7 +110,7 @@ namespace Fusion.XR
 
         private void OnTriggerStay(Collider other)
         {
-            if (canBeGrabbed && attachedGrabable && attachedGrabable.isGrabbed) Release();
+            if (canBeGrabbed && attachedGrabable != null && attachedGrabable.isGrabbed) Release();
 
             if (showPreview) DrawPrevObject();
 
@@ -123,9 +123,9 @@ namespace Fusion.XR
                 {
                     //Check if the object is still possible to attach
                     //Also checks if it has been attached by another object
-                    if (CheckAttachementRequirements(possibleAttachObjects[i].gameObject))
+                    if (CheckAttachementRequirements(possibleAttachObjects[i].GameObject))
                     {
-                        Attach(possibleAttachObjects[i].gameObject);
+                        Attach(possibleAttachObjects[i].GameObject);
                     }
                     else
                     {
@@ -137,7 +137,7 @@ namespace Fusion.XR
 
         private void OnTriggerExit(Collider exitingColl)
         {
-            if (exitingColl.TryGetComponent(out Grabable grabable) && possibleAttachObjects.Contains(grabable))
+            if (exitingColl.TryGetComponent(out IGrabable grabable) && possibleAttachObjects.Contains(grabable))
                 possibleAttachObjects.Remove(grabable);
 
             if (hasAttachedObject && exitingColl.gameObject == attachedObject)
@@ -262,8 +262,8 @@ namespace Fusion.XR
 
             if (possibleAttachObjects.Count > 0)
             {
-                prevMeshFilter.mesh = possibleAttachObjects[0].GetComponent<MeshFilter>().mesh;
-                prevObject.transform.localScale = possibleAttachObjects[0].transform.lossyScale;
+                prevMeshFilter.mesh = possibleAttachObjects[0].GameObject.GetComponent<MeshFilter>().mesh;
+                prevObject.transform.localScale = possibleAttachObjects[0].Transform.lossyScale;
             }
         }
 

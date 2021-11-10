@@ -4,15 +4,20 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public class Grabable : MonoBehaviour
+    public class Grabable : MonoBehaviour, IGrabable
     {
-        public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
-        public float releaseThreshold = 0.4f;
+        #region IGrabable Implementation
+        public Transform Transform { get { return transform; }}
+        public GameObject GameObject { get { return gameObject; }}
 
-        [HideInInspector] public bool isGrabbed;
+        public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
+
+        public bool isGrabbed { get; protected set; }
+
         [SerializeField] private GrabPoint[] grabPoints;
 
-        [HideInInspector] public List<FusionXRHand> attachedHands = new List<FusionXRHand>();
+        public List<FusionXRHand> attachedHands { get; private set; } = new List<FusionXRHand>();
+        #endregion
 
         private Rigidbody rb;
 
@@ -94,13 +99,13 @@ namespace Fusion.XR
         public virtual void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase) 
         {
             ///Manage new hand first (so the last driver gets removed before a new one is added)
-            ManageNewHand(hand);
+            ManageNewHand(hand, attachedHands, twoHandedMode);
 
             ///Setup and Start Track Driver
             hand.grabbedTrackDriver = Utilities.DriverFromEnum(mode);
             hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
 
-            EnableOrDisableCollisions(hand, true);
+            EnableOrDisableCollisions(gameObject, hand, true);
 
             ///This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
             isGrabbed = true; 
@@ -108,7 +113,7 @@ namespace Fusion.XR
 
         public virtual void Release(FusionXRHand hand)
         {
-            EnableOrDisableCollisions(hand, false);
+            EnableOrDisableCollisions(gameObject, hand, false);
 
             RemoveHand(hand);
 
@@ -123,7 +128,7 @@ namespace Fusion.XR
         //For returning the transform and the GrabPoint
         public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
         {
-            grabPoint = ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
+            grabPoint = Utilities.ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
 
             if (grabPoint != null)
             {
@@ -136,49 +141,22 @@ namespace Fusion.XR
             }
         }
 
-        GrabPoint ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Transform handTransform, Hand desiredHand)
+        public static void ManageNewHand(FusionXRHand hand, List<FusionXRHand> currentHands, TwoHandedMode mode)
         {
-            GrabPoint closestGrabPoint = null;
-            float distance = float.MaxValue;
-
-            if (grabPoints != null)
-            {
-                foreach (GrabPoint currentGrabPoint in grabPoints)
-                {
-                    //Debug.Log($"{currentGrabPoint.name}: grab possible? {currentGrabPoint.IsGrabPossible(handTransform, desiredHand)}" +
-                    //    $", Distance: {(currentGrabPoint.transform.position - point).sqrMagnitude}" +
-                    //    $", Closer? {(currentGrabPoint.transform.position - point).sqrMagnitude < distance}");
-
-                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand)) //Check if the GrabPoint is for the correct Hand and if it isActive
-                    {
-                        if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
-                        {
-                            closestGrabPoint = currentGrabPoint;
-                            distance = (currentGrabPoint.transform.position - point).sqrMagnitude; //New (smaller) distance
-                            //Debug.Log($"Grabbed, new distance: {distance}");
-                        }
-                    }
-                }
-            }
-            return closestGrabPoint;
-        }
-
-        protected void ManageNewHand(FusionXRHand hand)
-        {
-            if (twoHandedMode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
+            if (mode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
             {
                 //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
-                if (attachedHands.Count > 0)
+                if (currentHands.Count > 0)
                 {
                     //This will also call the release function on this grabable, with this structure the hand can also be forced to release whatever it is holding
-                    attachedHands[0].Release();
+                    currentHands[0].Release();
                 }
 
-                attachedHands.Add(hand);
+                currentHands.Add(hand);
             }
-            else if (twoHandedMode == TwoHandedMode.Average) //Case: Averaging Between Hands;
+            else if (mode == TwoHandedMode.Average) //Case: Averaging Between Hands;
             {
-                attachedHands.Add(hand);
+                currentHands.Add(hand);
             }
         }
 
@@ -194,9 +172,9 @@ namespace Fusion.XR
             }
         }
 
-        void EnableOrDisableCollisions(FusionXRHand hand, bool disable)
+        public static void EnableOrDisableCollisions(GameObject obj, FusionXRHand hand, bool disable)
         {
-            foreach (Collider coll in GetComponents<Collider>())
+            foreach (Collider coll in obj.GetComponents<Collider>())
             {
                 Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, disable);
             }

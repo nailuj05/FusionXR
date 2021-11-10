@@ -73,7 +73,7 @@ namespace Fusion.XR
 
             if (attractType == AttractType.Grabables)
             {
-                return obj.TryGetComponent<Grabable>(out Grabable g);
+                return obj.TryGetComponent<IGrabable>(out IGrabable g);
             }
             else if (attractType == AttractType.Rigidbodys)
             {
@@ -87,6 +87,33 @@ namespace Fusion.XR
         #endregion
 
         #region ClosestObject
+        public static GrabPoint ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Transform handTransform, Hand desiredHand)
+        {
+            GrabPoint closestGrabPoint = null;
+            float distance = float.MaxValue;
+
+            if (grabPoints != null)
+            {
+                foreach (GrabPoint currentGrabPoint in grabPoints)
+                {
+                    //Debug.Log($"{currentGrabPoint.name}: grab possible? {currentGrabPoint.IsGrabPossible(handTransform, desiredHand)}" +
+                    //    $", Distance: {(currentGrabPoint.transform.position - point).sqrMagnitude}" +
+                    //    $", Closer? {(currentGrabPoint.transform.position - point).sqrMagnitude < distance}");
+
+                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand)) //Check if the GrabPoint is for the correct Hand and if it isActive
+                    {
+                        if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
+                        {
+                            closestGrabPoint = currentGrabPoint;
+                            distance = (currentGrabPoint.transform.position - point).sqrMagnitude; //New (smaller) distance
+                            //Debug.Log($"Grabbed, new distance: {distance}");
+                        }
+                    }
+                }
+            }
+            return closestGrabPoint;
+        }
+
         public static GameObject ClosestGameobject(GameObject[] gameObjects, Vector3 pos)
         {
             if (gameObjects.Length == 0)

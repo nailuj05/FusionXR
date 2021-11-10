@@ -42,7 +42,7 @@ namespace Fusion.XR
 
         private bool isGrabbing;
         private bool generatedGrabPoint;
-        private Grabable grabbedGrabable;
+        private IGrabable grabbedGrabable;
 
         public bool useHandPoser;
         private HandPoser handPoser;
@@ -153,7 +153,7 @@ namespace Fusion.XR
                 return;
 
             ///Get grabable component and possible grab points
-            grabbedGrabable = closestGrabable.GetComponentInParent<Grabable>();
+            grabbedGrabable = closestGrabable.GetComponentInParent<IGrabable>();
 
             grabPosition = grabbedGrabable.GetClosestGrabPoint(transform.position, transform, hand, out grabPoint);
 
@@ -166,7 +166,7 @@ namespace Fusion.XR
 
             grabbedGrabable.Grab(this, grabbedTrackingMode, trackingBase);
 
-            Debug.Log($"Grab {grabbedGrabable.gameObject.name}");
+            //Debug.Log($"Grab {grabbedGrabable.GameObject.name}");
 
             if (!useHandPoser)
                 return;
@@ -202,7 +202,7 @@ namespace Fusion.XR
             if (grabbedGrabable != null)
             {
                 grabbedGrabable.Release(this);
-                grabbedGrabable.GetComponent<Rigidbody>().velocity = rb.velocity;   //NOTE: Apply Better velocity for throwing here
+                grabbedGrabable.GameObject.GetComponent<Rigidbody>().velocity = rb.velocity;   //NOTE: Apply Better velocity for throwing here
                 grabbedGrabable = null;
             }
 
@@ -212,7 +212,7 @@ namespace Fusion.XR
             }
         }
 
-        public Transform GenerateGrabPoint(Collider closestCollider, Grabable grabable)
+        public Transform GenerateGrabPoint(Collider closestCollider, IGrabable grabable)
         {
             Transform grabSpot = new GameObject().transform;
             grabSpot.position = closestCollider.ClosestPoint(palm.position);
@@ -231,7 +231,7 @@ namespace Fusion.XR
                 grabSpot.localRotation = transform.rotation;
             }
 
-            grabSpot.parent = grabable.transform;
+            grabSpot.parent = grabable.Transform;
             grabSpot.position = grabSpot.TransformPoint(-palm.localPosition + Vector3.up * 0.03f);
 
             return grabSpot;
