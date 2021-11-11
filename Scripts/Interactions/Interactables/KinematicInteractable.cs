@@ -19,6 +19,8 @@ namespace Fusion.XR
         public List<FusionXRHand> attachedHands { get; private set; } = new List<FusionXRHand>();
         #endregion
 
+        protected bool allowCollisionInteraction = true;
+
         [SerializeField] [Tooltip("Used to filter which objects can interact besides grabbing the interactable")]
         protected LayerMask interactionLayers = ~0;
 
@@ -30,14 +32,8 @@ namespace Fusion.XR
 
         protected bool isInteracting = false;
 
-        public void Update()
-        {
-            if (isInteracting)
-            {
-                InteractionUpdate();
-            }
-        }
 
+        #region Grab & Release
         public void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase)
         {
             Grabable.ManageNewHand(hand, attachedHands, twoHandedMode);
@@ -59,12 +55,43 @@ namespace Fusion.XR
 
             InteractionEnd();
         }
+        #endregion
+
+        #region Interaction
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!allowCollisionInteraction) return;
+
+            if (Utilities.ObjectMatchesLayermask(collision.gameObject, interactionLayers) & !isInteracting)
+            {
+                InteractionStart();
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (!allowCollisionInteraction) return;
+
+            if (Utilities.ObjectMatchesLayermask(collision.gameObject, interactionLayers) & isInteracting)
+            {
+                InteractionEnd();
+            }
+        }
+
+        public void Update()
+        {
+            if (isInteracting)
+            {
+                InteractionUpdate();
+            }
+        }
 
         protected abstract void InteractionUpdate();
 
         protected abstract void InteractionStart();
 
-        protected abstract void InteractionEnd();
+        protected abstract void InteractionEnd(); 
+        #endregion
 
         //For returning the transform and the GrabPoint
         public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
