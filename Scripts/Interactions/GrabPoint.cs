@@ -27,7 +27,7 @@ namespace Fusion.XR
         {
             if(!(TryGetComponent<PoseEditor>(out PoseEditor pe) && pe.isEditingPose))
             {
-                Mesh hand = Resources.Load<Mesh>("PrevHand") as Mesh;
+                Mesh hand = Resources.Load<Mesh>("Hand") as Mesh;
 
                 Vector3 scale = transform.localScale;
                 Vector3 adjustedPalmOffset = palmOffset;
