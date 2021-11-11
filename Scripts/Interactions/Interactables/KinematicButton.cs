@@ -10,23 +10,33 @@ namespace Fusion.XR
         [SerializeField]
         private float pressDistance;
         [SerializeField]
-        private Transform button;
+        private float buttonMoveTime = 1;
+
+        private Vector3 initialPosition;
+
+        private void Start()
+        {
+            initialPosition = transform.localPosition;
+        }
 
         protected override void InteractionStart()
         {
             //Release hand immediatly?
-            button.DOLocalMove(axis * pressDistance, 0.5f).SetLoops(2, LoopType.Yoyo);
+            Sequence s = DOTween.Sequence();
+
+            s.Append(transform.DOLocalMove(initialPosition + axis * pressDistance, buttonMoveTime / 2));
+            s.Append(transform.DOLocalMove(initialPosition, buttonMoveTime / 2));
+            s.SetLoops(1);
+            s.Play();
+
             isInteracting = true;
         }
 
-        protected override void InteractionUpdate()
-        {
-
-        }
+        protected override void InteractionUpdate() { }
 
         protected override void InteractionEnd()
         {
-
+            isInteracting = false;
         }
     }
 }
