@@ -296,10 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!54 &89298467
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -797,14 +794,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 1
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints:
   - {fileID: 1469176438}
   - {fileID: 547079742}
   - {fileID: 1778558029}
   - {fileID: 1918444011}
-  attachedHands: []
 --- !u!54 &313881361
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1131,10 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!54 &446333552
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1453,10 +1444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!1 &547079740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,10 +1602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!54 &639560616
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1764,12 +1749,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 1
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints:
   - {fileID: 20862938}
   - {fileID: 1311453294}
-  attachedHands: []
 --- !u!1 &825296763
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,10 +1948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!54 &854901928
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2241,10 +2220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!54 &977188419
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2425,10 +2401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!1 &988372478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,8 +2542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEditingPose: 0
-  pose: {fileID: 11400000, guid: 4ad07f40a729d264b807d241a8e39880, type: 2}
-  displayName: Awaitng
+  pose: {fileID: 11400000, guid: 052d3d1e23f42e64f80bde336208a63d, type: 2}
+  displayName: Grabbed
 --- !u!1 &1118429190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2682,10 +2655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!54 &1118429196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2872,10 +2842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!1 &1256796713
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,10 +3225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 1
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!1 &1460280213
 GameObject:
   m_ObjectHideFlags: 0
@@ -3637,10 +3601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!54 &1575785947
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4174,10 +4135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 1
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!1 &1969320480
 GameObject:
   m_ObjectHideFlags: 0
@@ -4305,10 +4263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!1 &1979489544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,10 +4391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!4 &1986084006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
@@ -5900,10 +5852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!1 &3185852257567913927
 GameObject:
   m_ObjectHideFlags: 0
@@ -6904,11 +6853,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints:
   - {fileID: 1266934372}
-  attachedHands: []
 --- !u!59 &5385675516306310529
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -7223,11 +7169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints:
   - {fileID: 213071327}
-  attachedHands: []
 --- !u!59 &5972630861854798395
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -7802,10 +7745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
   grabPoints: []
-  attachedHands: []
 --- !u!4 &7810790100169656697
 Transform:
   m_ObjectHideFlags: 0
