@@ -19,6 +19,7 @@ namespace Fusion.XR
         public List<FusionXRHand> attachedHands { get; private set; } = new List<FusionXRHand>();
         #endregion
 
+        [SerializeField]
         protected bool allowCollisionInteraction = true;
 
         [SerializeField] [Tooltip("Used to filter which objects can interact besides grabbing the interactable")]
