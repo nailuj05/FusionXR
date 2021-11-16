@@ -19,18 +19,18 @@ namespace Fusion.XR
 
             //TODO: Fix this using the up axis instead of the user set axis
             initalOffset = Vector3.ProjectOnPlane((transform.up * controllerPos.magnitude) - controllerPos, globalAxis);
-            
-            Debug.DrawRay(transform.position + controllerPos, initalOffset, Color.blue, 10f);
+
+            Debug.DrawRay(transform.position, globalAxis, Color.blue, 10f);
         }
 
         protected override void InteractionUpdate()
         {
-            var controllerPos = attachedHands[0].targetPosition - transform.position;
+            var controllerPos = Vector3.ProjectOnPlane(attachedHands[0].targetPosition - transform.position, globalAxis);
 
             //var angles = Vector3.SignedAngle(controllerPos, transform.up, globalAxis);
             var angles = Vector3.Angle(controllerPos, transform.up);
 
-            transform.rotation = Quaternion.FromToRotation(Vector3.up, controllerPos - initalOffset);
+            transform.rotation = Quaternion.LookRotation(controllerPos, globalAxis);
             //transform.localRotation = Quaternion.AngleAxis(angles, axis);
         }
 
