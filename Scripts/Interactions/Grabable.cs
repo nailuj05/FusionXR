@@ -43,7 +43,7 @@ namespace Fusion.XR
             rb = GetComponent<Rigidbody>();
         }
 
-        public virtual void Update()
+        public virtual void FixedUpdate()
         {
             if (!isGrabbed)
                 return;

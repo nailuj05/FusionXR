@@ -414,7 +414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &111377142
 Transform:
   m_ObjectHideFlags: 0
@@ -1346,7 +1346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &749908421
 Transform:
   m_ObjectHideFlags: 0
@@ -1855,8 +1855,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033683495}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.70710677}
+  m_LocalPosition: {x: -0.99999994, y: 0, z: -0.5000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1185954186}
@@ -1864,7 +1864,7 @@ Transform:
   - {fileID: 1199268062}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!114 &1033683497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,10 +2776,11 @@ GameObject:
   - component: {fileID: 1695114469}
   - component: {fileID: 1695114468}
   - component: {fileID: 1695114467}
+  - component: {fileID: 1695114466}
   - component: {fileID: 1695114465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dial
-  m_TagString: Untagged
+  m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2807,11 +2808,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695114463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
+  m_Script: {fileID: 11500000, guid: a487ba9cbe4fe7143ae2c8a0c2d257ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   twoHandedMode: 0
   grabPoints: []
+  allowCollisionInteraction: 0
+  interactionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  canBeGrabbed: 1
+  axis: {x: 0, y: 0, z: 1}
+  angle: 0
+--- !u!54 &1695114466
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695114463}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &1695114467
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3220,13 +3244,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030939728}
-  m_LocalRotation: {x: 0.000000074505806, y: 0.000000014901161, z: 0.08715573, w: 0.9961947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 749908421}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2030939731
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3327,7 +3351,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   canBeGrabbed: 1
-  axis: {x: 0, y: 0, z: 1}
+  axis: {x: 1, y: 0, z: 0}
+  angle: 0
 --- !u!1 &2050517834
 GameObject:
   m_ObjectHideFlags: 0
@@ -5224,7 +5249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922197, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: trackingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922197, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: trackedController
@@ -5232,7 +5257,7 @@ PrefabInstance:
       objectReference: {fileID: 1949655611}
     - target: {fileID: 2130366297943922197, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: grabbedTrackingMode
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: debugMode
@@ -10016,8 +10041,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
+  m_Antialiasing: 2
+  m_AntialiasingQuality: 1
   m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
