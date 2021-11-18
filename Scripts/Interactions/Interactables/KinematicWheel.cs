@@ -6,37 +6,39 @@ namespace Fusion.XR
 {
     public class KinematicWheel : KinematicInteractable
     {
-        private Vector3 initalOffset;
+        private Vector3 localGrabPosition = Vector3.zero;
 
-        private Vector3 globalAxis;
+        public float angle = 0f;
 
         protected override void InteractionStart()
         {
             isInteracting = true;
 
-            var controllerPos = attachedHands[0].targetPosition - transform.position;
-            globalAxis = transform.TransformDirection(axis);
-
-            //TODO: Fix this using the up axis instead of the user set axis
-            initalOffset = Vector3.ProjectOnPlane((transform.up * controllerPos.magnitude) - controllerPos, globalAxis);
-
-            Debug.DrawRay(transform.position, globalAxis, Color.blue, 10f);
+            localGrabPosition = transform.InverseTransformPoint(attachedHands[0].grabPosition.position);
+            angle = 0f;
         }
 
         protected override void InteractionUpdate()
         {
-            var controllerPos = Vector3.ProjectOnPlane(attachedHands[0].targetPosition - transform.position, globalAxis);
+            var targetPos = transform.TransformPoint(localGrabPosition);
+            var deltaAngle = Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(targetPos), axis);
 
-            //var angles = Vector3.SignedAngle(controllerPos, transform.up, globalAxis);
-            var angles = Vector3.Angle(controllerPos, transform.up);
+            angle = Mathf.MoveTowardsAngle(angle, deltaAngle, 2f);
 
-            transform.rotation = Quaternion.LookRotation(controllerPos, globalAxis);
-            //transform.localRotation = Quaternion.AngleAxis(angles, axis);
+            //transform.rotation = Quaternion.Euler(transform.InverseTransformDirection(axis) * deltaAngle);
+            transform.rotation *= Quaternion.Euler(transform.InverseTransformDirection(axis) * angle);
+            //transform.Rotate(transform.InverseTransformDirection(axis), deltaAngle, Space.Self);
+            //transform.Rotate(axis, deltaAngle, Space.World);
         }
 
         protected override void InteractionEnd()
         {
             isInteracting = false;
+        }
+
+        Vector3 LocalAngleSetup(Vector3 pos)
+        {
+            return Vector3.ProjectOnPlane(transform.InverseTransformPoint(pos).normalized, axis);
         }
     }
 }
