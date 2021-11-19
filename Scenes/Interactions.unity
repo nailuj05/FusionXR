@@ -1346,7 +1346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &749908421
 Transform:
   m_ObjectHideFlags: 0
@@ -2819,7 +2819,6 @@ MonoBehaviour:
     m_Bits: 4294967295
   canBeGrabbed: 1
   axis: {x: 0, y: 0, z: 1}
-  angle: 0
 --- !u!54 &1695114466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3351,7 +3350,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   canBeGrabbed: 1
-  axis: {x: 1, y: 0, z: 0}
+  axis: {x: 0, y: 0, z: 1}
   angle: 0
 --- !u!1 &2050517834
 GameObject:
