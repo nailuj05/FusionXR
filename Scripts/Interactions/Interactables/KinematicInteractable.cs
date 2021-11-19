@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace Fusion.XR
 {
@@ -20,7 +21,7 @@ namespace Fusion.XR
         #endregion
 
         [SerializeField]
-        protected bool allowCollisionInteraction = true;
+        protected bool allowCollisionInteraction = false;
 
         [SerializeField] [Tooltip("Used to filter which objects can interact besides grabbing the interactable")]
         protected LayerMask interactionLayers = ~0;
@@ -29,10 +30,21 @@ namespace Fusion.XR
         protected bool canBeGrabbed = true;
 
         [SerializeField]
-        protected Vector3 axis = Vector3.right;
+        public Vector3 axis = Vector3.right;
 
         protected bool isInteracting = false;
 
+        private void Start()
+        {
+            try
+            {
+                gameObject.layer = LayerMask.NameToLayer("Interactables");
+            }
+            catch
+            {
+                Debug.LogError("Layers need to be setup correctly!");
+            }
+        }
 
         #region Grab & Release
         public void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase)
@@ -110,4 +122,18 @@ namespace Fusion.XR
             }
         }
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(KinematicInteractable), true)]
+    public class KinematicInteractableEditor : Editor
+    {
+        private void OnSceneGUI()
+        {
+            var t = (KinematicInteractable)target;
+
+            Handles.color = new Color(0, 0.5f, 0, 0.1f);
+            Handles.DrawSolidDisc(t.transform.position, t.transform.TransformDirection(t.axis), 0.1f);
+        }
+    }
+#endif
 }

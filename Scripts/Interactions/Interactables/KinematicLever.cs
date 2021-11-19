@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public class KinematicDial : KinematicInteractable
+    public class KinematicLever : KinematicInteractable
     {
+        public Vector2 minMaxClamp = new Vector2(-45f, 45f);
+
         private Vector3 grabPosition = Vector3.zero;
+
         private float offsetAngle = 0f;
 
         private void Start()
@@ -27,9 +30,11 @@ namespace Fusion.XR
 
         protected override void InteractionUpdate()
         {
-            var deltaAngle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
 
-            transform.localEulerAngles = axis * deltaAngle;
+            angle = Mathf.Clamp(angle, minMaxClamp.x, minMaxClamp.y);
+
+            transform.localRotation = Quaternion.Euler(axis * angle);
         }
 
         protected override void InteractionEnd()
@@ -42,5 +47,4 @@ namespace Fusion.XR
             return Vector3.ProjectOnPlane(transform.InverseTransformPoint(pos).normalized, axis);
         }
     }
-
 }

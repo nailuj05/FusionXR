@@ -9,8 +9,15 @@ namespace Fusion.XR
         private Vector3 grabPosition = Vector3.zero;
         private float offsetAngle = 0f;
 
+        private void Start()
+        {
+            allowCollisionInteraction = false;
+        }
+
         protected override void InteractionStart()
         {
+            if (attachedHands.Count == 0) return;
+
             isInteracting = true;
 
             grabPosition = attachedHands[0].grabPosition.position;
@@ -20,9 +27,9 @@ namespace Fusion.XR
 
         protected override void InteractionUpdate()
         {
-            var deltaAngle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
 
-            transform.localEulerAngles = axis * deltaAngle;
+            transform.localEulerAngles = axis * angle;
         }
 
         protected override void InteractionEnd()

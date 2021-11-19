@@ -38,5 +38,10 @@ namespace Fusion.XR
         {
             isInteracting = false;
         }
+
+        private void OnDrawGizmosSelected()
+        {
+            
+        }
     }
 }
