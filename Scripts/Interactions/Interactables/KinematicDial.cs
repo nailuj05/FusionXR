@@ -7,24 +7,22 @@ namespace Fusion.XR
     public class KinematicDial : KinematicInteractable
     {
         private Vector3 grabPosition = Vector3.zero;
-
-        public float angle = 0f;
-
-        private float refVel;
+        public float offsetAngle = 0f;
 
         protected override void InteractionStart()
         {
             isInteracting = true;
 
             grabPosition = attachedHands[0].grabPosition.position;
-            angle = 0f;
+
+            offsetAngle = Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(transform.right), axis);
         }
 
         protected override void InteractionUpdate()
         {
             var targetPos = transform.TransformPoint(grabPosition);
 
-            var deltaAngle = Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            var deltaAngle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
             //var deltaAngle = Vector3.Angle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(targetPos));
 
             Debug.Log(deltaAngle);
@@ -41,6 +39,7 @@ namespace Fusion.XR
 
         Vector3 LocalAngleSetup(Vector3 pos)
         {
+            //Direction?
             return Vector3.ProjectOnPlane(transform.InverseTransformPoint(pos).normalized, axis);
         }
     }
