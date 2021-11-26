@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Fusion.XR
@@ -18,17 +19,40 @@ namespace Fusion.XR
             }
         }
 
-        public static GameObject GetChildByName(this GameObject gameObject, string name)
+        public static GameObject GetChildByName(this GameObject gameObject, string name, [Optional] bool recursive)
         {
             GameObject obj = null;
 
-            for (int i = 0; i < gameObject.transform.childCount; i++)
+            if (recursive == true)
             {
-                var child = gameObject.transform.GetChild(i);
-
-                if(child.name == name)
+                for (int i = 0; i < gameObject.transform.childCount; i++)
                 {
-                    obj = child.gameObject;
+                    var child = gameObject.transform.GetChild(i);
+
+                    if (child.name == name)
+                    {
+                        obj = child.gameObject;
+                        break;
+                    }
+
+                    var possibleObj = child.gameObject.GetChildByName(name, true);
+
+                    if (possibleObj)
+                    {
+                        obj = possibleObj;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < gameObject.transform.childCount; i++)
+                {
+                    var child = gameObject.transform.GetChild(i);
+
+                    if (child.name == name)
+                    {
+                        obj = child.gameObject;
+                    }
                 }
             }
 
