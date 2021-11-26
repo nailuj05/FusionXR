@@ -8,6 +8,8 @@ namespace Fusion.XR
     {
         public float mouseSensitivity = 1f;
 
+        public GameObject player;
+
         public Transform leftHand;
         public Transform rightHand;
 
@@ -37,7 +39,7 @@ namespace Fusion.XR
 
             currentHand = rightHand;
 
-            movement = GetComponent<Movement>();
+            movement = player.GetComponent<Movement>();
             VRCamera = Camera.main.transform;
 
             l_handPoser = l_hand.GetComponent<HandPoser>();

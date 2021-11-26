@@ -70,4 +70,11 @@ namespace Fusion.XR
         Rigidbodys,
         Grabables
     }
+
+    //Rig
+    public enum RigType
+    {
+        Mock,
+        XR
+    }
 }
