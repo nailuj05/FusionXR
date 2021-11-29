@@ -6,10 +6,15 @@ using UnityEditor;
 
 namespace Fusion.XR
 {
-    //This class holds all Components on the player and allows easy access and setup
+    /// <summary>
+    /// A container for all the important parts that makeup the player.
+    /// This class holds all Components on the player and allows easy access and setup.
+    /// </summary>
     public class Player : MonoBehaviour 
     {
         public static Player main;
+
+        public Transform head;
 
         public FusionXRHand LeftHand;
         public FusionXRHand RightHand;

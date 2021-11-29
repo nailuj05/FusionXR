@@ -12,9 +12,6 @@ namespace Fusion.XR
         [SerializeField] private GameObject hybridRig;
         [SerializeField] private GameObject xrRig;
 
-        [SerializeField] private FusionXRHand leftHand;
-        [SerializeField] private FusionXRHand rightHand;
-
         void Start()
         {
             GameObject currentRig;
@@ -34,11 +31,13 @@ namespace Fusion.XR
                 currentRig = xrRig;
             }
 
+            Player.main.head = Camera.main.transform;
+
             GameObject rControllerTarget = currentRig.GetChildByName("Right Tracked Controller", true);
             GameObject lControllerTarget = currentRig.GetChildByName("Left Tracked Controller",  true);
 
-            rightHand.trackedController = rControllerTarget.transform;
-            leftHand.trackedController  = lControllerTarget.transform;
+            Player.main.RightHand.trackedController = rControllerTarget.transform;
+            Player.main.LeftHand.trackedController  = lControllerTarget.transform;
         }
     }
 }
