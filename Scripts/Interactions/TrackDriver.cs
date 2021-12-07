@@ -18,14 +18,20 @@ namespace Fusion.XR
         [SerializeField] public float positionStrength = 15f;
         [SerializeField] public float rotationStrength = 35f;
 
+        //Force Tracking
+        [Header("Force Tracking")]
+        [SerializeField] public float forceMultiplier = 200f;
+        [SerializeField] public float forceDampener   = -10f;
+        [SerializeField] public float maxForceClamp   = 150f;
+
         //Active Joint Tracking
         [Header("Active Joint Tracking")]
         [SerializeField] public float positionSpring = 3000;
         [SerializeField] public float positionDamper = 250;
-        [SerializeField] public float maxForce = 1500;
+        [SerializeField] public float maxJointForce  = 1500;
 
-        [SerializeField] public float slerpSpring = 3000;
-        [SerializeField] public float slerpDamper = 250;
+        [SerializeField] public float slerpSpring   = 3000;
+        [SerializeField] public float slerpDamper   = 250;
         [SerializeField] public float slerpMaxForce = 1500;
 
         [HideInInspector] public GameObject tracker;
@@ -175,7 +181,7 @@ namespace Fusion.XR
             var drive = new JointDrive();
             drive.positionSpring = trackingBase.positionSpring;
             drive.positionDamper = trackingBase.positionDamper;
-            drive.maximumForce = trackingBase.maxForce;
+            drive.maximumForce = trackingBase.maxJointForce;
 
             activeJoint.xDrive = activeJoint.yDrive = activeJoint.zDrive = drive;
 
@@ -273,10 +279,12 @@ namespace Fusion.XR
         {
             //Track Position
             Vector3 velocity = trackerRigidbody.GetPointVelocity(targetPosition);
-            Vector3 displacement = targetPosition - objectToTrack.position;
+            Vector3 force = (targetPosition - objectToTrack.position) * trackingBase.forceMultiplier;
 
-            objectRigidbody.AddForce(displacement * 200f / objectRigidbody.mass, ForceMode.Acceleration);
-            objectRigidbody.AddForce(-10f * velocity / Mathf.Sqrt(objectRigidbody.mass), ForceMode.Acceleration);
+            Vector3 acceleration = Vector3.ClampMagnitude(force, trackingBase.maxForceClamp) / objectRigidbody.mass;
+
+            objectRigidbody.AddForce(acceleration, ForceMode.Acceleration);
+            objectRigidbody.AddForce(trackingBase.forceDampener * velocity / Mathf.Sqrt(objectRigidbody.mass), ForceMode.Acceleration);
 
             //Track Rotation
             Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
