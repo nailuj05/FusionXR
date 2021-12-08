@@ -1807,7 +1807,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820033474}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab3e882ba04ec354a813a4e23b810fb7, type: 3}
   m_Name: 
@@ -1815,7 +1815,7 @@ MonoBehaviour:
   detectionLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  volume: {fileID: 0}
+  volume: {fileID: 90654321}
   smoothTime: 0.1
 --- !u!114 &820033477
 MonoBehaviour:
