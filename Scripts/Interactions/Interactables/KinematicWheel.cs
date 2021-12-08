@@ -27,9 +27,10 @@ namespace Fusion.XR
 
         protected override void InteractionUpdate()
         {
-            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            var angle = Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis); // * Mathf.Rad2Deg;
+            var offsettedAngle = offsetAngle - angle;
 
-            transform.localEulerAngles = axis * angle;
+            transform.localEulerAngles = axis * offsettedAngle;
         }
 
         protected override void InteractionEnd()
