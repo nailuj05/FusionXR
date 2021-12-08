@@ -7,6 +7,30 @@ namespace Fusion.XR
 {
     public static class Extensions
     {
+        public static T GetComponentInAllChildren<T>(this Transform transform) where T : Component
+        {
+            if (transform.TryGetComponent<T>(out T t))
+            {
+                return t;
+            }
+            else
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    var child = transform.GetChild(i);
+
+                    var c = child.GetComponentInAllChildren<T>();
+
+                    if(c != null)
+                    {
+                        return c;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
             if(gameObject.TryGetComponent<T>(out T t))
