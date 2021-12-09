@@ -20,7 +20,8 @@ namespace Fusion.XR
 
         //Force Tracking
         [Header("Force Tracking")]
-        [SerializeField] public float forceMultiplier = 200f;
+        [SerializeField] public float forcePositionMultiplier = 200f;
+        [SerializeField] public float forceRotationMultiplier = 35f;
         [SerializeField] public float forceDampener   = -10f;
         [SerializeField] public float maxForceClamp   = 150f;
 
@@ -274,12 +275,11 @@ namespace Fusion.XR
             trackerRigidbody = trackingBase.tracker.GetComponent<Rigidbody>();
         }
 
-        //TODO: Remove Magic Numbers (expose forceMultiplier and dampening via TrackingBase) and do Rotation by Force/Torque
         public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
         {
             //Track Position
             Vector3 velocity = trackerRigidbody.GetPointVelocity(targetPosition);
-            Vector3 force = (targetPosition - objectToTrack.position) * trackingBase.forceMultiplier;
+            Vector3 force = (targetPosition - objectToTrack.position) * trackingBase.forcePositionMultiplier;
 
             Vector3 acceleration = Vector3.ClampMagnitude(force, trackingBase.maxForceClamp) / objectRigidbody.mass;
 
@@ -297,7 +297,9 @@ namespace Fusion.XR
             }
 
             if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
-                objectRigidbody.angularVelocity = axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad);
+            {
+                objectRigidbody.angularVelocity = axis * (angle * trackingBase.forceRotationMultiplier * Mathf.Deg2Rad);
+            }
         }
 
         public override void EndTrack()
