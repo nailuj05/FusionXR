@@ -73,6 +73,7 @@ namespace Fusion.XR
             trackDriver = ChangeTrackDriver(newTrackDriver);
 
             trackingBase.tracker = this.gameObject;
+            trackingBase.palm = palm;
             trackDriver.StartTrack(transform, trackingBase);
 
             ///Subscribe to the actions

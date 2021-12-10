@@ -36,6 +36,7 @@ namespace Fusion.XR
         [SerializeField] public float slerpMaxForce = 1500;
 
         [HideInInspector] public GameObject tracker;
+        [HideInInspector] public Transform palm;
     }
 
     public abstract class TrackDriver
@@ -209,7 +210,7 @@ namespace Fusion.XR
         private Rigidbody objectRB;
         private Rigidbody trackerRB;
 
-        private Joint joint;
+        private ConfigurableJoint joint;
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
@@ -241,11 +242,23 @@ namespace Fusion.XR
 
         private void SetupJoint(Vector3 targetPosition, Quaternion targetRotation)
         {
-            objectRB.transform.position = targetPosition;
-            objectRB.transform.rotation = targetRotation;
+            if (!objectRB.isKinematic)
+            {
+                objectRB.transform.rotation = targetRotation;
+            }
 
-            joint = trackerRB.gameObject.AddComponent<FixedJoint>();
+            joint = trackerRB.gameObject.AddComponent<ConfigurableJoint>();
+            joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
+            joint.anchor = trackerRB.transform.InverseTransformPoint(trackingBase.palm.position);
+            joint.autoConfigureConnectedAnchor = false;
+
             joint.connectedBody = objectRB;
+
+            joint.connectedAnchor = objectToTrack.transform.InverseTransformPoint(trackingBase.palm.position);
+
+            joint.rotationDriveMode = RotationDriveMode.Slerp;
+
+            joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
 
             joint.enableCollision = false;
             joint.enablePreprocessing = false;
