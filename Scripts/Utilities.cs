@@ -7,6 +7,21 @@ namespace Fusion.XR
 {
     public static class Extensions
     {
+        public static void TryDestroyComponent<T>(this GameObject gameObject) where T : Component
+        {
+            if (gameObject.TryGetComponent<T>(out T t))
+            {
+                if(Application.isPlaying)
+                {
+                    Object.Destroy(t);
+                }
+                else
+                {
+                    Object.DestroyImmediate(t);
+                }
+            }
+        }
+
         public static T GetComponentInAllChildren<T>(this Transform transform) where T : Component
         {
             if (transform.TryGetComponent<T>(out T t))
