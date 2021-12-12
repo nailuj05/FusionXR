@@ -12,23 +12,16 @@ namespace Fusion.XR
         [SerializeField] private GameObject hybridRig;
         [SerializeField] private GameObject xrRig;
 
+        public GameObject currentRig { get; private set; }
+
         void Start()
         {
-            GameObject currentRig;
+            currentRig = GetCurrentRig();
 
-            if(rigType == RigType.Mock)
+            // Potentially change the XR Rig of the Collision Adjuster
+            if (TryGetComponent(out CollisionAdjuster collisionAdjuster))
             {
-                hybridRig.SetActive(true);
-                xrRig.SetActive(false);
-
-                currentRig = hybridRig;
-            }
-            else
-            {
-                hybridRig.SetActive(false);
-                xrRig.SetActive(true);
-
-                currentRig = xrRig;
+                collisionAdjuster.p_XRRig = currentRig.transform;
             }
 
             Player.main.head = Camera.main.transform;
@@ -38,6 +31,24 @@ namespace Fusion.XR
 
             Player.main.RightHand.trackedController = rControllerTarget.transform;
             Player.main.LeftHand.trackedController  = lControllerTarget.transform;
+        }
+
+        public GameObject GetCurrentRig()
+        {
+            if (rigType == RigType.Mock)
+            {
+                hybridRig.SetActive(true);
+                xrRig.SetActive(false);
+
+                return hybridRig;
+            }
+            else
+            {
+                hybridRig.SetActive(false);
+                xrRig.SetActive(true);
+
+                return xrRig;
+            }
         }
     }
 }
