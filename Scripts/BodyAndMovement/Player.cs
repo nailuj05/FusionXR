@@ -97,11 +97,18 @@ namespace Fusion.XR
 
             try
             {
-                adj.p_XRRig = GameObject.Find("XRRig").transform;
+                adj.p_XRRig = player.GetComponent<HybridRig>().GetCurrentRig().transform;
             }
             catch
             {
-                adj.p_XRRig = GameObject.Find("Mock Rig").transform;
+                try
+                {
+                    adj.p_XRRig = GameObject.Find("XR Rig").transform;
+                }
+                catch
+                {
+                    Debug.LogError("Could not find XR/Mock Rig, set up Rig/Hybrid Rig correctly or assign Collision Adjusters XR Rig var manually.");
+                }
             }
 
             move.head = GameObject.Find("Main Camera").transform;
