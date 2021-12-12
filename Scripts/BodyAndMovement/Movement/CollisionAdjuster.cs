@@ -7,7 +7,7 @@ namespace Fusion.XR
     public class CollisionAdjuster : MonoBehaviour
     {
         public Transform p_XRRig;
-        public Transform p_VRCamera;
+        [HideInInspector] public Transform p_VRCamera;
 
         [Range(0.1f, 0.5f)]
         public float p_CollisionRadius = 0.2f;
