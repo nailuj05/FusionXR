@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 4601817725372166375}
   - component: {fileID: 4601817725372166371}
   - component: {fileID: 4601817725372166370}
-  - component: {fileID: 4601817725372166369}
+  - component: {fileID: 1718852702228879623}
   m_Layer: 3
   m_Name: HybridRig
   m_TagString: Untagged
@@ -603,7 +603,7 @@ MonoBehaviour:
   movement: {fileID: 4601817725372166370}
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  collisionAdjuster: {fileID: 4601817725372166369}
+  collisionAdjuster: {fileID: 0}
   rb: {fileID: 0}
 --- !u!54 &4601817725372166375
 Rigidbody:
@@ -662,7 +662,7 @@ MonoBehaviour:
   usesGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
   rigidBody: {fileID: 4601817725372166375}
---- !u!114 &4601817725372166369
+--- !u!114 &1718852702228879623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1de7387fed50e44f9af48d6f00b3104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_XRRig: {fileID: 4601817725372166368}
+  p_XRRig: {fileID: 4601817723373849410}
   p_VRCamera: {fileID: 5221161575693523710}
   p_CollisionRadius: 0.2
   p_localHeight: 0
