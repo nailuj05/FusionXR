@@ -114,21 +114,11 @@ namespace Fusion.XR
 
         void DestroyComponents(GameObject obj)
         {
-            if (obj.TryGetComponent(out CapsuleAdjuster capA))
-                DestroyImmediate(capA);
-            if (obj.TryGetComponent(out CapsuleCollider capC))
-                DestroyImmediate(capC);
-            if (obj.TryGetComponent(out RigidbodyMover rbM))
-                DestroyImmediate(rbM);
-            if (obj.TryGetComponent(out Rigidbody rb))
-                DestroyImmediate(rb);
-
-            if (obj.TryGetComponent(out CharacterControllerMover ccM))
-                DestroyImmediate(ccM);
-            if (obj.TryGetComponent(out CharacterControllerAdjuster ccA))
-                DestroyImmediate(ccA);
-            if (obj.TryGetComponent(out CharacterController cc))
-                DestroyImmediate(cc);
+            obj.TryDestroyComponent<CollisionAdjuster>();
+            obj.TryDestroyComponent<Movement>();
+            obj.TryDestroyComponent<Rigidbody>();
+            obj.TryDestroyComponent<Collider>();
+            obj.TryDestroyComponent<CharacterController>();
         }
     }
 #endif
