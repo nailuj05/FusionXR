@@ -7,7 +7,7 @@ namespace Fusion.XR
     public class CollisionAdjuster : MonoBehaviour
     {
         public Transform p_XRRig;
-        [HideInInspector] public Transform p_VRCamera;
+        public Transform p_VRCamera;
 
         [Range(0.1f, 0.5f)]
         public float p_CollisionRadius = 0.2f;
@@ -15,18 +15,20 @@ namespace Fusion.XR
         [HideInInspector]
         public float p_localHeight;
 
-        private void Awake()
+        private void Start()
         {
-            p_VRCamera = Camera.main.transform;
+            p_VRCamera = Player.main.head;
         }
+
+        //public Vector3 GetVRCamera
 
         private void Update()
         {
             //The local height of the camera (not the localPosition because localPos takes rotation into account)
-            float p_height = p_VRCamera.position.y - p_XRRig.position.y;
+            float p_height = transform.InverseTransformPoint(p_VRCamera.position).y;
 
             //the local Position of the Camera within the XRRig and half the height of the camera so it is exactly in the middle between floor and head
-            Vector3 p_localCameraPosition = (p_VRCamera.position - p_XRRig.position) - Vector3.up * p_height / 2;
+            Vector3 p_localCameraPosition = transform.InverseTransformPoint(p_VRCamera.position) - Vector3.up * p_height / 2;
 
             //Store players local height globally so other scripts can access it
             p_localHeight = p_height;
