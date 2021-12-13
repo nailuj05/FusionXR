@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace Fusion.XR
 {
@@ -14,7 +15,7 @@ namespace Fusion.XR
 
         public GameObject currentRig { get; private set; }
 
-        void Start()
+        public void SetRig()
         {
             currentRig = GetCurrentRig();
 
@@ -24,13 +25,20 @@ namespace Fusion.XR
                 collisionAdjuster.p_XRRig = currentRig.transform;
             }
 
-            Player.main.head = Camera.main.transform;
+            var player = FindObjectOfType<Player>();
+
+            player.head = Camera.main.transform;
 
             GameObject rControllerTarget = currentRig.GetChildByName("Right Tracked Controller", true);
             GameObject lControllerTarget = currentRig.GetChildByName("Left Tracked Controller",  true);
 
-            Player.main.RightHand.trackedController = rControllerTarget.transform;
-            Player.main.LeftHand.trackedController  = lControllerTarget.transform;
+            player.RightHand.trackedController = rControllerTarget.transform;
+            player.LeftHand.trackedController  = lControllerTarget.transform;
+
+            EditorUtility.SetDirty(player.LeftHand);
+            EditorUtility.SetDirty(player.RightHand);
+            EditorUtility.SetDirty(player);
+            EditorUtility.SetDirty(collisionAdjuster);
         }
 
         public GameObject GetCurrentRig()
@@ -48,6 +56,20 @@ namespace Fusion.XR
                 xrRig.SetActive(true);
 
                 return xrRig;
+            }
+        }
+    }
+
+    [CustomEditor(typeof(HybridRig))]
+    public class HybridRigEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            if(GUILayout.Button("Update Rig"))
+            {
+                ((HybridRig)target).SetRig();
             }
         }
     }
