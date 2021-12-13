@@ -12,6 +12,7 @@ namespace Fusion.XR
         private void Awake()
         {
             p_capsuleCollider = GetComponent<CapsuleCollider>();
+            p_capsuleCollider.center = Vector3.up;
         }
 
         public override void UpdateCollision(float p_height, Vector3 p_localPositionOffset, float p_CollisionRadius)

@@ -568,7 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d200b382a14c64459522c4ae63af6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigType: 0
+  rigType: 1
   hybridRig: {fileID: 4601817723373849409}
   xrRig: {fileID: 5221161576313746134}
 --- !u!114 &4601817725372166373
@@ -634,7 +634,7 @@ CapsuleCollider:
   m_Radius: 0.2
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4601817725372166370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,7 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_XRRig: {fileID: 5221161576313746133}
   p_VRCamera: {fileID: 0}
-  p_CollisionRadius: 0.2
+  p_CollisionRadius: 0.1
   p_localHeight: 0
 --- !u!1 &5221161575155597480
 GameObject:
