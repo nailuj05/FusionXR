@@ -674,8 +674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1de7387fed50e44f9af48d6f00b3104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_XRRig: {fileID: 4601817723373849410}
-  p_VRCamera: {fileID: 5221161575693523710}
+  p_XRRig: {fileID: 5221161576313746133}
+  p_VRCamera: {fileID: 0}
   p_CollisionRadius: 0.2
   p_localHeight: 0
 --- !u!1 &5221161575155597480
@@ -1287,7 +1287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5221161576313746134}
   m_LocalRotation: {x: 0, y: -0.7071068, z: -0, w: -0.70710677}
-  m_LocalPosition: {x: 0.7720001, y: 0, z: -0.51800007}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4601817724379515042}
