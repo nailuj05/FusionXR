@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -252,7 +253,7 @@ namespace Fusion.XR
             {
                 foreach (Collider coll in nearObjects)
                 {
-                    if(coll.gameObject.layer == LayerMask.NameToLayer("Interactables"))
+                    if(coll.gameObject.layer == LayerMask.NameToLayer("Interactables") || coll.gameObject.layer == LayerMask.NameToLayer("Props"))
                     {
                         if ((coll.transform.position - transform.position).sqrMagnitude < Distance)
                         {

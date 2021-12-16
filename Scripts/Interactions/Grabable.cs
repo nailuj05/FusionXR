@@ -6,6 +6,8 @@ namespace Fusion.XR
 {
     public class Grabable : MonoBehaviour, IGrabable
     {
+        public GrabableType grabableType = GrabableType.Interactables;
+
         #region IGrabable Implementation
         public Transform Transform { get { return transform; }}
         public GameObject GameObject { get { return gameObject; }}
@@ -33,7 +35,7 @@ namespace Fusion.XR
         {
             try
             {
-                gameObject.layer = LayerMask.NameToLayer("Interactables");
+                gameObject.layer = LayerMask.NameToLayer(grabableType.ToString());
             }
             catch
             {

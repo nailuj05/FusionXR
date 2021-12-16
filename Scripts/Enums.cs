@@ -27,6 +27,12 @@ namespace Fusion.XR
         //AttachHand = 2
     }
 
+    public enum GrabableType
+    {
+        Interactables,
+        Props
+    }
+
     //Used by Hand Poser
     public enum HandState
     {
