@@ -7,7 +7,8 @@ namespace Fusion.XR
     [RequireComponent(typeof(Rigidbody))]
     public class RigidbodyMover : Movement
     {
-        public Rigidbody rigidBody;
+        [HideInInspector]
+        public Rigidbody rb;
 
         new bool usesGravity => false;
 
@@ -15,7 +16,7 @@ namespace Fusion.XR
 
         private void Awake()
         {
-            rigidBody = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
         }
 
         public override void Move(Vector3 direction)
@@ -23,12 +24,12 @@ namespace Fusion.XR
             vel = Vector3.ProjectOnPlane(direction, Vector3.up);
             //vel += Physics.gravity;// / Time.deltaTime;
 
-            vel.y = rigidBody.velocity.y;
+            vel.y = rb.velocity.y;
 
-            CurrentVelocity = rigidBody.velocity;
+            CurrentVelocity = rb.velocity;
 
             //rigidBody.MovePosition(transform.TransformPoint(-vel));
-            rigidBody.velocity = vel;
+            rb.velocity = vel;
         }
     }
 }

@@ -603,7 +603,7 @@ MonoBehaviour:
   movement: {fileID: 4601817725372166370}
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  collisionAdjuster: {fileID: 0}
+  collisionAdjuster: {fileID: 1718852702228879623}
   rb: {fileID: 0}
 --- !u!54 &4601817725372166375
 Rigidbody:

@@ -69,9 +69,11 @@ namespace Fusion.XR
                 {
                     SetupAdjusterAndMovement(adj, move, player);
 
-                    move.rigidBody = obj.GetComponent<Rigidbody>();
+                    move.rb = obj.GetComponent<Rigidbody>();
                 }
                 catch {}
+
+                EditorUtility.SetDirty(obj);
             }
             if (GUILayout.Button("Setup CharacterController"))
             {
@@ -85,10 +87,49 @@ namespace Fusion.XR
                 player.collisionAdjuster = adj;
                 player.movement = move;
 
-                SetupAdjusterAndMovement(adj, move, player);
+                try
+                {
+                    SetupAdjusterAndMovement(adj, move, player);
+                }
+                catch { }
+
+                EditorUtility.SetDirty(obj);
             }
 
             EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+
+            if (GUILayout.Button("Setup Hover Controller"))
+            {
+                DestroyComponents(obj);
+
+                Rigidbody rb = obj.AddComponent<Rigidbody>();
+                rb.freezeRotation = true;
+                rb.mass = 100;
+
+                obj.AddComponent<SphereCollider>().radius = 0.2f;
+                HoverMover move = obj.AddComponent<HoverMover>();
+                CollisionAdjuster adj = obj.AddComponent<HeadCollider>();
+
+                Player player = obj.GetComponent<Player>();
+                player.collisionAdjuster = adj;
+                player.movement = move;
+
+                try
+                {
+                    SetupAdjusterAndMovement(adj, move, player);
+
+                    move.rb = obj.GetComponent<Rigidbody>();
+                }
+                catch { }
+
+                EditorUtility.SetDirty(obj);
+            }
+
+            EditorGUILayout.EndHorizontal();
+
+            FindObjectOfType<HybridRig>().SetRig();
         }
 
         void SetupAdjusterAndMovement(CollisionAdjuster adj, Movement move, Player player)

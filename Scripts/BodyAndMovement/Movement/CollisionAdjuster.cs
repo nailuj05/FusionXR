@@ -13,7 +13,7 @@ namespace Fusion.XR
         public float p_CollisionRadius = 0.2f;
 
         [HideInInspector]
-        public float p_localHeight;
+        public float p_localHeight { get; private set; }
 
         private void Start()
         {
