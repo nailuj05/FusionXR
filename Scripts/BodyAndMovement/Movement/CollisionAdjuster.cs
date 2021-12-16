@@ -20,8 +20,6 @@ namespace Fusion.XR
             p_VRCamera = Player.main.head;
         }
 
-        //public Vector3 GetVRCamera
-
         private void Update()
         {
             //The local height of the camera (not the localPosition because localPos takes rotation into account)
