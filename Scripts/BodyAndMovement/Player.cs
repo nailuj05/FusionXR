@@ -74,6 +74,7 @@ namespace Fusion.XR
                 catch {}
 
                 EditorUtility.SetDirty(obj);
+                FindObjectOfType<HybridRig>().SetRig();
             }
             if (GUILayout.Button("Setup CharacterController"))
             {
@@ -94,6 +95,7 @@ namespace Fusion.XR
                 catch { }
 
                 EditorUtility.SetDirty(obj);
+                FindObjectOfType<HybridRig>().SetRig();
             }
 
             EditorGUILayout.EndHorizontal();
@@ -125,11 +127,10 @@ namespace Fusion.XR
                 catch { }
 
                 EditorUtility.SetDirty(obj);
+                FindObjectOfType<HybridRig>().SetRig();
             }
 
             EditorGUILayout.EndHorizontal();
-
-            FindObjectOfType<HybridRig>().SetRig();
         }
 
         void SetupAdjusterAndMovement(CollisionAdjuster adj, Movement move, Player player)
