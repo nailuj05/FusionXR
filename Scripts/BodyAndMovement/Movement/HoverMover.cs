@@ -10,11 +10,20 @@ namespace Fusion.XR
         [Header("Hover Mover")]
         public LayerMask groundLayers;
 
-        public float hoverStrength = 500f;
+        public float hoverStrength = 2000f;
 
-        public float hoverDampening = 100f;
+        public float hoverDampening = 500f;
+
+        [Tooltip("Additional Dampening only applied to the vertical axis, 0 means no additional dampening")]
+        public float verticalDampening = 100f;
 
         public float addedHeight = 0f;
+
+        [Tooltip("Will there be the same force applied to the object below the player")]
+        public bool applyCounterForce = true;
+
+        [Tooltip("Use this to tune the amount of counter force applied")]
+        public float counterForceScale = 1f;
 
         [HideInInspector]
         public Rigidbody rb;
@@ -25,8 +34,15 @@ namespace Fusion.XR
         Vector3 vel;
 
         RaycastHit hit;
+
         float currentHeight;
         float heightDifference;
+
+        Collider currentCollider;
+        Rigidbody currentRigidbody;
+
+        Vector3 force;
+        Vector3 verticalVel;
 
         void Awake()
         {
@@ -54,9 +70,38 @@ namespace Fusion.XR
                 currentHeight = (Player.main.head.position - hit.point).magnitude;
                 heightDifference = (collisionAdjuster.p_localHeight - currentHeight) + addedHeight;
 
-                //Square height Difference? 
-                rb.AddForce(Vector3.up * heightDifference * hoverStrength);
+                force = Vector3.up * heightDifference * hoverStrength;
+
+                //Apply Force
+                rb.AddForce(force);
+
+                //Apply Dampening
                 rb.AddForce(-rb.velocity * hoverDampening);
+
+                //Apply Vertical Dampening
+                verticalVel = Vector3.Project(rb.velocity, Vector3.up);
+                rb.AddForce(-verticalVel * verticalDampening);
+
+                //Counter Force
+                if (!applyCounterForce) return;
+
+                if(currentCollider != hit.collider)
+                {
+                    if (hit.collider.TryGetComponent(out currentRigidbody))
+                    {
+                        currentCollider = hit.collider;
+                    }
+                    else
+                    {
+                        currentCollider = null;
+                        return;
+                    }
+                }
+
+                if (currentRigidbody)
+                {
+                    currentRigidbody.AddForceAtPosition(-force * counterForceScale, hit.point);
+                }
             }
         }
     }
