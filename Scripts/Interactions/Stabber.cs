@@ -5,6 +5,11 @@ using UnityEditor;
 
 namespace Fusion.XR
 {
+    /// <summary>
+    /// A physics interactor to simulate axes, knifes, swords, arrows, etc..
+    /// THIS ONLY WORKS ON BOXCOLLIDERS CURRENTLY
+    /// </summary>
+    [RequireComponent(typeof(BoxCollider))]
     public class Stabber : MonoBehaviour
     {
         public float requiredImpactVelocity;
@@ -33,6 +38,14 @@ namespace Fusion.XR
                 IgnoreCollisions(collision.gameObject.GetComponents<Collider>(), true);
                 AttachJoint(collision.collider.gameObject);
                 stabTime = Time.time;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (stabbedObject)
+            {
+                //Check box collisions here
             }
         }
 
