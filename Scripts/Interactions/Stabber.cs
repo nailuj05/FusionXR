@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,10 @@ namespace Fusion.XR
     [RequireComponent(typeof(BoxCollider))]
     public class Stabber : MonoBehaviour
     {
+        [Header("Stabber")]
+        [Tooltip("The collider that will be used for stabbing, if not assigned the script will grab the collider automatically")]
+        public BoxCollider stabCollider;
+
         public float requiredImpactVelocity;
 
         private Rigidbody rb;
@@ -21,12 +26,24 @@ namespace Fusion.XR
         private ConfigurableJoint stabJoint;
         private float stabTime;
         private GameObject stabbedObject;
+
+        /// <summary>
+        /// All colliders of the object
+        /// </summary>
         private Collider[] colliders;
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody>();
-            colliders = GetComponents<Collider>();
+            try
+            {
+                rb = GetComponent<Rigidbody>();
+                colliders = GetComponents<Collider>();
+                stabCollider = GetComponent<BoxCollider>();
+            }
+            catch 
+            {
+                Debug.LogError($"Object not setup correctly, missing Rigidbody/Collider/Box(Stab)Collider");
+            }
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -41,21 +58,23 @@ namespace Fusion.XR
             }
         }
 
+        //Maybe do this on a longer timestamp for performance (?)
         private void FixedUpdate()
         {
             if (stabbedObject)
             {
-                //Check box collisions here
-            }
-        }
+                Collider[] hitColliders = CheckBoxCollider(transform, stabCollider);
 
-        //This is not being called if Ignore Collision is enabled
-        private void OnCollisionExit(Collision collision)
-        {
-            if (collision.collider.gameObject == stabbedObject)
-            {
-                Debug.Log($"Exit {collision.collider}");
-                DetachJoint();
+                //Check if we hit more than one collider (the own collider)
+                if (hitColliders.Length > 1)
+                {
+                    //Apply Friction Force
+                }
+                else
+                {
+                    Debug.Log("Exit");
+                    DetachJoint();
+                }
             }
         }
 
@@ -76,8 +95,6 @@ namespace Fusion.XR
 
         void DetachJoint()
         {
-            Debug.Log($"Try detach: {(Time.time - stabTime)}");
-
             if((Time.time - stabTime) > unstabTime)
             {
                 Debug.Log("Detach Joint");
@@ -97,6 +114,13 @@ namespace Fusion.XR
                     Physics.IgnoreCollision(coll, stabColl, ignore);
                 }
             }
+        }
+
+        public static Collider[] CheckBoxCollider(Transform transform, BoxCollider boxCollider)
+        {
+            Vector3 boxCenter = transform.TransformPoint(boxCollider.center);
+
+            return Physics.OverlapBox(boxCenter, boxCollider.size / 2, transform.rotation);
         }
     }
 }

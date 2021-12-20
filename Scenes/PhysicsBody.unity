@@ -1005,6 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d2346821c6ce6469a6db59f9b11ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stabCollider: {fileID: 0}
   requiredImpactVelocity: 5
 --- !u!65 &101492012
 BoxCollider:
@@ -10024,7 +10025,7 @@ MonoBehaviour:
   hoverStrength: 2000
   hoverDampening: 500
   verticalDampening: 25
-  addedHeight: -0.4
+  addedHeight: 0
   applyCounterForce: 1
   counterForceScale: 1
   rb: {fileID: 1609038554}
