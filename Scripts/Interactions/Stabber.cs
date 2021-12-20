@@ -65,6 +65,8 @@ namespace Fusion.XR
             {
                 Collider[] hitColliders = CheckBoxCollider(transform, stabCollider);
 
+                //TODO: Check if hitColliders Contains the stabbed objects collider
+
                 //Check if we hit more than one collider (the own collider)
                 if (hitColliders.Length > 1)
                 {
