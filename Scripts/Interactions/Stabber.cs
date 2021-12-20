@@ -50,8 +50,6 @@ namespace Fusion.XR
         {
             if(collision.relativeVelocity.magnitude > requiredImpactVelocity)
             {
-                Debug.Log("Attach Joint");
-
                 IgnoreCollisions(collision.gameObject.GetComponents<Collider>(), true);
                 AttachJoint(collision.collider.gameObject);
                 stabTime = Time.time;
@@ -99,7 +97,6 @@ namespace Fusion.XR
         {
             if((Time.time - stabTime) > unstabTime)
             {
-                Debug.Log("Detach Joint");
                 IgnoreCollisions(stabbedObject.GetComponents<Collider>(), false);
 
                 stabbedObject = null;
