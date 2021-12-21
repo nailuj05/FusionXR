@@ -19,6 +19,8 @@ namespace Fusion.XR
 
         public float requiredImpactVelocity;
 
+        public float resistance = 100f;
+
         private Rigidbody rb;
 
         private float unstabTime = 0.3f;
@@ -40,7 +42,7 @@ namespace Fusion.XR
                 colliders = GetComponents<Collider>();
                 stabCollider = GetComponent<BoxCollider>();
             }
-            catch 
+            catch
             {
                 Debug.LogError($"Object not setup correctly, missing Rigidbody/Collider/Box(Stab)Collider");
             }
@@ -48,7 +50,7 @@ namespace Fusion.XR
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.relativeVelocity.magnitude > requiredImpactVelocity)
+            if (collision.relativeVelocity.magnitude > requiredImpactVelocity)
             {
                 IgnoreCollisions(collision.gameObject.GetComponents<Collider>(), true);
                 AttachJoint(collision.collider.gameObject);
@@ -65,19 +67,18 @@ namespace Fusion.XR
 
                 //TODO: Check if hitColliders Contains the stabbed objects collider
 
-                //Check if we hit more than one collider (the own collider)
-                if (hitColliders.Length > 1)
+                if (CheckColliders(hitColliders))
                 {
-                    //Apply Friction Force
+                    ApplyFriction();
                 }
                 else
                 {
-                    Debug.Log("Exit");
                     DetachJoint();
                 }
             }
         }
 
+        #region Joints
         void AttachJoint(GameObject objectToStab)
         {
             stabJoint = gameObject.AddComponent<ConfigurableJoint>();
@@ -95,7 +96,7 @@ namespace Fusion.XR
 
         void DetachJoint()
         {
-            if((Time.time - stabTime) > unstabTime)
+            if ((Time.time - stabTime) > unstabTime)
             {
                 IgnoreCollisions(stabbedObject.GetComponents<Collider>(), false);
 
@@ -103,10 +104,12 @@ namespace Fusion.XR
                 Destroy(stabJoint);
             }
         }
+        #endregion
 
+        #region Collisions
         void IgnoreCollisions(Collider[] stabbedColliders, bool ignore)
         {
-            foreach(Collider coll in colliders)
+            foreach (Collider coll in colliders)
             {
                 foreach (Collider stabColl in stabbedColliders)
                 {
@@ -120,6 +123,28 @@ namespace Fusion.XR
             Vector3 boxCenter = transform.TransformPoint(boxCollider.center);
 
             return Physics.OverlapBox(boxCenter, boxCollider.size / 2, transform.rotation);
+        }
+
+        public bool CheckColliders(Collider[] colliders)
+        {
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject == stabbedObject) return true;
+            }
+
+            return false;
+        } 
+        #endregion
+
+        public void ApplyFriction()
+        {
+            Vector3 connectedAnchor = stabJoint.connectedBody ? stabJoint.connectedBody.transform.TransformPoint(stabJoint.connectedAnchor) : stabJoint.connectedAnchor;
+            float stabDistance = Vector3.Distance(transform.TransformPoint(stabJoint.anchor), connectedAnchor);
+            Vector3 friction = -rb.velocity * resistance * stabDistance;
+
+            rb.AddForce(friction * rb.mass);
+
+            stabJoint.connectedBody?.AddForce(-friction * stabJoint.connectedBody.mass);
         }
     }
 }
