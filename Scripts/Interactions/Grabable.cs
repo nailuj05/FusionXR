@@ -9,8 +9,8 @@ namespace Fusion.XR
         public GrabableType grabableType = GrabableType.Interactables;
 
         #region IGrabable Implementation
-        public Transform Transform { get { return transform; }}
-        public GameObject GameObject { get { return gameObject; }}
+        public Transform Transform { get { return transform; } }
+        public GameObject GameObject { get { return gameObject; } }
 
         public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
 
@@ -98,7 +98,7 @@ namespace Fusion.XR
         #endregion
 
         #region Events
-        public virtual void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase) 
+        public virtual void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase)
         {
             ///Manage new hand first (so the last driver gets removed before a new one is added)
             ManageNewHand(hand, attachedHands, twoHandedMode);
@@ -110,7 +110,7 @@ namespace Fusion.XR
             EnableOrDisableCollisions(gameObject, hand, true);
 
             ///This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
-            isGrabbed = true; 
+            isGrabbed = true;
         }
 
         public virtual void Release(FusionXRHand hand)
