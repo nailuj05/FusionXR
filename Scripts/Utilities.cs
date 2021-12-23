@@ -177,7 +177,7 @@ namespace Fusion.XR
             return closestGrabPoint;
         }
 
-        public static GameObject ClosestGameobject(GameObject[] gameObjects, Vector3 pos)
+        public static GameObject ClosestGameObject(GameObject[] gameObjects, Vector3 pos)
         {
             if (gameObjects.Length == 0)
             {
@@ -204,7 +204,7 @@ namespace Fusion.XR
             return closestObject;
         }
 
-        public static GameObject ClosestGameobject(List<GameObject> gameObjects, Vector3 pos)
+        public static GameObject ClosestGameObject(List<GameObject> gameObjects, Vector3 pos)
         {
             if (gameObjects.Count == 0)
             {
