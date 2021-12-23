@@ -20,19 +20,19 @@ namespace Fusion.XR
         public float requiredImpactVelocity;
 
         public float resistance = 100f;
+        public float spring = 10f;
+
+        public LayerMask stabbingLayers;
 
         private Rigidbody rb;
-
         private float unstabTime = 0.3f;
 
         private ConfigurableJoint stabJoint;
         private float stabTime;
         private GameObject stabbedObject;
-
-        /// <summary>
-        /// All colliders of the object
-        /// </summary>
         private Collider[] colliders;
+
+        private JointDrive _drive;
 
         private void Awake()
         {
@@ -50,7 +50,7 @@ namespace Fusion.XR
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.relativeVelocity.magnitude > requiredImpactVelocity)
+            if (collision.relativeVelocity.magnitude > requiredImpactVelocity & Utilities.ObjectMatchesLayermask(collision.gameObject, stabbingLayers))
             {
                 IgnoreCollisions(collision.gameObject.GetComponents<Collider>(), true);
                 AttachJoint(collision.collider.gameObject);
@@ -133,18 +133,25 @@ namespace Fusion.XR
             }
 
             return false;
-        } 
+        }
         #endregion
+
+        Vector3 connectedAnchor;
+        float stabDistance;
 
         public void ApplyFriction()
         {
-            Vector3 connectedAnchor = stabJoint.connectedBody ? stabJoint.connectedBody.transform.TransformPoint(stabJoint.connectedAnchor) : stabJoint.connectedAnchor;
-            float stabDistance = Vector3.Distance(transform.TransformPoint(stabJoint.anchor), connectedAnchor);
-            Vector3 friction = -rb.velocity * resistance * stabDistance;
+            connectedAnchor = stabJoint.connectedBody ? stabJoint.connectedBody.transform.TransformPoint(stabJoint.connectedAnchor) : stabJoint.connectedAnchor;
+            stabDistance = Vector3.Distance(transform.TransformPoint(stabJoint.anchor), connectedAnchor);
 
-            rb.AddForce(friction * rb.mass);
+            _drive = stabJoint.xDrive;
+            _drive.positionDamper = resistance + resistance * Mathf.Pow(stabDistance, 2);
+            _drive.maximumForce = 1500;
+            _drive.positionSpring = spring;
 
-            stabJoint.connectedBody?.AddForce(-friction * stabJoint.connectedBody.mass);
+            stabJoint.xDrive = stabJoint.yDrive = stabJoint.zDrive = _drive;
+
+            stabJoint.targetPosition = transform.InverseTransformPoint(connectedAnchor);
         }
     }
 }
