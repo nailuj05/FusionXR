@@ -282,7 +282,16 @@ namespace Fusion.XR
             }
 
             return driver;
-        } 
+        }
+        #endregion
+
+        #region Collision
+        public static Collider[] CheckBoxCollider(Transform transform, BoxCollider boxCollider)
+        {
+            Vector3 boxCenter = transform.TransformPoint(boxCollider.center);
+
+            return Physics.OverlapBox(boxCenter, boxCollider.size / 2, transform.rotation);
+        }
         #endregion
 
         public static Direction GetDirectionFromVector(Vector2 input)

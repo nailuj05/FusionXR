@@ -118,12 +118,6 @@ namespace Fusion.XR
             }
         }
 
-        public static Collider[] CheckBoxCollider(Transform transform, BoxCollider boxCollider)
-        {
-            Vector3 boxCenter = transform.TransformPoint(boxCollider.center);
-
-            return Physics.OverlapBox(boxCenter, boxCollider.size / 2, transform.rotation);
-        }
 
         public bool CheckColliders(Collider[] colliders)
         {
