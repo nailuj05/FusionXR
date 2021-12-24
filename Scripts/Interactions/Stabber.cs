@@ -14,6 +14,8 @@ namespace Fusion.XR
     public class Stabber : MonoBehaviour
     {
         [Header("Stabber")]
+        public Axis axis = Axis.Z;
+
         [Tooltip("The collider that will be used for stabbing, if not assigned the script will grab the collider automatically")]
         public BoxCollider stabCollider;
 
@@ -131,7 +133,8 @@ namespace Fusion.XR
             stabJoint = stabber.gameObject.AddComponent<ConfigurableJoint>();
 
             stabJoint.angularXMotion = stabJoint.angularYMotion = stabJoint.angularZMotion = ConfigurableJointMotion.Locked;
-            stabJoint.yMotion = stabJoint.zMotion = ConfigurableJointMotion.Locked;
+
+            LockMotionAndAxis(stabber.axis);
 
             stabbedObject = objectToStab;
 
@@ -145,6 +148,27 @@ namespace Fusion.XR
         {
             stabbedObject = null;
             GameObject.Destroy(stabJoint);
+        }
+
+        void LockMotionAndAxis(Axis axis)
+        {
+            switch (axis)
+            {
+                case Axis.X:
+                    stabJoint.yMotion = stabJoint.zMotion = ConfigurableJointMotion.Locked;
+                    stabJoint.axis = Vector3.right;
+                    break;
+
+                case Axis.Y:
+                    stabJoint.xMotion = stabJoint.zMotion = ConfigurableJointMotion.Locked;
+                    stabJoint.axis = Vector3.forward;
+                    break;
+
+                case Axis.Z:
+                    stabJoint.xMotion = stabJoint.yMotion = ConfigurableJointMotion.Locked;
+                    stabJoint.axis = Vector3.up;
+                    break;
+            }
         }
         #endregion
 

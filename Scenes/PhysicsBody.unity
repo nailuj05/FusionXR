@@ -983,8 +983,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101492007}
-  m_LocalRotation: {x: -0, y: -0, z: -0.70710695, w: 0.7071067}
-  m_LocalPosition: {x: 0.816, y: 2.312, z: -0.8859999}
+  m_LocalRotation: {x: -0.0000013262032, y: -0.0000012538904, z: -0.7071066, w: 0.707107}
+  m_LocalPosition: {x: 0.8159995, y: 2.312, z: -0.88599956}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1085128079}
@@ -1005,6 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d2346821c6ce6469a6db59f9b11ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  axis: 0
   stabCollider: {fileID: 0}
   requiredImpactVelocity: 5
   resistance: 300
@@ -6963,9 +6964,10 @@ GameObject:
   - component: {fileID: 1121156035}
   - component: {fileID: 1121156034}
   - component: {fileID: 1121156033}
+  - component: {fileID: 1121156038}
   m_Layer: 10
-  m_Name: Cube (1)
-  m_TagString: Untagged
+  m_Name: StabCubes
+  m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6978,7 +6980,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121156032}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -7056,13 +7058,28 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121156032}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071057, w: 0.7071079}
-  m_LocalPosition: {x: -0.402, y: 0.963, z: -0.291}
-  m_LocalScale: {x: 0.3266312, y: 0.05764622, z: 0.3266312}
+  m_LocalRotation: {x: -0.002256389, y: 0.18056485, z: -0.012289886, w: 0.98348373}
+  m_LocalPosition: {x: 0.76282257, y: -0.04519987, z: -0.28}
+  m_LocalScale: {x: 0.32663122, y: 0.057646215, z: 0.3266312}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_Father: {fileID: 1784969799}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 20.807, z: -1.432}
+--- !u!114 &1121156038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121156032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabableType: 0
+  twoHandedMode: 1
+  grabPoints: []
 --- !u!1 &1121965585
 GameObject:
   m_ObjectHideFlags: 0
@@ -7734,9 +7751,10 @@ GameObject:
   - component: {fileID: 1215180861}
   - component: {fileID: 1215180860}
   - component: {fileID: 1215180859}
+  - component: {fileID: 1215180864}
   m_Layer: 10
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: StabCubes
+  m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7749,7 +7767,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215180858}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -7827,13 +7845,28 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215180858}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071057, w: 0.7071079}
-  m_LocalPosition: {x: -0.47289997, y: 0.9629999, z: -0.291}
-  m_LocalScale: {x: 0.3266312, y: 0.05764622, z: 0.3266312}
+  m_LocalRotation: {x: -0, y: -0, z: -0.012495302, w: 0.999922}
+  m_LocalPosition: {x: 0.7610513, y: -0.1160776, z: -0.28}
+  m_LocalScale: {x: 0.32663122, y: 0.05764622, z: 0.3266312}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_Father: {fileID: 1784969799}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.432}
+--- !u!114 &1215180864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215180858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabableType: 0
+  twoHandedMode: 1
+  grabPoints: []
 --- !u!1 &1232207949
 GameObject:
   m_ObjectHideFlags: 0
@@ -11180,9 +11213,10 @@ GameObject:
   - component: {fileID: 1709840893}
   - component: {fileID: 1709840892}
   - component: {fileID: 1709840891}
-  m_Layer: 0
-  m_Name: Cube (2)
-  m_TagString: Untagged
+  - component: {fileID: 1709840896}
+  m_Layer: 10
+  m_Name: StabCubes
+  m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11195,11 +11229,11 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709840890}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -11273,13 +11307,28 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709840890}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071057, w: 0.7071079}
-  m_LocalPosition: {x: -0.555, y: 0.9629999, z: -0.291}
-  m_LocalScale: {x: 0.3266312, y: 0.05764622, z: 0.3266312}
+  m_LocalRotation: {x: 0.002724269, y: -0.21800633, z: -0.012194713, w: 0.97586733}
+  m_LocalPosition: {x: 0.759, y: -0.19815171, z: -0.28}
+  m_LocalScale: {x: 0.32663122, y: 0.05764622, z: 0.3266312}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_Father: {fileID: 1784969799}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: -25.186, z: -1.432}
+--- !u!114 &1709840896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709840890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabableType: 0
+  twoHandedMode: 1
+  grabPoints: []
 --- !u!1 &1782468068
 GameObject:
   m_ObjectHideFlags: 0
@@ -11443,6 +11492,9 @@ Transform:
   - {fileID: 1246951702}
   - {fileID: 543450652928026628}
   - {fileID: 101492010}
+  - {fileID: 1215180863}
+  - {fileID: 1121156037}
+  - {fileID: 1709840895}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13885,7 +13937,7 @@ GameObject:
   - component: {fileID: 1711813856338465643}
   - component: {fileID: 919132148719088319}
   - component: {fileID: 919132148719088320}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TabelLarge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

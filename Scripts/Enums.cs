@@ -83,4 +83,12 @@ namespace Fusion.XR
         Mock,
         XR
     }
+
+    //Stabbing
+    public enum Axis
+    {
+        X,
+        Y,
+        Z
+    }
 }
