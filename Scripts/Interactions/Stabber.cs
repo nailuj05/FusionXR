@@ -20,7 +20,7 @@ namespace Fusion.XR
         public BoxCollider stabCollider;
 
         public float requiredImpactVelocity;
-        public float impactAngle = 15f;
+        public float impactAngle = 45f;
 
         public float resistance = 100f;
         public float spring = 10f;
