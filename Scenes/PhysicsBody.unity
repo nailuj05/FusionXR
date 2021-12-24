@@ -983,8 +983,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101492007}
-  m_LocalRotation: {x: -0.0000013262032, y: -0.0000012538904, z: -0.7071066, w: 0.707107}
-  m_LocalPosition: {x: 0.8159995, y: 2.312, z: -0.88599956}
+  m_LocalRotation: {x: -0.55065626, y: -0.44359842, z: -0.443597, w: 0.55065405}
+  m_LocalPosition: {x: 0.7977, y: -0.237, z: -0.8207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1085128079}
@@ -992,7 +992,7 @@ Transform:
   - {fileID: 4535285860646728001}
   m_Father: {fileID: 1784969799}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: -90, y: 180, z: -257.70898}
 --- !u!114 &101492011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,6 +1008,7 @@ MonoBehaviour:
   axis: 0
   stabCollider: {fileID: 0}
   requiredImpactVelocity: 5
+  impactAngle: 25
   resistance: 300
   spring: 100
   stabbingLayers:

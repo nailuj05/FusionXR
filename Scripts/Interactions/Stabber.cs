@@ -20,6 +20,7 @@ namespace Fusion.XR
         public BoxCollider stabCollider;
 
         public float requiredImpactVelocity;
+        public float impactAngle = 15f;
 
         public float resistance = 100f;
         public float spring = 10f;
@@ -51,13 +52,14 @@ namespace Fusion.XR
         {
             if (collision.relativeVelocity.magnitude > requiredImpactVelocity & Utilities.ObjectMatchesLayermask(collision.gameObject, stabbingLayers))
             {
-                var stab = new Stab(this, collision.gameObject);
+                if (MatchAxis(collision.relativeVelocity))
+                {
+                    var stab = new Stab(this, collision.gameObject);
+                    stab.StartStab();
+                    stabs.Add(stab);
 
-                stab.StartStab();
-
-                stabs.Add(stab);
-
-                //Debug.Log($"Added new Stab {stab}, Total stabs: {stabs.Count}");
+                    //Debug.Log($"Added new Stab {stab}, Total stabs: {stabs.Count}");
+                }
             }
         }
 
@@ -68,6 +70,31 @@ namespace Fusion.XR
             for(int i = stabs.Count - 1; i >= 0; i--)
             {
                 stabs[i].UpdateStab();
+            }
+        }
+
+        private bool MatchAxis(Vector3 impact)
+        {
+            var globalAxis = transform.TransformDirection(GetAxisVector(axis));
+
+            return Vector3.Angle(globalAxis, -impact) < impactAngle;
+        }
+
+        static Vector3 GetAxisVector(Axis axis)
+        {
+            switch (axis)
+            {
+                case Axis.X:
+                    return Vector3.right;
+
+                case Axis.Y:
+                    return Vector3.up;
+
+                case Axis.Z:
+                    return Vector3.forward;
+
+                default:
+                    return Vector3.zero;
             }
         }
     }
