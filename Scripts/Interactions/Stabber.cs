@@ -24,15 +24,12 @@ namespace Fusion.XR
 
         public LayerMask stabbingLayers;
 
-        private Rigidbody rb;
-        private float unstabTime = 0.3f;
+        public Rigidbody rb { get; private set; }
+        public float unstabTime { get; private set; } = 0.3f;
 
-        private ConfigurableJoint stabJoint;
-        private float stabTime;
-        private GameObject stabbedObject;
-        private Collider[] colliders;
+        public Collider[] colliders { get; private set; }
 
-        private JointDrive _drive;
+        public List<Stab> stabs { get; set; } = new List<Stab>();
 
         private void Awake()
         {
@@ -52,36 +49,86 @@ namespace Fusion.XR
         {
             if (collision.relativeVelocity.magnitude > requiredImpactVelocity & Utilities.ObjectMatchesLayermask(collision.gameObject, stabbingLayers))
             {
-                IgnoreCollisions(collision.gameObject.GetComponents<Collider>(), true);
-                AttachJoint(collision.collider.gameObject);
-                stabTime = Time.time;
+                var stab = new Stab(this, collision.gameObject);
+
+                stab.StartStab();
+
+                stabs.Add(stab);
+
+                //Debug.Log($"Added new Stab {stab}, Total stabs: {stabs.Count}");
             }
         }
 
         //Maybe do this on a longer timestamp for performance (?)
         private void FixedUpdate()
         {
-            if (stabbedObject)
+            //Iterate backwards through the stabs so we can remove them if needed without breaking the loop
+            for(int i = stabs.Count - 1; i >= 0; i--)
             {
-                Collider[] hitColliders = CheckBoxCollider(transform, stabCollider);
+                stabs[i].UpdateStab();
+            }
+        }
+    }
 
-                //TODO: Check if hitColliders Contains the stabbed objects collider
+    /// <summary>
+    /// A class to contain all the data and logic for stabs. 
+    /// Controlled and managed by the Stabber.
+    /// </summary>
+    public class Stab
+    {
+        private Stabber stabber;
 
-                if (CheckColliders(hitColliders))
-                {
-                    ApplyFriction();
-                }
-                else
-                {
-                    DetachJoint();
-                }
+        private ConfigurableJoint stabJoint;
+        private float stabTime;
+        private GameObject stabbedObject;
+
+        private JointDrive _drive;
+
+        public Stab(Stabber stabber, GameObject stabbedObject)
+        {
+            this.stabber = stabber;
+            this.stabbedObject = stabbedObject;
+        }
+
+        public void StartStab()
+        {
+            IgnoreCollisions(stabbedObject.GetComponents<Collider>(), true);
+
+            AttachJoint(stabbedObject);
+
+            stabTime = Time.time;
+        }
+
+        public void UpdateStab()
+        {
+            Collider[] hitColliders = Utilities.CheckBoxCollider(stabber.transform, stabber.stabCollider);
+
+            if (ContainsStabbedObject(hitColliders))
+            {
+                ApplyFriction();
+            }
+            else
+            {
+                TryEndStab();
+            }
+        }
+
+        public void TryEndStab()
+        {
+            if ((Time.time - stabTime) > stabber.unstabTime)
+            {
+                IgnoreCollisions(stabbedObject.GetComponents<Collider>(), false);
+
+                DetachJoint();
+
+                stabber.stabs.Remove(this);
             }
         }
 
         #region Joints
         void AttachJoint(GameObject objectToStab)
         {
-            stabJoint = gameObject.AddComponent<ConfigurableJoint>();
+            stabJoint = stabber.gameObject.AddComponent<ConfigurableJoint>();
 
             stabJoint.angularXMotion = stabJoint.angularYMotion = stabJoint.angularZMotion = ConfigurableJointMotion.Locked;
             stabJoint.yMotion = stabJoint.zMotion = ConfigurableJointMotion.Locked;
@@ -96,20 +143,15 @@ namespace Fusion.XR
 
         void DetachJoint()
         {
-            if ((Time.time - stabTime) > unstabTime)
-            {
-                IgnoreCollisions(stabbedObject.GetComponents<Collider>(), false);
-
-                stabbedObject = null;
-                Destroy(stabJoint);
-            }
+            stabbedObject = null;
+            GameObject.Destroy(stabJoint);
         }
         #endregion
 
         #region Collisions
         void IgnoreCollisions(Collider[] stabbedColliders, bool ignore)
         {
-            foreach (Collider coll in colliders)
+            foreach (Collider coll in stabber.colliders)
             {
                 foreach (Collider stabColl in stabbedColliders)
                 {
@@ -118,8 +160,7 @@ namespace Fusion.XR
             }
         }
 
-
-        public bool CheckColliders(Collider[] colliders)
+        bool ContainsStabbedObject(Collider[] colliders)
         {
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -130,22 +171,24 @@ namespace Fusion.XR
         }
         #endregion
 
+        #region Friction
         Vector3 connectedAnchor;
         float stabDistance;
 
-        public void ApplyFriction()
+        void ApplyFriction()
         {
             connectedAnchor = stabJoint.connectedBody ? stabJoint.connectedBody.transform.TransformPoint(stabJoint.connectedAnchor) : stabJoint.connectedAnchor;
-            stabDistance = Vector3.Distance(transform.TransformPoint(stabJoint.anchor), connectedAnchor);
+            stabDistance = Vector3.Distance(stabber.transform.TransformPoint(stabJoint.anchor), connectedAnchor);
 
             _drive = stabJoint.xDrive;
-            _drive.positionDamper = resistance + resistance * Mathf.Pow(stabDistance, 2);
+            _drive.positionDamper = stabber.resistance + stabber.resistance * Mathf.Pow(stabDistance, 2);
             _drive.maximumForce = 1500;
-            _drive.positionSpring = spring;
+            _drive.positionSpring = stabber.spring;
 
             stabJoint.xDrive = stabJoint.yDrive = stabJoint.zDrive = _drive;
 
-            stabJoint.targetPosition = transform.InverseTransformPoint(connectedAnchor);
+            stabJoint.targetPosition = stabber.transform.InverseTransformPoint(connectedAnchor);
         }
+        #endregion
     }
 }
