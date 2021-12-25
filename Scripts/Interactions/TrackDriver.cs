@@ -35,6 +35,8 @@ namespace Fusion.XR
         [SerializeField] public float slerpDamper   = 250;
         [SerializeField] public float slerpMaxForce = 1500;
 
+        [SerializeField] public float limit = 0.7f;
+
         [HideInInspector] public GameObject tracker;
         [HideInInspector] public Transform palm;
     }
@@ -153,6 +155,12 @@ namespace Fusion.XR
             activeJoint.anchor = Vector3.zero;
             activeJoint.connectedAnchor = Vector3.zero;
 
+            activeJoint.xMotion = activeJoint.yMotion = activeJoint.zMotion = ConfigurableJointMotion.Limited;
+
+            var limit = new SoftJointLimit();
+            limit.limit = trackingBase.limit;
+            activeJoint.linearLimit = limit;
+
             activeJoint.enableCollision = false;
             activeJoint.enablePreprocessing = false;
 
@@ -174,7 +182,9 @@ namespace Fusion.XR
                 UpdateHandJointDrives();
             }
 
-            activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos);
+            activeJoint.anchor = jointRB.transform.InverseTransformPoint(Player.main.head.position);
+
+            activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos) - activeJoint.anchor;
             activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;
         }
 
