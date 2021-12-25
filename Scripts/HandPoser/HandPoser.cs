@@ -45,7 +45,8 @@ namespace Fusion.XR
         public Transform renderHand;
 
         [Header("Fingers")]
-        public FingerTrackingMode fingerTrackingMode;
+        public FingerTrackingMode handPosingDriver = FingerTrackingMode.Kinematic;
+        public FingerTrackingMode grabbingDriver = FingerTrackingMode.CollisionTest;
         public FingerTrackingBase fingerSettings = new FingerTrackingBase();
         public Finger[] fingers;
 
@@ -73,7 +74,7 @@ namespace Fusion.XR
         void Start()
         {
             //Default Setup and tracking Base Config
-            UpdateDriverAndTracking(fingerTrackingMode);
+            UpdateDriverAndTracking(handPosingDriver);
 
             currentPose = handOpen;
             lastHandState = SavePose();
@@ -204,13 +205,14 @@ namespace Fusion.XR
 
         public void AttachHand(Transform attachmentPoint, HandPose pose, bool customPose)
         {
+            //Debug.Log($"Attaching with {pose} custom: {customPose}");
             poseLocked = true;
             isAttached = true;
             attachLerp = 0;
             attachedObj = attachmentPoint;
 
             //Whether we should use default or Kinematic tracking (for predfined poses)
-            UpdateTracking(customPose ? FingerTrackingMode.Kinematic : fingerTrackingMode);
+            UpdateTracking(customPose ? FingerTrackingMode.Kinematic : grabbingDriver);
 
             RotateToPose(handAwait);
 
@@ -227,6 +229,7 @@ namespace Fusion.XR
 
         private void FingerUpdate()
         {
+            //This right?
             currentLerp += currentLerp <= 1f ? Time.deltaTime * poseLerpSpeed : 0;
 
             if (currentLerp >= 1)
@@ -275,6 +278,7 @@ namespace Fusion.XR
 
         public void UpdateTracking(FingerTrackingMode driver)
         {
+            //Debug.Log($"Changed driver to {driver}");
             foreach (var finger in fingers)
             {
                 finger.ChangeFingerDriver(Utilities.FingerDriverFromEnum(driver));
@@ -332,7 +336,7 @@ namespace Fusion.XR
 
             if (GUILayout.Button("UpdateFingerGizmos"))
             {
-                handPoser.UpdateDriverAndTracking(handPoser.fingerTrackingMode);
+                handPoser.UpdateDriverAndTracking(handPoser.grabbingDriver);
             }
         }
     }

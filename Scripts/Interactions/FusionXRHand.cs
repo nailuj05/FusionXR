@@ -175,7 +175,7 @@ namespace Fusion.XR
 
             if (!generatedGrabPoint && grabPoint.hasCustomPose)
             {
-                handPoser.AttachHand(grabPosition, grabPoint.pose, false);
+                handPoser.AttachHand(grabPosition, grabPoint.pose, true);
             }
             else
             {

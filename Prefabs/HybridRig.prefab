@@ -661,7 +661,7 @@ MonoBehaviour:
   canMove: 1
   usesGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
-  rigidBody: {fileID: 4601817725372166375}
+  rb: {fileID: 0}
 --- !u!114 &1718852702228879623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +677,6 @@ MonoBehaviour:
   p_XRRig: {fileID: 5221161576313746133}
   p_VRCamera: {fileID: 0}
   p_CollisionRadius: 0.1
-  p_localHeight: 0
 --- !u!1 &5221161575155597480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,6 +1336,10 @@ PrefabInstance:
     - target: {fileID: 2130366296822573471, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130366297943922195, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
+      propertyPath: m_Center.x
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922196, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: m_Mass
