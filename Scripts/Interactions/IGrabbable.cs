@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public interface IGrabable
+    public interface IGrabbable
     {
         Transform Transform { get; }
 

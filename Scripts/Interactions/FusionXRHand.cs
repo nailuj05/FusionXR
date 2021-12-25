@@ -18,13 +18,13 @@ namespace Fusion.XR
         public Vector3 positionOffset;
         public Vector3 rotationOffset;
 
-        //Tracking for Hands (and trackingBase for Grabables)
+        //Tracking for Hands (and trackingBase for Grabbables)
         public TrackingMode trackingMode;
 
         public TrackingBase trackingBase;
         private TrackDriver trackDriver;
 
-        ///The Transformation the hand WANTS to reach, public get for access from Grabable
+        ///The Transformation the hand WANTS to reach, public get for access from Grabbable
         public Vector3 targetPosition { get; private set; }
         public Quaternion targetRotation { get; private set; }
 
@@ -43,7 +43,7 @@ namespace Fusion.XR
 
         private bool isGrabbing;
         private bool generatedGrabPoint;
-        private IGrabable grabbedGrabable;
+        private IGrabbable grabbedGrabbable;
 
         public bool useHandPoser;
         private HandPoser handPoser;
@@ -148,27 +148,27 @@ namespace Fusion.XR
             grabPoint = null;
             generatedGrabPoint = false;
 
-            ///Check for grabable in Range, if none return
-            GameObject closestGrabable = ClosestGrabable(out Collider closestColl);
+            ///Check for grabbable in Range, if none return
+            GameObject closestGrabbable = ClosestGrabbable(out Collider closestColl);
 
-            if (closestGrabable == null)
+            if (closestGrabbable == null)
                 return;
 
-            ///Get grabable component and possible grab points
-            grabbedGrabable = closestGrabable.GetComponentInParent<IGrabable>();
+            ///Get grabbable component and possible grab points
+            grabbedGrabbable = closestGrabbable.GetComponentInParent<IGrabbable>();
 
-            grabPosition = grabbedGrabable.GetClosestGrabPoint(transform.position, transform, hand, out grabPoint);
+            grabPosition = grabbedGrabbable.GetClosestGrabPoint(transform.position, transform, hand, out grabPoint);
 
             ///Generate a GrabPoint if there is no given one
             if (grabPosition == null)
             {
-                grabPosition = GenerateGrabPoint(closestColl, grabbedGrabable);
+                grabPosition = GenerateGrabPoint(closestColl, grabbedGrabbable);
                 generatedGrabPoint = true;
             }
 
-            grabbedGrabable.Grab(this, grabbedTrackingMode, trackingBase);
+            grabbedGrabbable.Grab(this, grabbedTrackingMode, trackingBase);
 
-            //Debug.Log($"Grab {grabbedGrabable.GameObject.name}");
+            //Debug.Log($"Grab {grabbedGrabbable.GameObject.name}");
 
             if (!useHandPoser)
                 return;
@@ -200,12 +200,12 @@ namespace Fusion.XR
                 grabPoint.ReleaseGrabPoint();
             }
 
-            //Release the Grabable and reset the hand
-            if (grabbedGrabable != null)
+            //Release the Grabbable and reset the hand
+            if (grabbedGrabbable != null)
             {
-                grabbedGrabable.Release(this);
-                grabbedGrabable.GameObject.GetComponent<Rigidbody>().velocity = rb.velocity;   //NOTE: Apply Better velocity for throwing here
-                grabbedGrabable = null;
+                grabbedGrabbable.Release(this);
+                grabbedGrabbable.GameObject.GetComponent<Rigidbody>().velocity = rb.velocity;   //NOTE: Apply Better velocity for throwing here
+                grabbedGrabbable = null;
             }
 
             if (useHandPoser)
@@ -214,7 +214,7 @@ namespace Fusion.XR
             }
         }
 
-        public Transform GenerateGrabPoint(Collider closestCollider, IGrabable grabable)
+        public Transform GenerateGrabPoint(Collider closestCollider, IGrabbable grabbable)
         {
             Transform grabSpot = new GameObject().transform;
             grabSpot.position = closestCollider.ClosestPoint(palm.position);
@@ -233,14 +233,14 @@ namespace Fusion.XR
                 grabSpot.localRotation = transform.rotation;
             }
 
-            grabSpot.parent = grabable.Transform;
+            grabSpot.parent = grabbable.Transform;
             grabSpot.position = grabSpot.TransformPoint(-palm.localPosition + Vector3.up * 0.03f);
 
             return grabSpot;
         }
 
         //TODO: remove redunant find closest gameobject
-        GameObject ClosestGrabable(out Collider closestColl)
+        GameObject ClosestGrabbable(out Collider closestColl)
         {
             Collider[] nearObjects = Physics.OverlapSphere(palm.position, reachDist);
 

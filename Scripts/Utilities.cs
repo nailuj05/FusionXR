@@ -134,9 +134,9 @@ namespace Fusion.XR
                 return false;
             }
 
-            if (attractType == AttractType.Grabables)
+            if (attractType == AttractType.Grabbables)
             {
-                return obj.TryGetComponent<IGrabable>(out IGrabable g);
+                return obj.TryGetComponent<IGrabbable>(out IGrabbable g);
             }
             else if (attractType == AttractType.Rigidbodys)
             {

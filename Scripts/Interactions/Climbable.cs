@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public class Climbable : Grabable
+    public class Climbable : Grabbable
     {
         //private Vector3 targetVelocity;
 
         //public override void Start()
         //{
-        //    gameObject.tag = "Grabable";
+        //    gameObject.tag = "Grabbable";
         //}
 
         //public override void Update()

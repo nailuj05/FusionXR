@@ -5,9 +5,9 @@ using UnityEditor;
 
 namespace Fusion.XR
 {
-    public abstract class KinematicInteractable : MonoBehaviour, IGrabable
+    public abstract class KinematicInteractable : MonoBehaviour, IGrabbable
     {
-        #region IGrabable Implementation
+        #region IGrabbable Implementation
         public Transform Transform { get { return transform; } }
         public GameObject GameObject { get { return gameObject; } }
 
@@ -49,9 +49,9 @@ namespace Fusion.XR
         #region Grab & Release
         public void Grab(FusionXRHand hand, TrackingMode mode, TrackingBase trackingBase)
         {
-            Grabable.ManageNewHand(hand, attachedHands, twoHandedMode);
+            Grabbable.ManageNewHand(hand, attachedHands, twoHandedMode);
 
-            Grabable.EnableOrDisableCollisions(gameObject, hand, true);
+            Grabbable.EnableOrDisableCollisions(gameObject, hand, true);
 
             isGrabbed = true;
 
@@ -60,7 +60,7 @@ namespace Fusion.XR
 
         public void Release(FusionXRHand hand)
         {
-            Grabable.EnableOrDisableCollisions(gameObject, hand, false);
+            Grabbable.EnableOrDisableCollisions(gameObject, hand, false);
 
             isGrabbed = false;
 

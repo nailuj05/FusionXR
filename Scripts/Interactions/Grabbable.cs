@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public class Grabable : MonoBehaviour, IGrabable
+    public class Grabbable : MonoBehaviour, IGrabbable
     {
-        public GrabableType grabableType = GrabableType.Interactables;
+        public GrabbableType grabableType = GrabbableType.Interactables;
 
-        #region IGrabable Implementation
+        #region IGrabbable Implementation
         public Transform Transform { get { return transform; } }
         public GameObject GameObject { get { return gameObject; } }
 

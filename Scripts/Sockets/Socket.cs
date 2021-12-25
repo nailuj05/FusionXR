@@ -9,7 +9,7 @@ namespace Fusion.XR
     {
         [Header("Attraction")]
         [Tooltip("The AttractType defines which kind of objects can be attracted (attached) to the Socket")]
-        public AttractType attractType = AttractType.Grabables;
+        public AttractType attractType = AttractType.Grabbables;
 
         [Tooltip("The Layers used to filter the possible attachments")]
         public LayerMask attractLayers = ~0;
@@ -21,7 +21,7 @@ namespace Fusion.XR
         public float attractionRange = 0.1f;
         public Vector3 attractionZoneOffset = Vector3.zero;
 
-        [Tooltip("Should a grabable forcefully detach if it is still grabbed?")]
+        [Tooltip("Should a grabbable forcefully detach if it is still grabbed?")]
         public bool forceDetach;
 
         [Tooltip("Should the socket release the object if the player grabs it?")]
@@ -48,13 +48,13 @@ namespace Fusion.XR
 
         [Tooltip("The object attached to this socket, can be set from the editor as a default attachment")]
         public GameObject attachedObject;
-        private IGrabable attachedGrabable;
+        private IGrabbable attachedGrabbable;
 
         private bool hasAttachedObject;
 
         private string storedTag;
 
-        private List<IGrabable> possibleAttachObjects = new List<IGrabable>();
+        private List<IGrabbable> possibleAttachObjects = new List<IGrabbable>();
 
         //-----------------------------//
 
@@ -87,18 +87,18 @@ namespace Fusion.XR
 
             if (CheckAttachementRequirements(newColl.gameObject))
             {
-                if(newColl.TryGetComponent(out IGrabable grabable) && grabable.isGrabbed)
+                if(newColl.TryGetComponent(out IGrabbable grabbable) && grabbable.isGrabbed)
                 {
                     if (forceDetach)
                     {
-                        for(int i = grabable.attachedHands.Count - 1; i >= 0; i--)
+                        for(int i = grabbable.attachedHands.Count - 1; i >= 0; i--)
                         {
-                            grabable.attachedHands[i].Release();
+                            grabbable.attachedHands[i].Release();
                         }
                     }
                     else
                     {
-                        possibleAttachObjects.Add(grabable);
+                        possibleAttachObjects.Add(grabbable);
                         return;
                     }
                 }
@@ -110,7 +110,7 @@ namespace Fusion.XR
 
         private void OnTriggerStay(Collider other)
         {
-            if (canBeGrabbed && attachedGrabable != null && attachedGrabable.isGrabbed) Release();
+            if (canBeGrabbed && attachedGrabbable != null && attachedGrabbable.isGrabbed) Release();
 
             if (showPreview) DrawPrevObject();
 
@@ -118,7 +118,7 @@ namespace Fusion.XR
 
             for (int i = 0; i < possibleAttachObjects.Count; i++)
             {
-                //Check whether a grabable has been released
+                //Check whether a grabbable has been released
                 if (!possibleAttachObjects[i].isGrabbed)
                 {
                     //Check if the object is still possible to attach
@@ -137,8 +137,8 @@ namespace Fusion.XR
 
         private void OnTriggerExit(Collider exitingColl)
         {
-            if (exitingColl.TryGetComponent(out IGrabable grabable) && possibleAttachObjects.Contains(grabable))
-                possibleAttachObjects.Remove(grabable);
+            if (exitingColl.TryGetComponent(out IGrabbable grabbable) && possibleAttachObjects.Contains(grabbable))
+                possibleAttachObjects.Remove(grabbable);
 
             if (hasAttachedObject && exitingColl.gameObject == attachedObject)
             {
@@ -163,7 +163,7 @@ namespace Fusion.XR
             trackDriver.EndTrack();
 
             attachedObject.tag = storedTag;
-            attachedGrabable = null;
+            attachedGrabbable = null;
             attachedObject = null;
             hasAttachedObject = false;
         }
@@ -179,14 +179,14 @@ namespace Fusion.XR
 
             attachedObject = objectToAttach;
 
-            if (attachedObject.TryGetComponent(out Grabable grabable))
+            if (attachedObject.TryGetComponent(out Grabbable grabbable))
             {
-                if (possibleAttachObjects.Contains(grabable))
+                if (possibleAttachObjects.Contains(grabbable))
                 {
-                    possibleAttachObjects.Remove(grabable);
+                    possibleAttachObjects.Remove(grabbable);
                 }
 
-                attachedGrabable = grabable;
+                attachedGrabbable = grabbable;
             }
 
             //Tag the attached GameObject as "Attached"

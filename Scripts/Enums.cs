@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    //Used by Hands/Grabable and Tracking Scripts
+    //Used by Hands/Grabbable and Tracking Scripts
     public enum Hand
     {
         Left = 0,
@@ -27,7 +27,7 @@ namespace Fusion.XR
         //AttachHand = 2
     }
 
-    public enum GrabableType
+    public enum GrabbableType
     {
         Interactables,
         Props
@@ -74,7 +74,7 @@ namespace Fusion.XR
     public enum AttractType
     {
         Rigidbodys,
-        Grabables
+        Grabbables
     }
 
     //Rig
