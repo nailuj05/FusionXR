@@ -61,7 +61,7 @@ namespace Fusion.XR
                 ///Movement
                 Vector3 movementDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-                movement.PreprocessMovement(movementDir);
+                movement?.PreprocessMovement(movementDir);
             }
             #endregion
 
