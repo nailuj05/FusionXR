@@ -45,6 +45,8 @@ namespace Fusion.XR
 
             GameObject obj = ((Player)target).gameObject;
 
+            if (((Player)target).GetComponentInChildren<PhysicsBody>()) return;
+
             EditorGUILayout.Space();
 
             EditorGUILayout.BeginHorizontal();
