@@ -27,7 +27,7 @@ namespace Fusion.XR
 
             var player = FindObjectOfType<Player>();
 
-            player.head = Camera.main.transform;
+            player.head = currentRig.GetChildByName("Main Camera", true).transform;
 
             GameObject rControllerTarget = currentRig.GetChildByName("Right Tracked Controller", true);
             GameObject lControllerTarget = currentRig.GetChildByName("Left Tracked Controller",  true);
@@ -35,9 +35,17 @@ namespace Fusion.XR
             player.RightHand.trackedController = rControllerTarget.transform;
             player.LeftHand.trackedController  = lControllerTarget.transform;
 
+            var poserL = player.LeftHand.GetComponent<HandPoser>();
+            var poserR = player.RightHand.GetComponent<HandPoser>();
+
+            poserL.debugMode = poserR.debugMode = rigType == RigType.Mock;
+
+            EditorUtility.SetDirty(poserR);
+            EditorUtility.SetDirty(poserL);
             EditorUtility.SetDirty(player.LeftHand);
             EditorUtility.SetDirty(player.RightHand);
             EditorUtility.SetDirty(player);
+            EditorUtility.SetDirty(player.head);
             EditorUtility.SetDirty(collisionAdjuster);
         }
 
