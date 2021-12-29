@@ -49,6 +49,11 @@ namespace Fusion.XR
 
         private bool waitForTurn = false;
 
+        private void Awake()
+        {
+            head = Player.main.head;
+        }
+
         private void Start()
         {
             //Subscribe to Movement Actions
