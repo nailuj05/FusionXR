@@ -15,7 +15,7 @@ namespace Fusion.XR
         [HideInInspector]
         public float p_localHeight { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             p_VRCamera = Player.main.head;
         }
