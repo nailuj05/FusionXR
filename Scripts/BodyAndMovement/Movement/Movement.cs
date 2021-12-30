@@ -49,19 +49,13 @@ namespace Fusion.XR
 
         private bool waitForTurn = false;
 
-        private void Awake()
-        {
-            head = Player.main.head;
-        }
-
         private void Start()
         {
             //Subscribe to Movement Actions
             movementAction.action.performed += PreprocessInput;
-            turnAction.action.performed += Turn; //This working with overrides?
+            turnAction.action.performed += Turn;
 
-            //Set Movement Direction Initially
-            SetMovementDirection(movementDirection);
+            head = Player.main.head;
 
             //Add the standard Movement Override
             movementOverrides.Add(new MovementOverride());
