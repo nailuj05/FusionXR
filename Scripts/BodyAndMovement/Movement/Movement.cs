@@ -20,7 +20,7 @@ namespace Fusion.XR
         public float turnAngle = 45;
         public float turnCooldown = 0.3f;
 
-        private Transform currentMovementDirection;
+        private Transform currentMovementDirection => GetMovementDirection(movementDirection);
 
         public InputActionReference movementAction;
         public InputActionReference turnAction;
@@ -99,15 +99,15 @@ namespace Fusion.XR
             }
         }
 
-        public void SetMovementDirection(MovementDirection movementDirection)
+        public Transform GetMovementDirection(MovementDirection movementDirection)
         {
             if (movementDirection == MovementDirection.HandOriented)
             {
-                currentMovementDirection = hand;
+                return hand;
             }
             else
             {
-                currentMovementDirection = head;
+                return head;
             }
         }
 
