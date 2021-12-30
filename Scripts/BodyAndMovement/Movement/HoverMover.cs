@@ -53,9 +53,7 @@ namespace Fusion.XR
         public override void Move(Vector3 direction)
         {
             //Stick Movement 
-            vel = Vector3.ProjectOnPlane(direction, Vector3.up);
-
-            vel.y = rb.velocity.y;
+            vel.Set(direction.x, rb.velocity.y, direction.z);
 
             CurrentVelocity = rb.velocity;
 

@@ -59,9 +59,9 @@ namespace Fusion.XR
                 VRCamera.localEulerAngles += lookDir;
 
                 ///Movement
-                Vector3 movementDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                Vector2 movementDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-                movement?.PreprocessMovement(movementDir);
+                movement?.PreprocessInput(movementDir);
             }
             #endregion
 

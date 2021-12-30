@@ -47,6 +47,7 @@ namespace Fusion.XR
                 Rig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
                 //Camera.transform.position -= delta;
 
+                //TODO: Is this needed?
                 StopXZ(Head);
                 StopXZ(Chest);
                 StopXZ(Legs);

@@ -113,32 +113,26 @@ namespace Fusion.XR
 
         #region Queuing, Processing, Overrides
 
+        public virtual void PreprocessInput(InputAction.CallbackContext obj) { PreprocessInput(movementAction.action.ReadValue<Vector2>()); }
+
+        Vector3 movementInput;
+
         /// <summary>
-        /// Subscribes to the Movement Action and transforms the Vec2 Input to Vec3
+        /// Subscribes to the Movement Action and Transforms Vector to 3D and into worldspace
         /// </summary>
         /// <param name="obj"></param>
-        public virtual void PreprocessInput(InputAction.CallbackContext obj)
+        public virtual void PreprocessInput(Vector2 moveInput)
         {
             if (!canMove)
                 return;
 
             //Transform to Vec3
-            Vector3 movementInput = movementAction.action.ReadValue<Vector2>();
-            movementInput.Set(movementInput.x, 0, movementInput.y);
+            movementInput.Set(moveInput.x, 0, moveInput.y);
 
-            PreprocessMovement(movementInput);
-        }
-
-        /// <summary>
-        /// Handles the movementInput and queues a move
-        /// </summary>
-        /// <param name="movementInput"></param>
-        public virtual void PreprocessMovement(Vector3 movementInput)
-        {
             if (movementInput.magnitude >= activationThreshold)
             {
                 movementInput = currentMovementDirection.TransformDirection(movementInput);
-                movementInput = Vector3.ProjectOnPlane(movementInput, Vector3.up);
+                Debug.DrawRay(currentMovementDirection.position, movementInput, Color.red, 0.1f);
 
                 QueueMove(movementInput, playerSpeed);
             }
