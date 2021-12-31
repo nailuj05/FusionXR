@@ -16,6 +16,10 @@ namespace Fusion.XR
         public Rigidbody Legs;
         public Rigidbody LocoSphere;
 
+        [Header("Colliders")]
+        public CapsuleCollider ChestCol;
+        public CapsuleCollider LegsCol;
+
         private Vector3 delta;
 
         void Start()
