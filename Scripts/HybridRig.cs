@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace Fusion.XR
 {
-    public class HybridRig : MonoBehaviour
+    public class HybridRig : Singleton<HybridRig>
     {
         [SerializeField]
         private RigType rigType;
@@ -13,7 +13,7 @@ namespace Fusion.XR
         [SerializeField] private GameObject hybridRig;
         [SerializeField] private GameObject xrRig;
 
-        public GameObject currentRig { get; private set; }
+        public GameObject currentRig { get { return GetCurrentRig(); } private set { currentRig = value; } }
 
         public void SetRig()
         {
@@ -27,7 +27,7 @@ namespace Fusion.XR
 
             var player = FindObjectOfType<Player>();
 
-            player.head = currentRig.GetChildByName("Main Camera", true).transform;
+            //player.head = currentRig.GetChildByName("Main Camera", true).transform;
 
             GameObject rControllerTarget = currentRig.GetChildByName("Right Tracked Controller", true);
             GameObject lControllerTarget = currentRig.GetChildByName("Left Tracked Controller",  true);

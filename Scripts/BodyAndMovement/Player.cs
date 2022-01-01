@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +11,9 @@ namespace Fusion.XR
     /// A container for all the important parts that makeup the player.
     /// This class holds all Components on the player and allows easy access and setup.
     /// </summary>
-    public class Player : MonoBehaviour 
+    public class Player : Singleton<Player> 
     {
-        public static Player main;
-
-        public Transform head;
+        public Transform head => Camera.main.transform;
 
         public FusionXRHand LeftHand;
         public FusionXRHand RightHand;
@@ -30,7 +29,6 @@ namespace Fusion.XR
 
         private void Awake()
         {
-            main = this;
             rb = GetComponent<Rigidbody>();
         }
     }

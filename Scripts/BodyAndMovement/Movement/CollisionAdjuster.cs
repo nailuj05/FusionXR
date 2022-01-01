@@ -15,15 +15,23 @@ namespace Fusion.XR
         [HideInInspector]
         public float p_localHeight { get; private set; }
 
-        private void Awake()
+        public void Awake()
         {
             p_VRCamera = Player.main.head;
+
+            if (!p_XRRig)
+            {
+                if (HybridRig.main)
+                    p_XRRig = HybridRig.main.currentRig.transform;
+                else
+                    p_XRRig = transform;
+            }
         }
 
         private void Update()
         {
             //The local height of the camera (not the localPosition because localPos takes rotation into account)
-            float p_height = transform.InverseTransformPoint(p_VRCamera.position).y;
+            float p_height = p_XRRig.InverseTransformPoint(p_VRCamera.position).y;
 
             //the local Position of the Camera within the XRRig and half the height of the camera so it is exactly in the middle between floor and head
             Vector3 p_localCameraPosition = transform.InverseTransformPoint(p_VRCamera.position) - Vector3.up * p_height / 2;
