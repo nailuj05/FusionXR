@@ -132,7 +132,7 @@ namespace Fusion.XR
             if (movementInput.magnitude >= activationThreshold)
             {
                 movementInput = currentMovementDirection.TransformDirection(movementInput);
-                Debug.DrawRay(currentMovementDirection.position, movementInput, Color.red, 0.1f);
+                //Debug.DrawRay(currentMovementDirection.position, movementInput, Color.red, 0.1f);
 
                 QueueMove(movementInput, playerSpeed);
             }
