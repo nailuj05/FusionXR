@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public class PhysicsBody : MonoBehaviour
+    public class PhysicsBody : CollisionAdjuster
     {
         [Header("Transforms")]
-        public Transform Rig;
-        private Transform Camera;
+        public Transform targetHead;
 
         [Header("Rigidbodys")]
         public Rigidbody Head;
@@ -19,22 +18,32 @@ namespace Fusion.XR
         [Header("Colliders")]
         public CapsuleCollider ChestCol;
         public CapsuleCollider LegsCol;
+        public SphereCollider LocoSphereCollider;
+
+        [Header("Joints")]
+        public ConfigurableJoint HeadJoint;
+        public ConfigurableJoint LegJoint;
+        public ConfigurableJoint LocoJoint;
 
         private Vector3 delta;
 
-        void Start()
+        private Vector3 localCameraPos;
+
+        public override void UpdateCollision(float p_height, Vector3 p_localCameraPosition, float p_CollisionRadius)
         {
-            Camera = Player.main.head;
+            localCameraPos = p_localCameraPosition;
         }
 
         void FixedUpdate()
         {
+            targetHead.position = GetCameraInChestSpace();
+
             HMDMove();
         }
 
         void HMDMove()
         {
-            delta = Camera.position - Chest.transform.position;
+            delta = p_VRCamera.position - Chest.transform.position;
 
             if(delta.magnitude > 0.001f)
             {
@@ -48,7 +57,7 @@ namespace Fusion.XR
                 Legs.MovePosition(Legs.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
 
-                Rig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
+                p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
                 //Camera.transform.position -= delta;
 
                 //TODO: Is this needed?
@@ -66,6 +75,14 @@ namespace Fusion.XR
             vel = rb.velocity;
             vel.Set(0, vel.y, 0);
             rb.velocity = vel;
+        }
+
+        Vector3 GetCameraInChestSpace()
+        {
+            Debug.DrawRay(Vector3.zero, LocoSphere.transform.TransformPoint(localCameraPos - Vector3.up * LocoSphereCollider.radius), Color.red);
+            Debug.DrawRay(Vector3.zero, Chest.transform.InverseTransformPoint(LocoSphere.transform.TransformPoint(localCameraPos - Vector3.up * LocoSphereCollider.radius)), Color.blue);
+
+            return Chest.transform.InverseTransformPoint(LocoSphere.transform.TransformPoint(localCameraPos - Vector3.up * LocoSphereCollider.radius));
         }
     }
 }

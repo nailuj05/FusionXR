@@ -1659,6 +1659,11 @@ Transform:
   m_Father: {fileID: 1870102747}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &792399253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5221161575693523710, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+  m_PrefabInstance: {fileID: 4601817724475912904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &988372478
 GameObject:
   m_ObjectHideFlags: 0
@@ -3090,6 +3095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabableType: 0
   twoHandedMode: 0
   grabPoints: []
 --- !u!136 &2050517838
@@ -3279,6 +3285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabableType: 0
   twoHandedMode: 0
   grabPoints: []
 --- !u!4 &113399173998196445
@@ -5047,6 +5054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabableType: 0
   twoHandedMode: 0
   grabPoints: []
 --- !u!1 &781672907553926247
@@ -5954,10 +5962,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1718852702228879623, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: p_XRRig
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718852702228879623, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: p_VRCamera
+      value: 
+      objectReference: {fileID: 792399253}
     - target: {fileID: 1732677461072611320, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 244292350}
+    - target: {fileID: 4601817723373849409, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725283271948, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: volume
       value: 
@@ -6010,6 +6030,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4601817725372166374, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: rigType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725372166375, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166383, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_Name
       value: HybridRig
@@ -6042,6 +6070,10 @@ PrefabInstance:
       propertyPath: footTarget
       value: 
       objectReference: {fileID: 1259931120}
+    - target: {fileID: 5221161576313746134, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
 --- !u!1 &4944690555612126233
@@ -6107,6 +6139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabableType: 0
   twoHandedMode: 0
   grabPoints: []
 --- !u!4 &5940497610761178540
@@ -6195,6 +6228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabableType: 0
   twoHandedMode: 0
   grabPoints: []
 --- !u!1 &6780130698191374465
