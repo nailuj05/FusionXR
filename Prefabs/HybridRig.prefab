@@ -569,7 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigType: 1
-  hybridRig: {fileID: 4601817723373849409}
+  mockRig: {fileID: 4601817723373849409}
   xrRig: {fileID: 5221161576313746134}
 --- !u!114 &4601817725372166373
 MonoBehaviour:

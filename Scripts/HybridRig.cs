@@ -10,22 +10,21 @@ namespace Fusion.XR
         [SerializeField]
         private RigType rigType;
 
-        [SerializeField] private GameObject hybridRig;
+        [SerializeField] private GameObject mockRig;
         [SerializeField] private GameObject xrRig;
 
         public GameObject currentRig { get { return GetCurrentRig(); } private set { currentRig = value; } }
 
         public void SetRig()
         {
-            currentRig = GetCurrentRig();
-
             // Potentially change the XR Rig of the Collision Adjuster
             if (TryGetComponent(out CollisionAdjuster collisionAdjuster))
             {
                 collisionAdjuster.p_XRRig = currentRig.transform;
             }
 
-            var player = FindObjectOfType<Player>();
+            var player = Player.main;
+            //var player = FindObjectOfType<Player>();
 
             //player.head = currentRig.GetChildByName("Main Camera", true).transform;
 
@@ -53,14 +52,14 @@ namespace Fusion.XR
         {
             if (rigType == RigType.Mock)
             {
-                hybridRig.SetActive(true);
+                mockRig.SetActive(true);
                 xrRig.SetActive(false);
 
-                return hybridRig;
+                return mockRig;
             }
             else
             {
-                hybridRig.SetActive(false);
+                mockRig.SetActive(false);
                 xrRig.SetActive(true);
 
                 return xrRig;
