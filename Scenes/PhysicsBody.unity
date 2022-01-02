@@ -20920,7 +20920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigType: 0
-  hybridRig: {fileID: 4601817723442553445}
+  mockRig: {fileID: 4601817723442553445}
   xrRig: {fileID: 5221161576248187890}
 --- !u!4 &4601817725437680068
 Transform:
