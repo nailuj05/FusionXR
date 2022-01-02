@@ -59,22 +59,7 @@ namespace Fusion.XR
 
                 p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
                 //Camera.transform.position -= delta;
-
-                //TODO: Is this needed?
-                StopXZ(Head);
-                StopXZ(Chest);
-                StopXZ(Legs);
-                StopXZ(LocoSphere);
             }
-        }
-
-        private Vector3 vel;
-
-        void StopXZ(Rigidbody rb)
-        {
-            vel = rb.velocity;
-            vel.Set(0, vel.y, 0);
-            rb.velocity = vel;
         }
 
         Vector3 GetCameraInChestSpace()
