@@ -259,7 +259,7 @@ namespace Fusion.XR
 
             joint = trackerRB.gameObject.AddComponent<ConfigurableJoint>();
             joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
-            joint.anchor = trackerRB.transform.InverseTransformPoint(trackingBase.palm.position);
+            joint.anchor = trackingBase.tracker.transform.InverseTransformPoint(trackingBase.palm.position);
             joint.autoConfigureConnectedAnchor = false;
 
             joint.connectedBody = objectRB;

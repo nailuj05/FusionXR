@@ -173,6 +173,7 @@ namespace Fusion.XR
             //Debug.Log($"Attach object: {objectToAttach.name}");
 
             attachedTrackingBase.tracker = gameObject;
+            attachedTrackingBase.palm = transform;
 
             trackDriver = Utilities.DriverFromEnum(attachedTrackingMode);
             trackDriver.StartTrack(objectToAttach.transform, attachedTrackingBase);
