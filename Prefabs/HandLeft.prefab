@@ -1065,19 +1065,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: 0
   trackedController: {fileID: 0}
-  positionOffset: {x: 0, y: 0, z: 0}
-  rotationOffset: {x: 0, y: 0, z: 0}
+  positionOffset: {x: 0, y: 0, z: 0.06}
+  rotationOffset: {x: 45, y: 0, z: 90}
   trackingMode: 1
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
+    forcePositionMultiplier: 200
+    forceRotationMultiplier: 35
+    forceDampener: -10
+    maxForceClamp: 150
     positionSpring: 3000
     positionDamper: 250
-    maxForce: 1500
+    maxJointForce: 1500
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    limit: 0.7
     tracker: {fileID: 0}
+    palm: {fileID: 0}
   rb: {fileID: 0}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -1111,7 +1117,8 @@ MonoBehaviour:
   smoothAttachSpeed: 0.5
   palm: {fileID: 2130366296751583961}
   renderHand: {fileID: 2130366297857373807}
-  fingerTrackingMode: 1
+  handPosingDriver: 0
+  grabbingDriver: 1
   fingerSettings:
     offset: {x: 0, y: 0.4, z: 0}
     radius: 0.0125
