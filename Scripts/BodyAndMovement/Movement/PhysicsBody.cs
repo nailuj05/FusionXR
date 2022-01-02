@@ -79,10 +79,7 @@ namespace Fusion.XR
 
         Vector3 GetCameraInChestSpace()
         {
-            Debug.DrawRay(Vector3.zero, LocoSphere.transform.TransformPoint(localCameraPos - Vector3.up * LocoSphereCollider.radius), Color.red);
-            Debug.DrawRay(Vector3.zero, Chest.transform.InverseTransformPoint(LocoSphere.transform.TransformPoint(localCameraPos - Vector3.up * LocoSphereCollider.radius)), Color.blue);
-
-            return Chest.transform.InverseTransformPoint(LocoSphere.transform.TransformPoint(localCameraPos - Vector3.up * LocoSphereCollider.radius));
+            return LocoSphere.position + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
         }
     }
 }
