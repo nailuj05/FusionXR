@@ -9,6 +9,9 @@ namespace Fusion.XR
         [Header("Transforms")]
         public Transform targetHead;
 
+        public float jointStrength = 20000;
+        public float jointDampener = 2000;
+
         [Header("Rigidbodys")]
         public Rigidbody Head;
         public Rigidbody Chest;
@@ -29,6 +32,11 @@ namespace Fusion.XR
 
         private Vector3 localCameraPos;
 
+        private void Start()
+        {
+            HeadJoint = SetupJoint(Chest, Head);
+        }
+
         public override void UpdateCollision(float p_height, Vector3 p_localCameraPosition, float p_CollisionRadius)
         {
             localCameraPos = p_localCameraPosition;
@@ -37,6 +45,8 @@ namespace Fusion.XR
         void FixedUpdate()
         {
             targetHead.position = GetCameraInChestSpace();
+
+            HeadJoint.targetPosition = GetCameraInChestSpace();
 
             HMDMove();
         }
@@ -48,7 +58,6 @@ namespace Fusion.XR
             if(delta.magnitude > 0.001f)
             {
                 delta.y = 0f;
-                //delta = delta * Time.fixedDeltaTime;
 
                 Debug.DrawRay(Chest.position, delta, Color.red, 0.1f);
 
@@ -58,13 +67,28 @@ namespace Fusion.XR
                 LocoSphere.MovePosition(LocoSphere.position + delta);
 
                 p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
-                //Camera.transform.position -= delta;
             }
         }
 
         Vector3 GetCameraInChestSpace()
         {
             return LocoSphere.position + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
+        }
+
+        ConfigurableJoint SetupJoint(Rigidbody connectTo, Rigidbody connectedBody)
+        {
+            ConfigurableJoint joint = connectTo.gameObject.AddComponent<ConfigurableJoint>();
+            joint.connectedBody = connectedBody;
+
+            joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
+
+            var drive = new JointDrive();
+            drive.positionSpring = jointStrength;
+            drive.positionDamper = jointDampener;
+
+            joint.xDrive = joint.yDrive = joint.zDrive = drive;
+
+            return joint;
         }
     }
 }
