@@ -170,6 +170,9 @@ namespace Fusion.XR
             Move(direction);
         }
 
+        //Overriden by Movers
+        public abstract void Move(Vector3 direction);
+
         /// <summary>
         /// Adds an override and sorts it into the stack
         /// </summary>
@@ -202,8 +205,6 @@ namespace Fusion.XR
 
         #endregion
 
-        //Overriden by Movers
-        public abstract void Move(Vector3 direction);
         
         /// <summary>
         /// Performces a Snap Turn
