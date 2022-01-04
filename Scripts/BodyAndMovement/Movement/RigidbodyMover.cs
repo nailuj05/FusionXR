@@ -28,6 +28,8 @@ namespace Fusion.XR
 
             CurrentVelocity = rb.velocity;
 
+            Debug.Log("Move");
+
             //rigidBody.MovePosition(transform.TransformPoint(-vel));
             rb.velocity = vel;
         }

@@ -48,7 +48,7 @@ namespace Fusion.XR
 
         private void Update()
         {
-            #region Mouse Look
+            #region Mouse Look and move
             if (!Input.GetKey(KeyCode.LeftShift))
             {
                 float yLookDir = -Mathf.Clamp(Input.GetAxis("Mouse Y"), -90, 90);
