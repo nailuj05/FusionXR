@@ -222,6 +222,8 @@ namespace Fusion.XR
 
         private ConfigurableJoint joint;
 
+        private Quaternion initalRotation;
+
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
             objectToTrack = assignedObjectToTrack;
@@ -243,6 +245,19 @@ namespace Fusion.XR
         {
             if (joint == null)
                 SetupJoint(targetPosition, targetRotation);
+
+            //Track Rotation
+            Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
+
+            deltaRotation.ToAngleAxis(out var angle, out var axis);
+
+            if (angle > 180f)
+            {
+                angle -= 360;
+            }
+
+            if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
+                objectRB.angularVelocity = axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad);
         }
 
         public override void EndTrack()
@@ -261,14 +276,19 @@ namespace Fusion.XR
             joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
             joint.anchor = trackingBase.tracker.transform.InverseTransformPoint(trackingBase.palm.position);
             joint.autoConfigureConnectedAnchor = false;
-
             joint.connectedBody = objectRB;
-
-            joint.connectedAnchor = objectToTrack.transform.InverseTransformPoint(trackingBase.palm.position);
+            joint.connectedAnchor = Vector3.zero;
 
             joint.rotationDriveMode = RotationDriveMode.Slerp;
 
-            joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
+            //var slerpDrive = new JointDrive();
+            //slerpDrive.positionSpring = trackingBase.slerpSpring;
+            //slerpDrive.positionDamper = trackingBase.slerpDamper;
+            //slerpDrive.maximumForce = trackingBase.slerpMaxForce;
+
+            //joint.slerpDrive = slerpDrive;
+
+            //joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
 
             joint.enableCollision = false;
             joint.enablePreprocessing = false;
