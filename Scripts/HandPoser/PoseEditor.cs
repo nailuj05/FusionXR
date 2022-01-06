@@ -17,8 +17,6 @@ namespace Fusion.XR
         public string displayName = "";
         private HandPoser handPoser;
 
-        private Vector3 palmOffset = new Vector3(-0.035f, -0.021f, -0.0012f);
-
         private GameObject prevHand;
 
         public void SpawnPoserHand(Transform obj)
