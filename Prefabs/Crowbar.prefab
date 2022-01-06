@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3925210fa7e582b45acc9630a06341c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabPointType: 721
+  grabPointType: 2
   hasCustomPose: 21
   pose: {fileID: 0}
-  reachDistance: 0
+  reachDistance: 0.15
 --- !u!114 &3212452903682922000
 MonoBehaviour:
   m_ObjectHideFlags: 0
