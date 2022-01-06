@@ -76,7 +76,7 @@ namespace Fusion.XR
 
             Vector2 turnDirection = obj.ReadValue<Vector2>();
 
-            Direction direction = Utilities.GetDirectionFromVector(turnDirection);
+            Direction direction = Utils.GetDirectionFromVector(turnDirection);
 
             Turn(direction);
         }

@@ -104,7 +104,7 @@ namespace Fusion.XR
             ManageNewHand(hand, attachedHands, twoHandedMode);
 
             ///Setup and Start Track Driver
-            hand.grabbedTrackDriver = Utilities.DriverFromEnum(mode);
+            hand.grabbedTrackDriver = Utils.DriverFromEnum(mode);
             hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
 
             EnableOrDisableCollisions(gameObject, hand, true);
@@ -130,7 +130,7 @@ namespace Fusion.XR
         //For returning the transform and the GrabPoint
         public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
         {
-            grabPoint = Utilities.ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
+            grabPoint = Utils.ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
 
             if (grabPoint != null)
             {

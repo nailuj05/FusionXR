@@ -6105,10 +6105,6 @@ PrefabInstance:
       propertyPath: rigType
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4601817725372166375, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166383, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_Name
       value: HybridRig

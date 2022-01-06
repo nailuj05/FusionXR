@@ -70,7 +70,7 @@ namespace Fusion.XR
             followObject = trackedController;
 
             ///Set the tracking Mode accordingly
-            var newTrackDriver = Utilities.DriverFromEnum(trackingMode);
+            var newTrackDriver = Utils.DriverFromEnum(trackingMode);
             trackDriver = ChangeTrackDriver(newTrackDriver);
 
             trackingBase.tracker = this.gameObject;

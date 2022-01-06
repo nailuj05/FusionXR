@@ -175,7 +175,7 @@ namespace Fusion.XR
             attachedTrackingBase.tracker = gameObject;
             attachedTrackingBase.palm = transform;
 
-            trackDriver = Utilities.DriverFromEnum(attachedTrackingMode);
+            trackDriver = Utils.DriverFromEnum(attachedTrackingMode);
             trackDriver.StartTrack(objectToAttach.transform, attachedTrackingBase);
 
             attachedObject = objectToAttach;
@@ -232,13 +232,13 @@ namespace Fusion.XR
             if (obj.tag == "Attached") { Debug.Log("Already attached"); return false; }
 
             //Check Tags
-            bool tagCorrect = Utilities.ObjectMatchesTags(obj, tagMask);
+            bool tagCorrect = Utils.ObjectMatchesTags(obj, tagMask);
 
             //Check Attract Type
-            bool typeCorrect = Utilities.ObjectMatchesAttractType(obj, attractType);
+            bool typeCorrect = Utils.ObjectMatchesAttractType(obj, attractType);
 
             //Check Layers
-            bool layerCorrect = Utilities.ObjectMatchesLayermask(obj, attractLayers);
+            bool layerCorrect = Utils.ObjectMatchesLayermask(obj, attractLayers);
 
             //All true?
             return (layerCorrect & tagCorrect & typeCorrect);

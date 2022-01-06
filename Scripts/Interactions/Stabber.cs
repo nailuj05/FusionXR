@@ -50,7 +50,7 @@ namespace Fusion.XR
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.relativeVelocity.magnitude > requiredImpactVelocity & Utilities.ObjectMatchesLayermask(collision.gameObject, stabbingLayers))
+            if (collision.relativeVelocity.magnitude > requiredImpactVelocity & Utils.ObjectMatchesLayermask(collision.gameObject, stabbingLayers))
             {
                 if (MatchAxis(collision.relativeVelocity))
                 {
@@ -130,7 +130,7 @@ namespace Fusion.XR
 
         public void UpdateStab()
         {
-            Collider[] hitColliders = Utilities.CheckBoxCollider(stabber.transform, stabber.stabCollider);
+            Collider[] hitColliders = Utils.CheckBoxCollider(stabber.transform, stabber.stabCollider);
 
             if (ContainsStabbedObject(hitColliders))
             {

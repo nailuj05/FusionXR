@@ -281,7 +281,7 @@ namespace Fusion.XR
             //Debug.Log($"Changed driver to {driver}");
             foreach (var finger in fingers)
             {
-                finger.ChangeFingerDriver(Utilities.FingerDriverFromEnum(driver));
+                finger.ChangeFingerDriver(Utils.FingerDriverFromEnum(driver));
             }
         }
 

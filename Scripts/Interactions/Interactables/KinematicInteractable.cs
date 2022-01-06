@@ -75,7 +75,7 @@ namespace Fusion.XR
         {
             if (!allowCollisionInteraction) return;
 
-            if (Utilities.ObjectMatchesLayermask(collision.gameObject, interactionLayers) & !isInteracting)
+            if (Utils.ObjectMatchesLayermask(collision.gameObject, interactionLayers) & !isInteracting)
             {
                 InteractionStart();
             }
@@ -85,7 +85,7 @@ namespace Fusion.XR
         {
             if (!allowCollisionInteraction) return;
 
-            if (Utilities.ObjectMatchesLayermask(collision.gameObject, interactionLayers) & isInteracting)
+            if (Utils.ObjectMatchesLayermask(collision.gameObject, interactionLayers) & isInteracting)
             {
                 InteractionEnd();
             }
@@ -109,7 +109,7 @@ namespace Fusion.XR
         //For returning the transform and the GrabPoint
         public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
         {
-            grabPoint = Utilities.ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
+            grabPoint = Utils.ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
 
             if (grabPoint != null)
             {
