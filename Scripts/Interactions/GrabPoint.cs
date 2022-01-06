@@ -67,5 +67,10 @@ namespace Fusion.XR
         {
             isActive = true;
         }
+
+        public virtual GrabPoint GetAligned()
+        {
+            return this;
+        }
     }
 }
