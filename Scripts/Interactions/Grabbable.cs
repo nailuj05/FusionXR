@@ -134,7 +134,7 @@ namespace Fusion.XR
 
             if (grabPoint != null)
             {
-                grabPoint = grabPoint.GetAligned();
+                grabPoint = grabPoint.GetAligned(handTransform);
                 grabPoint.BlockGrabPoint();
                 return grabPoint.transform;
             }

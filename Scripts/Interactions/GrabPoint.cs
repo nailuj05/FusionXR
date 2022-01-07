@@ -68,7 +68,7 @@ namespace Fusion.XR
             isActive = true;
         }
 
-        public virtual GrabPoint GetAligned()
+        public virtual GrabPoint GetAligned(Transform hand)
         {
             return this;
         }
