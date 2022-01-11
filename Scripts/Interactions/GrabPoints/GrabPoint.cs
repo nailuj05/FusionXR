@@ -20,7 +20,7 @@ namespace Fusion.XR
 
         protected bool isActive = true;
 
-        public bool hasCustomPose;
+        public bool hasCustomPose { get { return (bool)pose; } }
         public HandPose pose;
 
         private void OnDrawGizmos()
