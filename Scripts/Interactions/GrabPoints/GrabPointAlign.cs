@@ -8,21 +8,26 @@ namespace Fusion.XR
     {
         public override GrabPoint GetAligned(Transform hand)
         {
-            var right = transform.right;
-            var ogRot = transform.rotation;
-            var forward = Vector3.ProjectOnPlane(hand.forward, transform.right);
-
-            transform.rotation = Quaternion.LookRotation(forward, transform.up);
-
-            //If the hand is upside down recalculate with inverted right axis
-            if (Vector3.Dot(right, transform.right) < 0)
-            {
-                //Debug.Log("Wrong way");
-                transform.rotation = ogRot;
-                transform.rotation = Quaternion.LookRotation(forward, -transform.up);
-            }
+            AlignPoint(transform, hand);
 
             return this;
+        }
+
+        public static void AlignPoint(Transform point, Transform hand)
+        {
+            var right = point.right;
+            var ogRot = point.rotation;
+            var forward = Vector3.ProjectOnPlane(hand.forward, point.right);
+
+            point.rotation = Quaternion.LookRotation(forward, point.up);
+
+            //If the hand is upside down recalculate with inverted right axis
+            if (Vector3.Dot(right, point.right) < 0)
+            {
+                //Debug.Log("Wrong way");
+                point.rotation = ogRot;
+                point.rotation = Quaternion.LookRotation(forward, -point.up);
+            }
         }
     }
 }
