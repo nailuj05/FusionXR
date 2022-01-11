@@ -17,6 +17,7 @@ namespace Fusion.XR
                 {
                     return true;
                 }
+                return true;
             }
             return false;
         }
