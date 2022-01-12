@@ -51,6 +51,9 @@ namespace Fusion.XR
 
         public virtual void RotateToMatchHand(Hand hand)
         {
+            if (grabPointType != GrabPointType.Both)
+                return;
+
             if(lastHand != hand)
             {
                 if(hand == Hand.Left)
@@ -68,7 +71,7 @@ namespace Fusion.XR
 
         public virtual bool IsGrabPossible(Transform handTransform, Hand hand)
         {
-            if (rotateToMatchHand && grabPointType == GrabPointType.Both)
+            if (rotateToMatchHand)
                 RotateToMatchHand(hand);
 
             //If hands match or both hands are accepted
