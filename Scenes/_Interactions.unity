@@ -7761,7 +7761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec68683d5938504fac5b13761e38923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabPointType: 2
+  grabPointType: 0
   rotateToMatchHand: 1
   leftHandAddedRotation: {x: 180, y: 180, z: 0}
   pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}

@@ -149,6 +149,17 @@ namespace Fusion.XR
                             poseEditor.pose = grabPoint.pose;
                             poseEditor.LoadPose();
                         }
+
+                        if (grabPoint.grabPointType == GrabPointType.Right)
+                        {
+                            rightStyle.normal = new GUIStyleState() { background = Texture2D.whiteTexture };
+                            leftStyle.normal = new GUIStyleState() { background = Texture2D.grayTexture };
+                        }
+                        else if (grabPoint.grabPointType == GrabPointType.Left)
+                        {
+                            leftStyle.normal = new GUIStyleState() { background = Texture2D.whiteTexture };
+                            rightStyle.normal = new GUIStyleState() { background = Texture2D.grayTexture };
+                        }
                     }
                 }
             }
