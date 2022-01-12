@@ -33,6 +33,7 @@ namespace Fusion.XR
 
         public void RemovePoserHand()
         {
+            GetComponent<GrabPoint>().RotateToMatchHand(Hand.Right);
             DestroyImmediate(prevHand);
         }
 
@@ -81,6 +82,8 @@ namespace Fusion.XR
                 prevHand.transform.GetChild(0).localScale = new Vector3(1, 1, 1);
                 handPoser.palm = prevHand.GetChildByName("palmR").transform;
             }
+
+            GetComponent<GrabPoint>().RotateToMatchHand(hand);
 
             //Refresh RenderHand, because Editor Update() is not reliable
             handPoser.PlaceRenderHand();

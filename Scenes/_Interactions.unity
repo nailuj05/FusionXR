@@ -250,6 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
+  rotateToMatchHand: 1
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &54096035
 GameObject:
@@ -1001,70 +1003,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &244604030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 244604031}
-  - component: {fileID: 244604033}
-  - component: {fileID: 244604032}
-  m_Layer: 0
-  m_Name: GrabPointL
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &244604031
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244604030}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: -0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9090909, y: 0.9090909, z: 0.9090909}
-  m_Children: []
-  m_Father: {fileID: 475922766913498250}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270}
---- !u!114 &244604032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244604030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47f9eb5cb4ad6e74cad5d8859120ee91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabPointType: 0
-  pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
-  alignHand: 1
-  lineStart: {x: 0, y: 0, z: -0.2}
-  lineEnd: {x: 0, y: 0, z: 0.2}
---- !u!114 &244604033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244604030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 547a9a97ec12a034eac25a82c4b8bfe9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEditingPose: 0
-  pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
-  displayName: 
 --- !u!4 &258766048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4601817723373849410, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -5070,7 +5008,6 @@ Transform:
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 3212452903457394745}
-  - {fileID: 244604031}
   m_Father: {fileID: 1784969799}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
@@ -5702,7 +5639,7 @@ GameObject:
   - component: {fileID: 3212452903457394747}
   - component: {fileID: 3212452903457394746}
   m_Layer: 0
-  m_Name: GrabPointR
+  m_Name: GrabPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5715,7 +5652,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3212452903457394744}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: -0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9090909, y: 0.9090909, z: 0.9090909}
   m_Children: []
@@ -5734,7 +5671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f9eb5cb4ad6e74cad5d8859120ee91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabPointType: 1
+  grabPointType: 2
+  rotateToMatchHand: 1
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
   alignHand: 1
   lineStart: {x: 0, y: 0, z: -0.2}
@@ -6215,7 +6154,6 @@ MonoBehaviour:
   twoHandedMode: 1
   grabPoints:
   - {fileID: 3212452903457394746}
-  - {fileID: 244604032}
 --- !u!4 &4422027126369067498
 Transform:
   m_ObjectHideFlags: 0
@@ -6522,7 +6460,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 8685508166118684540}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5134475396254842774
 MeshFilter:
@@ -7791,7 +7729,7 @@ GameObject:
   - component: {fileID: 8685508164954828742}
   - component: {fileID: 8685508164954828762}
   m_Layer: 0
-  m_Name: GrabPointR
+  m_Name: GrabPoint
   m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7804,7 +7742,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8685508164954828760}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0.000000043711392, y: 0.000000043711385, z: -1, w: 0.000000043711392}
   m_LocalPosition: {x: -0.07, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7823,7 +7761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec68683d5938504fac5b13761e38923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabPointType: 1
+  grabPointType: 2
+  rotateToMatchHand: 1
+  leftHandAddedRotation: {x: 180, y: 180, z: 0}
   pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
 --- !u!1 &8685508166118684529
 GameObject:
@@ -7844,7 +7784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &8685508166118684538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7870,7 +7810,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8685508164954828761}
-  - {fileID: 8685508166838928008}
   - {fileID: 5078246043082924823}
   m_Father: {fileID: 1784969799}
   m_RootOrder: 3
@@ -7912,7 +7851,6 @@ MonoBehaviour:
   twoHandedMode: 0
   grabPoints:
   - {fileID: 8685508164954828762}
-  - {fileID: 8685508166838928012}
 --- !u!54 &8685508166118684543
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7929,67 +7867,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!4 &8685508166838928008
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8685508166838928011}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8685508166118684540}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8685508166838928009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8685508166838928011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 547a9a97ec12a034eac25a82c4b8bfe9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEditingPose: 0
-  pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
-  displayName: 
---- !u!1 &8685508166838928011
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8685508166838928008}
-  - component: {fileID: 8685508166838928009}
-  - component: {fileID: 8685508166838928012}
-  m_Layer: 0
-  m_Name: GrabPointL
-  m_TagString: Grabable
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &8685508166838928012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8685508166838928011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec68683d5938504fac5b13761e38923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabPointType: 0
-  pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
 --- !u!33 &8895214716759370459
 MeshFilter:
   m_ObjectHideFlags: 0

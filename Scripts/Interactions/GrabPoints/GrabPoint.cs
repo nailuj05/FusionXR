@@ -17,6 +17,10 @@ namespace Fusion.XR
         private Vector3 palmOffset = new Vector3(-0.035f, -0.021f, -0.0012f);
 
         public GrabPointType grabPointType;
+        public bool rotateToMatchHand = true;
+        public Vector3 leftHandAddedRotation;
+
+        protected Hand lastHand = Hand.Right;
 
         protected bool isActive = true;
 
@@ -45,8 +49,28 @@ namespace Fusion.XR
             }
         }
 
+        public virtual void RotateToMatchHand(Hand hand)
+        {
+            if(lastHand != hand)
+            {
+                if(hand == Hand.Left)
+                {
+                    transform.localEulerAngles += leftHandAddedRotation;
+                }
+                else
+                {
+                    transform.localEulerAngles -= leftHandAddedRotation;
+                }
+            }
+
+            lastHand = hand;
+        }
+
         public virtual bool IsGrabPossible(Transform handTransform, Hand hand)
         {
+            if (rotateToMatchHand && grabPointType == GrabPointType.Both)
+                RotateToMatchHand(hand);
+
             //If hands match or both hands are accepted
             if(((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && isActive)
             {
