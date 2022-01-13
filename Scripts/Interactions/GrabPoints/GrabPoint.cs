@@ -17,7 +17,7 @@ namespace Fusion.XR
         private Vector3 palmOffset = new Vector3(-0.035f, -0.021f, -0.0012f);
 
         public GrabPointType grabPointType;
-        public bool rotateToMatchHand = true;
+        public bool rotateToMatchHand = false;
         public Vector3 leftHandAddedRotation;
 
         protected Hand lastHand = Hand.Right;
