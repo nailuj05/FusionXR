@@ -52,12 +52,17 @@ namespace Fusion.XR
             HMDMove();
         }
 
+        Vector3 deltaHead;
+
         void HMDMove()
         {
             delta = p_VRCamera.position - Chest.transform.position;
 
             if(delta.magnitude > 0.001f)
             {
+                deltaHead = p_VRCamera.position - Head.transform.position;
+                p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
+
                 delta.y = 0f;
 
                 Debug.DrawRay(Chest.position, delta, Color.red, 0.1f);
