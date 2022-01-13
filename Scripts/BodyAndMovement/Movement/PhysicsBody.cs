@@ -12,6 +12,12 @@ namespace Fusion.XR
         public float jointStrength = 20000;
         public float jointDampener = 250;
 
+        [Header("Body Settings")]
+        [Range(0.1f, 0.9f)]
+        public float chestPercent = 0.5f;
+        [Range(0.1f, 0.9f)]
+        public float legPercent = 0.5f;
+
         [Header("Rigidbodys")]
         public Rigidbody Head;
         public Rigidbody Chest;
@@ -31,6 +37,21 @@ namespace Fusion.XR
         private Vector3 delta;
 
         private Vector3 localCameraPos;
+
+        #region Editor Stuff
+        private float lastCP, lastLP;
+
+        private void OnValidate()
+        {
+            if (chestPercent != lastCP)
+                legPercent = 1 - chestPercent;
+            else
+                chestPercent = 1 - legPercent;
+
+            lastCP = chestPercent;
+            lastLP = legPercent;
+        }  
+        #endregion
 
         private void Start()
         {

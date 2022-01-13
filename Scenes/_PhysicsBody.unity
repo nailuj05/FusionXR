@@ -8621,6 +8621,8 @@ MonoBehaviour:
   targetHead: {fileID: 276068215}
   jointStrength: 20000
   jointDampener: 250
+  chestPercent: 0.5
+  legPercent: 0.5
   Head: {fileID: 668176726}
   Chest: {fileID: 576957183}
   Legs: {fileID: 1316299732}
