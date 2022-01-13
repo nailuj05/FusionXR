@@ -8620,7 +8620,7 @@ MonoBehaviour:
   p_CollisionRadius: 0.2
   targetHead: {fileID: 276068215}
   jointStrength: 20000
-  jointDampener: 2000
+  jointDampener: 250
   Head: {fileID: 668176726}
   Chest: {fileID: 576957183}
   Legs: {fileID: 1316299732}

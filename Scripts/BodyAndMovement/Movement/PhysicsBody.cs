@@ -10,7 +10,7 @@ namespace Fusion.XR
         public Transform targetHead;
 
         public float jointStrength = 20000;
-        public float jointDampener = 2000;
+        public float jointDampener = 250;
 
         [Header("Rigidbodys")]
         public Rigidbody Head;
