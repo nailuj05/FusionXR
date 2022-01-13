@@ -44,9 +44,10 @@ namespace Fusion.XR
 
         void FixedUpdate()
         {
-            targetHead.position = GetCameraInChestSpace();
+            //This is only debug
+            targetHead.position = GetCameraInRigSpace();
 
-            HeadJoint.targetPosition = GetCameraInChestSpace();
+            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(GetCameraInRigSpace());
 
             HMDMove();
         }
@@ -70,7 +71,7 @@ namespace Fusion.XR
             }
         }
 
-        Vector3 GetCameraInChestSpace()
+        Vector3 GetCameraInRigSpace()
         {
             return LocoSphere.position + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
         }
@@ -80,11 +81,15 @@ namespace Fusion.XR
             ConfigurableJoint joint = connectTo.gameObject.AddComponent<ConfigurableJoint>();
             joint.connectedBody = connectedBody;
 
+            joint.autoConfigureConnectedAnchor = false;
+            joint.anchor = joint.connectedAnchor = Vector3.zero;
+
             joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
 
             var drive = new JointDrive();
             drive.positionSpring = jointStrength;
             drive.positionDamper = jointDampener;
+            drive.maximumForce = Mathf.Infinity;
 
             joint.xDrive = joint.yDrive = joint.zDrive = drive;
 
