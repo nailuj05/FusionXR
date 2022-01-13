@@ -19,6 +19,23 @@ namespace Fusion.XR
 
         private GameObject prevHand;
 
+        //Close all other opened editors
+        private void Update()
+        {
+            if (!isEditingPose) return;
+
+            var editors = FindObjectsOfType<PoseEditor>();
+
+            foreach (var editor in editors)
+            {
+                if (editor.gameObject != Selection.gameObjects[0] & editor.isEditingPose)
+                {
+                    editor.isEditingPose = false;
+                    editor.RemovePoserHand();
+                }
+            }
+        }
+
         public void SpawnPoserHand(Transform obj)
         {
             //Get mesh Hand and place it
@@ -33,6 +50,8 @@ namespace Fusion.XR
 
         public void RemovePoserHand()
         {
+            if (!prevHand) return;
+
             GetComponent<GrabPoint>().RotateToMatchHand(Hand.Right);
             DestroyImmediate(prevHand);
         }
@@ -115,12 +134,6 @@ namespace Fusion.XR
                 normal = new GUIStyleState() { background = Texture2D.grayTexture },
             };
         }
-        
-        void OnLostFocus()
-        {
-            PoseEditor poseEditor = (PoseEditor)target;
-            poseEditor.isEditingPose = false;
-        }
 
         public override void OnInspectorGUI()
         {
@@ -132,6 +145,19 @@ namespace Fusion.XR
             {
                 if (GUILayout.Button("Edit Pose"))
                 {
+                    //Close other editors
+                    var editors = FindObjectsOfType<PoseEditor>();
+
+                    foreach (var editor in editors)
+                    {
+                        if (editor.gameObject != poseEditor & editor.isEditingPose)
+                        {
+                            editor.isEditingPose = false;
+                            editor.RemovePoserHand();
+                        }
+                    }
+
+                    //Setup editor
                     poseEditor.isEditingPose = true;
                     poseEditor.pose = CreateInstance<HandPose>();
                     hasCustomPose = false;
