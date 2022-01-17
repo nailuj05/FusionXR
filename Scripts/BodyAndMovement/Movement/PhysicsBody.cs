@@ -25,18 +25,15 @@ namespace Fusion.XR
         public Rigidbody LocoSphere;
 
         [Header("Colliders")]
+        public SphereCollider HeadCol;
         public CapsuleCollider ChestCol;
         public CapsuleCollider LegsCol;
         public SphereCollider LocoSphereCollider;
 
         [Header("Joints")]
         public ConfigurableJoint HeadJoint;
+        public ConfigurableJoint ChestJoint;
         public ConfigurableJoint LegJoint;
-        public ConfigurableJoint LocoJoint;
-
-        private Vector3 delta;
-
-        private Vector3 localCameraPos;
 
         #region Editor Stuff
         private float lastCP, lastLP;
@@ -56,25 +53,49 @@ namespace Fusion.XR
         private void Start()
         {
             HeadJoint = SetupJoint(Chest, Head);
+            ChestJoint = SetupJoint(Legs, Chest);
+
+            //Init Legs
+            legFactor = LegsCol.height * 2;
+            initialLegCenter = LegsCol.center;
+
+            //Init Chest
+            chestFactor = ChestCol.height * 2;
         }
 
-        public override void UpdateCollision(float p_height, Vector3 p_localCameraPosition, float p_CollisionRadius)
-        {
-            localCameraPos = p_localCameraPosition;
-        }
-
+        Vector3 cameraInRigSpace;
         void FixedUpdate()
         {
             //This is only debug
-            targetHead.position = GetCameraInRigSpace();
+            cameraInRigSpace = GetCameraInRigSpace();
+            targetHead.position = cameraInRigSpace;
 
-            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(GetCameraInRigSpace());
+            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraInRigSpace);
+            ChestJoint.targetPosition = Legs.transform.InverseTransformPoint(cameraInRigSpace - Vector3.up * (cameraInRigSpace.y * chestPercent - LocoSphereCollider.radius * 2));
 
             HMDMove();
+            UpdateLegs();
+            UpdateChest();
         }
 
-        Vector3 deltaHead;
+        float chestFactor;
+        Vector3 initialChestCenter;
+        void UpdateChest()
+        {
+            ChestCol.height = chestFactor * chestPercent;
+            ChestCol.center = Vector3.up * (chestFactor * chestPercent * 0.5f - HeadCol.radius);
+        }
 
+        float legFactor;
+        Vector3 initialLegCenter;
+        void UpdateLegs()
+        {
+            LegsCol.height = legFactor * legPercent;
+            LegsCol.center = initialLegCenter + Vector3.up * (legFactor * legPercent * 0.5f - LocoSphereCollider.radius * 2);
+        }
+
+        Vector3 delta;
+        Vector3 deltaHead;
         void HMDMove()
         {
             delta = p_VRCamera.position - Chest.transform.position;
