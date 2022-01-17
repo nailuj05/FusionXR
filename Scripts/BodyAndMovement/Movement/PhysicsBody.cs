@@ -12,11 +12,7 @@ namespace Fusion.XR
         public float jointStrength = 20000;
         public float jointDampener = 250;
 
-        [Header("Body Settings")]
-        [Range(0.1f, 0.9f)]
-        public float chestPercent = 0.5f;
-        [Range(0.1f, 0.9f)]
-        public float legPercent = 0.5f;
+        public Vector3 headOffset;
 
         [Header("Rigidbodys")]
         public Rigidbody Head;
@@ -35,64 +31,26 @@ namespace Fusion.XR
         public ConfigurableJoint ChestJoint;
         public ConfigurableJoint LegJoint;
 
-        #region Editor Stuff
-        private float lastCP, lastLP;
-
-        private void OnValidate()
-        {
-            if (chestPercent != lastCP)
-                legPercent = 1 - chestPercent;
-            else
-                chestPercent = 1 - legPercent;
-
-            lastCP = chestPercent;
-            lastLP = legPercent;
-        }  
-        #endregion
 
         private void Start()
         {
             HeadJoint = SetupJoint(Chest, Head);
-            ChestJoint = SetupJoint(Legs, Chest);
-
-            //Init Legs
-            legFactor = LegsCol.height * 2;
-            initialLegCenter = LegsCol.center;
-
-            //Init Chest
-            chestFactor = ChestCol.height * 2;
         }
 
-        Vector3 cameraInRigSpace;
+        Vector3 cameraPos;
         void FixedUpdate()
         {
             //This is only debug
-            cameraInRigSpace = GetCameraInRigSpace();
-            targetHead.position = cameraInRigSpace;
+            cameraPos = GetCameraGlobal();
+            targetHead.position = cameraPos;
 
-            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraInRigSpace);
-            ChestJoint.targetPosition = Legs.transform.InverseTransformPoint(cameraInRigSpace - Vector3.up * (cameraInRigSpace.y * chestPercent - LocoSphereCollider.radius * 2));
+            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
+            //ChestJoint.targetPosition = Legs.transform.InverseTransformPoint(cameraInRigSpace - Vector3.up * (cameraInRigSpace.y * chestPercent - LocoSphereCollider.radius * 2));
 
             HMDMove();
-            UpdateLegs();
-            UpdateChest();
         }
 
-        float chestFactor;
-        Vector3 initialChestCenter;
-        void UpdateChest()
-        {
-            ChestCol.height = chestFactor * chestPercent;
-            ChestCol.center = Vector3.up * (chestFactor * chestPercent * 0.5f - HeadCol.radius);
-        }
 
-        float legFactor;
-        Vector3 initialLegCenter;
-        void UpdateLegs()
-        {
-            LegsCol.height = legFactor * legPercent;
-            LegsCol.center = initialLegCenter + Vector3.up * (legFactor * legPercent * 0.5f - LocoSphereCollider.radius * 2);
-        }
 
         Vector3 delta;
         Vector3 deltaHead;
@@ -106,19 +64,36 @@ namespace Fusion.XR
                 p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
 
                 delta.y = 0f;
+                delta -= headOffset;
 
-                Debug.DrawRay(Chest.position, delta, Color.red, 0.1f);
-
-                Head.MovePosition(Head.position + delta);
+                //Head.MovePosition(Head.position + delta);
                 Chest.MovePosition(Chest.position + delta);
                 Legs.MovePosition(Legs.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
+
+                StopXZ(Chest);
+                StopXZ(Legs);
+                StopXZ(LocoSphere);
 
                 p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
         }
 
+        Vector3 vel;
+        void StopXZ(Rigidbody rb)
+        {
+            vel = rb.velocity;
+            vel.x = 0;
+            vel.z = 0;
+            rb.velocity = vel;
+        }
+
         Vector3 GetCameraInRigSpace()
+        {
+            return LocoSphere.transform.localPosition + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
+        }
+
+        Vector3 GetCameraGlobal()
         {
             return LocoSphere.position + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
         }
