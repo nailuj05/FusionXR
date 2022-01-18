@@ -9,12 +9,16 @@ namespace Fusion.XR
         [Header("Transforms")]
         public Transform targetHead;
 
+        [Header("Joint Settings")]
         public float jointStrength = 20000;
         public float jointDampener = 250;
 
+        [Header("Tracking Settings")]
         public Vector3 headOffset;
         public float neckFactor;
         private Vector3 currentHeadOffset => Head.transform.TransformVector(headOffset);
+
+        public float FenderHeight = 0.1f;
 
         [Header("Rigidbodys")]
         public Rigidbody Head;
@@ -26,6 +30,7 @@ namespace Fusion.XR
         public SphereCollider HeadCol;
         public CapsuleCollider ChestCol;
         public CapsuleCollider LegsCol;
+        public SphereCollider FenderCol;
         public SphereCollider LocoSphereCollider;
 
         [Header("Joints")]
@@ -48,22 +53,22 @@ namespace Fusion.XR
 
             //TODO: Do this with anchors instead
 
-            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
+            //HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
             //ChestJoint.targetPosition = Legs.transform.InverseTransformPoint(cameraInRigSpace - Vector3.up * (cameraInRigSpace.y * chestPercent - LocoSphereCollider.radius * 2));
 
-            //Debug.DrawRay(Chest.position, Chest.transform.InverseTransformPoint(cameraPos + currentHeadOffset), Color.blue);
-            //Debug.DrawLine(LocoSphere.position + Vector3.down * LocoSphereCollider.radius, cameraPos, Color.green);
-            //Debug.DrawRay(cameraPos, currentHeadOffset, Color.green);
-            //Debug.DrawLine(Chest.position, p_VRCamera.position, Color.red);
-
-            HMDMove();
+            HandleHMDMovement();
+            PlaceFender();
         }
 
-
+        void PlaceFender()
+        {
+            FenderCol.transform.position = LocoSphereCollider.transform.position + Vector3.up * FenderHeight;
+        }
 
         Vector3 delta;
         Vector3 deltaHead;
-        void HMDMove()
+        Vector3 deltaRot;
+        void HandleHMDMovement()
         {
             delta = p_VRCamera.position - Chest.transform.position;
 
@@ -75,7 +80,6 @@ namespace Fusion.XR
                 delta.y = 0f;
                 delta -= currentHeadOffset;
 
-                //Head.MovePosition(Head.position + delta);
                 Chest.MovePosition(Chest.position + delta);
                 Legs.MovePosition(Legs.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
@@ -86,6 +90,22 @@ namespace Fusion.XR
 
                 p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
+
+            deltaRot = Vector3.zero;
+            deltaRot = Quaternion.LookRotation(p_VRCamera.forward, Vector3.up).eulerAngles;
+            deltaRot.x = Chest.transform.eulerAngles.x;
+            deltaRot.z = Chest.transform.eulerAngles.z;
+            //Chest.MoveRotation(Quaternion.Euler(deltaRot));
+            //Chest.rotation = Quaternion.Euler(deltaRot);
+
+            //Maybe only rotate collider not whole chest
+            deltaRot = Vector3.ProjectOnPlane(p_VRCamera.forward, Vector3.up);
+            var rot = Quaternion.LookRotation(deltaRot, Vector3.up);
+            Legs.MoveRotation(rot);
+            Chest.MoveRotation(rot);
+
+            var deltaAngle = p_XRRig.eulerAngles.y - Chest.transform.eulerAngles.y;
+            p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaAngle);
         }
 
         Vector3 vel;

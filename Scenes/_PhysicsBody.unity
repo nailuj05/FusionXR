@@ -643,7 +643,7 @@ Transform:
   m_Children:
   - {fileID: 1280261518}
   m_Father: {fileID: 1193097966}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &73760318
 SphereCollider:
@@ -2418,8 +2418,6 @@ GameObject:
   m_Component:
   - component: {fileID: 411622525}
   - component: {fileID: 411622526}
-  - component: {fileID: 411622528}
-  - component: {fileID: 411622527}
   m_Layer: 3
   m_Name: Fender
   m_TagString: Untagged
@@ -2435,12 +2433,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411622524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0, y: -0.84999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1280402678}
-  m_Father: {fileID: 1193097966}
-  m_RootOrder: 4
+  m_Father: {fileID: 1316299731}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &411622526
 SphereCollider:
@@ -2455,37 +2453,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.21
   m_Center: {x: 0, y: 0, z: 0}
---- !u!138 &411622527
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 411622524}
-  m_ConnectedBody: {fileID: 1316299732}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 0
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!54 &411622528
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 411622524}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!1 &440702020
 GameObject:
   m_ObjectHideFlags: 0
@@ -3507,7 +3474,7 @@ ConfigurableJoint:
     maximumForce: 3.4028233e+38
   m_TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_TargetAngularVelocity: {x: 0, y: 0, z: 0}
-  m_RotationDriveMode: 0
+  m_RotationDriveMode: 1
   m_AngularXDrive:
     serializedVersion: 3
     positionSpring: 0
@@ -3520,8 +3487,8 @@ ConfigurableJoint:
     maximumForce: 3.4028233e+38
   m_SlerpDrive:
     serializedVersion: 3
-    positionSpring: 0
-    positionDamper: 0
+    positionSpring: 10000
+    positionDamper: 100
     maximumForce: 3.4028233e+38
   m_ProjectionMode: 0
   m_ProjectionDistance: 0.1
@@ -4045,7 +4012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668176722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.744, z: 0.194}
+  m_LocalPosition: {x: -0, y: 1.744, z: 0.092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1135945960}
@@ -8715,7 +8682,6 @@ Transform:
   - {fileID: 668176723}
   - {fileID: 576957182}
   - {fileID: 1316299731}
-  - {fileID: 411622525}
   - {fileID: 73760317}
   m_Father: {fileID: 4601817725437680068}
   m_RootOrder: 2
@@ -8740,6 +8706,7 @@ MonoBehaviour:
   jointDampener: 250
   headOffset: {x: 0, y: 0, z: 0.25}
   neckFactor: 0.4
+  FenderHeight: 0.1
   Head: {fileID: 668176726}
   Chest: {fileID: 576957183}
   Legs: {fileID: 1316299732}
@@ -8747,9 +8714,10 @@ MonoBehaviour:
   HeadCol: {fileID: 668176724}
   ChestCol: {fileID: 1981767405}
   LegsCol: {fileID: 1626981159}
+  FenderCol: {fileID: 411622526}
   LocoSphereCollider: {fileID: 73760318}
   HeadJoint: {fileID: 0}
-  ChestJoint: {fileID: 0}
+  ChestJoint: {fileID: 576957184}
   LegJoint: {fileID: 0}
 --- !u!1 &1203173893
 GameObject:
@@ -9578,6 +9546,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1626981158}
+  - {fileID: 411622525}
   m_Father: {fileID: 1193097966}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
