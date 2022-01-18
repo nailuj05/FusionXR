@@ -13,6 +13,8 @@ namespace Fusion.XR
         public float jointDampener = 250;
 
         public Vector3 headOffset;
+        public float neckFactor;
+        private Vector3 currentHeadOffset => Head.transform.TransformVector(headOffset);
 
         [Header("Rigidbodys")]
         public Rigidbody Head;
@@ -41,11 +43,18 @@ namespace Fusion.XR
         void FixedUpdate()
         {
             //This is only debug
-            cameraPos = GetCameraGlobal();
+            cameraPos = GetCameraGlobal() + currentHeadOffset * neckFactor;
             targetHead.position = cameraPos;
+
+            //TODO: Do this with anchors instead
 
             HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
             //ChestJoint.targetPosition = Legs.transform.InverseTransformPoint(cameraInRigSpace - Vector3.up * (cameraInRigSpace.y * chestPercent - LocoSphereCollider.radius * 2));
+
+            //Debug.DrawRay(Chest.position, Chest.transform.InverseTransformPoint(cameraPos + currentHeadOffset), Color.blue);
+            //Debug.DrawLine(LocoSphere.position + Vector3.down * LocoSphereCollider.radius, cameraPos, Color.green);
+            //Debug.DrawRay(cameraPos, currentHeadOffset, Color.green);
+            //Debug.DrawLine(Chest.position, p_VRCamera.position, Color.red);
 
             HMDMove();
         }
@@ -64,7 +73,7 @@ namespace Fusion.XR
                 p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
 
                 delta.y = 0f;
-                delta -= headOffset;
+                delta -= currentHeadOffset;
 
                 //Head.MovePosition(Head.position + delta);
                 Chest.MovePosition(Chest.position + delta);
