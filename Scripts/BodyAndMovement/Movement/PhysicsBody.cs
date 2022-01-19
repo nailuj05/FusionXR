@@ -8,6 +8,7 @@ namespace Fusion.XR
     {
         [Header("Transforms")]
         public Transform targetHead;
+        public Rigidbody debugCylinder;
 
         [Header("Joint Settings")]
         public float jointStrength = 20000;
@@ -53,7 +54,7 @@ namespace Fusion.XR
 
             //TODO: Do this with anchors instead
 
-            //HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
+            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
             //ChestJoint.targetPosition = Legs.transform.InverseTransformPoint(cameraInRigSpace - Vector3.up * (cameraInRigSpace.y * chestPercent - LocoSphereCollider.radius * 2));
 
             HandleHMDMovement();
@@ -67,7 +68,6 @@ namespace Fusion.XR
 
         Vector3 delta;
         Vector3 deltaHead;
-        Vector3 deltaRot;
         void HandleHMDMovement()
         {
             delta = p_VRCamera.position - Chest.transform.position;
@@ -90,22 +90,46 @@ namespace Fusion.XR
 
                 p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
+        }
 
-            deltaRot = Vector3.zero;
-            deltaRot = Quaternion.LookRotation(p_VRCamera.forward, Vector3.up).eulerAngles;
-            deltaRot.x = Chest.transform.eulerAngles.x;
-            deltaRot.z = Chest.transform.eulerAngles.z;
-            //Chest.MoveRotation(Quaternion.Euler(deltaRot));
-            //Chest.rotation = Quaternion.Euler(deltaRot);
+        private void LateUpdate()
+        {
+            HandleHMDRotation();
+        }
 
-            //Maybe only rotate collider not whole chest
+        Vector3 deltaRot;
+        Quaternion rot;
+        void HandleHMDRotation()
+        {
             deltaRot = Vector3.ProjectOnPlane(p_VRCamera.forward, Vector3.up);
-            var rot = Quaternion.LookRotation(deltaRot, Vector3.up);
-            Legs.MoveRotation(rot);
-            Chest.MoveRotation(rot);
+            rot = Quaternion.FromToRotation(Chest.transform.forward, deltaRot);
 
-            var deltaAngle = p_XRRig.eulerAngles.y - Chest.transform.eulerAngles.y;
-            p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaAngle);
+
+            //deltaRot = Vector3.ProjectOnPlane(p_VRCamera.forward, Vector3.up);
+            //rot = Quaternion.RotateTowards(rot, Quaternion.FromToRotation(Chest.transform.forward, deltaRot), 1);
+            //rot.Normalize();
+
+            //var newDelta = Vector3.ProjectOnPlane(p_VRCamera.forward, Vector3.up);
+
+            //if (deltaRot == Vector3.zero)
+            //    deltaRot = newDelta;
+            //if (Vector3.Dot(newDelta, deltaRot) > 0)
+            //    deltaRot = newDelta;
+
+            //rot = Quaternion.FromToRotation(Chest.transform.forward, deltaRot);
+
+            //Legs.MoveRotation(Legs.rotation * rot);
+            //Chest.MoveRotation(Chest.rotation * rot);
+            Chest.rotation *= rot;
+
+            rot.ToAngleAxis(out float deltaAngle, out Vector3 axis);
+
+            if (deltaAngle > 180f)
+            {
+                deltaAngle -= 360;
+            }
+
+            p_XRRig.RotateAround(p_VRCamera.position, axis, -deltaAngle);
         }
 
         Vector3 vel;
