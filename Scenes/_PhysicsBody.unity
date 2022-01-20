@@ -8757,7 +8757,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193097965}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.567, y: 0, z: 0.574}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1796816283}
@@ -8803,7 +8803,7 @@ MonoBehaviour:
   HeadJoint: {fileID: 0}
   ChestJoint: {fileID: 576957184}
   LegJoint: {fileID: 0}
-  step: 1000
+  step: 500
 --- !u!1 &1203173893
 GameObject:
   m_ObjectHideFlags: 0
@@ -13406,12 +13406,12 @@ GameObject:
   - component: {fileID: 1796816283}
   - component: {fileID: 1796816284}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: canberemoved
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1796816283
 Transform:
   m_ObjectHideFlags: 0
@@ -21683,7 +21683,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4601817725437680075}
   m_LocalRotation: {x: -0, y: 0.7071067, z: -0, w: -0.7071069}
-  m_LocalPosition: {x: 0.55, y: 0, z: 6.36}
+  m_LocalPosition: {x: 0.05, y: 0, z: 5.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4601817723382300428}
