@@ -58,6 +58,7 @@ namespace Fusion.XR
             //ChestJoint.targetPosition = Legs.transform.InverseTransformPoint(cameraInRigSpace - Vector3.up * (cameraInRigSpace.y * chestPercent - LocoSphereCollider.radius * 2));
 
             HandleHMDMovement();
+            HandleHMDRotation();
             PlaceFender();
         }
 
@@ -94,7 +95,7 @@ namespace Fusion.XR
 
         private void LateUpdate()
         {
-            HandleHMDRotation();
+
         }
 
         float lastEulers, newEulers, deltaEulers;
@@ -106,16 +107,13 @@ namespace Fusion.XR
         {
             newEulers = Mathf.MoveTowardsAngle(lastEulers, p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y, step*Time.deltaTime);
 
-            //deltaEulers = Mathf.MoveTowards(deltaEulers, lastEulers - newEulers, step * Time.deltaTime);
-
-            //This still rotates to fast. Fix this by always storing the raw target rotation but smoothing the applied rotation
             deltaEulers = (lastEulers - newEulers);
 
-            //deltaRot = Quaternion.RotateTowards(deltaRot, Quaternion.AngleAxis(deltaEulers, Vector3.up), step * Time.deltaTime);
             deltaRot = Quaternion.AngleAxis(deltaEulers, Vector3.up);
 
-            Chest.transform.rotation *= deltaRot;
-            //Chest.MoveRotation(deltaRot);
+            Chest.MoveRotation(Chest.rotation * deltaRot);
+            Legs.MoveRotation(Legs.rotation * deltaRot);
+
             debugCylinder.transform.eulerAngles = new Vector3(0, lastEulers, 0);
 
             p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaEulers);
