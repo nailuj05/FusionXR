@@ -97,39 +97,29 @@ namespace Fusion.XR
             HandleHMDRotation();
         }
 
-        Vector3 deltaRot;
-        Quaternion rot;
+        float lastEulers, newEulers;
+        float deltaEulers;
+        Quaternion deltaRot;
+
+        [Range(0.1f, 10f)]
+        public float step;
         void HandleHMDRotation()
         {
-            deltaRot = Vector3.ProjectOnPlane(p_VRCamera.forward, Vector3.up);
-            rot = Quaternion.FromToRotation(Chest.transform.forward, deltaRot);
+            newEulers = p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y;
 
+            deltaEulers = Mathf.MoveTowards(deltaEulers, lastEulers - newEulers, step * Time.deltaTime);
+            //deltaEulers = (lastEulers - newEulers);
 
-            //deltaRot = Vector3.ProjectOnPlane(p_VRCamera.forward, Vector3.up);
-            //rot = Quaternion.RotateTowards(rot, Quaternion.FromToRotation(Chest.transform.forward, deltaRot), 1);
-            //rot.Normalize();
+            //deltaRot = Quaternion.RotateTowards(deltaRot, Quaternion.AngleAxis(deltaEulers, Vector3.up), step * Time.deltaTime);
+            deltaRot = Quaternion.AngleAxis(deltaEulers, Vector3.up);
 
-            //var newDelta = Vector3.ProjectOnPlane(p_VRCamera.forward, Vector3.up);
+            Chest.transform.rotation *= deltaRot;
+            //Chest.MoveRotation(deltaRot);
+            debugCylinder.transform.eulerAngles = new Vector3(0, lastEulers, 0);
 
-            //if (deltaRot == Vector3.zero)
-            //    deltaRot = newDelta;
-            //if (Vector3.Dot(newDelta, deltaRot) > 0)
-            //    deltaRot = newDelta;
+            p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaEulers);
 
-            //rot = Quaternion.FromToRotation(Chest.transform.forward, deltaRot);
-
-            //Legs.MoveRotation(Legs.rotation * rot);
-            //Chest.MoveRotation(Chest.rotation * rot);
-            Chest.rotation *= rot;
-
-            rot.ToAngleAxis(out float deltaAngle, out Vector3 axis);
-
-            if (deltaAngle > 180f)
-            {
-                deltaAngle -= 360;
-            }
-
-            p_XRRig.RotateAround(p_VRCamera.position, axis, -deltaAngle);
+            lastEulers = newEulers;
         }
 
         Vector3 vel;
