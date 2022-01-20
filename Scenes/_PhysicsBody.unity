@@ -8803,7 +8803,7 @@ MonoBehaviour:
   HeadJoint: {fileID: 0}
   ChestJoint: {fileID: 576957184}
   LegJoint: {fileID: 0}
-  step: 10
+  step: 1000
 --- !u!1 &1203173893
 GameObject:
   m_ObjectHideFlags: 0

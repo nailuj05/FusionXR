@@ -97,15 +97,14 @@ namespace Fusion.XR
             HandleHMDRotation();
         }
 
-        float lastEulers, newEulers;
-        float deltaEulers;
+        float lastEulers, newEulers, deltaEulers;
+        float targetEulers;
         Quaternion deltaRot;
 
-        [Range(0.1f, 10f)]
         public float step;
         void HandleHMDRotation()
         {
-            newEulers = p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y;
+            newEulers = Mathf.MoveTowardsAngle(lastEulers, p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y, step*Time.deltaTime);
 
             //deltaEulers = Mathf.MoveTowards(deltaEulers, lastEulers - newEulers, step * Time.deltaTime);
 
