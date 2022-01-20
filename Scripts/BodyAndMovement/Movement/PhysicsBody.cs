@@ -107,8 +107,10 @@ namespace Fusion.XR
         {
             newEulers = p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y;
 
-            deltaEulers = Mathf.MoveTowards(deltaEulers, lastEulers - newEulers, step * Time.deltaTime);
-            //deltaEulers = (lastEulers - newEulers);
+            //deltaEulers = Mathf.MoveTowards(deltaEulers, lastEulers - newEulers, step * Time.deltaTime);
+
+            //This still rotates to fast. Fix this by always storing the raw target rotation but smoothing the applied rotation
+            deltaEulers = (lastEulers - newEulers);
 
             //deltaRot = Quaternion.RotateTowards(deltaRot, Quaternion.AngleAxis(deltaEulers, Vector3.up), step * Time.deltaTime);
             deltaRot = Quaternion.AngleAxis(deltaEulers, Vector3.up);
