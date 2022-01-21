@@ -101,8 +101,11 @@ namespace Fusion.XR
         float lastEulers, newEulers, deltaEulers;
         float targetEulers;
         Quaternion deltaRot;
-
         public float step = 500;
+
+        //Can this run in LateUpdate
+        //Can FenderPlacement Run in LateUpdate?
+        //Do we need to expose step to the user?
         void HandleHMDRotation()
         {
             newEulers = Mathf.MoveTowardsAngle(lastEulers, p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y, step*Time.deltaTime);
@@ -114,7 +117,7 @@ namespace Fusion.XR
             Chest.MoveRotation(Chest.rotation * deltaRot);
             Legs.MoveRotation(Legs.rotation * deltaRot);
 
-            debugCylinder.transform.eulerAngles = new Vector3(0, lastEulers, 0);
+            //debugCylinder.transform.eulerAngles = new Vector3(0, lastEulers, 0);
 
             p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaEulers);
 

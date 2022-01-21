@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 1
-  hasCustomPose: 1
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 11400000, guid: a6e74b938be2b8443ae006622d2bb90a, type: 2}
 --- !u!114 &799544394879435275
 MonoBehaviour:
@@ -180,8 +181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  grabPoints:
+  grabableType: 0
+  TwoHandedMode: 0
+  GrabPoints:
   - {fileID: 799544394879435272}
   - {fileID: 9045024089428162762}
 --- !u!65 &4044798231639983442
@@ -281,7 +283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 0
-  hasCustomPose: 1
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 11400000, guid: a6e74b938be2b8443ae006622d2bb90a, type: 2}
 --- !u!114 &1838858492618053948
 MonoBehaviour:
