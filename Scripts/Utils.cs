@@ -150,26 +150,22 @@ namespace Fusion.XR
         #endregion
 
         #region ClosestObject
-        public static GrabPoint ClosestGrabPoint(GrabPoint[] grabPoints, Vector3 point, Transform handTransform, Hand desiredHand)
+        public static GrabPoint ClosestGrabPoint(IGrabbable grabbable, Vector3 point, Transform handTransform, Hand desiredHand)
         {
             GrabPoint closestGrabPoint = null;
             float distance = float.MaxValue;
 
-            if (grabPoints != null)
+            if (grabbable.grabPoints != null)
             {
-                foreach (GrabPoint currentGrabPoint in grabPoints)
+                foreach (GrabPoint currentGrabPoint in grabbable.grabPoints)
                 {
-                    //Debug.Log($"{currentGrabPoint.name}: grab possible? {currentGrabPoint.IsGrabPossible(handTransform, desiredHand)}" +
-                    //    $", Distance: {(currentGrabPoint.transform.position - point).sqrMagnitude}" +
-                    //    $", Closer? {(currentGrabPoint.transform.position - point).sqrMagnitude < distance}");
-
-                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand)) //Check if the GrabPoint is for the correct Hand and if it isActive
+                    //TODO FIX
+                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand, grabbable.twoHandedMode)) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
                         {
                             closestGrabPoint = currentGrabPoint;
                             distance = (currentGrabPoint.transform.position - point).sqrMagnitude; //New (smaller) distance
-                            //Debug.Log($"Grabbed, new distance: {distance}");
                         }
                     }
                 }

@@ -20,7 +20,7 @@ namespace Fusion.XR
         Force = 4
     }
 
-    public enum TwoHandedMode
+    public enum TwoHandedModes
     {
         SwitchHand = 0,
         Average = 1,

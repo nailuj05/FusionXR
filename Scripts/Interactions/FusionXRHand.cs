@@ -160,6 +160,7 @@ namespace Fusion.XR
             grabPosition = grabbedGrabbable.GetClosestGrabPoint(transform.position, transform, hand, out grabPoint);
 
             ///Generate a GrabPoint if there is no given one
+            //TODO: What if no grab Point should be generated and we just can't grab it?
             if (grabPosition == null)
             {
                 grabPosition = GenerateGrabPoint(closestColl, grabbedGrabbable);
