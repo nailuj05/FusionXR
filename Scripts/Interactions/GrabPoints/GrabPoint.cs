@@ -69,13 +69,13 @@ namespace Fusion.XR
             lastHand = hand;
         }
 
-        public virtual bool IsGrabPossible(Transform handTransform, Hand hand)
+        public virtual bool IsGrabPossible(Transform handTransform, Hand hand, TwoHandedModes twoHandedMode)
         {
             if (rotateToMatchHand)
                 RotateToMatchHand(hand);
 
-            //If hands match or both hands are accepted
-            if(((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && isActive)
+            //If hands match or both hands are accepted and if the grab Point is free or can be switched
+            if (((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && (isActive || twoHandedMode == TwoHandedModes.SwitchHand))
             {
                 return true;
             }

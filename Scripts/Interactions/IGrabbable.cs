@@ -10,7 +10,11 @@ namespace Fusion.XR
 
         GameObject GameObject { get; }
 
+        TwoHandedModes twoHandedMode { get; }
+
         bool isGrabbed { get; }
+
+        GrabPoint[] grabPoints { get; }
 
         List<FusionXRHand> attachedHands { get; }
 

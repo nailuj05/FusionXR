@@ -1250,9 +1250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9eb186b5f22df54a83105ec0ef3316e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  grabPoints:
-  - {fileID: 38388077}
+  TwoHandedMode: 0
+  GrabPoints: []
   allowCollisionInteraction: 1
   interactionLayers:
     serializedVersion: 2
@@ -1511,8 +1510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a692d1da35105478bfe62d300a360f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
   allowCollisionInteraction: 0
   interactionLayers:
     serializedVersion: 2
@@ -2535,8 +2534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a487ba9cbe4fe7143ae2c8a0c2d257ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
   allowCollisionInteraction: 0
   interactionLayers:
     serializedVersion: 2
@@ -3126,8 +3125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdff73955dd1c045a398293cae7e558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
   allowCollisionInteraction: 0
   interactionLayers:
     serializedVersion: 2
@@ -3181,8 +3180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!136 &2050517838
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3376,8 +3375,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!4 &113399173998196445
 Transform:
   m_ObjectHideFlags: 0
@@ -5204,8 +5203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1 &781672907553926247
 GameObject:
   m_ObjectHideFlags: 0
@@ -6218,9 +6217,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 1
-  grabPoints:
+  TwoHandedMode: 1
+  GrabPoints:
   - {fileID: 3212452903457394746}
+  - {fileID: 258415806}
 --- !u!4 &4422027126369067498
 Transform:
   m_ObjectHideFlags: 0
@@ -6304,10 +6304,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1307909870}
@@ -6325,10 +6321,6 @@ PrefabInstance:
       objectReference: {fileID: 90654321}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -6378,10 +6370,6 @@ PrefabInstance:
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725372166370, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166374, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: rigType
@@ -6513,8 +6501,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!4 &5078246043082924823
 Transform:
   m_ObjectHideFlags: 0
@@ -6642,8 +6630,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!23 &6211203868137773176
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7915,8 +7903,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints:
+  TwoHandedMode: 0
+  GrabPoints:
   - {fileID: 8685508164954828762}
 --- !u!54 &8685508166118684543
 Rigidbody:

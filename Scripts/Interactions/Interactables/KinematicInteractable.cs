@@ -11,11 +11,15 @@ namespace Fusion.XR
         public Transform Transform { get { return transform; } }
         public GameObject GameObject { get { return gameObject; } }
 
-        public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
+        [SerializeField]
+        TwoHandedModes TwoHandedMode = TwoHandedModes.SwitchHand;
+        public TwoHandedModes twoHandedMode { get { return TwoHandedMode; } set { TwoHandedMode = value; } }
 
         public bool isGrabbed { get; protected set; }
 
-        [SerializeField] private GrabPoint[] grabPoints;
+        [SerializeField]
+        public GrabPoint[] GrabPoints;
+        public GrabPoint[] grabPoints { get { return GrabPoints; } set { GrabPoints = value; } }
 
         public List<FusionXRHand> attachedHands { get; private set; } = new List<FusionXRHand>();
         #endregion
@@ -109,7 +113,7 @@ namespace Fusion.XR
         //For returning the transform and the GrabPoint
         public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
         {
-            grabPoint = Utils.ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
+            grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
 
             if (grabPoint != null)
             {

@@ -12,11 +12,15 @@ namespace Fusion.XR
         public Transform Transform { get { return transform; } }
         public GameObject GameObject { get { return gameObject; } }
 
-        public TwoHandedMode twoHandedMode = TwoHandedMode.SwitchHand;
+        [SerializeField]
+        TwoHandedModes TwoHandedMode = TwoHandedModes.SwitchHand;
+        public TwoHandedModes twoHandedMode { get { return TwoHandedMode; } set { TwoHandedMode = value; } }
 
         public bool isGrabbed { get; protected set; }
 
-        [SerializeField] private GrabPoint[] grabPoints;
+        [SerializeField]
+        GrabPoint[] GrabPoints;
+        public GrabPoint[] grabPoints { get { return GrabPoints; } set { GrabPoints = value; } }
 
         public List<FusionXRHand> attachedHands { get; private set; } = new List<FusionXRHand>();
         #endregion
@@ -130,7 +134,7 @@ namespace Fusion.XR
         //For returning the transform and the GrabPoint
         public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
         {
-            grabPoint = Utils.ClosestGrabPoint(grabPoints, point, handTransform, desiredHand);
+            grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
 
             if (grabPoint != null)
             {
@@ -144,9 +148,9 @@ namespace Fusion.XR
             }
         }
 
-        public static void ManageNewHand(FusionXRHand hand, List<FusionXRHand> currentHands, TwoHandedMode mode)
+        public static void ManageNewHand(FusionXRHand hand, List<FusionXRHand> currentHands, TwoHandedModes mode)
         {
-            if (mode == TwoHandedMode.SwitchHand)   //Case: Switch Hands (Release the other hand)
+            if (mode == TwoHandedModes.SwitchHand)   //Case: Switch Hands (Release the other hand)
             {
                 //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
                 if (currentHands.Count > 0)
@@ -157,7 +161,7 @@ namespace Fusion.XR
 
                 currentHands.Add(hand);
             }
-            else if (mode == TwoHandedMode.Average) //Case: Averaging Between Hands;
+            else if (mode == TwoHandedModes.Average) //Case: Averaging Between Hands;
             {
                 currentHands.Add(hand);
             }

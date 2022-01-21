@@ -9,9 +9,10 @@ namespace Fusion.XR
     {
         public float maxAngle = 45f;
 
-        public override bool IsGrabPossible(Transform handTransform, Hand hand)
+        public override bool IsGrabPossible(Transform handTransform, Hand hand, TwoHandedModes twoHandedMode)
         {
-            if (((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && isActive)
+            //If hands match or both hands are accepted and if the grab Point is free or can be switched
+            if (((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && (isActive || twoHandedMode == TwoHandedModes.SwitchHand))
             {
                 if (Vector3.Angle(handTransform.forward, transform.forward) <= maxAngle)
                 {
