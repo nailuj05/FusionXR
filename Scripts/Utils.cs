@@ -304,4 +304,37 @@ namespace Fusion.XR
             return angle >= 0f ? Direction.North : Direction.South;
         }
     }
+
+    [System.Serializable]
+    public class PID
+    {
+        public float P, I, D;
+
+        public PID(float P, float I, float D)
+        {
+            this.P = P;
+            this.I = I;
+            this.D = D;
+        }
+
+        Vector3 current;
+        public Vector3 CalcVector(Vector3 setPoint, Vector3 actualPoint, float deltaTime)
+        {
+            current.Set(
+                CalcScalar(setPoint.x, actualPoint.x, deltaTime),
+                CalcScalar(setPoint.y, actualPoint.y, deltaTime),
+                CalcScalar(setPoint.z, actualPoint.z, deltaTime));
+            return current;
+        }
+
+        float present, derivative, lastError, integral;
+        public float CalcScalar(float setPoint, float actual, float deltaTime)
+        {
+            present = setPoint - actual;
+            integral += present * deltaTime;
+            lastError = present;
+            derivative = (present - lastError) / deltaTime;
+            return present * P + integral * I + derivative * D;
+        }
+    }
 }
