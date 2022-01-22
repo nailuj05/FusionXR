@@ -12,9 +12,9 @@ namespace Fusion.XR
 
         [Header("Body Settings")]
         [Range(0.1f, 0.9f)]
-        public float chestPercent;
+        public float chestPercent = 0.3f;
         [Range(0.1f, 0.9f)]
-        public float legsPercent;
+        public float legsPercent = 0.7f;
 
         #region Editor Stuff
         private float lastCP, lastLP;
@@ -140,9 +140,9 @@ namespace Fusion.XR
                 Legs.MovePosition(Legs.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
 
-                StopXZ(Chest);
-                StopXZ(Legs);
-                StopXZ(LocoSphere);
+                StopHorizontalMomentum(Chest);
+                StopHorizontalMomentum(Legs);
+                StopHorizontalMomentum(LocoSphere);
 
                 p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
@@ -170,7 +170,7 @@ namespace Fusion.XR
         }
 
         Vector3 vel;
-        void StopXZ(Rigidbody rb)
+        void StopHorizontalMomentum(Rigidbody rb)
         {
             vel = rb.velocity;
             vel.x = 0;
