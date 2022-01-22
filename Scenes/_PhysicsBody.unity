@@ -8786,6 +8786,8 @@ MonoBehaviour:
   p_CollisionRadius: 0.2
   targetHead: {fileID: 276068215}
   debugCylinder: {fileID: 1796816284}
+  chestPercent: 0.283
+  legsPercent: 0.717
   jointStrength: 20000
   jointDampener: 250
   headOffset: {x: 0, y: 0, z: 0}
@@ -8801,9 +8803,8 @@ MonoBehaviour:
   FenderCol: {fileID: 411622526}
   LocoSphereCollider: {fileID: 73760318}
   HeadJoint: {fileID: 0}
-  ChestJoint: {fileID: 0}
-  LegJoint: {fileID: 0}
-  step: 500
+  ChestJoint: {fileID: 576957184}
+  LegJoint: {fileID: 1316299733}
 --- !u!1 &1203173893
 GameObject:
   m_ObjectHideFlags: 0
@@ -9660,7 +9661,7 @@ ConfigurableJoint:
   m_GameObject: {fileID: 1316299730}
   m_ConnectedBody: {fileID: 73760319}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -0.95, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}

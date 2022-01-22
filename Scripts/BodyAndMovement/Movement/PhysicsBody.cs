@@ -10,6 +10,27 @@ namespace Fusion.XR
         public Transform targetHead;
         public Rigidbody debugCylinder;
 
+        [Header("Body Settings")]
+        [Range(0.1f, 0.9f)]
+        public float chestPercent;
+        [Range(0.1f, 0.9f)]
+        public float legsPercent;
+
+        #region Editor Stuff
+        private float lastCP, lastLP;
+
+        private void OnValidate()
+        {
+            if (chestPercent != lastCP)
+                legsPercent = 1 - chestPercent;
+            else
+                chestPercent = 1 - legsPercent;
+
+            lastCP = chestPercent;
+            lastLP = legsPercent;
+        } 
+        #endregion
+
         [Header("Joint Settings")]
         public float jointStrength = 20000;
         public float jointDampener = 250;
@@ -48,18 +69,52 @@ namespace Fusion.XR
         Vector3 cameraPos;
         void FixedUpdate()
         {
-            //This is only debug
+            //Head Offset still needed? 
             cameraPos = GetCameraGlobal() + currentHeadOffset * neckFactor;
+
+            //This is only debug
             targetHead.position = cameraPos;
 
             //TODO: Do this with anchors instead
 
             HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
-            //ChestJoint.targetPosition = Legs.transform.InverseTransformPoint(cameraInRigSpace - Vector3.up * (cameraInRigSpace.y * chestPercent - LocoSphereCollider.radius * 2));
+
+            UpdateChest();
+            UpdateLegs();
 
             HandleHMDMovement();
             HandleHMDRotation();
             PlaceFender();
+        }
+
+        Vector3 positionToReach;
+        void UpdateChest()
+        {
+            positionToReach = cameraPos + Vector3.down * (p_localHeight * chestPercent);
+
+            ChestJoint.connectedAnchor = ChestJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
+        }
+
+        void UpdateLegs()
+        {
+            positionToReach = cameraPos + Vector3.down * (p_localHeight * (1 - legsPercent));
+
+            var tar = -LegJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
+            tar.x = tar.z = 0;
+            LegJoint.anchor = tar;
+        }
+
+        void AdjustJointAnchor(ConfigurableJoint joint, float percentToReach, Vector3 cameraPosition)
+        {
+            positionToReach = cameraPos + Vector3.down * (p_localHeight * percentToReach);
+
+            //Debug.DrawLine(LocoSphere.position + Vector3.right * 0.2f + Vector3.down * LocoSphereCollider.radius, positionToReach + Vector3.right * 0.2f, Color.red);
+            //Debug.DrawLine(joint.transform.position + Vector3.right * 0.1f, joint.transform.TransformPoint(joint.transform.InverseTransformPoint(positionToReach)) + Vector3.right * 0.1f, Color.green);
+            //Debug.DrawLine(joint.transform.position, joint.transform.TransformPoint(joint.anchor), Color.blue);
+
+            //Debug.Log($"{p_localHeight} {joint.connectedBody.transform.InverseTransformPoint(positionToReach).y}");
+
+            joint.connectedAnchor = joint.connectedBody.transform.InverseTransformPoint(positionToReach);
         }
 
         void PlaceFender()
@@ -93,31 +148,21 @@ namespace Fusion.XR
             }
         }
 
-        private void LateUpdate()
-        {
-
-        }
-
-        float lastEulers, newEulers, deltaEulers;
-        float targetEulers;
-        Quaternion deltaRot;
-        public float step = 500;
-
         //Can this run in LateUpdate
         //Can FenderPlacement Run in LateUpdate?
         //Do we need to expose step to the user?
+        Quaternion deltaRot;
+        private float step = 500;
+        float lastEulers, newEulers, deltaEulers, targetEulers;
         void HandleHMDRotation()
         {
             newEulers = Mathf.MoveTowardsAngle(lastEulers, p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y, step*Time.deltaTime);
-
             deltaEulers = (lastEulers - newEulers);
 
             deltaRot = Quaternion.AngleAxis(deltaEulers, Vector3.up);
 
             Chest.MoveRotation(Chest.rotation * deltaRot);
             Legs.MoveRotation(Legs.rotation * deltaRot);
-
-            //debugCylinder.transform.eulerAngles = new Vector3(0, lastEulers, 0);
 
             p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaEulers);
 
