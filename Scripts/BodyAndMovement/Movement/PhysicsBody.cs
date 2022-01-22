@@ -81,13 +81,21 @@ namespace Fusion.XR
                 delta.y = 0f;
                 delta -= currentHeadOffset;
 
-                Chest.MovePosition(Chest.position + delta);
-                Legs.MovePosition(Legs.position + delta);
-                LocoSphere.MovePosition(LocoSphere.position + delta);
+                //Chest.AddForce(delta * 5000);
+                //Legs.AddForce(delta * 5000);
 
-                StopXZ(Chest);
-                StopXZ(Legs);
-                StopXZ(LocoSphere);
+                Chest.velocity = delta * 500;
+                Legs.velocity = delta * 500;
+
+                Debug.DrawRay(Chest.position, delta * 5);
+
+                //Chest.MovePosition(Chest.position + delta);
+                //Legs.MovePosition(Legs.position + delta);
+                //LocoSphere.MovePosition(LocoSphere.position + delta);
+
+                //StopXZ(Chest);
+                //StopXZ(Legs);
+                //StopXZ(LocoSphere);
 
                 p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
