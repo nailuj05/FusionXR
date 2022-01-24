@@ -1349,7 +1349,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c37b8c6d0014d8049b6d46cf81963cda, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1391,11 +1391,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
-  grabPoints: []
-  attachedHands: []
+  grabableType: 0
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!54 &555980311
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1655,7 +1653,8 @@ MonoBehaviour:
   smoothAttachSpeed: 0.5
   palm: {fileID: 1563749726}
   renderHand: {fileID: 863190381}
-  fingerTrackingMode: 1
+  handPosingDriver: 0
+  grabbingDriver: 1
   fingerSettings:
     offset: {x: 0, y: 0.4, z: 0}
     radius: 0.0125
@@ -2206,7 +2205,8 @@ MonoBehaviour:
   smoothAttachSpeed: 1
   palm: {fileID: 169951278}
   renderHand: {fileID: 1144407192}
-  fingerTrackingMode: 1
+  handPosingDriver: 0
+  grabbingDriver: 1
   fingerSettings:
     offset: {x: 0, y: 0.4, z: 0}
     radius: 0.0125

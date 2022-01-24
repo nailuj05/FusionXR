@@ -168,7 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  hasCustomPose: 0
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!114 &20862939
 MonoBehaviour:
@@ -533,7 +534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 0
-  hasCustomPose: 0
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
   reachDistance: 0.2
 --- !u!43 &244292350
@@ -772,12 +774,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 1
-  grabPoints:
-  - {fileID: 1469176438}
-  - {fileID: 547079742}
-  - {fileID: 1778558029}
-  - {fileID: 1918444011}
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!54 &313881361
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -827,7 +825,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1027,7 +1025,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1100,8 +1098,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1001 &529904289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1220,7 +1218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  hasCustomPose: 0
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &713184332
 GameObject:
@@ -1277,7 +1276,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36bce9ab6cae8ce43962938466458044, type: 2}
+  - {fileID: 2100000, guid: 0667dd74dfd376b4d98e22d48f72de2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1352,10 +1351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 1
-  grabPoints:
-  - {fileID: 20862938}
-  - {fileID: 1311453294}
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1001 &772687355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1853,7 +1850,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dbe80190c9adea34c8c8845ca4a17934, type: 2}
+  - {fileID: 2100000, guid: 0667dd74dfd376b4d98e22d48f72de2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1896,8 +1893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!43 &983409491
 Mesh:
   m_ObjectHideFlags: 0
@@ -2114,7 +2111,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07dc66ae04b7f6a43b9674bf0fefb33a, type: 2}
+  - {fileID: 2100000, guid: c37b8c6d0014d8049b6d46cf81963cda, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2487,7 +2484,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2544,8 +2541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1 &1266934370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,7 +2587,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 0
-  hasCustomPose: 0
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
   reachDistance: 0.2
 --- !u!1 &1311453291
@@ -2653,7 +2651,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  hasCustomPose: 0
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &1314623111
 GameObject:
@@ -2708,7 +2707,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cba66c276aed0874091de1c33eb3950d, type: 2}
+  - {fileID: 2100000, guid: c37b8c6d0014d8049b6d46cf81963cda, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3134,7 +3133,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a26de236ce89e94b963be8fa2b7ade6, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3191,8 +3190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 1
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1 &1460280213
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,7 +3284,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  hasCustomPose: 0
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &1488218071
 GameObject:
@@ -3429,7 +3429,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e148de6cdf2d164aa3e3f90ce8c852c, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3486,8 +3486,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!54 &1575785947
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3553,7 +3553,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  hasCustomPose: 0
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &1784969798
 GameObject:
@@ -3799,7 +3800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  hasCustomPose: 0
+  rotateToMatchHand: 0
+  leftHandAddedRotation: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &1920245165
 GameObject:
@@ -3929,7 +3931,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a26de236ce89e94b963be8fa2b7ade6, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3986,8 +3988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 1
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1 &1949655610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4089,7 +4091,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4146,8 +4148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1 &1979489544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4218,7 +4220,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4275,8 +4277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!4 &1986084006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
@@ -6347,7 +6349,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c852af001dae0064e9acaa832f1dadb7, type: 2}
+  - {fileID: 2100000, guid: e870c619a867e4f4fbe8fcf5595e3085, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6602,8 +6604,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1 &3185852257567913927
 GameObject:
   m_ObjectHideFlags: 0
@@ -8004,9 +8006,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints:
-  - {fileID: 1266934372}
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!59 &5385675516306310529
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -8455,9 +8456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints:
-  - {fileID: 213071327}
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!59 &5972630861854798395
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -9795,8 +9795,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  twoHandedMode: 0
-  grabPoints: []
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!4 &7810790100169656697
 Transform:
   m_ObjectHideFlags: 0
@@ -9993,7 +9993,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c852af001dae0064e9acaa832f1dadb7, type: 2}
+  - {fileID: 2100000, guid: e870c619a867e4f4fbe8fcf5595e3085, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
