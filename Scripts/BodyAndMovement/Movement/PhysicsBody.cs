@@ -60,7 +60,7 @@ namespace Fusion.XR
         public SphereCollider LocoSphereCollider;
 
         [Header("Joints")]
-        public ConfigurableJoint HeadJoint;
+        private ConfigurableJoint HeadJoint;
         public ConfigurableJoint ChestJoint;
         public ConfigurableJoint LegsJoint;
 
@@ -96,6 +96,10 @@ namespace Fusion.XR
         private void Start()
         {
             HeadJoint = SetupJoint(Chest, Head);
+
+            UpdateChest();
+            UpdateLegs();
+            PlaceFender();
 
             ToggleDebugObjects(renderDebugObjects);
         }
