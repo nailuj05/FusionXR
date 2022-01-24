@@ -27,19 +27,24 @@ namespace Fusion.XR
 
             lastCP = chestPercent;
             lastLP = legsPercent;
-        } 
+        }
         #endregion
+
+        [Space]
+        [Range(0f, 1f)]
+        public float chestAdjustmentFactor = 0.75f;
+        [Range(0f, 1f)]
+        public float legAdjustmentFacotor = 0.75f;
 
         [Header("Joint Settings")]
         public float jointStrength = 20000;
         public float jointDampener = 250;
 
         [Header("Tracking Settings")]
-        public Vector3 headOffset;
-        public float neckFactor;
-        private Vector3 currentHeadOffset => Head.transform.TransformVector(headOffset);
-
         public float FenderHeight = 0.1f;
+
+        private Vector3 headOffset;
+        private Vector3 currentHeadOffset => Head.transform.TransformVector(headOffset);
 
         [Header("Rigidbodys")]
         public Rigidbody Head;
@@ -59,23 +64,51 @@ namespace Fusion.XR
         public ConfigurableJoint ChestJoint;
         public ConfigurableJoint LegJoint;
 
+        [Header("Debug Objects")]
+        public bool renderDebugObjects = true;
+        public GameObject d_LocoSphere;
+        public GameObject d_Fender;
+        public GameObject d_Legs;
+        public GameObject d_Chest;
+
+        #region Private vars to avoid frame allocations
+
+        //Fixed Update
+        Vector3 cameraPos;
+
+        //Update Chest/Legs
+        float colliderHeight;
+        Vector3 positionToReach;
+
+        //HandleHMDMovement
+        Vector3 delta;
+        Vector3 deltaHead;
+
+        //HandleHMDRotation
+        Quaternion deltaRot;
+        private float step = 500;
+        float lastEulers, newEulers, deltaEulers, targetEulers;
+
+        //StopHorizontalMomentum
+        Vector3 vel; 
+        #endregion
 
         private void Start()
         {
             HeadJoint = SetupJoint(Chest, Head);
+
+            ToggleDebugObjects(renderDebugObjects);
         }
 
-        Vector3 cameraPos;
         void FixedUpdate()
         {
-            //Head Offset still needed? 
-            cameraPos = GetCameraGlobal() + currentHeadOffset * neckFactor;
+            //NOTE: Head Offset can be used for jumping
+            cameraPos = GetCameraGlobal() + currentHeadOffset;
 
             //This is only debug
             targetHead.position = cameraPos;
 
             //TODO: Do this with anchors instead
-
             HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
 
             HandleHMDMovement();
@@ -87,48 +120,55 @@ namespace Fusion.XR
             UpdateLegs();
         }
 
-        Vector3 positionToReach;
-        void UpdateChest()
+        private void LateUpdate()
         {
-            positionToReach = cameraPos + Vector3.down * (p_localHeight * chestPercent);
-
-            ChestJoint.connectedAnchor = ChestJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
+            if (renderDebugObjects)
+            {
+                AlignObjectWithCollider(ChestCol, d_Chest);
+                AlignObjectWithCollider(LegsCol, d_Legs);
+            }
         }
 
-        void UpdateLegs()
+        #region Chest and Legs
+
+        private void UpdateChest()
         {
+            colliderHeight = (p_localHeight * chestPercent);
+            positionToReach = cameraPos + Vector3.down * colliderHeight;
+
+            ChestJoint.connectedAnchor = ChestJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
+
+            ChestCol.height = colliderHeight;
+            ChestCol.center = Vector3.up * ((colliderHeight - 0.5f) * chestAdjustmentFactor);
+        }
+
+        //Fix collision issue
+        private void UpdateLegs()
+        {
+            colliderHeight = (p_localHeight * (1 - legsPercent));
             positionToReach = cameraPos + Vector3.down * (p_localHeight * (1 - legsPercent));
 
             var tar = -LegJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
-            tar.x = tar.z = 0;
+            //tar.x = tar.z = 0;
             LegJoint.anchor = tar;
-        }
 
-        void AdjustJointAnchor(ConfigurableJoint joint, float percentToReach, Vector3 cameraPosition)
-        {
-            positionToReach = cameraPos + Vector3.down * (p_localHeight * percentToReach);
+            LegsCol.height = colliderHeight;
+        } 
 
-            //Debug.DrawLine(LocoSphere.position + Vector3.right * 0.2f + Vector3.down * LocoSphereCollider.radius, positionToReach + Vector3.right * 0.2f, Color.red);
-            //Debug.DrawLine(joint.transform.position + Vector3.right * 0.1f, joint.transform.TransformPoint(joint.transform.InverseTransformPoint(positionToReach)) + Vector3.right * 0.1f, Color.green);
-            //Debug.DrawLine(joint.transform.position, joint.transform.TransformPoint(joint.anchor), Color.blue);
-
-            //Debug.Log($"{p_localHeight} {joint.connectedBody.transform.InverseTransformPoint(positionToReach).y}");
-
-            joint.connectedAnchor = joint.connectedBody.transform.InverseTransformPoint(positionToReach);
-        }
-
-        void PlaceFender()
+        private void PlaceFender()
         {
             FenderCol.transform.position = LocoSphereCollider.transform.position + Vector3.up * FenderHeight;
         }
 
-        Vector3 delta;
-        Vector3 deltaHead;
-        void HandleHMDMovement()
+        #endregion
+
+        #region HMD Movement and Rotation
+
+        private void HandleHMDMovement()
         {
             delta = p_VRCamera.position - Chest.transform.position;
 
-            if(delta.magnitude > 0.001f)
+            if (delta.magnitude > 0.001f)
             {
                 deltaHead = p_VRCamera.position - Head.transform.position;
                 p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
@@ -151,12 +191,9 @@ namespace Fusion.XR
         //Can this run in LateUpdate
         //Can FenderPlacement Run in LateUpdate?
         //Do we need to expose step to the user?
-        Quaternion deltaRot;
-        private float step = 500;
-        float lastEulers, newEulers, deltaEulers, targetEulers;
-        void HandleHMDRotation()
+        private void HandleHMDRotation()
         {
-            newEulers = Mathf.MoveTowardsAngle(lastEulers, p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y, step*Time.deltaTime);
+            newEulers = Mathf.MoveTowardsAngle(lastEulers, p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y, step * Time.deltaTime);
             deltaEulers = (lastEulers - newEulers);
 
             deltaRot = Quaternion.AngleAxis(deltaEulers, Vector3.up);
@@ -168,9 +205,28 @@ namespace Fusion.XR
 
             lastEulers = newEulers;
         }
+        #endregion
 
-        Vector3 vel;
-        void StopHorizontalMomentum(Rigidbody rb)
+        #region Debug Objects
+
+        private void ToggleDebugObjects(bool enabled)
+        {
+            d_Chest.SetActive(enabled);
+            d_Fender.SetActive(enabled);
+            d_Legs.SetActive(enabled);
+            d_LocoSphere.SetActive(enabled);
+        }
+
+        private void AlignObjectWithCollider(CapsuleCollider coll, GameObject gameObject)
+        {
+            gameObject.transform.position = coll.transform.TransformPoint(coll.center);
+            gameObject.transform.localScale = new Vector3(coll.radius * 2, coll.height / 2, coll.radius * 2);
+        }  
+        #endregion
+
+        #region Helper Functions
+
+        private void StopHorizontalMomentum(Rigidbody rb)
         {
             vel = rb.velocity;
             vel.x = 0;
@@ -178,17 +234,17 @@ namespace Fusion.XR
             rb.velocity = vel;
         }
 
-        Vector3 GetCameraInRigSpace()
+        private Vector3 GetCameraInRigSpace()
         {
             return LocoSphere.transform.localPosition + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
         }
 
-        Vector3 GetCameraGlobal()
+        private Vector3 GetCameraGlobal()
         {
             return LocoSphere.position + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
         }
 
-        ConfigurableJoint SetupJoint(Rigidbody connectTo, Rigidbody connectedBody)
+        private ConfigurableJoint SetupJoint(Rigidbody connectTo, Rigidbody connectedBody)
         {
             ConfigurableJoint joint = connectTo.gameObject.AddComponent<ConfigurableJoint>();
             joint.connectedBody = connectedBody;
@@ -206,6 +262,7 @@ namespace Fusion.XR
             joint.xDrive = joint.yDrive = joint.zDrive = drive;
 
             return joint;
-        }
+        } 
+        #endregion
     }
 }
