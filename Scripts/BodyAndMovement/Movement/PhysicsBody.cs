@@ -8,7 +8,6 @@ namespace Fusion.XR
     {
         [Header("Transforms")]
         public Transform targetHead;
-        public Rigidbody debugCylinder;
 
         [Header("Body Settings")]
         [Range(0.1f, 0.9f)]
@@ -79,12 +78,13 @@ namespace Fusion.XR
 
             HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
 
-            UpdateChest();
-            UpdateLegs();
-
             HandleHMDMovement();
             HandleHMDRotation();
+
             PlaceFender();
+
+            UpdateChest();
+            UpdateLegs();
         }
 
         Vector3 positionToReach;
