@@ -147,6 +147,7 @@ namespace Fusion.XR
             colliderHeight = (p_localHeight * (1 - legsPercent));
             positionToReach = LocoSphere.transform.position + Vector3.up * (p_localHeight * legsPercent);
 
+            LegsJoint.anchor = Vector3.up * LocoSphereCollider.radius;
             LegsJoint.connectedAnchor = LegsJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
 
             LegsCol.height = colliderHeight;
