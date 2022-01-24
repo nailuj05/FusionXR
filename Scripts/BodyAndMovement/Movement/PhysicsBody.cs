@@ -62,7 +62,7 @@ namespace Fusion.XR
         [Header("Joints")]
         public ConfigurableJoint HeadJoint;
         public ConfigurableJoint ChestJoint;
-        public ConfigurableJoint LegJoint;
+        public ConfigurableJoint LegsJoint;
 
         [Header("Debug Objects")]
         public bool renderDebugObjects = true;
@@ -142,15 +142,12 @@ namespace Fusion.XR
             ChestCol.center = Vector3.up * ((colliderHeight - 0.5f) * chestAdjustmentFactor);
         }
 
-        //Fix collision issue
         private void UpdateLegs()
         {
             colliderHeight = (p_localHeight * (1 - legsPercent));
-            positionToReach = cameraPos + Vector3.down * (p_localHeight * (1 - legsPercent));
+            positionToReach = LocoSphere.transform.position + Vector3.up * (p_localHeight * legsPercent);
 
-            var tar = -LegJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
-            //tar.x = tar.z = 0;
-            LegJoint.anchor = tar;
+            LegsJoint.connectedAnchor = LegsJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
 
             LegsCol.height = colliderHeight;
         } 

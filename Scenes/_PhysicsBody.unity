@@ -8708,8 +8708,6 @@ MonoBehaviour:
   legAdjustmentFacotor: 0.75
   jointStrength: 20000
   jointDampener: 250
-  headOffset: {x: 0, y: 0, z: 0}
-  neckFactor: 0.4
   FenderHeight: 0.1
   Head: {fileID: 668176726}
   Chest: {fileID: 576957183}
@@ -8722,7 +8720,7 @@ MonoBehaviour:
   LocoSphereCollider: {fileID: 73760318}
   HeadJoint: {fileID: 0}
   ChestJoint: {fileID: 576957184}
-  LegJoint: {fileID: 1316299733}
+  LegsJoint: {fileID: 1316299733}
   renderDebugObjects: 1
   d_LocoSphere: {fileID: 1280261517}
   d_Fender: {fileID: 1280402677}
@@ -9584,10 +9582,10 @@ ConfigurableJoint:
   m_GameObject: {fileID: 1316299730}
   m_ConnectedBody: {fileID: 73760319}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0.2, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 1.4, z: 0}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
