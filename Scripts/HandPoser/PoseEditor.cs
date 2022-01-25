@@ -28,6 +28,8 @@ namespace Fusion.XR
 
             foreach (var editor in editors)
             {
+                if (!Selection.gameObjects[0]) return;
+
                 if (editor.gameObject != Selection.gameObjects[0] & editor.isEditingPose)
                 {
                     editor.isEditingPose = false;
