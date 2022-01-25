@@ -66,7 +66,7 @@ namespace Fusion.XR
                 Vector3 offsetPos = attachedHands[0].grabPosition.localPosition;
                 Quaternion offsetRot = attachedHands[0].grabPosition.localRotation;
 
-                //Delta Vector/Quaternion from Grabable (+ offset) to hand
+                //Delta Vector/Quaternion from Grabbable (+ offset) to hand
                 targetPosition = attachedHands[0].targetPosition - transform.TransformVector(offsetPos);
                 targetRotation = attachedHands[0].targetRotation * Quaternion.Inverse(offsetRot);
 
@@ -84,7 +84,7 @@ namespace Fusion.XR
                     Vector3 offsetPos = attachedHands[i].grabPosition.localPosition;
                     Quaternion offsetRot = attachedHands[i].grabPosition.localRotation;
 
-                    //Delta Vector/Quaternion from Grabable (+ offset) to hand
+                    //Delta Vector/Quaternion from Grabbable (+ offset) to hand
                     posTargets[i] = attachedHands[i].targetPosition - transform.TransformVector(offsetPos);
                     rotTargets[i] = attachedHands[i].targetRotation * Quaternion.Inverse(offsetRot);
                 }
