@@ -7,6 +7,13 @@ namespace Fusion.XR
 {
     public static class Extensions
     {
+        public static Vector3 ClampVector(this Vector3 vector, float maxLength)
+        {
+            if (vector.magnitude < maxLength) return vector;
+
+            return vector.normalized * maxLength;
+        }
+
         public static void TryDestroyComponent<T>(this GameObject gameObject) where T : Component
         {
             if (gameObject.TryGetComponent<T>(out T t))
@@ -150,6 +157,15 @@ namespace Fusion.XR
         #endregion
 
         #region ClosestObject
+
+        public static Vector3 ClosestPointOnLine(Vector3 linePnt, Vector3 lineDir, float lineLength, Vector3 pnt)
+        {
+            lineDir.Normalize();
+            var v = pnt - linePnt;
+            var d = Vector3.Dot(v, lineDir);
+            return linePnt + (lineDir * d).ClampVector(lineLength * 0.5f);
+        }
+
         public static GrabPoint ClosestGrabPoint(IGrabbable grabbable, Vector3 point, Transform handTransform, Hand desiredHand)
         {
             GrabPoint closestGrabPoint = null;
