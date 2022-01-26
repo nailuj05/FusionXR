@@ -16,39 +16,16 @@ namespace Fusion.XR
         public Vector3 lineStartGlobal  { get { return transform.parent.TransformPoint(lineStart);  } }
         public Vector3 lineEndGlobal    { get { return transform.parent.TransformPoint(lineEnd);    } }
 
-#if UNITY_EDITOR
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(lineStartGlobal, lineEndGlobal);
-        }
-#endif
+        private Vector3 globalLinePoint => transform.parent.TransformPoint((lineStart + lineEnd) * 0.5f);
+        private Vector3 globalLineDir => transform.parent.TransformDirection(lineEnd - lineStart);
+
+        private float globalLineLength => Vector3.Distance(lineStartGlobal, lineEndGlobal);
 
         public override GrabPoint GetAligned(Transform hand)
         {
-            Vector3 line = lineEndGlobal - lineStartGlobal;
-            float lineLength = line.magnitude;
+            transform.position = Utils.ClosestPointOnLine(globalLinePoint, globalLineDir, globalLineLength, hand.position);
 
-            Vector3 handVec = hand.position - lineStartGlobal;
-            Vector3 handPos = Vector3.Project(handVec, line) + lineStartGlobal;
-
-            Vector3 lineMid = (lineStartGlobal + lineEndGlobal) / 2;
-
-            //If we need to cap the projected position
-            if (Vector3.Distance(handPos, lineMid) > (lineLength / 2))
-            {
-                if (Vector3.Dot(handPos - lineMid, lineStartGlobal - lineMid) > 0)
-                {
-                    handPos = lineStartGlobal;
-                }
-                else if (Vector3.Dot(handPos - lineMid, lineEndGlobal - lineMid) > 0)
-                {
-                    handPos = lineEndGlobal;
-                }
-            }
-
-            transform.position = handPos;
-
+            //Align rotation
             if (alignHand)
             {
                 GrabPointAlign.AlignPoint(transform, hand);
@@ -56,5 +33,13 @@ namespace Fusion.XR
 
             return this;
         }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(lineStartGlobal, lineEndGlobal);
+        }
+#endif
     } 
 }
