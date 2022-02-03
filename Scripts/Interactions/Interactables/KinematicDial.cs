@@ -23,13 +23,16 @@ namespace Fusion.XR
             grabPosition = attachedHands[0].grabPosition.position;
 
             offsetAngle = Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            startAngles = transform.localEulerAngles;
         }
+
+        Vector3 startAngles;
 
         protected override void InteractionUpdate()
         {
             var deltaAngle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
 
-            transform.localEulerAngles = axis * deltaAngle;
+            transform.localEulerAngles = startAngles + axis * deltaAngle;
         }
 
         protected override void InteractionEnd()
