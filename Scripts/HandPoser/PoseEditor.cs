@@ -254,7 +254,7 @@ namespace Fusion.XR
                         poseEditor.isEditingPose = false;
                         poseEditor.RemovePoserHand();
 
-                        string path = "Assets/FusionBasicXR/Poses/" + poseEditor.displayName + ".asset";
+                        string path = "Assets/FusionXR/Poses/" + poseEditor.displayName + ".asset";
 
                         if (!hasCustomPose)
                         {
