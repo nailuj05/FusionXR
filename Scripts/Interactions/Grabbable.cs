@@ -26,6 +26,7 @@ namespace Fusion.XR
         #endregion
 
         private Rigidbody rb;
+        private RigidbodyInterpolation originalInterpolation;
 
         //If 2 Handed:
         private Vector3 posOffset;
@@ -107,6 +108,9 @@ namespace Fusion.XR
             ///Manage new hand first (so the last driver gets removed before a new one is added)
             ManageNewHand(hand, attachedHands, twoHandedMode);
 
+            originalInterpolation = rb.interpolation;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+
             ///Setup and Start Track Driver
             hand.grabbedTrackDriver = Utils.DriverFromEnum(mode);
             hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
@@ -120,6 +124,8 @@ namespace Fusion.XR
         public virtual void Release(FusionXRHand hand)
         {
             EnableOrDisableCollisions(gameObject, hand, false);
+
+            rb.interpolation = originalInterpolation;
 
             RemoveHand(hand);
 
