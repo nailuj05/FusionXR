@@ -39,6 +39,7 @@ namespace Fusion.XR
 
             poserL.debugMode = poserR.debugMode = rigType == RigType.Mock;
 
+#if UNITY_EDITOR
             EditorUtility.SetDirty(poserR);
             EditorUtility.SetDirty(poserL);
             EditorUtility.SetDirty(player.LeftHand);
@@ -46,6 +47,7 @@ namespace Fusion.XR
             EditorUtility.SetDirty(player);
             EditorUtility.SetDirty(player.head);
             EditorUtility.SetDirty(collisionAdjuster);
+#endif
         }
 
         public GameObject GetCurrentRig()
@@ -67,6 +69,7 @@ namespace Fusion.XR
         }
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(HybridRig))]
     public class HybridRigEditor : Editor
     {
@@ -80,4 +83,5 @@ namespace Fusion.XR
             }
         }
     }
+#endif
 }
