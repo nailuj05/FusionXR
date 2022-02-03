@@ -115,13 +115,13 @@ namespace Fusion.XR
             //TODO: Do this with anchors instead
             HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
 
+            UpdateChest();
+            UpdateLegs();
+
             HandleHMDMovement();
             HandleHMDRotation();
 
             PlaceFender();
-
-            UpdateChest();
-            UpdateLegs();
         }
 
         private void LateUpdate()
@@ -146,13 +146,29 @@ namespace Fusion.XR
             ChestCol.center = Vector3.up * ((colliderHeight - 0.5f) * chestAdjustmentFactor);
         }
 
+        Vector3 shift = new Vector3(0.1f, 0, 0);
         private void UpdateLegs()
         {
             colliderHeight = (p_localHeight * (1 - legsPercent));
             positionToReach = LocoSphere.transform.position + Vector3.up * (p_localHeight * legsPercent);
+            positionToReach = cameraPos + Vector3.down * (p_localHeight * legsPercent - LocoSphereCollider.radius);
 
-            LegsJoint.anchor = Vector3.up * LocoSphereCollider.radius;
-            LegsJoint.connectedAnchor = LegsJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
+            Debug.DrawLine(Chest.position, positionToReach, Color.black);
+
+            //LegsJoint.anchor = Vector3.up * LocoSphereCollider.radius;
+            //LegsJoint.connectedAnchor = LegsJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
+
+            //LegsJoint.connectedAnchor = Vector3.down * LocoSphereCollider.radius;
+            //LegsJoint.anchor = LegsJoint.transform.InverseTransformPoint(positionToReach);
+
+            var drive = new JointDrive();
+            drive.positionSpring = jointStrength;
+            drive.positionDamper = jointDampener;
+            drive.maximumForce = Mathf.Infinity;
+
+            LegsJoint.xDrive = LegsJoint.yDrive = LegsJoint.zDrive = drive;
+
+            LegsJoint.targetPosition = positionToReach - Legs.position; //p_VRCamera.InverseTransformPoint(positionToReach);
 
             LegsCol.height = colliderHeight;
         } 
