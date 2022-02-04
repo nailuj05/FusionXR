@@ -111,14 +111,14 @@ namespace Fusion.XR
         #endregion
 
         //For returning the transform and the GrabPoint
-        public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
+        public GrabPoint GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand)
         {
-            grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
+            GrabPoint grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
 
             if (grabPoint != null)
             {
                 grabPoint.BlockGrabPoint();
-                return grabPoint.transform;
+                return grabPoint;
             }
             else
             {

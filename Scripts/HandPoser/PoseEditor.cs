@@ -19,10 +19,27 @@ namespace Fusion.XR
 
         private GameObject prevHand;
 
+        private void Awake()
+        {
+            isEditingPose = false;
+        }
+
         //Close all other opened editors
         private void Update()
         {
             if (!isEditingPose) return;
+
+            //TODO Update LeftHand
+            //if(TryGetComponent<GrabPoint>(out GrabPoint gb))
+            //{
+            //    handPoser.attachedObj = gb.AlignedTransform;
+            //}
+
+            if(isEditingPose)
+            {
+                GetComponent<GrabPoint>()?.UpdateAlignedPoint();
+                handPoser.PlaceRenderHand();
+            }
 
             var editors = FindObjectsOfType<PoseEditor>();
 
@@ -45,16 +62,23 @@ namespace Fusion.XR
             prevHand = Instantiate(prevHand);
 
             handPoser = prevHand.GetComponent<HandPoser>();
-            handPoser.attachedObj = this.transform;
 
-            StartCoroutine(UpdateHandPos());
+            if(TryGetComponent(out GrabPoint grabPoint))
+            {
+                handPoser.attachedObj = grabPoint.AlignedTransform;
+            }
+            else
+            {
+                handPoser.attachedObj = this.transform;
+            }
         }
 
         public void RemovePoserHand()
         {
             if (!prevHand) return;
 
-            GetComponent<GrabPoint>().RotateToMatchHand(Hand.Right);
+            GetComponent<GrabPoint>()?.ChangeCurrentHand(Hand.Right);
+            GetComponent<GrabPoint>()?.RemoveAlignedForEditor();
             DestroyImmediate(prevHand);
         }
 
@@ -66,15 +90,6 @@ namespace Fusion.XR
         public void SavePose()
         {
             pose.SetAllRotations(handPoser.SavePose());
-        }
-
-        private IEnumerator UpdateHandPos()
-        {
-            while (isEditingPose)
-            {
-                handPoser.PlaceRenderHand();
-                yield return null;
-            }
         }
 
         public void SwitchHand(GrabPointType type)
@@ -104,7 +119,7 @@ namespace Fusion.XR
                 handPoser.palm = prevHand.GetChildByName("palmR").transform;
             }
 
-            GetComponent<GrabPoint>().RotateToMatchHand(hand);
+            GetComponent<GrabPoint>()?.ChangeCurrentHand(hand);
 
             //Refresh RenderHand, because Editor Update() is not reliable
             handPoser.PlaceRenderHand();
