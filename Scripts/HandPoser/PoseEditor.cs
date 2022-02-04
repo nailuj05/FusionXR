@@ -124,6 +124,14 @@ namespace Fusion.XR
             //Refresh RenderHand, because Editor Update() is not reliable
             handPoser.PlaceRenderHand();
         }
+
+        public void NewPose(string name)
+        {
+            isEditingPose = true;
+            pose = ScriptableObject.CreateInstance<HandPose>();
+            pose.name = name;
+            displayName = name;
+        }
     }
 
 #if UNITY_EDITOR
@@ -209,6 +217,7 @@ namespace Fusion.XR
             }
             else
             {
+                #region Name, Pose and Hand Buttons
                 //Name and Pose
                 EditorGUILayout.LabelField("Pose Editor", EditorStyles.boldLabel);
                 EditorGUILayout.LabelField("Currently Editing:", poseEditor.displayName, EditorStyles.boldLabel);
@@ -244,7 +253,8 @@ namespace Fusion.XR
                     rightStyle.normal = new GUIStyleState() { background = Texture2D.grayTexture };
                 }
 
-                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndHorizontal(); 
+                #endregion
 
                 //Save, Load, Update and Cancel
                 EditorGUILayout.BeginHorizontal("Box");
@@ -254,12 +264,10 @@ namespace Fusion.XR
                     poseEditor.LoadPose();
                 }
 
-                if(GUILayout.Button("New Pose"))
+                if (GUILayout.Button("New Pose"))
                 {
-                    poseEditor.isEditingPose = true;
-                    poseEditor.pose = CreateInstance<HandPose>();
+                    NamePopout.Init(poseEditor);
                     hasCustomPose = false;
-                    poseEditor.displayName = "";
                 }
 
                 if (GUILayout.Button("SavePose"))
@@ -294,16 +302,52 @@ namespace Fusion.XR
                         Debug.LogWarning("No name set");
                     }
                 }
-                if(GUILayout.Button("Cancel"))
+
+                if (GUILayout.Button("Cancel"))
                 {
                     poseEditor.isEditingPose = false;
                     poseEditor.RemovePoserHand();
                 }
+
                 EditorGUILayout.EndHorizontal();
             }
 
             serializedObject.ApplyModifiedProperties();
         }
     }
+
+    public class NamePopout : EditorWindow
+    {
+        private PoseEditor contextEditor;
+        private string name;
+
+        public static void Init(PoseEditor context)
+        {
+            NamePopout w = ScriptableObject.CreateInstance<NamePopout>();
+            w.position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
+            w.contextEditor = context;
+            w.titleContent = new GUIContent("New Pose");
+            w.name = "New Pose";
+
+            w.ShowUtility();
+        }
+
+        private void OnGUI()
+        {
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("New Pose: ", EditorStyles.boldLabel);
+
+            EditorGUILayout.Space();
+            name = EditorGUILayout.TextField(new GUIContent("Name: "), name);
+
+            EditorGUILayout.Space();
+            if (GUILayout.Button("Agree!"))
+            {
+                contextEditor.NewPose(name);
+                this.Close();
+            }
+        }
+    }
+
 #endif
 }
