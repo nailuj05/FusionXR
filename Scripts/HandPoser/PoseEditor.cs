@@ -210,7 +210,8 @@ namespace Fusion.XR
             else
             {
                 //Name and Pose
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("displayName"));
+                EditorGUILayout.LabelField("Pose Editor", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Currently Editing:", poseEditor.displayName, EditorStyles.boldLabel);
 
                 EditorGUI.BeginChangeCheck();
 
