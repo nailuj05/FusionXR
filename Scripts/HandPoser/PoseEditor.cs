@@ -191,6 +191,7 @@ namespace Fusion.XR
                         {
                             poseEditor.pose = grabPoint.pose;
                             poseEditor.LoadPose();
+                            poseEditor.displayName = grabPoint.pose.name;
                         }
 
                         if (grabPoint.grabPointType == GrabPointType.Right)
