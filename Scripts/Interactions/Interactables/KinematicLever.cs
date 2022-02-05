@@ -23,12 +23,12 @@ namespace Fusion.XR
 
             grabPosition = attachedHands[0].grabPosition.position;
 
-            offsetAngle = Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            offsetAngle = Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(grabPosition), axis);
         }
 
         protected override void InteractionUpdate()
         {
-            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(grabPosition), axis);
 
             angle = Mathf.Clamp(angle, minMaxClamp.x, minMaxClamp.y);
 
