@@ -341,7 +341,7 @@ namespace Fusion.XR
             name = EditorGUILayout.TextField(new GUIContent("Name: "), name);
 
             EditorGUILayout.Space();
-            if (GUILayout.Button("Agree!"))
+            if (GUILayout.Button("Create!"))
             {
                 contextEditor.NewPose(name);
                 this.Close();
