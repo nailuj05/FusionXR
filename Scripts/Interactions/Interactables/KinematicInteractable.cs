@@ -72,6 +72,20 @@ namespace Fusion.XR
 
             InteractionEnd();
         }
+
+        protected Vector3 GetMeanPosition()
+        {
+            Vector3 meanPos = attachedHands[0].targetPosition;
+
+            if(attachedHands.Count > 1)
+            {
+                meanPos += attachedHands[1].targetPosition;
+                meanPos *= 0.5f;
+            }
+
+            return meanPos;
+        }
+
         #endregion
 
         #region Interaction
