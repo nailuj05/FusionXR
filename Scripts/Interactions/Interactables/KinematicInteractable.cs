@@ -36,6 +36,7 @@ namespace Fusion.XR
         [SerializeField]
         public Vector3 axis = Vector3.right;
 
+        //TODO: Is this still needed (obsolete by isGrabbed?)
         protected bool isInteracting = false;
 
         private void Start()
@@ -58,6 +59,7 @@ namespace Fusion.XR
             Grabbable.EnableOrDisableCollisions(gameObject, hand, true);
 
             isGrabbed = true;
+            isInteracting = true;
 
             InteractionStart();
         }
@@ -66,7 +68,8 @@ namespace Fusion.XR
         {
             Grabbable.EnableOrDisableCollisions(gameObject, hand, false);
 
-            isGrabbed = false;
+            isGrabbed = attachedHands.Count > 0;
+            isInteracting = attachedHands.Count > 0;
 
             attachedHands.Remove(hand);
 

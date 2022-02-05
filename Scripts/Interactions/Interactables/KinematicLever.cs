@@ -21,8 +21,6 @@ namespace Fusion.XR
         {
             if (attachedHands.Count == 0) return;
 
-            isInteracting = true;
-
             grabPosition = attachedHands[0].grabPosition.position;
 
             offsetAngle = Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
@@ -39,7 +37,7 @@ namespace Fusion.XR
 
         protected override void InteractionEnd()
         {
-            isInteracting = false;
+
         }
 
         Vector3 LocalAngleSetup(Vector3 pos)
