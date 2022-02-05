@@ -21,18 +21,16 @@ namespace Fusion.XR
         protected override void InteractionStart()
         {
             if (attachedHands.Count == 0) return;
-
-            isInteracting = true;
         }
 
         protected override void InteractionUpdate()
         {
-            transform.position = Utils.ClosestPointOnLine(globalLinePoint, globalLineDir, globalLineLength, attachedHands[0].targetPosition);
+            transform.position = Utils.ClosestPointOnLine(globalLinePoint, globalLineDir, globalLineLength, GetMeanPosition());
         }
 
         protected override void InteractionEnd()
         {
-            isInteracting = false;
+
         }
 
 #if UNITY_EDITOR

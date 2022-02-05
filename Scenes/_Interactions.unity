@@ -3570,7 +3570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ce66a3c5db2db41a1581ea8ac47894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TwoHandedMode: 0
+  TwoHandedMode: 1
   GrabPoints: []
   allowCollisionInteraction: 0
   interactionLayers:
