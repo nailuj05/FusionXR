@@ -24,7 +24,11 @@ namespace Fusion.XR
             grabPosition = attachedHands[0].grabPosition.position;
 
             offsetAngle = Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(grabPosition), axis);
+
+            startAngle = transform.localEulerAngles;
         }
+
+        Vector3 startAngle;
 
         protected override void InteractionUpdate()
         {
@@ -32,7 +36,7 @@ namespace Fusion.XR
 
             angle = Mathf.Clamp(angle, minMaxClamp.x, minMaxClamp.y);
 
-            transform.localRotation = Quaternion.Euler(axis * angle);
+            transform.localRotation = Quaternion.Euler(startAngle + axis * angle);
         }
 
         protected override void InteractionEnd()
