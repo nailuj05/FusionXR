@@ -68,10 +68,10 @@ namespace Fusion.XR
         {
             Grabbable.EnableOrDisableCollisions(gameObject, hand, false);
 
+            attachedHands.Remove(hand);
+
             isGrabbed = attachedHands.Count > 0;
             isInteracting = attachedHands.Count > 0;
-
-            attachedHands.Remove(hand);
 
             InteractionEnd();
         }
