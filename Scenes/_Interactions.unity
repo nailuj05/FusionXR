@@ -453,7 +453,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111377141}
-  m_LocalRotation: {x: 0.000000015454315, y: -0.000000015454305, z: 0.7071065, w: 0.7071071}
+  m_LocalRotation: {x: 0.000000015454276, y: -0.000000015454276, z: 0.70710653, w: 0.7071071}
   m_LocalPosition: {x: 1.104, y: 0.158, z: 1.23}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
@@ -1656,6 +1656,7 @@ GameObject:
   - component: {fileID: 678715103}
   - component: {fileID: 678715104}
   - component: {fileID: 678715102}
+  - component: {fileID: 678715105}
   m_Layer: 8
   m_Name: Lever
   m_TagString: Grabable
@@ -1670,7 +1671,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678715100}
-  m_LocalRotation: {x: -0.0000004319773, y: -0.000000113523285, z: 0.00000017881393, w: 1}
+  m_LocalRotation: {x: -0.00000043197727, y: -0.00000011352354, z: -0.00000017881393, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1729,6 +1730,29 @@ CapsuleCollider:
   m_Height: 0.7
   m_Direction: 1
   m_Center: {x: 0, y: 0.36, z: 0}
+--- !u!114 &678715105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678715100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8bb4fb5aa0fe645a621f92feb4e421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAxis: {x: 0, y: 0, z: 1}
+  direction: {x: 0, y: 1, z: 0}
+  angleToReach: -42.27
+  allowance: 10
+  currentAngle: 0
+  OnAngleReached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAngleLeft:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &693150860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2891,6 +2915,7 @@ GameObject:
   - component: {fileID: 1695114467}
   - component: {fileID: 1695114466}
   - component: {fileID: 1695114465}
+  - component: {fileID: 1695114470}
   m_Layer: 8
   m_Name: Dial
   m_TagString: Grabable
@@ -3012,6 +3037,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695114463}
   m_Mesh: {fileID: -8342707387534262118, guid: d5b3985ea0e224c4ca4bb60ff0de005d, type: 3}
+--- !u!114 &1695114470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695114463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8bb4fb5aa0fe645a621f92feb4e421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAxis: {x: 0, y: 0, z: 1}
+  direction: {x: 1, y: 0, z: 0}
+  angleToReach: 90
+  allowance: 10
+  currentAngle: 0
+  OnAngleReached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAngleLeft:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1784969798
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,6 +3449,7 @@ GameObject:
   - component: {fileID: 2030939732}
   - component: {fileID: 2030939731}
   - component: {fileID: 2030939735}
+  - component: {fileID: 2030939730}
   m_Layer: 8
   m_Name: Wheel
   m_TagString: Grabable
@@ -3422,6 +3471,29 @@ Transform:
   m_Father: {fileID: 749908421}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2030939730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030939728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8bb4fb5aa0fe645a621f92feb4e421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAxis: {x: 0, y: 0, z: 1}
+  direction: {x: 1, y: 0, z: 0}
+  angleToReach: 90
+  allowance: 15
+  currentAngle: 0
+  OnAngleReached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAngleLeft:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &2030939731
 Rigidbody:
   m_ObjectHideFlags: 0
