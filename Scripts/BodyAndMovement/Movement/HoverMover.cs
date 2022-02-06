@@ -47,6 +47,8 @@ namespace Fusion.XR
         void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+
             collisionAdjuster = GetComponent<CollisionAdjuster>();
         }
 

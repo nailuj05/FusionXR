@@ -1768,6 +1768,7 @@ MonoBehaviour:
   angleToReach: -42.27
   allowance: 10
   currentAngle: 0
+  isReached: 0
   OnAngleReached:
     m_PersistentCalls:
       m_Calls: []
@@ -3075,6 +3076,7 @@ MonoBehaviour:
   angleToReach: 90
   allowance: 10
   currentAngle: 0
+  isReached: 0
   OnAngleReached:
     m_PersistentCalls:
       m_Calls: []
@@ -3509,6 +3511,7 @@ MonoBehaviour:
   angleToReach: 180
   allowance: 15
   currentAngle: 0
+  isReached: 0
   OnAngleReached:
     m_PersistentCalls:
       m_Calls: []
@@ -6906,6 +6909,10 @@ PrefabInstance:
     - target: {fileID: 4601817725372166374, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: rigType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725372166375, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166383, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_Name

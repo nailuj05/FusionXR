@@ -17,6 +17,7 @@ namespace Fusion.XR
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
         }
 
         public override void Move(Vector3 direction)
