@@ -1396,6 +1396,7 @@ GameObject:
   - component: {fileID: 483270071}
   - component: {fileID: 483270074}
   - component: {fileID: 483270070}
+  - component: {fileID: 483270075}
   m_Layer: 8
   m_Name: Button
   m_TagString: Grabable
@@ -1411,7 +1412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483270068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.039}
+  m_LocalPosition: {x: 0, y: 0, z: 0.038}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 38388076}
@@ -1520,6 +1521,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &483270075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483270068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da20a2fc3d8d7a42a5793d7d236c36c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToReach: {x: 0, y: 0, z: -0.02}
+  allowance: 0.05
+  OnPositionReached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPositionLeft:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &492995989
 GameObject:
   m_ObjectHideFlags: 0
@@ -6175,7 +6196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6780130698191374465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.000000026076943, y: 0.00000023333769, z: -0.034097675}
+  m_LocalPosition: {x: 0, y: 0, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1113489406844760657}
@@ -7181,6 +7202,7 @@ GameObject:
   - component: {fileID: 9117586197106689066}
   - component: {fileID: 6780130698191374466}
   - component: {fileID: 6780130698191374467}
+  - component: {fileID: 6780130698191374468}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -7218,6 +7240,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6780130698191374468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6780130698191374465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da20a2fc3d8d7a42a5793d7d236c36c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionToReach: {x: 0, y: 0, z: -0.03}
+  allowance: 0.05
+  OnPositionReached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPositionLeft:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &6860059583994312827
 Transform:
   m_ObjectHideFlags: 0
@@ -7294,8 +7336,8 @@ ConfigurableJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000007078043, y: -0.00000023333772, z: 0.034097675}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0.03}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
