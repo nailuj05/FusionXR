@@ -101,6 +101,11 @@ namespace Fusion.XR
             UpdateLegs();
             PlaceFender();
 
+            Head.interpolation = RigidbodyInterpolation.Interpolate;
+            Chest.interpolation = RigidbodyInterpolation.Interpolate;
+            Legs.interpolation = RigidbodyInterpolation.Interpolate;
+            LocoSphere.interpolation = RigidbodyInterpolation.Interpolate;
+
             ToggleDebugObjects(renderDebugObjects);
         }
 
