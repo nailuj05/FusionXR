@@ -3630,6 +3630,7 @@ GameObject:
   - component: {fileID: 2050517838}
   - component: {fileID: 2050517837}
   - component: {fileID: 2050517836}
+  - component: {fileID: 2050517841}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -3753,6 +3754,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050517834}
   m_Mesh: {fileID: 5964940218898284536, guid: d5b3985ea0e224c4ca4bb60ff0de005d, type: 3}
+--- !u!114 &2050517841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050517834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8db2dbbeedf934d8ef031bae338897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialPosition: {x: 0, y: -0.3, z: 0}
+  distance: 0
+  OnDistanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2101626294
 GameObject:
   m_ObjectHideFlags: 0
