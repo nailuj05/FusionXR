@@ -59,7 +59,7 @@ namespace Fusion.XR
     public enum TurnMode
     {
         SnapTurn = 0,
-        //SmoothTurn = 1 //Not working
+        SmoothTurn = 1
     }
 
     public enum Direction

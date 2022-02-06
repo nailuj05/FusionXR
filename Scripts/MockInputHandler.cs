@@ -66,13 +66,13 @@ namespace Fusion.XR
             #endregion
 
             # region Turn
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKey(KeyCode.Q))
             {
                 Direction dir = new Direction();
                 dir = Direction.West;
                 movement.Turn(dir);
             }
-            else if (Input.GetKeyDown(KeyCode.E))
+            else if (Input.GetKey(KeyCode.E))
             {
                 Direction dir = new Direction();
                 dir = Direction.East;
