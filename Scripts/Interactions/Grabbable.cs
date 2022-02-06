@@ -26,6 +26,7 @@ namespace Fusion.XR
         #endregion
 
         private Rigidbody rb;
+        private RigidbodyInterpolation originalInterpolation;
 
         //If 2 Handed:
         private Vector3 posOffset;
@@ -107,6 +108,9 @@ namespace Fusion.XR
             ///Manage new hand first (so the last driver gets removed before a new one is added)
             ManageNewHand(hand, attachedHands, twoHandedMode);
 
+            originalInterpolation = rb.interpolation;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+
             ///Setup and Start Track Driver
             hand.grabbedTrackDriver = Utils.DriverFromEnum(mode);
             hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
@@ -121,6 +125,8 @@ namespace Fusion.XR
         {
             EnableOrDisableCollisions(gameObject, hand, false);
 
+            rb.interpolation = originalInterpolation;
+
             RemoveHand(hand);
 
             //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
@@ -132,15 +138,15 @@ namespace Fusion.XR
         #region Functions
 
         //For returning the transform and the GrabPoint
-        public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
+        public GrabPoint GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand)
         {
-            grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
+            GrabPoint grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
 
             if (grabPoint != null)
             {
                 grabPoint = grabPoint.GetAligned(handTransform);
                 grabPoint.BlockGrabPoint();
-                return grabPoint.transform;
+                return grabPoint;
             }
             else
             {

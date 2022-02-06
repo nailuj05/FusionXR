@@ -22,6 +22,6 @@ namespace Fusion.XR
 
         void Release(FusionXRHand hand);
 
-        Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint);
+        GrabPoint GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand);
     }
 }

@@ -16,63 +16,43 @@ namespace Fusion.XR
     {
         private Vector3 palmOffset = new Vector3(-0.035f, -0.021f, -0.0012f);
 
-        public GrabPointType grabPointType;
-        public bool rotateToMatchHand = false;
-        public Vector3 leftHandAddedRotation;
+        private Hand currentHand;
 
-        protected Hand lastHand = Hand.Right;
+        public void ChangeCurrentHand(Hand newHand)
+        {
+            currentHand = newHand;
+        }
+
+        private Transform alignedTransform;
+        public Transform AlignedTransform
+        {
+            get
+            {
+                if (alignedTransform == null)
+                {
+                    alignedTransform = new GameObject("alignedTransform").transform;
+                    alignedTransform.SetParent(transform.parent);
+                }
+
+                return alignedTransform;
+            }
+        }
+
+        public GrabPointType grabPointType;
+        public bool alignForLeftHand = false;
+        private Transform tempLeftTransform;
+
+        public Vector3 leftHandAddedRotation;
+        public Vector3 leftHandAddedPosition;
 
         protected bool isActive = true;
 
         public bool hasCustomPose { get { return (bool)pose; } }
         public HandPose pose;
 
-        private void OnDrawGizmos()
-        {
-            if(!(TryGetComponent<PoseEditor>(out PoseEditor pe) && pe.isEditingPose))
-            {
-                Mesh hand = Resources.Load<Mesh>("Hand") as Mesh;
-
-                Vector3 scale = transform.localScale;
-                Vector3 adjustedPalmOffset = palmOffset;
-
-                if(grabPointType == GrabPointType.Left)
-                {
-                    scale -= 2 * Vector3.right;
-
-                    adjustedPalmOffset.x *= -1;
-                    adjustedPalmOffset.z *= -1;
-                }
-
-                Gizmos.color = new Color(0, 1, 0, .5f);
-                Gizmos.DrawMesh(hand, transform.TransformPoint(adjustedPalmOffset), transform.rotation, scale * 0.01f);
-            }
-        }
-
-        public virtual void RotateToMatchHand(Hand hand)
-        {
-            if (grabPointType != GrabPointType.Both)
-                return;
-
-            if(lastHand != hand)
-            {
-                if(hand == Hand.Left)
-                {
-                    transform.localEulerAngles += leftHandAddedRotation;
-                }
-                else
-                {
-                    transform.localEulerAngles -= leftHandAddedRotation;
-                }
-            }
-
-            lastHand = hand;
-        }
-
         public virtual bool IsGrabPossible(Transform handTransform, Hand hand, TwoHandedModes twoHandedMode)
         {
-            if (rotateToMatchHand)
-                RotateToMatchHand(hand);
+            ChangeCurrentHand(hand);
 
             //If hands match or both hands are accepted and if the grab Point is free or can be switched
             if (((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && (isActive || twoHandedMode == TwoHandedModes.SwitchHand))
@@ -83,6 +63,34 @@ namespace Fusion.XR
             {
                 return false;
             }
+        }
+
+        public void Update()
+        {
+            if (Application.isPlaying)
+                UpdateAlignedPoint();
+        }
+
+        public void UpdateAlignedPoint()
+        {
+            if (currentHand == Hand.Left & alignForLeftHand)
+            {
+                AlignedTransform.position = transform.TransformPoint(leftHandAddedPosition);
+                AlignedTransform.rotation = transform.rotation * Quaternion.Euler(leftHandAddedRotation);
+            }
+            else
+            {
+                AlignedTransform.position = transform.position;
+                AlignedTransform.rotation = transform.rotation;
+            }
+        }
+
+        public void RemoveAlignedForEditor()
+        {
+            if (Application.isPlaying)
+                Destroy(alignedTransform.gameObject);
+            else
+                DestroyImmediate(alignedTransform.gameObject);
         }
 
         public virtual void BlockGrabPoint()
@@ -98,6 +106,28 @@ namespace Fusion.XR
         public virtual GrabPoint GetAligned(Transform hand)
         {
             return this;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!(TryGetComponent<PoseEditor>(out PoseEditor pe) && pe.isEditingPose))
+            {
+                Mesh hand = Resources.Load<Mesh>("Hand") as Mesh;
+
+                Vector3 scale = transform.localScale;
+                Vector3 adjustedPalmOffset = palmOffset;
+
+                if (grabPointType == GrabPointType.Left)
+                {
+                    scale -= 2 * Vector3.right;
+
+                    adjustedPalmOffset.x *= -1;
+                    adjustedPalmOffset.z *= -1;
+                }
+
+                Gizmos.color = new Color(0, 1, 0, .5f);
+                Gizmos.DrawMesh(hand, transform.TransformPoint(adjustedPalmOffset), transform.rotation, scale * 0.01f);
+            }
         }
     }
 }

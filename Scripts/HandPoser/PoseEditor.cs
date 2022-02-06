@@ -19,10 +19,27 @@ namespace Fusion.XR
 
         private GameObject prevHand;
 
+        private void Awake()
+        {
+            isEditingPose = false;
+        }
+
         //Close all other opened editors
         private void Update()
         {
             if (!isEditingPose) return;
+
+            //TODO Update LeftHand
+            //if(TryGetComponent<GrabPoint>(out GrabPoint gb))
+            //{
+            //    handPoser.attachedObj = gb.AlignedTransform;
+            //}
+
+            if(isEditingPose)
+            {
+                GetComponent<GrabPoint>()?.UpdateAlignedPoint();
+                handPoser.PlaceRenderHand();
+            }
 
             var editors = FindObjectsOfType<PoseEditor>();
 
@@ -45,16 +62,23 @@ namespace Fusion.XR
             prevHand = Instantiate(prevHand);
 
             handPoser = prevHand.GetComponent<HandPoser>();
-            handPoser.attachedObj = this.transform;
 
-            StartCoroutine(UpdateHandPos());
+            if(TryGetComponent(out GrabPoint grabPoint))
+            {
+                handPoser.attachedObj = grabPoint.AlignedTransform;
+            }
+            else
+            {
+                handPoser.attachedObj = this.transform;
+            }
         }
 
         public void RemovePoserHand()
         {
             if (!prevHand) return;
 
-            GetComponent<GrabPoint>().RotateToMatchHand(Hand.Right);
+            GetComponent<GrabPoint>()?.ChangeCurrentHand(Hand.Right);
+            GetComponent<GrabPoint>()?.RemoveAlignedForEditor();
             DestroyImmediate(prevHand);
         }
 
@@ -66,15 +90,6 @@ namespace Fusion.XR
         public void SavePose()
         {
             pose.SetAllRotations(handPoser.SavePose());
-        }
-
-        private IEnumerator UpdateHandPos()
-        {
-            while (isEditingPose)
-            {
-                handPoser.PlaceRenderHand();
-                yield return null;
-            }
         }
 
         public void SwitchHand(GrabPointType type)
@@ -104,10 +119,18 @@ namespace Fusion.XR
                 handPoser.palm = prevHand.GetChildByName("palmR").transform;
             }
 
-            GetComponent<GrabPoint>().RotateToMatchHand(hand);
+            GetComponent<GrabPoint>()?.ChangeCurrentHand(hand);
 
             //Refresh RenderHand, because Editor Update() is not reliable
             handPoser.PlaceRenderHand();
+        }
+
+        public void NewPose(string name)
+        {
+            isEditingPose = true;
+            pose = ScriptableObject.CreateInstance<HandPose>();
+            pose.name = name;
+            displayName = name;
         }
     }
 
@@ -176,6 +199,7 @@ namespace Fusion.XR
                         {
                             poseEditor.pose = grabPoint.pose;
                             poseEditor.LoadPose();
+                            poseEditor.displayName = grabPoint.pose.name;
                         }
 
                         if (grabPoint.grabPointType == GrabPointType.Right)
@@ -193,8 +217,10 @@ namespace Fusion.XR
             }
             else
             {
+                #region Name, Pose and Hand Buttons
                 //Name and Pose
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("displayName"));
+                EditorGUILayout.LabelField("Pose Editor", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Currently Editing:", poseEditor.displayName, EditorStyles.boldLabel);
 
                 EditorGUI.BeginChangeCheck();
 
@@ -227,7 +253,8 @@ namespace Fusion.XR
                     rightStyle.normal = new GUIStyleState() { background = Texture2D.grayTexture };
                 }
 
-                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndHorizontal(); 
+                #endregion
 
                 //Save, Load, Update and Cancel
                 EditorGUILayout.BeginHorizontal("Box");
@@ -237,12 +264,10 @@ namespace Fusion.XR
                     poseEditor.LoadPose();
                 }
 
-                if(GUILayout.Button("New Pose"))
+                if (GUILayout.Button("New Pose"))
                 {
-                    poseEditor.isEditingPose = true;
-                    poseEditor.pose = CreateInstance<HandPose>();
+                    NamePopout.Init(poseEditor);
                     hasCustomPose = false;
-                    poseEditor.displayName = "";
                 }
 
                 if (GUILayout.Button("SavePose"))
@@ -254,7 +279,7 @@ namespace Fusion.XR
                         poseEditor.isEditingPose = false;
                         poseEditor.RemovePoserHand();
 
-                        string path = "Assets/FusionBasicXR/Poses/" + poseEditor.displayName + ".asset";
+                        string path = "Assets/FusionXR/Poses/" + poseEditor.displayName + ".asset";
 
                         if (!hasCustomPose)
                         {
@@ -277,16 +302,52 @@ namespace Fusion.XR
                         Debug.LogWarning("No name set");
                     }
                 }
-                if(GUILayout.Button("Cancel"))
+
+                if (GUILayout.Button("Cancel"))
                 {
                     poseEditor.isEditingPose = false;
                     poseEditor.RemovePoserHand();
                 }
+
                 EditorGUILayout.EndHorizontal();
             }
 
             serializedObject.ApplyModifiedProperties();
         }
     }
+
+    public class NamePopout : EditorWindow
+    {
+        private PoseEditor contextEditor;
+        private string name;
+
+        public static void Init(PoseEditor context)
+        {
+            NamePopout w = ScriptableObject.CreateInstance<NamePopout>();
+            w.position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
+            w.contextEditor = context;
+            w.titleContent = new GUIContent("New Pose");
+            w.name = "New Pose";
+
+            w.ShowUtility();
+        }
+
+        private void OnGUI()
+        {
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("New Pose: ", EditorStyles.boldLabel);
+
+            EditorGUILayout.Space();
+            name = EditorGUILayout.TextField(new GUIContent("Name: "), name);
+
+            EditorGUILayout.Space();
+            if (GUILayout.Button("Create!"))
+            {
+                contextEditor.NewPose(name);
+                this.Close();
+            }
+        }
+    }
+
 #endif
 }

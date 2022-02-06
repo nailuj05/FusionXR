@@ -21,25 +21,27 @@ namespace Fusion.XR
         {
             if (attachedHands.Count == 0) return;
 
-            isInteracting = true;
-
             grabPosition = attachedHands[0].grabPosition.position;
 
-            offsetAngle = Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            offsetAngle = Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(grabPosition), axis);
+
+            startAngle = transform.localEulerAngles;
         }
+
+        Vector3 startAngle;
 
         protected override void InteractionUpdate()
         {
-            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(attachedHands[0].targetPosition), LocalAngleSetup(grabPosition), axis);
+            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(grabPosition), axis);
 
             angle = Mathf.Clamp(angle, minMaxClamp.x, minMaxClamp.y);
 
-            transform.localRotation = Quaternion.Euler(axis * angle);
+            transform.localRotation = Quaternion.Euler(startAngle + axis * angle);
         }
 
         protected override void InteractionEnd()
         {
-            isInteracting = false;
+
         }
 
         Vector3 LocalAngleSetup(Vector3 pos)

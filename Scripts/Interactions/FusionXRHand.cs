@@ -157,7 +157,9 @@ namespace Fusion.XR
             ///Get grabbable component and possible grab points
             grabbedGrabbable = closestGrabbable.GetComponentInParent<IGrabbable>();
 
-            grabPosition = grabbedGrabbable.GetClosestGrabPoint(transform.position, transform, hand, out grabPoint);
+            grabPoint = grabbedGrabbable.GetClosestGrabPoint(transform.position, transform, hand);
+
+            grabPosition = grabPoint?.AlignedTransform;
 
             ///Generate a GrabPoint if there is no given one
             //TODO: What if no grab Point should be generated and we just can't grab it?

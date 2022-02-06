@@ -36,6 +36,7 @@ namespace Fusion.XR
         [SerializeField]
         public Vector3 axis = Vector3.right;
 
+        //TODO: Is this still needed (obsolete by isGrabbed?)
         protected bool isInteracting = false;
 
         private void Start()
@@ -58,6 +59,7 @@ namespace Fusion.XR
             Grabbable.EnableOrDisableCollisions(gameObject, hand, true);
 
             isGrabbed = true;
+            isInteracting = true;
 
             InteractionStart();
         }
@@ -66,12 +68,27 @@ namespace Fusion.XR
         {
             Grabbable.EnableOrDisableCollisions(gameObject, hand, false);
 
-            isGrabbed = false;
-
             attachedHands.Remove(hand);
+
+            isGrabbed = attachedHands.Count > 0;
+            isInteracting = attachedHands.Count > 0;
 
             InteractionEnd();
         }
+
+        protected Vector3 GetMeanPosition()
+        {
+            Vector3 meanPos = attachedHands[0].targetPosition;
+
+            if(attachedHands.Count > 1)
+            {
+                meanPos += attachedHands[1].targetPosition;
+                meanPos *= 0.5f;
+            }
+
+            return meanPos;
+        }
+
         #endregion
 
         #region Interaction
@@ -111,14 +128,14 @@ namespace Fusion.XR
         #endregion
 
         //For returning the transform and the GrabPoint
-        public Transform GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand, out GrabPoint grabPoint)
+        public GrabPoint GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand)
         {
-            grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
+            GrabPoint grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
 
             if (grabPoint != null)
             {
                 grabPoint.BlockGrabPoint();
-                return grabPoint.transform;
+                return grabPoint;
             }
             else
             {
