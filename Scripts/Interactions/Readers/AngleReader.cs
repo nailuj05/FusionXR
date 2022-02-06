@@ -22,7 +22,8 @@ namespace Fusion.XR
         [ReadOnly]
         [SerializeField] private float currentAngle;
 
-        private bool isReached;
+        [ReadOnly]
+        [SerializeField] private bool isReached;
 
         public UnityEvent OnAngleReached;
         public UnityEvent OnAngleLeft;
@@ -40,11 +41,16 @@ namespace Fusion.XR
             startDirection = transform.parent.InverseTransformVector(globalDirection);
         }
 
+        float diff;
         private void Update()
         {
             currentAngle = Vector3.SignedAngle(startDirection, transform.parent.InverseTransformVector(globalDirection), rotationAxis);
+            diff = Mathf.Abs(angleToReach - currentAngle);
+            
+            if(diff >= 180)
+                diff -= 360;
 
-            if(Mathf.Abs(angleToReach - currentAngle) <= allowance)
+            if (Mathf.Abs(diff) <= allowance)
             {
                 if (!isReached)
                 {

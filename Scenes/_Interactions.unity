@@ -3506,7 +3506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationAxis: {x: 0, y: 0, z: 1}
   direction: {x: 1, y: 0, z: 0}
-  angleToReach: 90
+  angleToReach: 180
   allowance: 15
   currentAngle: 0
   OnAngleReached:
