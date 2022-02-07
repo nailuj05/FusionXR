@@ -3414,14 +3414,14 @@ ConfigurableJoint:
   m_GameObject: {fileID: 576957181}
   m_ConnectedBody: {fileID: 1316299732}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -0.37, z: 0}
+  m_Anchor: {x: 0, y: -0.38, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
-  m_YMotion: 0
+  m_YMotion: 2
   m_ZMotion: 0
   m_AngularXMotion: 0
   m_AngularYMotion: 0
@@ -4157,8 +4157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
   reachDistance: 0.15
 --- !u!1 &707986409
@@ -6222,8 +6223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
   reachDistance: 0.15
 --- !u!1 &943278045
@@ -9371,8 +9373,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
   reachDistance: 0.15
 --- !u!1 &1313269115
@@ -9588,7 +9591,7 @@ ConfigurableJoint:
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
-  m_YMotion: 2
+  m_YMotion: 0
   m_ZMotion: 0
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -22498,9 +22501,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3678763360
   volume: {fileID: 0}
-  smoothTime: 0.1
+  smoothTime: 5.72e-43
 --- !u!4 &5221161576068505952
 Transform:
   m_ObjectHideFlags: 0

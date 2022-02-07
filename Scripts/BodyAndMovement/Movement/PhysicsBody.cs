@@ -145,6 +145,15 @@ namespace Fusion.XR
             colliderHeight = (p_localHeight * chestPercent);
             positionToReach = cameraPos + Vector3.down * colliderHeight;
 
+            var drive = new JointDrive();
+            drive.positionSpring = jointStrength;
+            drive.positionDamper = jointDampener;
+            drive.maximumForce = Mathf.Infinity;
+
+            ChestJoint.xDrive = ChestJoint.yDrive = ChestJoint.zDrive = drive;
+
+            //Debug.Log($"{Chest.position - cameraPos} posR:{positionToReach}Final:{Chest.transform.InverseTransformPoint(positionToReach)}");
+
             ChestJoint.connectedAnchor = ChestJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
 
             ChestCol.height = colliderHeight;
@@ -156,24 +165,11 @@ namespace Fusion.XR
         {
             colliderHeight = (p_localHeight * (1 - legsPercent));
             positionToReach = LocoSphere.transform.position + Vector3.up * (p_localHeight * legsPercent);
-            positionToReach = cameraPos + Vector3.down * (p_localHeight * legsPercent - LocoSphereCollider.radius);
 
             Debug.DrawLine(Chest.position, positionToReach, Color.black);
 
-            //LegsJoint.anchor = Vector3.up * LocoSphereCollider.radius;
-            //LegsJoint.connectedAnchor = LegsJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
-
-            //LegsJoint.connectedAnchor = Vector3.down * LocoSphereCollider.radius;
-            //LegsJoint.anchor = LegsJoint.transform.InverseTransformPoint(positionToReach);
-
-            var drive = new JointDrive();
-            drive.positionSpring = jointStrength;
-            drive.positionDamper = jointDampener;
-            drive.maximumForce = Mathf.Infinity;
-
-            LegsJoint.xDrive = LegsJoint.yDrive = LegsJoint.zDrive = drive;
-
-            LegsJoint.targetPosition = positionToReach - Legs.position; //p_VRCamera.InverseTransformPoint(positionToReach);
+            LegsJoint.anchor = Vector3.up * LocoSphereCollider.radius;
+            LegsJoint.connectedAnchor = LegsJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
 
             LegsCol.height = colliderHeight;
         } 
