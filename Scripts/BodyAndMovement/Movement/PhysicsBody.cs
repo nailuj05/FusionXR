@@ -114,9 +114,6 @@ namespace Fusion.XR
             //NOTE: Head Offset can be used for jumping
             cameraPos = GetCameraGlobal() + currentHeadOffset;
 
-            //This is only debug
-            targetHead.position = cameraPos;
-
             //TODO: Do this with anchors instead
             HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
 
@@ -145,31 +142,24 @@ namespace Fusion.XR
             colliderHeight = (p_localHeight * chestPercent);
             positionToReach = cameraPos + Vector3.down * colliderHeight;
 
-            var drive = new JointDrive();
-            drive.positionSpring = jointStrength;
-            drive.positionDamper = jointDampener;
-            drive.maximumForce = Mathf.Infinity;
-
-            ChestJoint.xDrive = ChestJoint.yDrive = ChestJoint.zDrive = drive;
-
-            //Debug.Log($"{Chest.position - cameraPos} posR:{positionToReach}Final:{Chest.transform.InverseTransformPoint(positionToReach)}");
-
             ChestJoint.connectedAnchor = ChestJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
 
             ChestCol.height = colliderHeight;
             ChestCol.center = Vector3.up * ((colliderHeight - 0.5f) * chestAdjustmentFactor);
         }
 
-        Vector3 shift = new Vector3(0.1f, 0, 0);
+        JointDrive drive = new JointDrive();
         private void UpdateLegs()
         {
             colliderHeight = (p_localHeight * (1 - legsPercent));
-            positionToReach = LocoSphere.transform.position + Vector3.up * (p_localHeight * legsPercent);
 
-            Debug.DrawLine(Chest.position, positionToReach, Color.black);
+            drive.positionSpring = jointStrength;
+            drive.positionDamper = jointDampener;
+            drive.maximumForce = Mathf.Infinity;
 
+            LegsJoint.xDrive = LegsJoint.yDrive = LegsJoint.zDrive = drive;
             LegsJoint.anchor = Vector3.up * LocoSphereCollider.radius;
-            LegsJoint.connectedAnchor = LegsJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
+            LegsJoint.targetPosition = new Vector3(0, -(p_localHeight * legsPercent), 0);
 
             LegsCol.height = colliderHeight;
         } 
