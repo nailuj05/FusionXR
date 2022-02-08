@@ -18,14 +18,39 @@ namespace Fusion.XR
         public FusionXRHand LeftHand;
         public FusionXRHand RightHand;
 
+        [HideInInspector]
+        private Rigidbody rb;
+        public Rigidbody Rigidbody
+        {
+            get
+            {
+                if(rb == null)
+                {
+                    var pb = GetComponentInChildren<PhysicsBody>();
+
+                    if (pb)
+                    {
+                        rb = pb.Chest;
+                    }
+                    else
+                    {
+                        rb = GetComponent<Rigidbody>();
+                    }
+                }
+
+                return rb;
+            }
+            set
+            {
+                rb = value;
+            }
+        }
+
         public Movement movement;
         public InputActionReference movementAction;
         public InputActionReference turnAction;
 
         public CollisionAdjuster collisionAdjuster;
-
-        [HideInInspector]
-        public Rigidbody rb;
 
         private void Awake()
         {

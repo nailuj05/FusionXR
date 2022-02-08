@@ -126,7 +126,7 @@ namespace Fusion.XR
             objectToTrack = assignedObjectToTrack;
             trackingBase = assignedTrackingBase;
 
-            jointRB = Object.FindObjectOfType<Player>().GetComponent<Rigidbody>();
+            jointRB = Object.FindObjectOfType<Player>().Rigidbody;
             objectRB = objectToTrack.GetComponent<Rigidbody>();
 
             SetupJoint();

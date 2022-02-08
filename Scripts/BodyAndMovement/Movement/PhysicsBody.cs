@@ -97,6 +97,8 @@ namespace Fusion.XR
         {
             HeadJoint = SetupJoint(Chest, Head);
 
+            Player.main.Rigidbody = Chest;
+
             UpdateChest();
             UpdateLegs();
             PlaceFender();
