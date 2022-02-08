@@ -46,7 +46,8 @@ namespace Fusion.XR
             EditorUtility.SetDirty(player.RightHand);
             EditorUtility.SetDirty(player);
             EditorUtility.SetDirty(player.head);
-            EditorUtility.SetDirty(collisionAdjuster);
+            if(collisionAdjuster)
+                EditorUtility.SetDirty(collisionAdjuster);
 #endif
         }
 
