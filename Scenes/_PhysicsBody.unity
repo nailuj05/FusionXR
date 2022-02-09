@@ -671,7 +671,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!1 &89298461
@@ -3402,7 +3402,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!153 &576957184
@@ -4045,7 +4045,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!1001 &668176832
@@ -8661,8 +8661,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1193097966}
-  - component: {fileID: 1193097967}
   - component: {fileID: 1193097968}
+  - component: {fileID: 1193097967}
   m_Layer: 3
   m_Name: PhysicsBody
   m_TagString: Untagged
@@ -8748,13 +8748,14 @@ MonoBehaviour:
   turnSpeed: 5
   turnAngle: 45
   turnCooldown: 0.3
-  movementAction: {fileID: 0}
-  turnAction: {fileID: 0}
+  movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   activationThreshold: 0.1
   canMove: 1
-  usesGravity: 0
+  usesCustomGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
-  LocoSphere: {fileID: 0}
+  LocoSphere: {fileID: 73760319}
+  torque: 500
 --- !u!1 &1203173893
 GameObject:
   m_ObjectHideFlags: 0
@@ -9600,7 +9601,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!153 &1316299733
@@ -11745,7 +11746,7 @@ MonoBehaviour:
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   activationThreshold: 0.1
   canMove: 1
-  usesGravity: 0
+  usesCustomGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
   groundLayers:
     serializedVersion: 2
@@ -18345,7 +18346,7 @@ Rigidbody:
   m_AngularDrag: 0.03
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!1 &4601817723382300467
@@ -21056,7 +21057,7 @@ Rigidbody:
   m_AngularDrag: 0.03
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!65 &4601817725228337785
@@ -21517,7 +21518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftHand: {fileID: 4601817723382300430}
   RightHand: {fileID: 4601817725228337791}
-  movement: {fileID: 0}
+  movement: {fileID: 1193097968}
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   collisionAdjuster: {fileID: 1193097967}

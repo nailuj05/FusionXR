@@ -51,11 +51,6 @@ namespace Fusion.XR
         public InputActionReference turnAction;
 
         public CollisionAdjuster collisionAdjuster;
-
-        private void Awake()
-        {
-            rb = GetComponent<Rigidbody>();
-        }
     }
 
 #if UNITY_EDITOR

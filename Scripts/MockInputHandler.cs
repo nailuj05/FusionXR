@@ -39,7 +39,7 @@ namespace Fusion.XR
 
             currentHand = rightHand;
 
-            movement = player.GetComponent<Movement>();
+            movement = Player.main.movement;
             VRCamera = Camera.main.transform;
 
             l_handPoser = l_hand.GetComponent<HandPoser>();

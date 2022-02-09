@@ -6917,11 +6917,11 @@ PrefabInstance:
     - target: {fileID: 4601817725372166372, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: movement
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4601817724475912906}
     - target: {fileID: 4601817725372166372, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: collisionAdjuster
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4601817724475912905}
     - target: {fileID: 4601817725372166374, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: rigType
       value: 0
@@ -6988,6 +6988,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+--- !u!114 &4601817724475912905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1718852702228879623, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+  m_PrefabInstance: {fileID: 4601817724475912904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1de7387fed50e44f9af48d6f00b3104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4601817724475912906 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4601817725372166370, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+  m_PrefabInstance: {fileID: 4601817724475912904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bb5e71266297b438f5c4b7cb525a84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4944690555612126233
 GameObject:
   m_ObjectHideFlags: 0

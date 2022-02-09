@@ -61,6 +61,7 @@ namespace Fusion.XR
             turnAction.action.canceled += (c) => isTurning = false;
 
             head = Player.main.head;
+            hand = Player.main.LeftHand.trackedController;
 
             //Add the standard Movement Override
             movementOverrides.Add(new MovementOverride());
