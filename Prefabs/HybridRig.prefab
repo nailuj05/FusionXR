@@ -651,14 +651,14 @@ MonoBehaviour:
   hand: {fileID: 4601817723450955304}
   movementDirection: 0
   turnMode: 0
-  turnSpeed: 5
+  turnSpeed: 20
   turnAngle: 45
   turnCooldown: 0.3
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   activationThreshold: 0.1
   canMove: 1
-  usesGravity: 0
+  usesCustomGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
   rb: {fileID: 0}
 --- !u!114 &1718852702228879623

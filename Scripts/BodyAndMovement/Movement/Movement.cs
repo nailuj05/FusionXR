@@ -20,6 +20,9 @@ namespace Fusion.XR
         public float turnAngle = 45;
         public float turnCooldown = 0.3f;
 
+        private bool isTurning;
+        private InputAction.CallbackContext context;
+
         private Transform currentMovementDirection => GetMovementDirection(movementDirection);
 
         public InputActionReference movementAction;
@@ -30,7 +33,8 @@ namespace Fusion.XR
 
         [Header("External Factors")]
         public bool canMove = true;
-        public bool usesGravity = false;
+        [Tooltip("A custom gravity to apply. Don't use with a rigidbody that also uses gravity")]
+        public bool usesCustomGravity = false;
 
         public Vector3 gravity = Physics.gravity;
 
@@ -53,7 +57,8 @@ namespace Fusion.XR
         {
             //Subscribe to Movement Actions
             movementAction.action.performed += PreprocessInput;
-            turnAction.action.performed += Turn;
+            turnAction.action.started += (c) => { isTurning = true; context = c; };
+            turnAction.action.canceled += (c) => isTurning = false;
 
             head = Player.main.head;
 
@@ -63,18 +68,26 @@ namespace Fusion.XR
 
         private void Update()
         {
-            if(usesGravity && canMove)
+            if(usesCustomGravity && canMove)
             {
                 QueueMove(gravity);
             }
+
+            if (isTurning)
+                Turn();
+        }
+
+        #region Turning
+        private void Turn()
+        {
+            Turn(context);
         }
 
         private void Turn(InputAction.CallbackContext obj)
         {
-            if (waitForTurn)
-                return;
-
             Vector2 turnDirection = obj.ReadValue<Vector2>();
+
+            if (turnDirection.sqrMagnitude == 0) return;
 
             Direction direction = Utils.GetDirectionFromVector(turnDirection);
 
@@ -83,21 +96,63 @@ namespace Fusion.XR
 
         public void Turn(Direction direction)
         {
-            if (waitForTurn)
-                return;
-
             if (direction != Direction.North || direction != Direction.South)
             {
                 if (turnMode == TurnMode.SnapTurn)
                 {
                     SnapTurn(direction, turnAngle);
                 }
-                //if (turnMode == TurnMode.SmoothTurn)
-                //{
-                //    SmoothTurn(direction, turnSpeed);
-                //}
+                if (turnMode == TurnMode.SmoothTurn)
+                {
+                    SmoothTurn(direction, turnSpeed);
+                }
             }
         }
+
+        /// <summary>
+        /// Performces a Snap Turn
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="angle"></param>
+        public virtual void SnapTurn(Direction dir, float angle)
+        {
+            if (waitForTurn)
+                return;
+
+            angle = dir == Direction.West ? -angle : angle;
+
+            transform.RotateAround(head.position, Vector3.up, angle);
+
+            StartCoroutine(WaitForTurn(turnCooldown));
+        }
+
+        /// <summary>
+        /// Performs a smooth turn
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="speed"></param>
+        public virtual void SmoothTurn(Direction dir, float speed)
+        {
+            speed = dir == Direction.West ? -speed : speed;
+
+            transform.RotateAround(head.position, Vector3.up, speed * Time.deltaTime);
+        }
+
+        /// <summary>
+        /// Waits until next Turn is possible
+        /// </summary>
+        /// <param name="waitTime"></param>
+        /// <returns></returns>
+        private IEnumerator WaitForTurn(float waitTime)
+        {
+            waitForTurn = true;
+
+            yield return new WaitForSecondsRealtime(waitTime);
+
+            waitForTurn = false;
+        } 
+
+        #endregion
 
         public Transform GetMovementDirection(MovementDirection movementDirection)
         {
@@ -194,47 +249,6 @@ namespace Fusion.XR
         }
 
         #endregion
-
-        
-        /// <summary>
-        /// Performces a Snap Turn
-        /// </summary>
-        /// <param name="dir"></param>
-        /// <param name="angle"></param>
-        public virtual void SnapTurn(Direction dir, float angle)
-        {
-            angle = dir == Direction.West ? -angle : angle;
-
-            transform.RotateAround(head.position, Vector3.up, angle);
-
-            StartCoroutine(WaitForTurn(turnCooldown));
-        }
-
-        /// <summary>
-        /// Performs a smooth turn
-        /// </summary>
-        /// <param name="dir"></param>
-        /// <param name="speed"></param>
-        public virtual void SmoothTurn(Direction dir, float speed)
-        {
-            speed = dir == Direction.West ? -speed : speed;
-
-            transform.Rotate(head.position, speed * Time.deltaTime);
-        }
-
-        /// <summary>
-        /// Waits until next Turn is possible
-        /// </summary>
-        /// <param name="waitTime"></param>
-        /// <returns></returns>
-        private IEnumerator WaitForTurn(float waitTime)
-        {
-            waitForTurn = true;
-
-            yield return new WaitForSecondsRealtime(waitTime);
-
-            waitForTurn = false;
-        }
     }
 
     //TODO, extent to base and default classes making base class abstract
