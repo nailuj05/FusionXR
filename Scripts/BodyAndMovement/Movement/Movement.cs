@@ -207,10 +207,14 @@ namespace Fusion.XR
         /// Processes the movement by applying movement overrides.
         /// </summary>
         /// <param name="direction"></param>
+        float mag;
         public void MovementProcessing(Vector3 direction)
         {
             direction = movementOverrides[movementOverrides.Count - 1].ProcessMovement(direction);
-            direction.Normalize();
+            mag = direction.magnitude;
+
+            direction = Vector3.ProjectOnPlane(direction, Vector3.up);
+            direction = direction.normalized * mag;
 
             Move(direction);
         }
