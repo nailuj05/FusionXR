@@ -22,14 +22,12 @@ namespace Fusion.XR
 
         public override void Move(Vector3 direction)
         {
-            vel = Vector3.ProjectOnPlane(direction, Vector3.up);
-            //vel += Physics.gravity;// / Time.deltaTime;
+            vel = direction; // Vector3.ProjectOnPlane(direction, Vector3.up).normalized;
 
             vel.y = rb.velocity.y;
 
             CurrentVelocity = rb.velocity;
 
-            //rigidBody.MovePosition(transform.TransformPoint(-vel));
             rb.velocity = vel;
         }
     }

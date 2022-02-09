@@ -6914,6 +6914,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4601817725372166372, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725372166372, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: collisionAdjuster
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166374, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: rigType
       value: 0

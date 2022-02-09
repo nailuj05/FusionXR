@@ -8662,6 +8662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1193097966}
   - component: {fileID: 1193097967}
+  - component: {fileID: 1193097968}
   m_Layer: 3
   m_Name: PhysicsBody
   m_TagString: Untagged
@@ -8727,6 +8728,33 @@ MonoBehaviour:
   d_Fender: {fileID: 1280402677}
   d_Legs: {fileID: 718271216}
   d_Chest: {fileID: 494721094}
+--- !u!114 &1193097968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193097965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86efded618915fe41be5f802c022606c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 2
+  head: {fileID: 0}
+  hand: {fileID: 0}
+  movementDirection: 0
+  turnMode: 0
+  turnSpeed: 5
+  turnAngle: 45
+  turnCooldown: 0.3
+  movementAction: {fileID: 0}
+  turnAction: {fileID: 0}
+  activationThreshold: 0.1
+  canMove: 1
+  usesGravity: 0
+  gravity: {x: 0, y: -9.81, z: 0}
+  LocoSphere: {fileID: 0}
 --- !u!1 &1203173893
 GameObject:
   m_ObjectHideFlags: 0
@@ -21493,7 +21521,6 @@ MonoBehaviour:
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   collisionAdjuster: {fileID: 1193097967}
-  rb: {fileID: 0}
 --- !u!114 &4601817725437680065
 MonoBehaviour:
   m_ObjectHideFlags: 0

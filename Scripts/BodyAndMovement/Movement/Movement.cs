@@ -65,7 +65,7 @@ namespace Fusion.XR
         {
             if(usesGravity && canMove)
             {
-                QueueMove(gravity.normalized, gravity.magnitude);
+                QueueMove(gravity);
             }
         }
 
@@ -134,19 +134,8 @@ namespace Fusion.XR
                 movementInput = currentMovementDirection.TransformDirection(movementInput);
                 //Debug.DrawRay(currentMovementDirection.position, movementInput, Color.red, 0.1f);
 
-                QueueMove(movementInput, playerSpeed);
+                QueueMove(movementInput.normalized * playerSpeed);
             }
-        }
-
-        /// <summary>
-        /// Queues a move.
-        /// Queueing Moves allowes different preprocessing and multiple Movements being applied
-        /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="speed"></param>
-        public void QueueMove(Vector3 direction, float speed)
-        {
-            QueueMove(direction.normalized * speed);
         }
 
         /// <summary>
@@ -166,6 +155,7 @@ namespace Fusion.XR
         public void MovementProcessing(Vector3 direction)
         {
             direction = movementOverrides[movementOverrides.Count - 1].ProcessMovement(direction);
+            direction.Normalize();
 
             Move(direction);
         }
