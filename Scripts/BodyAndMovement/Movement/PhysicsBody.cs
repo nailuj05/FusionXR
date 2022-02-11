@@ -120,6 +120,8 @@ namespace Fusion.XR
             Debug.DrawLine(LocoSphere.transform.position, LocoSphere.transform.position + Vector3.up * (p_localHeight * chestPercent), Color.blue);
             ChestJoint.targetPosition = new Vector3(0, -(p_localHeight * chestPercent), 0);
 
+            HandleHMDMovement();
+            //HandleHMDRotation();
 
             return;
             //NOTE: Head Offset can be used for jumping
@@ -189,29 +191,22 @@ namespace Fusion.XR
         private void HandleHMDMovement()
         {
             delta = p_VRCamera.position - Chest.transform.position;
+            delta.y = 0f;
 
-            if (delta.magnitude > 0.001f)
+            if (delta.magnitude > 0.01f)
             {
-                deltaHead = p_VRCamera.position - Head.transform.position;
-                p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
+                //deltaHead = p_VRCamera.position - Head.transform.position;
+                //p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
 
-                delta.y = 0f;
-                delta -= currentHeadOffset;
+                //delta -= currentHeadOffset;
 
                 Chest.MovePosition(Chest.position + delta);
-                Legs.MovePosition(Legs.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
-
-                StopHorizontalMomentum(Chest);
-                StopHorizontalMomentum(Legs);
-                StopHorizontalMomentum(LocoSphere);
 
                 p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
         }
 
-        //Can this run in LateUpdate
-        //Can FenderPlacement Run in LateUpdate?
         //Do we need to expose step to the user?
         private void HandleHMDRotation()
         {
@@ -221,7 +216,7 @@ namespace Fusion.XR
             deltaRot = Quaternion.AngleAxis(deltaEulers, Vector3.up);
 
             Chest.MoveRotation(Chest.rotation * deltaRot);
-            Legs.MoveRotation(Legs.rotation * deltaRot);
+            //Legs.MoveRotation(Legs.rotation * deltaRot);
 
             p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaEulers);
 
