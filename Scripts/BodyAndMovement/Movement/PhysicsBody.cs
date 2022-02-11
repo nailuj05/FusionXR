@@ -61,9 +61,9 @@ namespace Fusion.XR
         public SphereCollider LocoSphereCollider;
 
         [Header("Joints")]
-        private ConfigurableJoint HeadJoint;
         public ConfigurableJoint ChestJoint;
         public ConfigurableJoint LegsJoint;
+        private ConfigurableJoint HeadJoint;
 
         [Header("Debug Objects")]
         public bool renderDebugObjects = true;
@@ -96,6 +96,8 @@ namespace Fusion.XR
 
         private void Start()
         {
+            Chest.WakeUp();
+            return;
             HeadJoint = SetupJoint(Chest, Head);
             HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
 
@@ -115,6 +117,11 @@ namespace Fusion.XR
 
         void FixedUpdate()
         {
+            Debug.DrawLine(LocoSphere.transform.position, LocoSphere.transform.position + Vector3.up * (p_localHeight * chestPercent), Color.blue);
+            ChestJoint.targetPosition = new Vector3(0, -(p_localHeight * chestPercent), 0);
+
+
+            return;
             //NOTE: Head Offset can be used for jumping
             cameraPos = GetCameraGlobal() + currentHeadOffset;
 
@@ -132,6 +139,8 @@ namespace Fusion.XR
 
         private void LateUpdate()
         {
+            return;
+
             if (renderDebugObjects)
             {
                 AlignObjectWithCollider(ChestCol, d_Chest);

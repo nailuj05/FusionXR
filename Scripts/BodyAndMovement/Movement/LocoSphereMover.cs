@@ -28,7 +28,7 @@ namespace Fusion.XR
             {
                 torqueVec = Vector3.Cross(currentMove, Vector3.down);
 
-                LocoSphere.AddTorque(torqueVec * torque, ForceMode.Acceleration);
+                LocoSphere.AddTorque(torqueVec * torque, ForceMode.VelocityChange);
 
                 LocoSphere.freezeRotation = false;
             }

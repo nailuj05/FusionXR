@@ -12,17 +12,18 @@ namespace Fusion.XR
         [Range(0.1f, 0.5f)]
         public float p_CollisionRadius = 0.2f;
 
-        [HideInInspector]
-        public float p_localHeight { get; private set; }
+        [SerializeField] [ReadOnly]
+        private float localHeight;
+        public float p_localHeight { get { return localHeight; } private set { localHeight = value; } }
 
         public void Awake()
         {
-            p_VRCamera = Player.main.head;
+            p_VRCamera = Player.main?.head;
 
             if (!p_XRRig)
             {
                 if (HybridRig.main)
-                    p_XRRig = HybridRig.main.currentRig.transform;
+                    p_XRRig = HybridRig.main?.currentRig.transform;
                 else
                     p_XRRig = transform;
             }
