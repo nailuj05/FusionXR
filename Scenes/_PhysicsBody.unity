@@ -667,12 +667,12 @@ Rigidbody:
   m_GameObject: {fileID: 73760316}
   serializedVersion: 2
   m_Mass: 25
-  m_Drag: 0.1
-  m_AngularDrag: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
+  m_Interpolate: 0
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!1 &89298461
 GameObject:
@@ -3399,7 +3399,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 50
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -3498,9 +3498,9 @@ ConfigurableJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_ConnectedMassScale: 0.00001
 --- !u!1 &584124590
 GameObject:
   m_ObjectHideFlags: 0
@@ -4040,9 +4040,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668176722}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -8709,8 +8709,9 @@ MonoBehaviour:
   legsPercent: 0.7
   chestAdjustmentFactor: 0.75
   legAdjustmentFacotor: 0.75
-  jointStrength: 20000
-  jointDampener: 1500
+  jointStrength: 1000
+  jointDampener: 250
+  jointMaxStrength: 1000
   FenderHeight: 0.1
   Head: {fileID: 668176726}
   Chest: {fileID: 576957183}
@@ -9598,11 +9599,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!153 &1316299733
 ConfigurableJoint:
@@ -9613,7 +9614,7 @@ ConfigurableJoint:
   m_GameObject: {fileID: 1316299730}
   m_ConnectedBody: {fileID: 73760319}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: -0.95, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -9663,9 +9664,9 @@ ConfigurableJoint:
     maximumForce: 3.4028233e+38
   m_YDrive:
     serializedVersion: 3
-    positionSpring: 0
-    positionDamper: 0
-    maximumForce: 3.4028233e+38
+    positionSpring: 5000
+    positionDamper: 500
+    maximumForce: 1000
   m_ZDrive:
     serializedVersion: 3
     positionSpring: 0
@@ -9697,9 +9698,9 @@ ConfigurableJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_ConnectedMassScale: 0.00001
 --- !u!1 &1363473845
 GameObject:
   m_ObjectHideFlags: 0
@@ -18322,7 +18323,7 @@ MonoBehaviour:
     slerpSpring: 1500
     slerpDamper: 250
     slerpMaxForce: 1500
-    limit: 0.7
+    limit: 1
     tracker: {fileID: 0}
     palm: {fileID: 0}
   rb: {fileID: 0}
@@ -18341,7 +18342,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4601817723382300467}
   serializedVersion: 2
-  m_Mass: 7
+  m_Mass: 2
   m_Drag: 0.5
   m_AngularDrag: 0.03
   m_UseGravity: 0
@@ -18368,7 +18369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4601817723400724340
 Transform:
   m_ObjectHideFlags: 0
@@ -21052,7 +21053,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4601817725228337788}
   serializedVersion: 2
-  m_Mass: 7
+  m_Mass: 2
   m_Drag: 0.5
   m_AngularDrag: 0.03
   m_UseGravity: 0
@@ -21092,7 +21093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4601817725228337789
 Transform:
   m_ObjectHideFlags: 0
@@ -21189,7 +21190,7 @@ MonoBehaviour:
     slerpSpring: 1500
     slerpDamper: 250
     slerpMaxForce: 1500
-    limit: 0.7
+    limit: 1
     tracker: {fileID: 0}
     palm: {fileID: 0}
   rb: {fileID: 0}
@@ -23387,7 +23388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6103207187587072656}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 2.551371, y: 0.0014851093, z: 4.23522}
+  m_LocalPosition: {x: 2.551371, y: 0.0014851093, z: 5.233}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7442065429491841668}

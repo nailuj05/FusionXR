@@ -12,14 +12,37 @@ namespace Fusion.XR
         [SerializeField]
         private float torque = 500f;
 
+        private Vector3 currentMove;
+
         private Vector3 torqueVec;
         public override void Move(Vector3 direction)
         {
-            Debug.DrawRay(LocoSphere.position, direction);
+            currentMove = direction;
+        }
 
-            torqueVec = Vector3.Cross(direction, Vector3.down);
+        private void FixedUpdate()
+        {
+            LocoSphere.freezeRotation = true;
 
-            LocoSphere.AddTorque(torqueVec * torque);
+            if(currentMove.sqrMagnitude > 0)
+            {
+                torqueVec = Vector3.Cross(currentMove, Vector3.down);
+
+                LocoSphere.AddTorque(torqueVec * torque, ForceMode.Acceleration);
+
+                LocoSphere.freezeRotation = false;
+            }
+
+            currentMove = Vector3.zero;
+        }
+
+        Vector3 vel;
+        private void StopAngularMomentum(Rigidbody rb)
+        {
+            vel = rb.angularVelocity;
+            vel.x = 0;
+            vel.z = 0;
+            rb.angularVelocity = vel;
         }
     } 
 }

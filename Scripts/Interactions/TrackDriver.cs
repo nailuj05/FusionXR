@@ -136,7 +136,7 @@ namespace Fusion.XR
         public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
         {
             TrackPositionRotation(targetPosition, targetRotation);
-            UpdateTargetVelocity(targetPosition);
+            //UpdateTargetVelocity(targetPosition);
         }
 
         public override void EndTrack()

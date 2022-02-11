@@ -37,8 +37,9 @@ namespace Fusion.XR
         public float legAdjustmentFacotor = 0.75f;
 
         [Header("Joint Settings")]
-        public float jointStrength = 20000;
-        public float jointDampener = 250;
+        public float jointStrength = 5000;
+        public float jointDampener = 500;
+        public float jointMaxStrength = 1000;
 
         [Header("Tracking Settings")]
         public float FenderHeight = 0.1f;
@@ -96,12 +97,13 @@ namespace Fusion.XR
         private void Start()
         {
             HeadJoint = SetupJoint(Chest, Head);
+            HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
 
             Player.main.Rigidbody = Chest;
 
-            UpdateChest();
-            UpdateLegs();
-            PlaceFender();
+            //UpdateChest();
+            //UpdateLegs();
+            //PlaceFender();
 
             Head.interpolation = RigidbodyInterpolation.Interpolate;
             Chest.interpolation = RigidbodyInterpolation.Interpolate;
@@ -116,8 +118,8 @@ namespace Fusion.XR
             //NOTE: Head Offset can be used for jumping
             cameraPos = GetCameraGlobal() + currentHeadOffset;
 
-            //TODO: Do this with anchors instead
-            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
+            //HeadJoint.connectedAnchor = Chest.transform.InverseTransformPoint(cameraPos);
+            //HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos).y * Vector3.up;
 
             UpdateChest();
             UpdateLegs();
@@ -157,7 +159,7 @@ namespace Fusion.XR
 
             drive.positionSpring = jointStrength;
             drive.positionDamper = jointDampener;
-            drive.maximumForce = Mathf.Infinity;
+            drive.maximumForce = jointMaxStrength;
 
             LegsJoint.xDrive = LegsJoint.yDrive = LegsJoint.zDrive = drive;
             LegsJoint.anchor = Vector3.up * LocoSphereCollider.radius;
@@ -268,7 +270,7 @@ namespace Fusion.XR
             var drive = new JointDrive();
             drive.positionSpring = jointStrength;
             drive.positionDamper = jointDampener;
-            drive.maximumForce = Mathf.Infinity;
+            drive.maximumForce = jointMaxStrength;
 
             joint.xDrive = joint.yDrive = joint.zDrive = drive;
 
