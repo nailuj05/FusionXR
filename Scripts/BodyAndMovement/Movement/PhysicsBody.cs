@@ -97,12 +97,11 @@ namespace Fusion.XR
         private void Start()
         {
             Chest.WakeUp();
-            return;
             HeadJoint = SetupJoint(Chest, Head);
-            HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
 
             Player.main.Rigidbody = Chest;
 
+            return;
             //UpdateChest();
             //UpdateLegs();
             //PlaceFender();
@@ -115,13 +114,20 @@ namespace Fusion.XR
             ToggleDebugObjects(renderDebugObjects);
         }
 
+        float chestHeight;
         void FixedUpdate()
         {
-            Debug.DrawLine(LocoSphere.transform.position, LocoSphere.transform.position + Vector3.up * (p_localHeight * chestPercent), Color.blue);
-            ChestJoint.targetPosition = new Vector3(0, -(p_localHeight * chestPercent), 0);
+            cameraPos = GetCameraGlobal();
+            chestHeight = (p_localHeight * chestPercent) - LocoSphereCollider.radius;
+
+            Debug.Log($"{p_localHeight} {chestHeight} {p_localHeight * (1 - chestPercent)} {Camera.main.transform.position.y}");
+
+            HeadJoint.targetPosition = new Vector3(0, p_localHeight * (1 - chestPercent), 0);
+
+            ChestJoint.targetPosition = new Vector3(0, -chestHeight, 0);
 
             HandleHMDMovement();
-            //HandleHMDRotation();
+            HandleHMDRotation();
 
             return;
             //NOTE: Head Offset can be used for jumping
@@ -193,12 +199,12 @@ namespace Fusion.XR
             delta = p_VRCamera.position - Chest.transform.position;
             delta.y = 0f;
 
+            deltaHead = p_VRCamera.position - Head.transform.position;
+            p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
+
             if (delta.magnitude > 0.01f)
             {
-                //deltaHead = p_VRCamera.position - Head.transform.position;
-                //p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
-
-                //delta -= currentHeadOffset;
+                delta -= currentHeadOffset;
 
                 Chest.MovePosition(Chest.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
@@ -216,7 +222,6 @@ namespace Fusion.XR
             deltaRot = Quaternion.AngleAxis(deltaEulers, Vector3.up);
 
             Chest.MoveRotation(Chest.rotation * deltaRot);
-            //Legs.MoveRotation(Legs.rotation * deltaRot);
 
             p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaEulers);
 
@@ -269,6 +274,7 @@ namespace Fusion.XR
             joint.autoConfigureConnectedAnchor = false;
             joint.anchor = joint.connectedAnchor = Vector3.zero;
 
+            joint.xMotion = joint.zMotion = ConfigurableJointMotion.Locked;
             joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
 
             var drive = new JointDrive();
