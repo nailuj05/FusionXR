@@ -13,18 +13,18 @@ namespace Fusion.XR
         public float legsPercent = 0.7f;
 
         #region Editor Stuff
-        private float lastCP, lastLP;
+        //private float lastCP, lastLP;
 
-        private void OnValidate()
-        {
-            if (chestPercent != lastCP)
-                legsPercent = 1 - chestPercent;
-            else
-                chestPercent = 1 - legsPercent;
+        //private void OnValidate()
+        //{
+        //    if (chestPercent != lastCP)
+        //        legsPercent = 1 - chestPercent;
+        //    else
+        //        chestPercent = 1 - legsPercent;
 
-            lastCP = chestPercent;
-            lastLP = legsPercent;
-        }
+        //    lastCP = chestPercent;
+        //    lastLP = legsPercent;
+        //}
         #endregion
 
 
@@ -93,8 +93,11 @@ namespace Fusion.XR
 
             Player.main.Rigidbody = Chest;
 
+            UpdateJointDrive(ChestJoint);
+            UpdateJointDrive(LegsJoint);
+
             UpdateChest();
-            //UpdateLegs();
+            UpdateLegs();
             //PlaceFender();
 
             Head.interpolation = RigidbodyInterpolation.Interpolate;
@@ -111,7 +114,10 @@ namespace Fusion.XR
 
             HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
 
+            Debug.Log(Camera.main.transform.position.y);
+
             UpdateChest();
+            UpdateLegs();
 
             HandleHMDMovement();
             HandleHMDRotation();
@@ -122,7 +128,7 @@ namespace Fusion.XR
             if (renderDebugObjects)
             {
                 AlignObjectWithCollider(ChestCol, d_Chest);
-                //AlignObjectWithCollider(LegsCol, d_Legs);
+                AlignObjectWithCollider(LegsCol, d_Legs);
             }
         }
 
@@ -137,21 +143,14 @@ namespace Fusion.XR
             ChestCol.height = p_localHeight - colliderHeight;
         }
 
-        JointDrive drive = new JointDrive();
         private void UpdateLegs()
         {
-            colliderHeight = (p_localHeight * (1 - legsPercent));
+            colliderHeight = (p_localHeight * chestPercent * legsPercent);
 
-            drive.positionSpring = jointStrength;
-            drive.positionDamper = jointDampener;
-            drive.maximumForce = jointMaxStrength;
+            LegsJoint.targetPosition = new Vector3(0, colliderHeight, 0);
 
-            LegsJoint.xDrive = LegsJoint.yDrive = LegsJoint.zDrive = drive;
-            LegsJoint.anchor = Vector3.up * LocoSphereCollider.radius;
-            LegsJoint.targetPosition = new Vector3(0, -(p_localHeight * legsPercent), 0);
-
-            LegsCol.height = colliderHeight;
-        } 
+            LegsCol.height = colliderHeight + LocoSphereCollider.radius;
+        }
 
         private void PlaceFender()
         {
@@ -203,7 +202,7 @@ namespace Fusion.XR
         {
             d_Chest.SetActive(enabled);
             //d_Fender.SetActive(enabled);
-            //d_Legs.SetActive(enabled);
+            d_Legs.SetActive(enabled);
             d_LocoSphere.SetActive(enabled);
         }
 
@@ -232,6 +231,17 @@ namespace Fusion.XR
         private Vector3 GetCameraGlobal()
         {
             return LocoSphere.position + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
+        }
+
+        JointDrive drive;
+        private void UpdateJointDrive(ConfigurableJoint joint)
+        {
+            drive.positionSpring = jointStrength;
+            drive.positionDamper = jointDampener;
+            drive.maximumForce = jointMaxStrength;
+
+            joint.xDrive = joint.yDrive = joint.zDrive = drive;
+            joint.xMotion = joint.zMotion = ConfigurableJointMotion.Locked;
         }
 
         private ConfigurableJoint SetupJoint(Rigidbody connectTo, Rigidbody connectedBody)
