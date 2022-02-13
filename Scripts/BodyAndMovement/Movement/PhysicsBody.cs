@@ -6,9 +6,6 @@ namespace Fusion.XR
 {
     public class PhysicsBody : CollisionAdjuster
     {
-        [Header("Transforms")]
-        public Transform targetHead;
-
         [Header("Body Settings")]
         [Range(0.1f, 0.9f)]
         public float chestPercent = 0.3f;
@@ -30,11 +27,6 @@ namespace Fusion.XR
         }
         #endregion
 
-        [Space]
-        [Range(0f, 1f)]
-        public float chestAdjustmentFactor = 0.75f;
-        [Range(0f, 1f)]
-        public float legAdjustmentFacotor = 0.75f;
 
         [Header("Joint Settings")]
         public float jointStrength = 5000;
@@ -101,58 +93,36 @@ namespace Fusion.XR
 
             Player.main.Rigidbody = Chest;
 
-            return;
-            //UpdateChest();
+            UpdateChest();
             //UpdateLegs();
             //PlaceFender();
 
             Head.interpolation = RigidbodyInterpolation.Interpolate;
             Chest.interpolation = RigidbodyInterpolation.Interpolate;
-            Legs.interpolation = RigidbodyInterpolation.Interpolate;
+            //Legs.interpolation = RigidbodyInterpolation.Interpolate;
             LocoSphere.interpolation = RigidbodyInterpolation.Interpolate;
 
             ToggleDebugObjects(renderDebugObjects);
         }
 
-        float chestHeight;
         void FixedUpdate()
         {
             cameraPos = GetCameraGlobal();
-            chestHeight = (p_localHeight * chestPercent) - LocoSphereCollider.radius;
 
-            Debug.Log($"{p_localHeight} {chestHeight} {p_localHeight * (1 - chestPercent)} {Camera.main.transform.position.y}");
-
-            HeadJoint.targetPosition = new Vector3(0, p_localHeight * (1 - chestPercent), 0);
-
-            ChestJoint.targetPosition = new Vector3(0, -chestHeight, 0);
-
-            HandleHMDMovement();
-            HandleHMDRotation();
-
-            return;
-            //NOTE: Head Offset can be used for jumping
-            cameraPos = GetCameraGlobal() + currentHeadOffset;
-
-            //HeadJoint.connectedAnchor = Chest.transform.InverseTransformPoint(cameraPos);
-            //HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos).y * Vector3.up;
+            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
 
             UpdateChest();
-            UpdateLegs();
 
             HandleHMDMovement();
             HandleHMDRotation();
-
-            PlaceFender();
         }
 
         private void LateUpdate()
         {
-            return;
-
             if (renderDebugObjects)
             {
                 AlignObjectWithCollider(ChestCol, d_Chest);
-                AlignObjectWithCollider(LegsCol, d_Legs);
+                //AlignObjectWithCollider(LegsCol, d_Legs);
             }
         }
 
@@ -160,13 +130,11 @@ namespace Fusion.XR
 
         private void UpdateChest()
         {
-            colliderHeight = (p_localHeight * chestPercent);
-            positionToReach = cameraPos + Vector3.down * colliderHeight;
+            colliderHeight = (p_localHeight * chestPercent) - LocoSphereCollider.radius;
 
-            ChestJoint.connectedAnchor = ChestJoint.connectedBody.transform.InverseTransformPoint(positionToReach);
+            ChestJoint.targetPosition = new Vector3(0, -colliderHeight, 0);
 
-            ChestCol.height = colliderHeight;
-            ChestCol.center = Vector3.up * ((colliderHeight - 0.5f) * chestAdjustmentFactor);
+            ChestCol.height = p_localHeight - colliderHeight;
         }
 
         JointDrive drive = new JointDrive();
@@ -234,8 +202,8 @@ namespace Fusion.XR
         private void ToggleDebugObjects(bool enabled)
         {
             d_Chest.SetActive(enabled);
-            d_Fender.SetActive(enabled);
-            d_Legs.SetActive(enabled);
+            //d_Fender.SetActive(enabled);
+            //d_Legs.SetActive(enabled);
             d_LocoSphere.SetActive(enabled);
         }
 
