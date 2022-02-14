@@ -155,17 +155,17 @@ namespace Fusion.XR
 
         void SetupAdjusterAndMovement(CollisionAdjuster adj, Movement move, Player player)
         {
-            adj.p_VRCamera = GameObject.Find("Main Camera").transform;
+            adj.VRCamera = GameObject.Find("Main Camera").transform;
 
             try
             {
-                adj.p_XRRig = player.GetComponent<HybridRig>().GetCurrentRig().transform;
+                adj.XRRig = player.GetComponent<HybridRig>().GetCurrentRig().transform;
             }
             catch
             {
                 try
                 {
-                    adj.p_XRRig = GameObject.Find("XR Rig").transform;
+                    adj.XRRig = GameObject.Find("XR Rig").transform;
                 }
                 catch
                 {

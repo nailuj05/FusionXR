@@ -68,7 +68,7 @@ namespace Fusion.XR
             if (Physics.Raycast(Player.main.head.position, Vector3.down, out hit, 2f, groundLayers))
             {
                 currentHeight = (Player.main.head.position - hit.point).magnitude;
-                heightDifference = (collisionAdjuster.p_localHeight - currentHeight) + addedHeight;
+                heightDifference = (collisionAdjuster.localHeight - currentHeight) + addedHeight;
 
                 force = Vector3.up * heightDifference * hoverStrength;
 

@@ -20,7 +20,7 @@ namespace Fusion.XR
             // Potentially change the XR Rig of the Collision Adjuster
             if (TryGetComponent(out CollisionAdjuster collisionAdjuster))
             {
-                collisionAdjuster.p_XRRig = currentRig.transform;
+                collisionAdjuster.XRRig = currentRig.transform;
             }
 
             var player = Player.main;

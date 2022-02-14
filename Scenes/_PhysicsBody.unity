@@ -3623,7 +3623,7 @@ GameObject:
   - component: {fileID: 443490238}
   - component: {fileID: 443490237}
   m_Layer: 3
-  m_Name: PhysicsPlayerTest
+  m_Name: PhysicsRigV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7231,8 +7231,6 @@ MonoBehaviour:
       z: 1
     m_MaintainPositionOffset: 0
     m_MaintainRotationOffset: 0
-  m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 1
 --- !u!1 &841541253
 GameObject:
   m_ObjectHideFlags: 0
@@ -8314,7 +8312,7 @@ GameObject:
   - component: {fileID: 954945682}
   - component: {fileID: 954945683}
   m_Layer: 3
-  m_Name: PhysicsTestRig
+  m_Name: PhysicsBody
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -14794,8 +14792,6 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
-  m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 1
 --- !u!1 &1495665311
 GameObject:
   m_ObjectHideFlags: 0
@@ -18609,8 +18605,6 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
-  m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 1
 --- !u!1 &1935173207
 GameObject:
   m_ObjectHideFlags: 0

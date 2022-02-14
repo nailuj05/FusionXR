@@ -136,16 +136,16 @@ namespace Fusion.XR
 
         private void UpdateChest()
         {
-            colliderHeight = (p_localHeight * chestPercent) - LocoSphereCollider.radius;
+            colliderHeight = (localHeight * chestPercent) - LocoSphereCollider.radius;
 
             ChestJoint.targetPosition = new Vector3(0, -colliderHeight, 0);
 
-            ChestCol.height = p_localHeight - colliderHeight;
+            ChestCol.height = localHeight - colliderHeight;
         }
 
         private void UpdateLegs()
         {
-            colliderHeight = (p_localHeight * chestPercent * legsPercent);
+            colliderHeight = (localHeight * chestPercent * legsPercent);
 
             LegsJoint.targetPosition = new Vector3(0, colliderHeight, 0);
 
@@ -163,11 +163,11 @@ namespace Fusion.XR
 
         private void HandleHMDMovement()
         {
-            delta = p_VRCamera.position - Chest.transform.position;
+            delta = VRCamera.position - Chest.transform.position;
             delta.y = 0f;
 
-            deltaHead = p_VRCamera.position - Head.transform.position;
-            p_XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
+            deltaHead = VRCamera.position - Head.transform.position;
+            XRRig.transform.localPosition += Chest.transform.InverseTransformDirection(deltaHead.y * Vector3.down);
 
             if (delta.magnitude > 0.01f)
             {
@@ -176,21 +176,21 @@ namespace Fusion.XR
                 Chest.MovePosition(Chest.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
 
-                p_XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
+                XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
         }
 
         //Do we need to expose step to the user?
         private void HandleHMDRotation()
         {
-            newEulers = Mathf.MoveTowardsAngle(lastEulers, p_XRRig.transform.eulerAngles.y - p_VRCamera.transform.eulerAngles.y, step * Time.deltaTime);
+            newEulers = Mathf.MoveTowardsAngle(lastEulers, XRRig.transform.eulerAngles.y - VRCamera.transform.eulerAngles.y, step * Time.deltaTime);
             deltaEulers = (lastEulers - newEulers);
 
             deltaRot = Quaternion.AngleAxis(deltaEulers, Vector3.up);
 
             Chest.MoveRotation(Chest.rotation * deltaRot);
 
-            p_XRRig.RotateAround(p_VRCamera.position, Vector3.up, -deltaEulers);
+            XRRig.RotateAround(VRCamera.position, Vector3.up, -deltaEulers);
 
             lastEulers = newEulers;
         }
@@ -225,12 +225,13 @@ namespace Fusion.XR
 
         private Vector3 GetCameraInRigSpace()
         {
-            return LocoSphere.transform.localPosition + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
+            return LocoSphere.transform.localPosition + Vector3.up * (localHeight - LocoSphereCollider.radius);
         }
 
         private Vector3 GetCameraGlobal()
         {
-            return LocoSphere.position + Vector3.up * (p_localHeight - LocoSphereCollider.radius);
+            return LocoSphere.position + Vector3.up * (localHeight - LocoSphereCollider.radius);
+        }
         }
 
         JointDrive drive;
