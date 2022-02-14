@@ -35,6 +35,7 @@ namespace Fusion.XR
         [SerializeField] public float slerpDamper   = 250;
         [SerializeField] public float slerpMaxForce = 1500;
 
+        [SerializeField] public bool adjustAnchor = true;
         [SerializeField] public float limit = 0.7f;
 
         [HideInInspector] public GameObject tracker;
@@ -182,7 +183,8 @@ namespace Fusion.XR
                 UpdateHandJointDrives();
             }
 
-            activeJoint.anchor = jointRB.transform.InverseTransformPoint(Player.main.head.position);
+            if(trackingBase.adjustAnchor)
+                activeJoint.anchor = jointRB.transform.InverseTransformPoint(Player.main.head.position);
 
             activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos) - activeJoint.anchor;
             activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;

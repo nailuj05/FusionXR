@@ -213,7 +213,7 @@ namespace Fusion.XR
 
             if (useHandPoser)
             {
-                handPoser.ReleaseHand();
+                handPoser?.ReleaseHand();
             }
         }
 
