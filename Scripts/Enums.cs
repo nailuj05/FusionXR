@@ -70,6 +70,14 @@ namespace Fusion.XR
         East = 3
     }
 
+    public enum PlayerState
+    {
+        Crouching,
+        Standing,
+        Jumping,
+        Falling
+    }
+
     //Used by Sockets
     public enum AttractType
     {

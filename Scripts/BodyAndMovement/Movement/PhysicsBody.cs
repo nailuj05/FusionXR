@@ -6,6 +6,9 @@ namespace Fusion.XR
 {
     public class PhysicsBody : CollisionAdjuster
     {
+        [ReadOnly]
+        public float actualHeight;
+
         [Header("Body Settings")]
         [Range(0.1f, 0.9f)]
         public float chestPercent = 0.3f;
@@ -47,8 +50,6 @@ namespace Fusion.XR
         public GameObject d_Fender;
         public GameObject d_Legs;
         public GameObject d_Chest;
-
-        private float actualHeight;
 
         #region Private vars to avoid frame allocations
 

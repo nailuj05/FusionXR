@@ -7,6 +7,9 @@ namespace Fusion.XR
 {
     public class LocoSphereMover : Movement
     {
+        private PhysicsBody body;
+
+        [Header("Torques and Accelerations")]
         [SerializeField]
         private Rigidbody LocoSphere;
 
@@ -28,6 +31,13 @@ namespace Fusion.XR
         [SerializeField]
         private AnimationCurve decelerationCurve = AnimationCurve.EaseInOut(0, 1, 0.5f, 0);
 
+        [Header("Crouch and Jump")]
+        [SerializeField] [ReadOnly]
+        private PlayerState playerState;
+
+        [SerializeField]
+        private float crouchHeight = 1.3f;
+
         #region Private Vars
         private Vector3 currentMove;
         private Vector3 torqueVec;
@@ -39,26 +49,51 @@ namespace Fusion.XR
         private float timeSinceMoveEnded = 0;
         #endregion
 
+        private void Start()
+        {
+            body = GetComponent<PhysicsBody>();
+        }
+
         private void FixedUpdate()
         {
             LocoSphere.freezeRotation = true;
 
-            if(currentMove.sqrMagnitude > 0)
+            currentTorque = UpdateTorqueAcceleration();
+
+            //Smooth this / Tween transition
+            if (playerState == PlayerState.Crouching)
+                currentTorque *= 0.5f;
+
+            ApplyTorque();
+        }
+
+        public override void Move(Vector3 direction)
+        {
+            currentMove = direction;
+        }
+
+        #region Torque
+        private float UpdateTorqueAcceleration()
+        {
+            if (currentMove.sqrMagnitude > 0)
             {
                 timeSinceMoveStarted += Time.fixedDeltaTime / accelerationTime;
                 timeSinceMoveEnded = 0;
 
-                currentTorque = accelerationCurve.Evaluate(timeSinceMoveStarted) * torque;
+                return accelerationCurve.Evaluate(timeSinceMoveStarted) * torque;
             }
             else
             {
                 timeSinceMoveEnded += Time.fixedDeltaTime / decelerationTime;
                 timeSinceMoveStarted = 0;
 
-                currentTorque = decelerationCurve.Evaluate(timeSinceMoveEnded) * torque;
+                return decelerationCurve.Evaluate(timeSinceMoveEnded) * torque;
             }
+        }
 
-            if(currentTorque > 0)
+        private void ApplyTorque()
+        {
+            if (currentTorque > 0)
             {
                 torqueVec = Vector3.Cross(currentMove, Vector3.down);
 
@@ -68,11 +103,19 @@ namespace Fusion.XR
             }
 
             currentMove = Vector3.zero;
-        }
+        } 
+        #endregion
 
-        public override void Move(Vector3 direction)
+        private void UpdatePlayerState()
         {
-            currentMove = direction;
+            if(body.actualHeight <= crouchHeight)
+            {
+                playerState = PlayerState.Crouching;
+            }
+            else
+            {
+                playerState = PlayerState.Standing;
+            }
         }
     } 
 }
