@@ -74,18 +74,22 @@ namespace Fusion.XR
 
         private void Start()
         {
-            Chest.WakeUp();
-            HeadJoint = SetupJoint(Chest, Head);
-
+            //Set Rigidbody on Player
             Player.main.Rigidbody = Chest;
 
+            //Setup Joints and Drives
+            Chest.WakeUp();
+
+            HeadJoint = SetupJoint(Chest, Head);
             UpdateJointDrive(ChestJoint);
             UpdateJointDrive(LegsJoint);
 
+            //Update alle Joints initally
             UpdateChest();
             UpdateLegs();
-            //PlaceFender();
+            PlaceFender();
 
+            //Interpolate all RBs
             Head.interpolation = RigidbodyInterpolation.Interpolate;
             Chest.interpolation = RigidbodyInterpolation.Interpolate;
             Legs.interpolation = RigidbodyInterpolation.Interpolate;
@@ -102,6 +106,8 @@ namespace Fusion.XR
             UpdateHead();
             UpdateChest();
             UpdateLegs();
+
+            PlaceFender();
 
             //Debug.Log($"{Mathf.Round(VRCamera.position.y * 100f) / 100f} {Mathf.Round(actualHeight * 100f) / 100f} {Mathf.Round(localHeight * 100f) / 100f}");
 
@@ -192,7 +198,7 @@ namespace Fusion.XR
         private void ToggleDebugObjects(bool enabled)
         {
             d_Chest.SetActive(enabled);
-            //d_Fender.SetActive(enabled);
+            d_Fender.SetActive(enabled);
             d_Legs.SetActive(enabled);
             d_LocoSphere.SetActive(enabled);
         }
