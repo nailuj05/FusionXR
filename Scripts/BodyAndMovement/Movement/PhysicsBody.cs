@@ -12,22 +12,6 @@ namespace Fusion.XR
         [Range(0.1f, 0.9f)]
         public float legsPercent = 0.7f;
 
-        #region Editor Stuff
-        //private float lastCP, lastLP;
-
-        //private void OnValidate()
-        //{
-        //    if (chestPercent != lastCP)
-        //        legsPercent = 1 - chestPercent;
-        //    else
-        //        chestPercent = 1 - legsPercent;
-
-        //    lastCP = chestPercent;
-        //    lastLP = legsPercent;
-        //}
-        #endregion
-
-
         [Header("Joint Settings")]
         public float jointStrength = 5000;
         public float jointDampener = 500;
@@ -64,6 +48,8 @@ namespace Fusion.XR
         public GameObject d_Legs;
         public GameObject d_Chest;
 
+        private float actualHeight;
+
         #region Private vars to avoid frame allocations
 
         //Fixed Update
@@ -83,7 +69,7 @@ namespace Fusion.XR
         float lastEulers, newEulers, deltaEulers, targetEulers;
 
         //StopHorizontalMomentum
-        Vector3 vel; 
+        Vector3 vel;
         #endregion
 
         private void Start()
@@ -102,7 +88,7 @@ namespace Fusion.XR
 
             Head.interpolation = RigidbodyInterpolation.Interpolate;
             Chest.interpolation = RigidbodyInterpolation.Interpolate;
-            //Legs.interpolation = RigidbodyInterpolation.Interpolate;
+            Legs.interpolation = RigidbodyInterpolation.Interpolate;
             LocoSphere.interpolation = RigidbodyInterpolation.Interpolate;
 
             ToggleDebugObjects(renderDebugObjects);
@@ -111,28 +97,24 @@ namespace Fusion.XR
         void FixedUpdate()
         {
             cameraPos = GetCameraGlobal();
+            actualHeight = GetActualHeight();
 
-            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
-
-            Debug.Log(Camera.main.transform.position.y);
-
+            UpdateHead();
             UpdateChest();
             UpdateLegs();
+
+            //Debug.Log($"{Mathf.Round(VRCamera.position.y * 100f) / 100f} {Mathf.Round(actualHeight * 100f) / 100f} {Mathf.Round(localHeight * 100f) / 100f}");
 
             HandleHMDMovement();
             HandleHMDRotation();
         }
 
-        private void LateUpdate()
-        {
-            if (renderDebugObjects)
-            {
-                AlignObjectWithCollider(ChestCol, d_Chest);
-                AlignObjectWithCollider(LegsCol, d_Legs);
-            }
-        }
+        #region Body
 
-        #region Chest and Legs
+        private void UpdateHead()
+        {
+            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
+        }
 
         private void UpdateChest()
         {
@@ -140,7 +122,7 @@ namespace Fusion.XR
 
             ChestJoint.targetPosition = new Vector3(0, -colliderHeight, 0);
 
-            ChestCol.height = localHeight - colliderHeight;
+            ChestCol.height = actualHeight - (actualHeight * chestPercent - LocoSphereCollider.radius);
         }
 
         private void UpdateLegs()
@@ -149,7 +131,7 @@ namespace Fusion.XR
 
             LegsJoint.targetPosition = new Vector3(0, colliderHeight, 0);
 
-            LegsCol.height = colliderHeight + LocoSphereCollider.radius;
+            LegsCol.height = (actualHeight * chestPercent * legsPercent) + LocoSphereCollider.radius;
         }
 
         private void PlaceFender()
@@ -198,6 +180,15 @@ namespace Fusion.XR
 
         #region Debug Objects
 
+        private void LateUpdate()
+        {
+            if (renderDebugObjects)
+            {
+                AlignObjectWithCollider(ChestCol, d_Chest);
+                AlignObjectWithCollider(LegsCol, d_Legs);
+            }
+        }
+
         private void ToggleDebugObjects(bool enabled)
         {
             d_Chest.SetActive(enabled);
@@ -232,6 +223,10 @@ namespace Fusion.XR
         {
             return LocoSphere.position + Vector3.up * (localHeight - LocoSphereCollider.radius);
         }
+
+        private float GetActualHeight()
+        {
+            return Head.transform.position.y - LocoSphere.transform.position.y + LocoSphereCollider.radius;
         }
 
         JointDrive drive;
