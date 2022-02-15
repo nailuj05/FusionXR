@@ -82,7 +82,7 @@ namespace Fusion.XR
 
             #region Arms
             ///Switch current hand
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 currentHand = (currentHand == rightHand) ? leftHand : rightHand;
                 scrollDelta = currentHand.localPosition.z / scrollFactor;
@@ -96,13 +96,13 @@ namespace Fusion.XR
             currentHand.localPosition = localPos;
 
             ///Control hand with Mouse
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
             {
                 //Unlock cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
-            else if (Input.GetKey(KeyCode.LeftShift))
+            else if (Input.GetKey(KeyCode.LeftAlt))
             {
                 Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Vector3 deltaArmMovement = mouseRay.direction - currentHand.forward;
