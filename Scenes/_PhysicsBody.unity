@@ -8468,7 +8468,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpReference: {fileID: 0}
+  jumpReference: {fileID: 5760696675348489410, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerState: 0
   jumpForce: 1000
   crouchHeight: 1.3

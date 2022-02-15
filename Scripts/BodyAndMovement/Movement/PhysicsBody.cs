@@ -156,7 +156,7 @@ namespace Fusion.XR
         {
             if (!isGrounded) return;
 
-            LocoSphere.AddForce(Vector3.up * 1000f);
+            LocoSphere.AddForce(Vector3.up * 10000f);
         }
 
         #endregion
