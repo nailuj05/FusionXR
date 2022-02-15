@@ -15,6 +15,9 @@ namespace Fusion.XR
         [Range(0.1f, 0.9f)]
         public float legsPercent = 0.7f;
 
+        public CollisionDetector LocoSphereCollDetector;
+        [ReadOnly] public bool isGrounded;
+
         [Header("Joint Settings")]
         public float jointStrength = 5000;
         public float jointDampener = 500;
@@ -22,9 +25,6 @@ namespace Fusion.XR
 
         [Header("Tracking Settings")]
         public float FenderHeight = 0.1f;
-
-        private Vector3 headOffset;
-        private Vector3 currentHeadOffset => Head.transform.TransformVector(headOffset);
 
         [Header("Rigidbodys")]
         public Rigidbody Head;
@@ -78,6 +78,10 @@ namespace Fusion.XR
             //Set Rigidbody on Player
             Player.main.Rigidbody = Chest;
 
+            //Ground Detection
+            LocoSphereCollDetector.CollisionEnter += () => isGrounded = true;
+            LocoSphereCollDetector.CollisionExit += () => isGrounded = false;
+
             //Setup Joints and Drives
             Chest.WakeUp();
 
@@ -109,8 +113,6 @@ namespace Fusion.XR
             UpdateLegs();
 
             PlaceFender();
-
-            //Debug.Log($"{Mathf.Round(VRCamera.position.y * 100f) / 100f} {Mathf.Round(actualHeight * 100f) / 100f} {Mathf.Round(localHeight * 100f) / 100f}");
 
             HandleHMDMovement();
             HandleHMDRotation();
@@ -148,6 +150,17 @@ namespace Fusion.XR
 
         #endregion
 
+        #region Jumping
+
+        public void StartJump()
+        {
+            if (!isGrounded) return;
+
+            LocoSphere.AddForce(Vector3.up * 1000f);
+        }
+
+        #endregion
+
         #region HMD Movement and Rotation
 
         private void HandleHMDMovement()
@@ -160,8 +173,6 @@ namespace Fusion.XR
 
             if (delta.magnitude > 0.01f)
             {
-                delta -= currentHeadOffset;
-
                 Chest.MovePosition(Chest.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
 
@@ -266,7 +277,7 @@ namespace Fusion.XR
             joint.xDrive = joint.yDrive = joint.zDrive = drive;
 
             return joint;
-        } 
+        }
         #endregion
     }
 }

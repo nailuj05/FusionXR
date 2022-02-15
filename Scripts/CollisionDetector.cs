@@ -7,7 +7,7 @@ namespace Fusion.XR
 {
     public class CollisionDetector : MonoBehaviour
     {
-        public delegate void Coll(Collider collision);
+        public delegate void Coll();
         public event Coll CollisionEnter;
         public event Coll CollisionExit;
 
@@ -21,12 +21,12 @@ namespace Fusion.XR
 
         private void OnCollisionEnter(Collision collision)
         {
-            CollisionEnter(collision.collider);
+            CollisionEnter();
         }
 
         private void OnCollisionExit(Collision collision)
         {
-            CollisionExit(collision.collider);
+            CollisionExit();
         }
     } 
 }

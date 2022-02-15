@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Animations;
 
 namespace Fusion.XR
@@ -32,8 +33,14 @@ namespace Fusion.XR
         private AnimationCurve decelerationCurve = AnimationCurve.EaseInOut(0, 1, 0.5f, 0);
 
         [Header("Crouch and Jump")]
+        [SerializeField]
+        private InputActionReference jumpReference;
+
         [SerializeField] [ReadOnly]
-        private PlayerState playerState;
+        private PlayerState playerState = PlayerState.Standing;
+
+        [SerializeField]
+        private float jumpForce = 1000f;
 
         [SerializeField]
         private float crouchHeight = 1.3f;
@@ -49,9 +56,11 @@ namespace Fusion.XR
         private float timeSinceMoveEnded = 0;
         #endregion
 
-        private void Start()
+        private void Awake()
         {
             body = GetComponent<PhysicsBody>();
+
+            jumpReference.action.performed += OnJump;
         }
 
         private void FixedUpdate()
@@ -60,10 +69,6 @@ namespace Fusion.XR
 
             currentTorque = UpdateTorqueAcceleration();
 
-            //Smooth this / Tween transition
-            if (playerState == PlayerState.Crouching)
-                currentTorque *= 0.5f;
-
             ApplyTorque();
         }
 
@@ -71,6 +76,17 @@ namespace Fusion.XR
         {
             currentMove = direction;
         }
+
+        #region Jumping
+
+        public void OnJump(InputAction.CallbackContext obj) { OnJump(); }
+
+        public void OnJump()
+        {
+            body.StartJump();
+        }
+
+        #endregion
 
         #region Torque
         private float UpdateTorqueAcceleration()
@@ -105,17 +121,5 @@ namespace Fusion.XR
             currentMove = Vector3.zero;
         } 
         #endregion
-
-        private void UpdatePlayerState()
-        {
-            if(body.actualHeight <= crouchHeight)
-            {
-                playerState = PlayerState.Crouching;
-            }
-            else
-            {
-                playerState = PlayerState.Standing;
-            }
-        }
     } 
 }
