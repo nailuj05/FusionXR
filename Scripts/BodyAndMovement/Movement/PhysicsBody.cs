@@ -260,7 +260,7 @@ namespace Fusion.XR
 
         private Vector3 GetCameraGlobal()
         {
-            return Chest.position + Vector3.up * (localHeight * (1 - chestPercent));
+            return Chest.position + Vector3.up * (localHeight * (1 - chestPercent) + LocoSphereCollider.radius);
         }
 
         private float GetActualHeight()
