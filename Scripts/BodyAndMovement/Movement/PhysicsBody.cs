@@ -57,7 +57,7 @@ namespace Fusion.XR
         Vector3 cameraPos;
 
         //Update Chest/Legs
-        float percent;
+        float heightPercent;
         Vector3 positionToReach;
 
         //HandleHMDMovement
@@ -80,6 +80,7 @@ namespace Fusion.XR
 
             //Ground Detection
             LocoSphereCollDetector.CollisionEnter += () => isGrounded = true;
+            LocoSphereCollDetector.CollisionStay += () => isGrounded = true;
             LocoSphereCollDetector.CollisionExit += () => isGrounded = false;
 
             //Setup Joints and Drives
@@ -127,20 +128,20 @@ namespace Fusion.XR
 
         private void UpdateChest()
         {
-            percent = (localHeight * chestPercent * retractAmount) - LocoSphereCollider.radius;
+            heightPercent = chestPercent - LocoSphereCollider.radius;
 
-            ChestJoint.targetPosition = new Vector3(0, -percent, 0);
+            ChestJoint.targetPosition = new Vector3(0, -localHeight * heightPercent * retractAmount, 0);
 
-            ChestCol.height = actualHeight - (actualHeight * chestPercent - LocoSphereCollider.radius);
+            ChestCol.height = actualHeight - (actualHeight * heightPercent);
         }
 
         private void UpdateLegs()
         {
-            percent = (chestPercent * legsPercent * retractAmount);
+            heightPercent = (chestPercent * legsPercent * retractAmount);
 
-            LegsJoint.targetPosition = new Vector3(0, localHeight * percent, 0);
+            LegsJoint.targetPosition = new Vector3(0, localHeight * heightPercent, 0);
 
-            LegsCol.height = actualHeight * percent + LocoSphereCollider.radius;
+            LegsCol.height = actualHeight * heightPercent + LocoSphereCollider.radius;
         }
 
         private void PlaceFender()
