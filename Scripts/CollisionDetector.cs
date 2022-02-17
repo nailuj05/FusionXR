@@ -9,6 +9,7 @@ namespace Fusion.XR
     {
         public delegate void Coll();
         public event Coll CollisionEnter;
+        public event Coll CollisionStay;
         public event Coll CollisionExit;
 
         void Start()
@@ -22,6 +23,11 @@ namespace Fusion.XR
         private void OnCollisionEnter(Collision collision)
         {
             CollisionEnter();
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            CollisionStay();
         }
 
         private void OnCollisionExit(Collision collision)
