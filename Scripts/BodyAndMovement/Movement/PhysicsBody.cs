@@ -245,14 +245,6 @@ namespace Fusion.XR
 
         #region Helper Functions
 
-        private void StopHorizontalMomentum(Rigidbody rb)
-        {
-            vel = rb.velocity;
-            vel.x = 0;
-            vel.z = 0;
-            rb.velocity = vel;
-        }
-
         private Vector3 GetCameraInRigSpace()
         {
             return LocoSphere.transform.localPosition + Vector3.up * (localHeight - LocoSphereCollider.radius);
@@ -266,6 +258,14 @@ namespace Fusion.XR
         private float GetActualHeight()
         {
             return Head.transform.position.y - LocoSphere.transform.position.y + LocoSphereCollider.radius;
+        }
+
+        private void StopHorizontalMomentum(Rigidbody rb)
+        {
+            vel = rb.velocity;
+            vel.x = 0;
+            vel.z = 0;
+            rb.velocity = vel;
         }
 
         JointDrive drive;
