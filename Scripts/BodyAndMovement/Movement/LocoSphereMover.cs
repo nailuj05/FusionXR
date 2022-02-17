@@ -83,7 +83,7 @@ namespace Fusion.XR
 
         public void OnJump()
         {
-            body.StartJump();
+            body.StartJump(jumpForce);
         }
 
         #endregion
