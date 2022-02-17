@@ -183,15 +183,15 @@ namespace Fusion.XR
                 UpdateHandJointDrives();
             }
 
-            if(trackingBase.adjustAnchor)
-                activeJoint.anchor = jointRB.transform.InverseTransformPoint(Player.main.head.position);
-
             activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos) - activeJoint.anchor;
             activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;
         }
 
         private void UpdateHandJointDrives()
         {
+            if (trackingBase.adjustAnchor)
+                activeJoint.anchor = jointRB.transform.InverseTransformPoint(Player.main.head.position);
+
             var drive = new JointDrive();
             drive.positionSpring = trackingBase.positionSpring;
             drive.positionDamper = trackingBase.positionDamper;
