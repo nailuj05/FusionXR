@@ -57,7 +57,7 @@ namespace Fusion.XR
         Vector3 cameraPos;
 
         //Update Chest/Legs
-        float colliderHeight;
+        float percent;
         Vector3 positionToReach;
 
         //HandleHMDMovement
@@ -127,20 +127,20 @@ namespace Fusion.XR
 
         private void UpdateChest()
         {
-            colliderHeight = (localHeight * chestPercent) - LocoSphereCollider.radius;
+            percent = (localHeight * chestPercent * retractAmount) - LocoSphereCollider.radius;
 
-            ChestJoint.targetPosition = new Vector3(0, -colliderHeight, 0);
+            ChestJoint.targetPosition = new Vector3(0, -percent, 0);
 
             ChestCol.height = actualHeight - (actualHeight * chestPercent - LocoSphereCollider.radius);
         }
 
         private void UpdateLegs()
         {
-            colliderHeight = (localHeight * chestPercent * legsPercent);
+            percent = (chestPercent * legsPercent * retractAmount);
 
-            LegsJoint.targetPosition = new Vector3(0, colliderHeight, 0);
+            LegsJoint.targetPosition = new Vector3(0, localHeight * percent, 0);
 
-            LegsCol.height = (actualHeight * chestPercent * legsPercent) + LocoSphereCollider.radius;
+            LegsCol.height = actualHeight * percent + LocoSphereCollider.radius;
         }
 
         private void PlaceFender()
@@ -152,11 +152,31 @@ namespace Fusion.XR
 
         #region Jumping
 
-        public void StartJump()
+        private float retractAmount = 1;
+
+        public void StartJump(float jumpForce)
         {
             if (!isGrounded) return;
 
-            LocoSphere.AddForce(Vector3.up * 10000f);
+            Chest.AddForce(Vector3.up * jumpForce);
+
+            StartCoroutine(Jump());
+        }
+
+        IEnumerator Jump()
+        {
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+
+            while (!isGrounded)
+            {
+                retractAmount = 0.5f;
+
+                yield return new WaitForFixedUpdate();
+            }
+
+            retractAmount = 1;
         }
 
         #endregion
