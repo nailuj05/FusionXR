@@ -66,11 +66,14 @@ namespace Fusion.XR
         {
             for (int i = 0; i < targetRotations.Length; i++)
             {
+                var lastRot = fingers[i].localRotation;
+                fingers[i].localRotation = Quaternion.Lerp(lastTargetRotations[i], targetRotations[i], currentLerp);
+
                 Collider[] colliders = Physics.OverlapSphere(fingers[i].TransformPoint(Finger.GetFingerCollisionOffset(i, trackingBase)), trackingBase.radius, trackingBase.collMask);
 
-                if (colliders.Length == 0) //Only rotate if we didn't hit anything
+                if (colliders.Length > 0) //
                 {
-                    fingers[i].localRotation = Quaternion.Lerp(lastTargetRotations[i], targetRotations[i], currentLerp);
+                    fingers[i].localRotation = lastRot;
                 }
             }
         }
