@@ -71,7 +71,8 @@ namespace Fusion.XR
 
                 Collider[] colliders = Physics.OverlapSphere(fingers[i].TransformPoint(Finger.GetFingerCollisionOffset(i, trackingBase)), trackingBase.radius, trackingBase.collMask);
 
-                if (colliders.Length > 0) //
+                //Reset rotation if we hit something
+                if (colliders.Length > 0)
                 {
                     fingers[i].localRotation = lastRot;
                 }
