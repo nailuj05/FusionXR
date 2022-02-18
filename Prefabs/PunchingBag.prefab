@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c852af001dae0064e9acaa832f1dadb7, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,12 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
-  grabPoints: []
-  attachedHands: []
-  projectOntoJointAxis: 0
+  grabableType: 0
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1 &4581513713073807992
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +355,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c852af001dae0064e9acaa832f1dadb7, type: 2}
+  - {fileID: 2100000, guid: ce9d25e97157e94409daca2c91b6bcf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -468,12 +465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8732455efce4a324ba78b9a708808354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoHandedMode: 0
-  releaseThreshold: 0.4
-  isGrabbed: 0
-  grabPoints: []
-  attachedHands: []
-  projectOntoJointAxis: 0
+  grabableType: 0
+  TwoHandedMode: 0
+  GrabPoints: []
 --- !u!1 &7459324596716500288
 GameObject:
   m_ObjectHideFlags: 0
