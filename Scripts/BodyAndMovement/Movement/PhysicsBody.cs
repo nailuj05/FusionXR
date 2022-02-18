@@ -15,6 +15,8 @@ namespace Fusion.XR
         [Range(0.1f, 0.9f)]
         public float legsPercent = 0.7f;
 
+        public float heightAdjustmentFactor = 0.05f;
+
         public CollisionDetector LocoSphereCollDetector;
         [ReadOnly] public bool isGrounded;
 
@@ -96,10 +98,7 @@ namespace Fusion.XR
             PlaceFender();
 
             //Interpolate all RBs
-            Head.interpolation = RigidbodyInterpolation.Interpolate;
-            Chest.interpolation = RigidbodyInterpolation.Interpolate;
-            Legs.interpolation = RigidbodyInterpolation.Interpolate;
-            LocoSphere.interpolation = RigidbodyInterpolation.Interpolate;
+            Head.interpolation = Chest.interpolation = Legs.interpolation = LocoSphere.interpolation = RigidbodyInterpolation.Extrapolate;
 
             ToggleDebugObjects(renderDebugObjects);
         }
@@ -128,11 +127,11 @@ namespace Fusion.XR
 
         private void UpdateChest()
         {
-            heightPercent = chestPercent - LocoSphereCollider.radius;
+            heightPercent = chestPercent;
 
-            ChestJoint.targetPosition = new Vector3(0, -localHeight * heightPercent * retractAmount, 0);
+            ChestJoint.targetPosition = new Vector3(0, -localHeight * heightPercent * retractAmount - LocoSphereCollider.radius, 0);
 
-            ChestCol.height = actualHeight - (actualHeight * heightPercent);
+            ChestCol.height = actualHeight - (actualHeight * heightPercent - LocoSphereCollider.radius);
         }
 
         private void UpdateLegs()
@@ -195,6 +194,8 @@ namespace Fusion.XR
             if (delta.magnitude > 0.01f)
             {
                 Chest.MovePosition(Chest.position + delta);
+                Legs.MovePosition(Legs.position + delta);
+                Head.MovePosition(Head.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
 
                 XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
@@ -252,7 +253,7 @@ namespace Fusion.XR
 
         private Vector3 GetCameraGlobal()
         {
-            return Chest.position + Vector3.up * (localHeight * (1 - chestPercent) + LocoSphereCollider.radius);
+            return Chest.position + Vector3.up * (localHeight * (1 - chestPercent) - LocoSphereCollider.radius - heightAdjustmentFactor);
         }
 
         private float GetActualHeight()
