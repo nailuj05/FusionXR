@@ -168,8 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!114 &20862939
 MonoBehaviour:
@@ -534,8 +535,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 0
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
   reachDistance: 0.2
 --- !u!43 &244292350
@@ -873,11 +875,6 @@ Transform:
   m_Father: {fileID: 1784969799}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
---- !u!1 &339453344 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4044798231639983441, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
-  m_PrefabInstance: {fileID: 799544395192565041}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &492995989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,8 +1215,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &713184332
 GameObject:
@@ -1568,8 +1566,6 @@ MonoBehaviour:
       z: 1
     m_MaintainPositionOffset: 0
     m_MaintainRotationOffset: 0
-  m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 1
 --- !u!1 &885354570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,9 +2219,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1de7387fed50e44f9af48d6f00b3104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_XRRig: {fileID: 1033683496}
-  p_VRCamera: {fileID: 8622627593387649078}
-  p_CollisionRadius: 0.2
+  XRRig: {fileID: 0}
+  VRCamera: {fileID: 0}
+  CollisionRadius: 0.2
+  _localHeight: 0
 --- !u!114 &1033683498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2250,7 +2247,7 @@ MonoBehaviour:
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   activationThreshold: 0.1
   canMove: 1
-  usesGravity: 0
+  usesCustomGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
   rb: {fileID: 0}
 --- !u!136 &1033683499
@@ -2285,7 +2282,6 @@ MonoBehaviour:
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   collisionAdjuster: {fileID: 1033683497}
-  rb: {fileID: 0}
 --- !u!114 &1033683501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2608,8 +2604,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 0
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
   reachDistance: 0.2
 --- !u!1 &1311453291
@@ -2672,8 +2669,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &1314623111
 GameObject:
@@ -2972,7 +2970,7 @@ MonoBehaviour:
   canBeGrabbed: 1
   showPreview: 1
   prevMaterial: {fileID: 2100000, guid: c4ee67ce04386454fa4f6f9f57f0ab93, type: 2}
-  attachedTrackingMode: 3
+  attachedTrackingMode: 5
   attachedTrackingBase:
     positionStrength: 15
     rotationStrength: 35
@@ -2986,10 +2984,11 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
-  attachedObject: {fileID: 339453344}
+  attachedObject: {fileID: 0}
 --- !u!54 &1408044856
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3305,8 +3304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &1488218071
 GameObject:
@@ -3364,8 +3364,6 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
-  m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 1
 --- !u!1 &1570927991
 GameObject:
   m_ObjectHideFlags: 0
@@ -3579,8 +3577,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &1784969798
 GameObject:
@@ -3826,8 +3825,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPointType: 2
-  rotateToMatchHand: 0
+  alignForLeftHand: 0
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
+  leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
 --- !u!1 &1920245165
 GameObject:
@@ -3885,8 +3885,6 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
-  m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 1
 --- !u!1 &1945161855
 GameObject:
   m_ObjectHideFlags: 0
@@ -4871,7 +4869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.068
+      value: -0.932
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10574,6 +10572,7 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
@@ -10980,6 +10979,7 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
@@ -11325,7 +11325,6 @@ MonoBehaviour:
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   collisionAdjuster: {fileID: 8622627594991174601}
-  rb: {fileID: 0}
 --- !u!114 &8622627594991174597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11410,9 +11409,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345afe44b87d7c748958895731a744ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_XRRig: {fileID: 8622627594991174598}
-  p_VRCamera: {fileID: 8622627593387649078}
-  p_CollisionRadius: 0.1
+  XRRig: {fileID: 0}
+  VRCamera: {fileID: 0}
+  CollisionRadius: 0.2
+  _localHeight: 0
 --- !u!114 &8622627594991174602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11437,7 +11437,7 @@ MonoBehaviour:
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   activationThreshold: 0.1
   canMove: 1
-  usesGravity: 0
+  usesCustomGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
   controller: {fileID: 8622627594991174603}
 --- !u!143 &8622627594991174603

@@ -2225,7 +2225,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 416a03289b5214145aa5e4d6c628daed, type: 2}
+  - {fileID: 2100000, guid: 9f93aebc8ffaeb540839dfc5edac1619, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2382,9 +2382,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &233674870
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3306,9 +3306,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: 0.000000034285193, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!23 &348406915
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3662,7 +3662,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 416a03289b5214145aa5e4d6c628daed, type: 2}
+  - {fileID: 2100000, guid: 9f93aebc8ffaeb540839dfc5edac1619, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4729,9 +4729,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &558267887
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6212,9 +6212,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &716476322
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6728,9 +6728,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &799025184
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7715,9 +7715,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!23 &846993104
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8867,9 +8867,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &962012929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10530,9 +10530,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &1084793901
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11512,7 +11512,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 416a03289b5214145aa5e4d6c628daed, type: 2}
+  - {fileID: 2100000, guid: 9f93aebc8ffaeb540839dfc5edac1619, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14437,9 +14437,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &1411616233
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14762,9 +14762,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &1464547808
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15787,7 +15787,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1554825079
 Transform:
@@ -15864,9 +15864,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.00000026373803, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &1554825083
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16201,9 +16201,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: 0.000000034285193, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &1590845143
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17543,9 +17543,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &1692045395
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18392,9 +18392,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &1785427997
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19075,7 +19075,7 @@ MonoBehaviour:
     positionSpring: 4500
     positionDamper: 250
     maxJointForce: 4000
-    slerpSpring: 1500
+    slerpSpring: 2500
     slerpDamper: 250
     slerpMaxForce: 1500
     adjustAnchor: 0
@@ -19560,9 +19560,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: 0.000000034285193, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!23 &1937151587
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20563,9 +20563,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: 0.000000034285193, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!23 &2036497724
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20864,9 +20864,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &2062812379
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22852,9 +22852,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05
-  m_Height: 1.25
+  m_Height: 1.4
   m_Direction: 2
-  m_Center: {x: -0.00000004394545, y: -0.000000025319451, z: 0.59958893}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &2552953710152092808
 Rigidbody:
   m_ObjectHideFlags: 0

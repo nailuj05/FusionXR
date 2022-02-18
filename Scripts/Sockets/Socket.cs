@@ -40,7 +40,7 @@ namespace Fusion.XR
 
         [Header("Attachment")]
         [Tooltip("The Track Driver used for attaching the object. Works best with Passive Joint and Velocity tracking.")]
-        public TrackingMode attachedTrackingMode;
+        public TrackingMode attachedTrackingMode = TrackingMode.FixedJoint;
 
         [Tooltip("The settings for the Track Driver")]
         public TrackingBase attachedTrackingBase = new TrackingBase();

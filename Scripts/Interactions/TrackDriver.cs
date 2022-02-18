@@ -274,11 +274,13 @@ namespace Fusion.XR
                 objectRB.transform.rotation = targetRotation;
             }
 
-            joint = trackerRB.gameObject.AddComponent<ConfigurableJoint>();
+            joint = objectRB.gameObject.AddComponent<ConfigurableJoint>();
+            
+            Debug.DrawRay(Vector3.zero, trackingBase.palm.position, Color.red, 15);
+            joint.anchor = objectRB.transform.InverseTransformPoint(trackerRB.position);
             joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
-            joint.anchor = trackingBase.tracker.transform.InverseTransformPoint(trackingBase.palm.position);
             joint.autoConfigureConnectedAnchor = false;
-            joint.connectedBody = objectRB;
+            joint.connectedBody = trackerRB;
             joint.connectedAnchor = Vector3.zero;
 
             joint.rotationDriveMode = RotationDriveMode.Slerp;
@@ -291,6 +293,70 @@ namespace Fusion.XR
             //joint.slerpDrive = slerpDrive;
 
             //joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
+
+            joint.enableCollision = false;
+            joint.enablePreprocessing = false;
+        }
+
+        private void DestroyJoint()
+        {
+            if (joint != null)
+                Object.Destroy(joint);
+
+            joint = null;
+        }
+    }
+
+    public class FixedJointDriver : TrackDriver
+    {
+        private Rigidbody objectRB;
+        private Rigidbody trackerRB;
+
+        private FixedJoint joint;
+
+        private Quaternion initalRotation;
+
+        public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
+        {
+            objectToTrack = assignedObjectToTrack;
+            trackingBase = assignedTrackingBase;
+
+            try
+            {
+                trackerRB = trackingBase.tracker.GetComponent<Rigidbody>();
+                objectRB = objectToTrack.GetComponent<Rigidbody>();
+            }
+            catch
+            {
+                Debug.Log("Target and Tracking Object need to have a Rigidbody attached, " +
+                    "this should be used for grabbing, not for moving the hand (Use Active Joint Tracking for that");
+            }
+        }
+
+        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        {
+            if (joint == null)
+                SetupJoint(targetPosition, targetRotation);
+        }
+
+        public override void EndTrack()
+        {
+            DestroyJoint();
+        }
+
+        private void SetupJoint(Vector3 targetPosition, Quaternion targetRotation)
+        {
+            if (!objectRB.isKinematic)
+            {
+                objectRB.transform.rotation = targetRotation;
+            }
+
+            joint = objectRB.gameObject.AddComponent<FixedJoint>();
+
+            joint.anchor = Vector3.zero;
+            joint.autoConfigureConnectedAnchor = false;
+            joint.connectedBody = trackerRB;
+            joint.connectedAnchor = Vector3.zero;
 
             joint.enableCollision = false;
             joint.enablePreprocessing = false;
