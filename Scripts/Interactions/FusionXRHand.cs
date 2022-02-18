@@ -232,6 +232,7 @@ namespace Fusion.XR
             {
                 grabSpot.parent = grabbable.Transform;
                 grabSpot.localPosition = grabbedGrabbable.Transform.InverseTransformPoint(hit.point);
+                grabSpot.position = closestCollider.ClosestPoint(hit.point);
 
                 var n = Vector3.Project(dir, hit.normal);
                 grabSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), n);
