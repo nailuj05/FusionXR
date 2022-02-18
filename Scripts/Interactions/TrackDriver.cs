@@ -269,14 +269,8 @@ namespace Fusion.XR
 
         private void SetupJoint(Vector3 targetPosition, Quaternion targetRotation)
         {
-            if (!objectRB.isKinematic)
-            {
-                objectRB.transform.rotation = targetRotation;
-            }
-
             joint = objectRB.gameObject.AddComponent<ConfigurableJoint>();
             
-            Debug.DrawRay(Vector3.zero, trackingBase.palm.position, Color.red, 15);
             joint.anchor = objectRB.transform.InverseTransformPoint(trackerRB.position);
             joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
             joint.autoConfigureConnectedAnchor = false;
@@ -284,15 +278,6 @@ namespace Fusion.XR
             joint.connectedAnchor = Vector3.zero;
 
             joint.rotationDriveMode = RotationDriveMode.Slerp;
-
-            //var slerpDrive = new JointDrive();
-            //slerpDrive.positionSpring = trackingBase.slerpSpring;
-            //slerpDrive.positionDamper = trackingBase.slerpDamper;
-            //slerpDrive.maximumForce = trackingBase.slerpMaxForce;
-
-            //joint.slerpDrive = slerpDrive;
-
-            //joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
 
             joint.enableCollision = false;
             joint.enablePreprocessing = false;

@@ -1081,6 +1081,7 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
@@ -1091,6 +1092,9 @@ MonoBehaviour:
   grabbedTrackingMode: 3
   palm: {fileID: 2130366296751583961}
   reachDist: 0.1
+  grabMask:
+    serializedVersion: 2
+    m_Bits: 768
   useHandPoser: 1
 --- !u!114 &2130366297943922198
 MonoBehaviour:

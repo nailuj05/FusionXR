@@ -10,7 +10,7 @@ namespace Fusion.XR
     {
         #region Variables
 
-        //Tracking
+        [Header("Tracking")]
         public Hand hand;
         public Transform trackedController;
         private Transform followObject;
@@ -31,15 +31,17 @@ namespace Fusion.XR
         [HideInInspector]
         public Rigidbody rb;
 
-        //Inputs
+        [Header("Inputs")]
         public InputActionReference grabReference;
         public InputActionReference pinchReference;
 
-        //Grabbing
+        [Header("Grabbing")]
         public float grabRange = 0.1f;
         public TrackingMode grabbedTrackingMode;
         public Transform palm;
         [SerializeField] private float reachDist = 0.1f; //, joinDist = 0.05f;
+
+        public LayerMask grabMask = 768;
 
         private bool isGrabbing;
         private bool generatedGrabPoint;
@@ -171,8 +173,6 @@ namespace Fusion.XR
 
             grabbedGrabbable.Grab(this, grabbedTrackingMode, trackingBase);
 
-            //Debug.Log($"Grab {grabbedGrabbable.GameObject.name}");
-
             if (!useHandPoser)
                 return;
 
@@ -224,20 +224,23 @@ namespace Fusion.XR
 
             //Raycasting to find GrabSpots Normal
             RaycastHit hit;
-            Vector3 grabPointPosOffset = grabSpot.TransformPoint(Vector3.up * 0.2f);
-            Ray ray = new Ray(grabPointPosOffset, grabSpot.position - grabPointPosOffset);
+            var dir = palm.position - closestCollider.bounds.center;
+            Ray ray = new Ray(palm.position - dir, dir);
 
-            if (Physics.Raycast(ray, out hit, 1f, LayerMask.NameToLayer("Hands")))
+            //TODO: Better ignore mask
+            if (Physics.Raycast(ray, out hit, 1f, ~grabMask))
             {
-                grabSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), hit.normal);
+                grabSpot.parent = grabbable.Transform;
+                grabSpot.localPosition = grabbedGrabbable.Transform.InverseTransformPoint(hit.point);
+
+                var n = Vector3.Project(dir, hit.normal);
+                grabSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), n);
             }
             else
             {
                 grabSpot.localRotation = transform.rotation;
+                grabSpot.parent = grabbable.Transform;
             }
-
-            grabSpot.parent = grabbable.Transform;
-            grabSpot.position = grabSpot.TransformPoint(-palm.localPosition + Vector3.up * 0.03f);
 
             return grabSpot;
         }
@@ -256,7 +259,7 @@ namespace Fusion.XR
             {
                 foreach (Collider coll in nearObjects)
                 {
-                    if(coll.gameObject.layer == LayerMask.NameToLayer("Interactables") || coll.gameObject.layer == LayerMask.NameToLayer("Props"))
+                    if(Utils.ObjectMatchesLayermask(coll.gameObject, grabMask))
                     {
                         if ((coll.transform.position - transform.position).sqrMagnitude < Distance)
                         {

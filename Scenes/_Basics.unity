@@ -1379,6 +1379,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: grabMask.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1604745582}
@@ -10583,6 +10587,9 @@ MonoBehaviour:
   grabbedTrackingMode: 0
   palm: {fileID: 8622627593758503776}
   reachDist: 0.1
+  grabMask:
+    serializedVersion: 2
+    m_Bits: 0
   useHandPoser: 0
 --- !u!54 &8622627593513699866
 Rigidbody:
@@ -10990,6 +10997,9 @@ MonoBehaviour:
   grabbedTrackingMode: 0
   palm: {fileID: 8622627593493029903}
   reachDist: 0.1
+  grabMask:
+    serializedVersion: 2
+    m_Bits: 0
   useHandPoser: 0
 --- !u!54 &8622627594202557812
 Rigidbody:
