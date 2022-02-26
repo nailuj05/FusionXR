@@ -259,7 +259,11 @@ namespace Fusion.XR
             }
 
             if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
-                objectRB.angularVelocity = axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad);
+            {
+                //objectRB.angularVelocity = axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad);
+                objectRB.AddTorque(axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad));
+                objectRB.AddTorque(-objectRB.angularVelocity * 0.75f);
+            }
         }
 
         public override void EndTrack()
