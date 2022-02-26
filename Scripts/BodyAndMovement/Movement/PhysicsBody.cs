@@ -19,6 +19,7 @@ namespace Fusion.XR
 
         public CollisionDetector LocoSphereCollDetector;
         [ReadOnly] public bool isGrounded;
+        [ReadOnly] public Collider walkedCollider;
 
         [Header("Joint Settings")]
         public float jointStrength = 5000;
@@ -81,9 +82,9 @@ namespace Fusion.XR
             Player.main.Rigidbody = Chest;
 
             //Ground Detection
-            LocoSphereCollDetector.CollisionEnter += () => isGrounded = true;
-            LocoSphereCollDetector.CollisionStay += () => isGrounded = true;
-            LocoSphereCollDetector.CollisionExit += () => isGrounded = false;
+            LocoSphereCollDetector.CollisionEnter += (c) => { walkedCollider = c;    isGrounded = true;  };
+            LocoSphereCollDetector.CollisionStay  += (c) => { walkedCollider = c;    isGrounded = true;  };
+            LocoSphereCollDetector.CollisionExit  += (c) => { walkedCollider = null; isGrounded = false; };
 
             //Setup Joints and Drives
             Chest.WakeUp();
