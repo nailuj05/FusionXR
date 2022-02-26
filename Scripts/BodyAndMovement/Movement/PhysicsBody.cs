@@ -10,11 +10,10 @@ namespace Fusion.XR
         public float actualHeight;
 
         [Header("Body Settings")]
-        [Range(0.1f, 0.9f)]
-        public float chestPercent = 0.3f;
-        [Range(0.1f, 0.9f)]
-        public float legsPercent = 0.7f;
+        public LayerMask playerMask;
 
+        [Range(0.1f, 0.9f)] public float chestPercent = 0.3f;
+        [Range(0.1f, 0.9f)] public float legsPercent = 0.7f;
         public float heightAdjustmentFactor = 0.05f;
 
         public CollisionDetector LocoSphereCollDetector;
@@ -28,6 +27,11 @@ namespace Fusion.XR
 
         [Header("Tracking Settings")]
         public float FenderHeight = 0.1f;
+
+        [Header("Jumping")]
+        public float retractSpeed = 2f;
+        private float retractAmount = 1;
+        private float targetRetract = 1;
 
         [Header("Rigidbodys")]
         public Rigidbody Head;
@@ -56,8 +60,13 @@ namespace Fusion.XR
 
         #region Private vars to avoid frame allocations
 
-        //Fixed Update
+        //FixedUpdate
         Vector3 cameraPos;
+
+        //Jumping
+        //Init Ray with a inital downward direction
+        Ray jumpRay = new Ray(Vector3.zero, Vector3.down);
+        RaycastHit jumpRayHit;
 
         //Update Chest/Legs
         float heightPercent;
@@ -106,15 +115,21 @@ namespace Fusion.XR
 
         void FixedUpdate()
         {
+            //Get Head Info
             cameraPos = GetCameraGlobal();
             actualHeight = GetActualHeight();
 
+            //Update Retract Amount
+            retractAmount = Mathf.MoveTowards(retractAmount, targetRetract, retractSpeed * Time.fixedDeltaTime);
+
+            //Updated Body
             UpdateHead();
             UpdateChest();
             UpdateLegs();
 
             PlaceFender();
 
+            //Adjust for HMD (Playspace) Movement
             HandleHMDMovement();
             HandleHMDRotation();
         }
@@ -153,8 +168,6 @@ namespace Fusion.XR
 
         #region Jumping
 
-        private float retractAmount = 1;
-
         public void StartJump(float jumpForce)
         {
             if (!isGrounded) return;
@@ -166,18 +179,31 @@ namespace Fusion.XR
 
         IEnumerator Jump()
         {
+            //Wait for Locosphere to leave the ground
             yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();
 
+            //Retract the legs
+            targetRetract = 0.5f;
+
+            //Wait for touching the ground again
             while (!isGrounded)
             {
-                retractAmount = 0.5f;
-
                 yield return new WaitForFixedUpdate();
+
+                //Check if we reached the peak of the jump
+                if (Chest.velocity.y < 0)
+                {
+                    jumpRay.origin = Head.position;
+
+                    //If there is a floor below the legs expand them again
+                    if (Physics.Raycast(jumpRay, out jumpRayHit, actualHeight, playerMask))
+                        break;
+                }
             }
 
-            retractAmount = 1;
+            targetRetract = 1;
         }
 
         #endregion

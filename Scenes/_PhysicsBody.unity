@@ -8381,12 +8381,17 @@ MonoBehaviour:
   chestPercent: 0.8
   legsPercent: 0.5
   heightAdjustmentFactor: 0.05
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
   LocoSphereCollDetector: {fileID: 597530007}
   isGrounded: 0
+  walkedCollider: {fileID: 0}
   jointStrength: 10000
   jointDampener: 500
   jointMaxStrength: Infinity
   FenderHeight: 0.1
+  retractSpeed: 2
   Head: {fileID: 347880587}
   Chest: {fileID: 304071420}
   Legs: {fileID: 1108629389}
@@ -8398,7 +8403,7 @@ MonoBehaviour:
   LocoSphereCollider: {fileID: 597530005}
   ChestJoint: {fileID: 304071421}
   LegsJoint: {fileID: 1108629390}
-  renderDebugObjects: 0
+  renderDebugObjects: 1
   d_LocoSphere: {fileID: 1386785163}
   d_Fender: {fileID: 1915011035}
   d_Legs: {fileID: 1654769649}
@@ -11761,12 +11766,17 @@ MonoBehaviour:
   chestPercent: 0.3
   legsPercent: 0.7
   heightAdjustmentFactor: 0.05
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
   LocoSphereCollDetector: {fileID: 0}
   isGrounded: 0
+  walkedCollider: {fileID: 0}
   jointStrength: 1000
   jointDampener: 250
   jointMaxStrength: 1000
   FenderHeight: 0.1
+  retractSpeed: 2
   Head: {fileID: 668176726}
   Chest: {fileID: 576957183}
   Legs: {fileID: 1316299732}
