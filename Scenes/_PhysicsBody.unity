@@ -716,6 +716,7 @@ GameObject:
   - component: {fileID: 86533696}
   - component: {fileID: 86533695}
   - component: {fileID: 86533694}
+  - component: {fileID: 86533693}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -738,6 +739,21 @@ Transform:
   m_Father: {fileID: 1589662061}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &86533693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86533691}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a7fb86d73aeef449eec472858f2192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  stretch: 0.25
+  add: 1.75
 --- !u!114 &86533694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3672,7 +3688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d200b382a14c64459522c4ae63af6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigType: 1
+  rigType: 0
   mockRig: {fileID: 1589662060}
   xrRig: {fileID: 1775882139}
 --- !u!4 &443490240
@@ -14561,7 +14577,7 @@ MonoBehaviour:
   - {fileID: 133386587}
   - {fileID: 260874911}
   - {fileID: 672966505}
-  debugMode: 0
+  debugMode: 1
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 1
@@ -14581,7 +14597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: 1
-  trackedController: {fileID: 165805130}
+  trackedController: {fileID: 821950978}
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 60, y: 0, z: -90}
   trackingMode: 2
@@ -15646,7 +15662,7 @@ GameObject:
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1589662061
 Transform:
   m_ObjectHideFlags: 0
@@ -17662,7 +17678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1775882140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18616,7 +18632,7 @@ MonoBehaviour:
   - {fileID: 1518956957}
   - {fileID: 1991997824}
   - {fileID: 781208821}
-  debugMode: 0
+  debugMode: 1
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 0
@@ -18636,7 +18652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: 0
-  trackedController: {fileID: 1976586517}
+  trackedController: {fileID: 516412577}
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 60, y: 0, z: 90}
   trackingMode: 2
