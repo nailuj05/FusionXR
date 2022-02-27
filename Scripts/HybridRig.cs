@@ -17,7 +17,8 @@ namespace Fusion.XR
 
         private void OnValidate()
         {
-            SetRig();
+            if(this.gameObject.activeInHierarchy)
+                SetRig();
         }
 
         public void SetRig()
@@ -82,8 +83,6 @@ namespace Fusion.XR
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
-            EditorGUILayout.HelpBox($"Currently: {((HybridRig)target).GetCurrentRig().name}", MessageType.Info);
 
             if(GUILayout.Button("Update Rig"))
             {
