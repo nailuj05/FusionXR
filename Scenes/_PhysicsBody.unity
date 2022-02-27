@@ -2004,7 +2004,7 @@ GameObject:
   - component: {fileID: 219338869}
   m_Layer: 9
   m_Name: Big Cube (2)
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3308,7 +3308,7 @@ GameObject:
   - component: {fileID: 372965725}
   m_Layer: 9
   m_Name: Big Cube
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4218,7 +4218,7 @@ GameObject:
   - component: {fileID: 510572445}
   m_Layer: 8
   m_Name: Heavy Cubes (10kg)
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10633,7 +10633,7 @@ GameObject:
   - component: {fileID: 1121156038}
   m_Layer: 10
   m_Name: StabCubes
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10940,7 +10940,7 @@ GameObject:
   - component: {fileID: 1150902778}
   m_Layer: 9
   m_Name: Big Cube (3)
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11970,7 +11970,7 @@ GameObject:
   - component: {fileID: 1215180864}
   m_Layer: 10
   m_Name: StabCubes
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12132,7 +12132,7 @@ GameObject:
   - component: {fileID: 1246951703}
   m_Layer: 8
   m_Name: Heavy Cubes (50kg)
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17110,7 +17110,7 @@ GameObject:
   - component: {fileID: 1709840896}
   m_Layer: 10
   m_Name: StabCubes
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19002,7 +19002,7 @@ GameObject:
   - component: {fileID: 1969320486}
   m_Layer: 8
   m_Name: Heavy Cubes (100kg)
-  m_TagString: Grabable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
