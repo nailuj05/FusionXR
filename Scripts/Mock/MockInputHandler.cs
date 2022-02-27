@@ -49,7 +49,7 @@ namespace Fusion.XR
         private void Update()
         {
             #region Mouse Look and move
-            if (!Input.GetKey(KeyCode.LeftShift))
+            if (!Input.GetKey(KeyCode.LeftAlt))
             {
                 float yLookDir = -Mathf.Clamp(Input.GetAxis("Mouse Y"), -90, 90);
                 Vector3 lookDir = new Vector3(yLookDir, Input.GetAxis("Mouse X"), 0);
