@@ -15,6 +15,11 @@ namespace Fusion.XR
 
         public GameObject currentRig { get { return GetCurrentRig(); } private set { currentRig = value; } }
 
+        private void OnValidate()
+        {
+            SetRig();
+        }
+
         public void SetRig()
         {
             // Potentially change the XR Rig of the Collision Adjuster
@@ -77,6 +82,8 @@ namespace Fusion.XR
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
+
+            EditorGUILayout.HelpBox($"Currently: {((HybridRig)target).GetCurrentRig().name}", MessageType.Info);
 
             if(GUILayout.Button("Update Rig"))
             {
