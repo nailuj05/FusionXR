@@ -603,7 +603,6 @@ MonoBehaviour:
   movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   collisionAdjuster: {fileID: 1718852702228879623}
-  rb: {fileID: 0}
 --- !u!54 &4601817725372166375
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -673,9 +672,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1de7387fed50e44f9af48d6f00b3104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_XRRig: {fileID: 5221161576313746133}
-  p_VRCamera: {fileID: 0}
-  p_CollisionRadius: 0.1
+  XRRig: {fileID: 5221161576313746133}
+  VRCamera: {fileID: 0}
+  CollisionRadius: 0.2
+  _localHeight: 0
 --- !u!1 &5221161575355319610
 GameObject:
   m_ObjectHideFlags: 0

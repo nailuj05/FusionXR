@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: c86672564f6b6294788460e7bcc46e2e, type: 2}
 --- !u!4 &29908326 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4601817724023232920, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -8378,12 +8378,12 @@ MonoBehaviour:
   CollisionRadius: 0.2
   _localHeight: 0
   actualHeight: 0
-  chestPercent: 0.8
-  legsPercent: 0.5
-  heightAdjustmentFactor: 0.05
   playerMask:
     serializedVersion: 2
     m_Bits: 8
+  chestPercent: 0.8
+  legsPercent: 0.5
+  heightAdjustmentFactor: 0.05
   LocoSphereCollDetector: {fileID: 597530007}
   isGrounded: 0
   walkedCollider: {fileID: 0}
@@ -11763,12 +11763,12 @@ MonoBehaviour:
   CollisionRadius: 0.2
   _localHeight: 0
   actualHeight: 0
-  chestPercent: 0.3
-  legsPercent: 0.7
-  heightAdjustmentFactor: 0.05
   playerMask:
     serializedVersion: 2
     m_Bits: 0
+  chestPercent: 0.3
+  legsPercent: 0.7
+  heightAdjustmentFactor: 0.05
   LocoSphereCollDetector: {fileID: 0}
   isGrounded: 0
   walkedCollider: {fileID: 0}
@@ -14587,7 +14587,7 @@ MonoBehaviour:
   - {fileID: 133386587}
   - {fileID: 260874911}
   - {fileID: 672966505}
-  debugMode: 1
+  debugMode: 0
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 1
@@ -14607,7 +14607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: 1
-  trackedController: {fileID: 821950978}
+  trackedController: {fileID: 0}
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 60, y: 0, z: -90}
   trackingMode: 2
@@ -16097,7 +16097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2afeeafe43aeaa41aef3abb96cc5398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XRRig: {fileID: 0}
+  XRRig: {fileID: 216338548}
   VRCamera: {fileID: 0}
   CollisionRadius: 0.2
   _localHeight: 0
@@ -18642,7 +18642,7 @@ MonoBehaviour:
   - {fileID: 1518956957}
   - {fileID: 1991997824}
   - {fileID: 781208821}
-  debugMode: 1
+  debugMode: 0
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 0
@@ -18662,7 +18662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: 0
-  trackedController: {fileID: 516412577}
+  trackedController: {fileID: 0}
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 60, y: 0, z: 90}
   trackingMode: 2
