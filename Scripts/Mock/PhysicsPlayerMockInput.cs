@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Fusion.XR
 {
-    public class PhysicsPlayerInput : MonoBehaviour
+    public class PhysicsPlayerMockInput : MonoBehaviour
     {
         public void Update()
         {
