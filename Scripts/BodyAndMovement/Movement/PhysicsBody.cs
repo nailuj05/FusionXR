@@ -166,10 +166,17 @@ namespace Fusion.XR
 
         #endregion
 
-        #region Jumping
+        #region Jumping & Crouching
+
+        public void StartCrouch()
+        {
+            targetRetract = 0.7f;
+        }
 
         public void StartJump(float jumpForce)
         {
+            targetRetract = 1;
+
             if (!isGrounded) return;
 
             Chest.AddForce(Vector3.up * jumpForce);
@@ -180,6 +187,8 @@ namespace Fusion.XR
         IEnumerator Jump()
         {
             //Wait for Locosphere to leave the ground
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();

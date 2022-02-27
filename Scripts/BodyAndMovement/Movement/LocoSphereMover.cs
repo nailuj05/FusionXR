@@ -60,7 +60,8 @@ namespace Fusion.XR
         {
             body = GetComponent<PhysicsBody>();
 
-            jumpReference.action.performed += OnJump;
+            jumpReference.action.started += OnCrouch;
+            jumpReference.action.canceled += OnJump;
         }
 
         private void FixedUpdate()
@@ -77,9 +78,16 @@ namespace Fusion.XR
             currentMove = direction;
         }
 
-        #region Jumping
+        #region Jumping & Crouching
+
+        public void OnCrouch(InputAction.CallbackContext obj) { OnCrouch(); }
 
         public void OnJump(InputAction.CallbackContext obj) { OnJump(); }
+
+        public void OnCrouch()
+        {
+            body.StartCrouch();
+        }
 
         public void OnJump()
         {

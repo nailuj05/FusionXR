@@ -10,6 +10,11 @@ namespace Fusion.XR
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                ((LocoSphereMover)Player.main.movement).OnCrouch();
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
                 ((LocoSphereMover)Player.main.movement).OnJump();
             }
         }
