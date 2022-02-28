@@ -152,8 +152,10 @@ namespace Fusion.XR
         {
             var t = (KinematicInteractable)target;
 
-            Handles.color = new Color(0, 0.5f, 0, 0.1f);
+            Handles.color = new Color(0, 0.5f, 0, 0.25f);
             Handles.DrawSolidDisc(t.transform.position, t.transform.TransformDirection(t.axis), 0.1f);
+
+            Handles.DrawLine(t.transform.position, t.transform.TransformPoint(t.axis), 3);
         }
     }
 #endif
