@@ -14435,6 +14435,8 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
+    rotationPower: 20
+    rotationDampener: 1.5
     forcePositionMultiplier: 200
     forceRotationMultiplier: 35
     forceDampener: -10
@@ -14446,7 +14448,7 @@ MonoBehaviour:
     slerpDamper: 150
     slerpMaxForce: 2500
     adjustAnchor: 0
-    limit: 1
+    limit: 1.2
     tracker: {fileID: 0}
     palm: {fileID: 0}
   rb: {fileID: 0}
@@ -18404,6 +18406,8 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
+    rotationPower: 20
+    rotationDampener: 1.5
     forcePositionMultiplier: 200
     forceRotationMultiplier: 35
     forceDampener: -10
@@ -18415,7 +18419,7 @@ MonoBehaviour:
     slerpDamper: 150
     slerpMaxForce: 2500
     adjustAnchor: 0
-    limit: 1
+    limit: 1.2
     tracker: {fileID: 0}
     palm: {fileID: 0}
   rb: {fileID: 0}
@@ -22195,6 +22199,8 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
+    rotationPower: 35
+    rotationDampener: 0.5
     forcePositionMultiplier: 200
     forceRotationMultiplier: 35
     forceDampener: -10
@@ -25066,6 +25072,8 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
+    rotationPower: 35
+    rotationDampener: 0.5
     forcePositionMultiplier: 200
     forceRotationMultiplier: 35
     forceDampener: -10

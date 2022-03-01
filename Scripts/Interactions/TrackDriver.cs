@@ -264,8 +264,8 @@ namespace Fusion.XR
 
             if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
             {
-                objectRB.AddTorque(axis * (angle * trackingBase.rotationPower * Mathf.Deg2Rad) / objectRB.mass, ForceMode.VelocityChange);
-                objectRB.AddTorque(-objectRB.angularVelocity * trackingBase.rotationDampener / objectRB.mass, ForceMode.VelocityChange);
+                objectRB.AddTorque(axis * (angle * trackingBase.rotationPower * Mathf.Deg2Rad), ForceMode.VelocityChange);
+                objectRB.AddTorque(-objectRB.angularVelocity * trackingBase.rotationDampener, ForceMode.VelocityChange);
             }
         }
 
