@@ -263,8 +263,6 @@ namespace Fusion.XR
                     if (!Utils.ObjectMatchesLayermask(coll.gameObject, grabMask))
                         continue;
 
-                    print(coll);
-
                     if ((coll.transform.position - transform.position).sqrMagnitude < Distance)
                     {
                         closestColl = coll;

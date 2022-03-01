@@ -1264,7 +1264,7 @@ PrefabInstance:
       objectReference: {fileID: 1262116621}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationPower
-      value: 35
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.positionStrength
@@ -1272,7 +1272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationDampener
-      value: 0.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
@@ -1288,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 1604745582}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationPower
-      value: 35
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.positionStrength
@@ -1296,7 +1296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationDampener
-      value: 0.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_RootOrder
