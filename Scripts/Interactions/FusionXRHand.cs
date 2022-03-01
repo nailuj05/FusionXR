@@ -260,14 +260,16 @@ namespace Fusion.XR
             {
                 foreach (Collider coll in nearObjects)
                 {
-                    if(Utils.ObjectMatchesLayermask(coll.gameObject, grabMask))
+                    if (!Utils.ObjectMatchesLayermask(coll.gameObject, grabMask))
+                        continue;
+
+                    print(coll);
+
+                    if ((coll.transform.position - transform.position).sqrMagnitude < Distance)
                     {
-                        if ((coll.transform.position - transform.position).sqrMagnitude < Distance)
-                        {
-                            closestColl = coll;
-                            ClosestGameObj = coll.gameObject;
-                            Distance = (coll.transform.position - transform.position).sqrMagnitude;
-                        }
+                        closestColl = coll;
+                        ClosestGameObj = coll.gameObject;
+                        Distance = (coll.transform.position - transform.position).sqrMagnitude;
                     }
                 }
             }

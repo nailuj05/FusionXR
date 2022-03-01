@@ -1243,6 +1243,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1718852702228879623, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: XRRig
+      value: 
+      objectReference: {fileID: 1763441204}
+    - target: {fileID: 1718852702228879623, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: p_XRRig
       value: 
       objectReference: {fileID: 1763441204}
@@ -1258,6 +1262,18 @@ PrefabInstance:
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1262116621}
+    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.rotationPower
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.positionStrength
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.rotationDampener
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
       value: 1
@@ -1270,6 +1286,18 @@ PrefabInstance:
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1604745582}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.rotationPower
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.positionStrength
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.rotationDampener
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2862,6 +2890,8 @@ MonoBehaviour:
   attachedTrackingBase:
     positionStrength: 15
     rotationStrength: 35
+    rotationPower: 35
+    rotationDampener: 0.5
     forcePositionMultiplier: 200
     forceRotationMultiplier: 35
     forceDampener: -10
@@ -10259,6 +10289,8 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
+    rotationPower: 35
+    rotationDampener: 0.5
     forcePositionMultiplier: 200
     forceRotationMultiplier: 35
     forceDampener: -10
@@ -10669,6 +10701,8 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
+    rotationPower: 35
+    rotationDampener: 0.5
     forcePositionMultiplier: 200
     forceRotationMultiplier: 35
     forceDampener: -10

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4601817723373849410
 Transform:
   m_ObjectHideFlags: 0
@@ -1401,7 +1401,7 @@ PrefabInstance:
     - target: {fileID: 2870838252102908442, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -5549804166063207085, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
     - target: {fileID: 3025583462011494309, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1501,6 +1501,10 @@ PrefabInstance:
     - target: {fileID: 6313628543173066355, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_Mass
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grabMask.m_Bits
+      value: 768
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackedController
