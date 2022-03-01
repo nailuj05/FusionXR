@@ -18,6 +18,10 @@ namespace Fusion.XR
         [SerializeField] public float positionStrength = 15f;
         [SerializeField] public float rotationStrength = 35f;
 
+        [Header("Passive Joint")]
+        [SerializeField] public float rotationPower = 35f;
+        [SerializeField] public float rotationDampener = 0.5f;
+
         //Force Tracking
         [Header("Force Tracking")]
         [SerializeField] public float forcePositionMultiplier = 200f;
@@ -261,8 +265,8 @@ namespace Fusion.XR
             if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
             {
                 //objectRB.angularVelocity = axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad);
-                objectRB.AddTorque(axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad));
-                objectRB.AddTorque(-objectRB.angularVelocity * 0.75f);
+                objectRB.AddTorque(axis * (angle * trackingBase.rotationPower * Mathf.Deg2Rad) / objectRB.mass);
+                objectRB.AddTorque(-objectRB.angularVelocity * trackingBase.rotationDampener / objectRB.mass);
             }
         }
 
