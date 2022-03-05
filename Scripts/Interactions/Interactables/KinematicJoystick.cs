@@ -32,13 +32,17 @@ namespace Fusion.XR
 
         protected override void InteractionUpdate()
         {
-            var newAxis = GetMeanPosition() - transform.position;
-            //newAxis = transform.parent.InverseTransformDirection(newAxis);
-            newAxis.Normalize();
+            var grabDir = GetMeanPosition() - transform.position;
 
-            //newAxis = Vector3.MoveTowards(initialAxis, newAxis, Rad);
 
-            transform.localRotation = initialRot * Quaternion.FromToRotation(transform.parent.TransformDirection(initialAxis), newAxis);
+            Debug.DrawRay(transform.position, grabDir);
+            Debug.DrawRay(transform.position, transform.parent.TransformDirection(initialAxis), Color.blue);
+
+            //transform.rotation = Quaternion.FromToRotation(transform.parent.TransformDirection(initialAxis), grabDir);
+            //transform.localRotation = initialRot;
+            var rot = Quaternion.FromToRotation(Vector3.up, grabDir);
+                
+            transform.rotation = rot;
         }
 
         protected override void InteractionEnd()
