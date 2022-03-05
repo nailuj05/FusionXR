@@ -1250,12 +1250,56 @@ PrefabInstance:
       propertyPath: p_XRRig
       value: 
       objectReference: {fileID: 1763441204}
+    - target: {fileID: 3683268326674611512, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683268327577239731, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817723373849409, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955304, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955304, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955304, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.516
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: grabbingDriver
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: handPosingDriver
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: useFingerColliders
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: fingerSettings.slerpDamper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: fingerSettings.slerpSpring
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -1263,8 +1307,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1262116621}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.limit
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.slerpSpring
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationPower
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.positionDamper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.positionSpring
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.positionStrength
@@ -1274,8 +1334,44 @@ PrefabInstance:
       propertyPath: trackingBase.rotationDampener
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058073, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058073, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058073, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.516
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: grabbingDriver
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: handPosingDriver
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: useFingerColliders
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: fingerSettings.slerpDamper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: fingerSettings.slerpSpring
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -1287,8 +1383,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1604745582}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.limit
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.slerpSpring
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationPower
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.positionDamper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.positionSpring
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.positionStrength
@@ -10350,6 +10462,11 @@ MonoBehaviour:
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
   poseLerpSpeed: 2
+  useFingerColliders: 0
+  handBaseCenter: {x: 0, y: 0, z: 0}
+  handBaseSize: {x: 0, y: 0, z: 0}
+  fingerLength: 0
+  fingerDirection: 2
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
@@ -10368,7 +10485,11 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    fingerMass: 0
+    fingerDrag: 0
+    fingerAngularDrag: 0
     fingerBones: []
+    hand: {fileID: 0}
   fingers:
   - {fileID: 5997832362670621638}
   - {fileID: 783105950259459021}
@@ -10762,6 +10883,11 @@ MonoBehaviour:
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
   poseLerpSpeed: 2
+  useFingerColliders: 0
+  handBaseCenter: {x: 0, y: 0, z: 0}
+  handBaseSize: {x: 0, y: 0, z: 0}
+  fingerLength: 0
+  fingerDirection: 2
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
@@ -10780,7 +10906,11 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    fingerMass: 0
+    fingerDrag: 0
+    fingerAngularDrag: 0
     fingerBones: []
+    hand: {fileID: 0}
   fingers:
   - {fileID: 5997832362618446452}
   - {fileID: 783105950244426363}

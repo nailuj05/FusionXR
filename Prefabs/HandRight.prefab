@@ -1395,6 +1395,8 @@ MonoBehaviour:
   trackingBase:
     positionStrength: 15
     rotationStrength: 35
+    rotationPower: 35
+    rotationDampener: 0.5
     forcePositionMultiplier: 200
     forceRotationMultiplier: 35
     forceDampener: -10
@@ -1405,6 +1407,7 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
@@ -1415,6 +1418,9 @@ MonoBehaviour:
   grabbedTrackingMode: 3
   palm: {fileID: 6313628541362307769}
   reachDist: 0.1
+  grabMask:
+    serializedVersion: 2
+    m_Bits: 768
   useHandPoser: 1
 --- !u!114 &6313628543173066357
 MonoBehaviour:
@@ -1434,6 +1440,11 @@ MonoBehaviour:
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
   poseLerpSpeed: 2
+  useFingerColliders: 0
+  handBaseCenter: {x: 0.03, y: 0.045, z: -0.02}
+  handBaseSize: {x: 0.08, y: 0.03, z: 0.1}
+  fingerLength: 4
+  fingerDirection: 2
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
@@ -1449,10 +1460,14 @@ MonoBehaviour:
     collMask:
       serializedVersion: 2
       m_Bits: 383
-    slerpSpring: 3000
-    slerpDamper: 250
+    slerpSpring: 50
+    slerpDamper: 5
     slerpMaxForce: 1500
+    fingerMass: 0
+    fingerDrag: 0
+    fingerAngularDrag: 0
     fingerBones: []
+    hand: {fileID: 0}
   fingers:
   - {fileID: 6313628541358779286}
   - {fileID: 6313628541778264162}

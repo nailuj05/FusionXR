@@ -47,7 +47,7 @@ namespace Fusion.XR
     {
         Kinematic = 0,
         CollisionTest = 1,
-        //ActiveJoint = 2
+        Joint = 2
     }
 
     //Used by Movement

@@ -16,8 +16,15 @@ namespace Fusion.XR
         [SerializeField] public float slerpDamper = 250;
         [SerializeField] public float slerpMaxForce = 1500;
 
+        [SerializeField] public float fingerMass;
+        [SerializeField] public float fingerDrag;
+        [SerializeField] public float fingerAngularDrag;
+
         [HideInInspector]
         public Transform[] fingerBones;
+
+        [HideInInspector]
+        public Rigidbody hand;
     }
 
     public abstract class FingerDriver
@@ -82,6 +89,70 @@ namespace Fusion.XR
         public override void EndTrack()
         {
 
+        }
+    }
+
+    public class JointDriver : FingerDriver
+    {
+        public Quaternion[] initalRotations = new Quaternion[3];
+        public ConfigurableJoint[] configurableJoints;
+
+        public override void StartTrack(FingerTrackingBase fingerTrackingBase)
+        {
+            fingers = fingerTrackingBase.fingerBones;
+            trackingBase = fingerTrackingBase;
+
+            initalRotations = new Quaternion[fingers.Length];
+            configurableJoints = new ConfigurableJoint[fingers.Length];
+
+            configurableJoints[0] = trackingBase.hand.gameObject.AddComponent<ConfigurableJoint>();
+
+            JointDrive slerpDrive = new JointDrive();
+            slerpDrive.positionSpring = trackingBase.slerpSpring;
+            slerpDrive.positionDamper = trackingBase.slerpDamper;
+            slerpDrive.maximumForce   = trackingBase.slerpMaxForce;
+
+            for (int i = 0; i < fingers.Length; i++)
+            {
+                initalRotations[i] = fingers[i].localRotation;
+
+                var rb = fingers[i].gameObject.AddComponent<Rigidbody>();
+                rb.mass = trackingBase.fingerMass;
+                rb.drag = trackingBase.fingerDrag;
+                rb.angularDrag  = trackingBase.fingerAngularDrag;
+
+                rb.gameObject.layer = LayerMask.NameToLayer("Fingers");
+
+                if (i != 0)
+                    configurableJoints[i] = fingers[i - 1].gameObject.AddComponent<ConfigurableJoint>();
+
+                configurableJoints[i].autoConfigureConnectedAnchor = true;
+                configurableJoints[i].anchor = configurableJoints[i].connectedAnchor = Vector3.zero;
+
+                configurableJoints[i].connectedBody = rb;
+                configurableJoints[i].rotationDriveMode = RotationDriveMode.Slerp;
+                configurableJoints[i].xMotion = configurableJoints[i].yMotion = configurableJoints[i].zMotion = ConfigurableJointMotion.Locked;
+                configurableJoints[i].angularXMotion = configurableJoints[i].angularYMotion = configurableJoints[i].angularZMotion = ConfigurableJointMotion.Locked;
+
+                configurableJoints[i].slerpDrive = slerpDrive;
+            }
+        }
+
+        public override void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
+        {
+            for (int i = 0; i < fingers.Length; i++)
+            {
+                configurableJoints[i].SetTargetRotationLocal(targetRotations[i], initalRotations[i]);
+            }
+        }
+
+        public override void EndTrack()
+        {
+            for (int i = 0; i < fingers.Length; i++)
+            {
+                GameObject.Destroy(configurableJoints[i].connectedBody);
+                GameObject.Destroy(configurableJoints[i]);
+            }
         }
     }
 }

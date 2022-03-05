@@ -10,7 +10,7 @@ namespace Fusion.XR
         public Transform[] fingerBones;
 
         public FingerDriver fingerDriver;
-        private FingerTrackingBase fingerTrackingBase;
+        public FingerTrackingBase fingerTrackingBase { get; private set; }
 
         public void FingerUpdate(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
         {

@@ -1269,6 +1269,30 @@ PrefabInstance:
       propertyPath: debugMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
+      propertyPath: handBaseSize.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
+      propertyPath: handBaseSize.y
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
+      propertyPath: handBaseSize.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
+      propertyPath: handBaseCenter.x
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
+      propertyPath: handBaseCenter.y
+      value: 0.045
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130366297943922198, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
+      propertyPath: handBaseCenter.z
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 2130366297943922199, guid: 5bf8a533023e6ee43a572dcaf0840fb0, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1513,6 +1537,30 @@ PrefabInstance:
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: debugMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: handBaseSize.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: handBaseSize.y
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: handBaseSize.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: fingerDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: handBaseCenter.y
+      value: 0.045
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: handBaseCenter.z
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_RootOrder

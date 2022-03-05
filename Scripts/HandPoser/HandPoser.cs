@@ -28,6 +28,19 @@ namespace Fusion.XR
         [Range(0.5f, 5f)]
         public float poseLerpSpeed = 0.1f;
 
+        public bool useFingerColliders;
+        public Vector3 handBaseCenter;
+        public Vector3 handBaseSize;
+        public float fingerLength;
+
+        [Tooltip("0,1,2 for the X,Y,Z axis of the fingers capsul collider")] [Min(0)]
+        public int fingerDirection = 1;
+
+        private void OnValidate()
+        {
+            if (fingerDirection > 2) fingerDirection = 2;
+        }
+
         [Header("Attachment")]
         //Whether the Renderhand is attached to something of following the controller
         [SerializeField] private bool isAttached;
@@ -78,6 +91,8 @@ namespace Fusion.XR
 
             currentPose = handOpen;
             lastHandState = SavePose();
+
+            UpdateColliders();
         }
 
         public void Update()
@@ -158,6 +173,34 @@ namespace Fusion.XR
                 }
             }
             #endregion
+        }
+
+        public void UpdateColliders()
+        {
+            if(TryGetComponent(out Collider collider))
+            {
+                collider.enabled = !useFingerColliders;
+            }
+
+            if (useFingerColliders)
+            {
+                var b = gameObject.AddComponent<BoxCollider>();
+                b.center = handBaseCenter;
+                b.size   = handBaseSize;
+
+                foreach (Finger f in fingers)
+                {
+                    for (int i = 0; i < f.fingerBones.Length; i++)
+                    {
+                        var c = f.fingerBones[i].gameObject.AddComponent<CapsuleCollider>();
+
+                        c.center = Finger.GetFingerCollisionOffset(i, f.fingerTrackingBase) * 0.5f;
+                        c.direction = fingerDirection;
+                        c.radius = fingerSettings.radius / c.transform.lossyScale.magnitude;
+                        c.height = fingerLength;
+                    }
+                }
+            }
         }
 
         public void PlaceRenderHand()
@@ -271,6 +314,7 @@ namespace Fusion.XR
                 trackingBase.collMask = fingerSettings.collMask;
                 trackingBase.offset = fingerSettings.offset;
                 trackingBase.radius = fingerSettings.radius;
+                trackingBase.hand = GetComponent<Rigidbody>();
 
                 finger.ChangeTrackingBase(trackingBase);
             }
