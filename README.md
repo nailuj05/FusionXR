@@ -28,6 +28,7 @@ For testing I'd recommend using the same setup as I do:
 | Layer 8 | Interactables|
 | Layer 9 | Props        |
 | Layer 10| Stabable     |
+| Layer 11| Fingers      |
 
 Tag X: **Attached**
 
@@ -39,7 +40,7 @@ Tag X: **Attached**
 ### Layermask:
 Your Layermask should look like this:
 
-![image](https://user-images.githubusercontent.com/57530068/155902620-acc5be96-c0e0-4410-b7c3-d11308c71597.png)
+![image](https://user-images.githubusercontent.com/57530068/158584303-d674ac52-b746-48bc-94c8-a5c84f103acf.png)
 
 ---
 
