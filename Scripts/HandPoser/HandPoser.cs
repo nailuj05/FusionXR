@@ -29,16 +29,10 @@ namespace Fusion.XR
         public float poseLerpSpeed = 0.1f;
 
         public bool useFingerColliders;
-        public Vector3 handBaseCenter;
-        public Vector3 handBaseSize;
-        public float fingerLength;
-
-        [Tooltip("0,1,2 for the X,Y,Z axis of the fingers capsul collider")] [Min(0)]
-        public int fingerDirection = 1;
 
         private void OnValidate()
         {
-            if (fingerDirection > 2) fingerDirection = 2;
+            if (fingerSettings.fingerDirection > 2) fingerSettings.fingerDirection = 2;
         }
 
         [Header("Attachment")]
@@ -185,8 +179,8 @@ namespace Fusion.XR
             if (useFingerColliders)
             {
                 var b = gameObject.AddComponent<BoxCollider>();
-                b.center = handBaseCenter;
-                b.size   = handBaseSize;
+                b.center = fingerSettings.handBaseCenter;
+                b.size   = fingerSettings.handBaseSize;
 
                 foreach (Finger f in fingers)
                 {
@@ -195,9 +189,9 @@ namespace Fusion.XR
                         var c = f.fingerBones[i].gameObject.AddComponent<CapsuleCollider>();
 
                         c.center = Finger.GetFingerCollisionOffset(i, f.fingerTrackingBase) * 0.5f;
-                        c.direction = fingerDirection;
+                        c.direction = fingerSettings.fingerDirection;
                         c.radius = fingerSettings.radius / c.transform.lossyScale.magnitude;
-                        c.height = fingerLength;
+                        c.height = fingerSettings.fingerLength;
                     }
                 }
             }
@@ -310,11 +304,19 @@ namespace Fusion.XR
             {
                 //Create a new Tracking Base with the same values as "Finger Settings", won't work with a pointer to Finger Settings
                 FingerTrackingBase trackingBase = new FingerTrackingBase();
-                trackingBase.fingerBones = finger.fingerBones;
-                trackingBase.collMask = fingerSettings.collMask;
-                trackingBase.offset = fingerSettings.offset;
-                trackingBase.radius = fingerSettings.radius;
-                trackingBase.hand = GetComponent<Rigidbody>();
+
+                trackingBase.fingerBones        = finger.fingerBones;
+                trackingBase.collMask           = fingerSettings.collMask;
+                trackingBase.offset             = fingerSettings.offset;
+                trackingBase.radius             = fingerSettings.radius;
+                trackingBase.hand               = GetComponent<Rigidbody>();
+                trackingBase.handBaseCenter     = fingerSettings.handBaseCenter;
+                trackingBase.handBaseSize       = fingerSettings.handBaseSize;
+                trackingBase.fingerLength       = fingerSettings.fingerLength;
+                trackingBase.fingerDirection    = fingerSettings.fingerDirection;
+                trackingBase.fingerMass         = fingerSettings.fingerMass;
+                trackingBase.fingerDrag         = fingerSettings.fingerDrag;
+                trackingBase.fingerAngularDrag  = fingerSettings.fingerAngularDrag;
 
                 finger.ChangeTrackingBase(trackingBase);
             }

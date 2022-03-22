@@ -16,6 +16,13 @@ namespace Fusion.XR
         [SerializeField] public float slerpDamper = 250;
         [SerializeField] public float slerpMaxForce = 1500;
 
+        [SerializeField] public Vector3 handBaseCenter;
+        [SerializeField] public Vector3 handBaseSize;
+        [SerializeField] public float fingerLength;
+
+        [Tooltip("0,1,2 for the X,Y,Z axis of the fingers capsul collider")] [Min(0)] [SerializeField]
+        public int fingerDirection = 1;
+
         [SerializeField] public float fingerMass;
         [SerializeField] public float fingerDrag;
         [SerializeField] public float fingerAngularDrag;
@@ -105,8 +112,6 @@ namespace Fusion.XR
             initalRotations = new Quaternion[fingers.Length];
             configurableJoints = new ConfigurableJoint[fingers.Length];
 
-            configurableJoints[0] = trackingBase.hand.gameObject.AddComponent<ConfigurableJoint>();
-
             JointDrive slerpDrive = new JointDrive();
             slerpDrive.positionSpring = trackingBase.slerpSpring;
             slerpDrive.positionDamper = trackingBase.slerpDamper;
@@ -114,25 +119,37 @@ namespace Fusion.XR
 
             for (int i = 0; i < fingers.Length; i++)
             {
-                initalRotations[i] = fingers[i].localRotation;
-
                 var rb = fingers[i].gameObject.AddComponent<Rigidbody>();
                 rb.mass = trackingBase.fingerMass;
                 rb.drag = trackingBase.fingerDrag;
-                rb.angularDrag  = trackingBase.fingerAngularDrag;
-
+                rb.angularDrag = trackingBase.fingerAngularDrag;
                 rb.gameObject.layer = LayerMask.NameToLayer("Fingers");
 
                 if (i != 0)
+                {
                     configurableJoints[i] = fingers[i - 1].gameObject.AddComponent<ConfigurableJoint>();
+                    configurableJoints[i].autoConfigureConnectedAnchor = false;
+                    configurableJoints[i].connectedAnchor = Vector3.zero;
 
-                configurableJoints[i].autoConfigureConnectedAnchor = true;
-                configurableJoints[i].anchor = configurableJoints[i].connectedAnchor = Vector3.zero;
+                    var v = Vector3.zero;
+                    v[trackingBase.fingerDirection] = trackingBase.fingerLength;
+                    configurableJoints[i].anchor = v;
+                }
+                else
+                {
+                    configurableJoints[i] = trackingBase.hand.gameObject.AddComponent<ConfigurableJoint>();
+
+                    configurableJoints[i].autoConfigureConnectedAnchor = true;
+                    configurableJoints[i].anchor = trackingBase.hand.transform.InverseTransformPoint(rb.transform.position);
+
+                }
+                initalRotations[i] = configurableJoints[i].transform.localRotation;
 
                 configurableJoints[i].connectedBody = rb;
+                configurableJoints[i].massScale = 1e-05f;
+
                 configurableJoints[i].rotationDriveMode = RotationDriveMode.Slerp;
                 configurableJoints[i].xMotion = configurableJoints[i].yMotion = configurableJoints[i].zMotion = ConfigurableJointMotion.Locked;
-                configurableJoints[i].angularXMotion = configurableJoints[i].angularYMotion = configurableJoints[i].angularZMotion = ConfigurableJointMotion.Locked;
 
                 configurableJoints[i].slerpDrive = slerpDrive;
             }
@@ -143,6 +160,21 @@ namespace Fusion.XR
             for (int i = 0; i < fingers.Length; i++)
             {
                 configurableJoints[i].SetTargetRotationLocal(targetRotations[i], initalRotations[i]);
+
+                //Quaternion deltaRotation = targetRotations[i] * Quaternion.Inverse(configurableJoints[i].connectedBody.transform.localRotation);
+
+                //deltaRotation.ToAngleAxis(out var angle, out var axis);
+
+                //if (angle > 180f)
+                //{
+                //    angle -= 360;
+                //}
+
+                //if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
+                //{
+                //    configurableJoints[i].connectedBody.AddRelativeTorque(axis * (angle * 1 * Mathf.Deg2Rad), ForceMode.VelocityChange);
+                //    configurableJoints[i].connectedBody.AddRelativeTorque(-configurableJoints[i].connectedBody.angularVelocity * 0.5f, ForceMode.VelocityChange);
+                //}
             }
         }
 

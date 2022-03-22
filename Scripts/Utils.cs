@@ -96,6 +96,21 @@ namespace Fusion.XR
 
     public static class Extensions
     {
+        public static List<Transform> GetParentsFromTo(this Transform transform, Transform to)
+        {
+            List<Transform> transforms = new List<Transform>();
+            Transform currentParent = transform;
+
+            while(currentParent != to && currentParent.parent != null)
+            {
+                currentParent = currentParent.parent;
+                Debug.Log(currentParent);
+                transforms.Add(currentParent);
+            }
+
+            return transforms;
+        }
+
         public static Vector3 ClampVector(this Vector3 vector, float maxLength)
         {
             if (vector.magnitude < maxLength) return vector;
