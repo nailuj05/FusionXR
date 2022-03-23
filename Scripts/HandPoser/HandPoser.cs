@@ -188,10 +188,12 @@ namespace Fusion.XR
                     {
                         var c = f.fingerBones[i].gameObject.AddComponent<CapsuleCollider>();
 
+                        c.gameObject.layer = LayerMask.NameToLayer("Fingers");
+
                         c.center = Finger.GetFingerCollisionOffset(i, f.fingerTrackingBase) * 0.5f;
                         c.direction = fingerSettings.fingerDirection;
                         c.radius = fingerSettings.radius / c.transform.lossyScale.magnitude;
-                        c.height = fingerSettings.fingerLength;
+                        c.height = Finger.GetFingerLength(i, f.fingerTrackingBase);
                     }
                 }
             }

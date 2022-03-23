@@ -1032,8 +1032,8 @@ MonoBehaviour:
   handPosingDriver: 1
   grabbingDriver: 1
   fingerSettings:
-    offset: {x: 0, y: 0.4, z: 0}
-    radius: 0.0125
+    offset: {x: 0, y: 0, z: 0}
+    radius: 0.015
     collMask:
       serializedVersion: 2
       m_Bits: 383
@@ -1042,9 +1042,9 @@ MonoBehaviour:
     slerpMaxForce: 1500
     handBaseCenter: {x: 0, y: 0, z: 0}
     handBaseSize: {x: 0, y: 0, z: 0}
-    fingerLength: 4
+    fingerLength: 0.03
     fingerDirection: 1
-    fingerMass: 0.1
+    fingerMass: 1
     fingerDrag: 0
     fingerAngularDrag: 0.05
     fingerBones: []

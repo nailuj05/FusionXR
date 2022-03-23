@@ -75,6 +75,18 @@ namespace Fusion.XR
             }
         }
 
+        public static float GetFingerLength(int fingerIndex, FingerTrackingBase trackingBase)
+        {
+            float fingerLength = trackingBase.fingerLength;
+
+            if (fingerIndex < trackingBase.fingerBones.Length - 1)
+            {
+                fingerLength = Vector3.Distance(trackingBase.fingerBones[fingerIndex].position, trackingBase.fingerBones[fingerIndex + 1].position) + trackingBase.radius;
+            }
+
+            return fingerLength;
+        }
+
         public static Vector3 GetFingerCollisionOffset(int fingerIndex, FingerTrackingBase trackingBase)
         {
             Vector3 fingerCollisionOffset = new Vector3();

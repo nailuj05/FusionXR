@@ -1363,24 +1363,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: grabbingDriver
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: handPosingDriver
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: useFingerColliders
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: fingerSettings.fingerMass
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: fingerSettings.fingerAngularDrag
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingMode
