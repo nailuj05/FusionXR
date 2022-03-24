@@ -110,8 +110,6 @@ namespace Fusion.XR
                 }
             }
 
-            FingerUpdate();
-
             #region HandState
             if (!poseLocked)
             {
@@ -167,6 +165,11 @@ namespace Fusion.XR
                 }
             }
             #endregion
+        }
+
+        private void LateUpdate()
+        {
+            FingerUpdate();
         }
 
         public void UpdateColliders()
@@ -232,28 +235,18 @@ namespace Fusion.XR
 
 #region Posing Functions
 
-        public void AttachHand(Transform attachmentPoint)
+        public void AttachHand(Transform attachmentPoint, HandPose pose = null, bool customPose = false)
         {
-            AttachHand(attachmentPoint, handClosed, false);
-        }
-
-        public void AttachHand(Transform attachmentPoint, HandPose pose)
-        {
-            AttachHand(attachmentPoint, pose, true);
-        }
-
-        public void AttachHand(Transform attachmentPoint, HandPose pose, bool customPose)
-        {
-            //Debug.Log($"Attaching with {pose} custom: {customPose}");
             poseLocked = true;
             isAttached = true;
             attachLerp = 0;
             attachedObj = attachmentPoint;
 
-            //Whether we should use default or Kinematic tracking (for predfined poses)
             UpdateTracking(customPose ? FingerTrackingMode.Kinematic : grabbingDriver);
 
             RotateToPose(handAwait);
+
+            if (pose is null) pose = handClosed;
 
             SetPoseTarget(pose);
         }
@@ -268,7 +261,6 @@ namespace Fusion.XR
 
         private void FingerUpdate()
         {
-            //This right?
             currentLerp += currentLerp <= 1f ? Time.deltaTime * poseLerpSpeed : 0;
 
             if (currentLerp >= 1)

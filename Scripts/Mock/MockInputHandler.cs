@@ -121,12 +121,11 @@ namespace Fusion.XR
             float pinchTarget = Input.GetMouseButton(0) ? 1 : 0;
             float grabTarget = Input.GetMouseButton(1) ? 1 : 0;
 
-            mockPinch = Mathf.MoveTowards(mockPinch, pinchTarget, Time.deltaTime * 3);
-            mockGrab = Mathf.MoveTowards(mockGrab, grabTarget, Time.deltaTime * 3);
+            mockPinch = pinchTarget;
+            mockGrab = grabTarget;
 
             if (currentHand == leftHand)
             {
-                //Apply mock Pinch/Grab to Hand/HandPoser here
                 if (l_hand)
                 {
                     if (Input.GetMouseButtonDown(1))
@@ -141,7 +140,6 @@ namespace Fusion.XR
             }
             else if(currentHand == rightHand)
             {
-                //Apply mock Pinch/Grab to Hand/HandPoser here
                 if (r_hand)
                 {
                     if (Input.GetMouseButtonDown(1))
