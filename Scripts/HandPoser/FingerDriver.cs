@@ -41,7 +41,7 @@ namespace Fusion.XR
 
         public abstract void StartTrack(FingerTrackingBase fingerTrackingBase);
 
-        public abstract void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp);
+        public abstract void UpdateTrack(Quaternion[] targetRotations, float step);
 
         public abstract void EndTrack();
     }
@@ -54,11 +54,11 @@ namespace Fusion.XR
             trackingBase = fingerTrackingBase;
         }
 
-        public override void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
+        public override void UpdateTrack(Quaternion[] targetRotations, float step)
         {
             for (int i = 0; i < targetRotations.Length; i++)
             {
-                fingers[i].localRotation = Quaternion.Lerp(lastTargetRotations[i], targetRotations[i], currentLerp);
+                fingers[i].localRotation = Quaternion.RotateTowards(fingers[i].localRotation, targetRotations[i], step);
             }
         }
 
@@ -76,12 +76,12 @@ namespace Fusion.XR
             trackingBase = fingerTrackingBase;
         }
 
-        public override void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
+        public override void UpdateTrack( Quaternion[] targetRotations, float step)
         {
             for (int i = 0; i < targetRotations.Length; i++)
             {
                 var lastRot = fingers[i].localRotation;
-                fingers[i].localRotation = Quaternion.Lerp(lastTargetRotations[i], targetRotations[i], currentLerp);
+                fingers[i].localRotation = Quaternion.RotateTowards(fingers[i].localRotation, targetRotations[i], step);
 
                 Collider[] colliders = Physics.OverlapSphere(fingers[i].TransformPoint(Finger.GetFingerCollisionOffset(i, trackingBase)), trackingBase.radius, trackingBase.collMask);
 
@@ -155,7 +155,7 @@ namespace Fusion.XR
             }
         }
 
-        public override void UpdateTrack(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
+        public override void UpdateTrack(Quaternion[] targetRotations, float step)
         {
             for (int i = 0; i < fingers.Length; i++)
             {

@@ -466,7 +466,7 @@ MonoBehaviour:
   handAwait: {fileID: 11400000, guid: 4ad07f40a729d264b807d241a8e39880, type: 2}
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
-  poseLerpSpeed: 3
+  poseLerpSpeed: 2
   useFingerColliders: 0
   isAttached: 0
   attachedObj: {fileID: 0}

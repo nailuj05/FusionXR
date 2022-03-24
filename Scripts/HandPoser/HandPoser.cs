@@ -65,16 +65,10 @@ namespace Fusion.XR
         public Hand hand;
 
         private HandPose currentPose;
-        private List<Quaternion[]> lastHandState;
-
-        private float currentLerp;
 
         [Header("Debug Hand State")]
         private float pinchValue;
         private float grabValue;
-
-        public float pinchState;
-        public float grabState;
 
         public HandState handState = HandState.open;
 
@@ -84,7 +78,6 @@ namespace Fusion.XR
             UpdateDriverAndTracking(handPosingDriver);
 
             currentPose = handOpen;
-            lastHandState = SavePose();
 
             UpdateColliders();
         }
@@ -119,11 +112,11 @@ namespace Fusion.XR
                     if (handState == HandState.open)
                         return;
 
-                    pinchState = grabState = 0;
-
                     handState = HandState.open;
 
                     SetPoseTarget(handOpen);
+
+                    return;
                 }
                 //Grabbing
                 if (pinchValue > 0 && grabValue > 0)
@@ -131,11 +124,11 @@ namespace Fusion.XR
                     if (handState == HandState.grab)
                         return;
 
-                    pinchState = grabState = 1;
-
                     handState = HandState.grab;
 
                     SetPoseTarget(handClosed);
+
+                    return;
                 }
                 //Pinching
                 if (pinchValue > 0 && grabValue == 0)
@@ -143,12 +136,11 @@ namespace Fusion.XR
                     if (handState == HandState.pinch)
                         return;
 
-                    pinchState = 1;
-                    grabState = 0;
-
                     handState = HandState.pinch;
 
                     SetPoseTarget(handPinch);
+
+                    return;
                 }
                 //Pointing
                 if (pinchValue == 0 && grabValue > 0)
@@ -156,12 +148,11 @@ namespace Fusion.XR
                     if (handState == HandState.point)
                         return;
 
-                    pinchState = 0;
-                    grabState = 1;
-
                     handState = HandState.point;
 
                     SetPoseTarget(handPoint);
+
+                    return;
                 }
             }
             #endregion
@@ -253,22 +244,14 @@ namespace Fusion.XR
 
         private void SetPoseTarget(HandPose pose)
         {
-            lastHandState = SavePose();
             currentPose = pose;
-
-            currentLerp = 0;
         }
 
         private void FingerUpdate()
         {
-            currentLerp += currentLerp <= 1f ? Time.deltaTime * poseLerpSpeed : 0;
-
-            if (currentLerp >= 1)
-                return;
-
             for (int i = 0; i < fingers.Length; i++)
             {
-                fingers[i].FingerUpdate(lastHandState[i], currentPose.GetRotationByIndex(i), currentLerp);
+                fingers[i].FingerUpdate(currentPose.GetRotationByIndex(i), poseLerpSpeed * 50 * Time.deltaTime);
             }
         }
 
@@ -279,6 +262,7 @@ namespace Fusion.XR
 
             attachedObj = null;
 
+            //TODO: Rotate or Lerp to Pose?
             //SetPoseTarget(handOpen);
             RotateToPose(handOpen);
 

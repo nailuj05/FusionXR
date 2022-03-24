@@ -1283,10 +1283,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: poseLerpSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: useFingerColliders
       value: 1
       objectReference: {fileID: 0}
@@ -1365,10 +1361,6 @@ PrefabInstance:
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: poseLerpSpeed
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: useFingerColliders
@@ -10504,8 +10496,6 @@ MonoBehaviour:
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 1
-  pinchState: 0
-  grabState: 0
   handState: 0
 --- !u!65 &8622627593513699869
 BoxCollider:
@@ -10925,8 +10915,6 @@ MonoBehaviour:
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 0
-  pinchState: 0
-  grabState: 0
   handState: 0
 --- !u!65 &8622627594202557815
 BoxCollider:

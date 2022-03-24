@@ -12,13 +12,12 @@ namespace Fusion.XR
         public FingerDriver fingerDriver;
         public FingerTrackingBase fingerTrackingBase { get; private set; }
 
-        public void FingerUpdate(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
+        public void FingerUpdate(Quaternion[] targetRotations, float step)
         {
-            fingerDriver.UpdateTrack(lastTargetRotations, targetRotations, currentLerp);
+            fingerDriver.UpdateTrack(targetRotations, step);
         }
 
         //Rotate to Pose instantly rotates to the pose
-
         public void RotateToPose(Quaternion[] rotations)
         {
             for (int i = 0; i < fingerBones.Length; i++)
