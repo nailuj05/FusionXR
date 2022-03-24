@@ -29,12 +29,6 @@ namespace Fusion.XR
         {
             if (!isEditingPose) return;
 
-            //TODO Update LeftHand
-            //if(TryGetComponent<GrabPoint>(out GrabPoint gb))
-            //{
-            //    handPoser.attachedObj = gb.AlignedTransform;
-            //}
-
             if(isEditingPose)
             {
                 GetComponent<GrabPoint>()?.UpdateAlignedPoint();

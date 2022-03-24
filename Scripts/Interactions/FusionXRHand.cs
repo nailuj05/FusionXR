@@ -146,7 +146,6 @@ namespace Fusion.XR
             if (isGrabbing)
                 return;
 
-            isGrabbing = true;
             grabPoint = null;
             generatedGrabPoint = false;
 
@@ -155,6 +154,8 @@ namespace Fusion.XR
 
             if (closestGrabbable == null)
                 return;
+
+            isGrabbing = true;
 
             ///Get grabbable component and possible grab points
             grabbedGrabbable = closestGrabbable.GetComponentInParent<IGrabbable>();
@@ -189,9 +190,10 @@ namespace Fusion.XR
         ///A function so it can also be called from a grabbable that wants to switch hands
         public void Release()
         {
+            if (!isGrabbing) return;
             isGrabbing = false;
-            
-            //Destory the grabPoint, unlock if needed
+
+            //Destroy the grabPoint, unlock if needed
             if (generatedGrabPoint)
             {
                 if(grabPosition != null)
