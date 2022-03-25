@@ -20,12 +20,15 @@ namespace Fusion.XR
         public FusionXRHand l_hand;
         public FusionXRHand r_hand;
 
+        public bool showControllers = true;
+        public GameObject l_controllerModel;
+        public GameObject r_controllerModel;
+
         private HandPoser l_handPoser;
         private HandPoser r_handPoser;
 
         private float mockPinch;
         private float mockGrab;
-
 
         private Transform currentHand;
 
@@ -44,6 +47,9 @@ namespace Fusion.XR
 
             l_handPoser = l_hand.GetComponent<HandPoser>();
             r_handPoser = r_hand.GetComponent<HandPoser>();
+
+            r_controllerModel.SetActive(showControllers);
+            l_controllerModel.SetActive(showControllers);
         }
 
         private void Update()

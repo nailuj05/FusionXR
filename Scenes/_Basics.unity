@@ -1284,7 +1284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: useFingerColliders
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingMode
@@ -1364,7 +1364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: useFingerColliders
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingMode
@@ -2338,6 +2338,9 @@ MonoBehaviour:
   rightHand: {fileID: 1366268933}
   l_hand: {fileID: 1126147298}
   r_hand: {fileID: 822546835}
+  showControllers: 1
+  l_controllerModel: {fileID: 0}
+  r_controllerModel: {fileID: 0}
   scrollFactor: 0.2
 --- !u!54 &1033683503
 Rigidbody:

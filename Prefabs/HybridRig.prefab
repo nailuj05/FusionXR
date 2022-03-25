@@ -50,6 +50,9 @@ MonoBehaviour:
   rightHand: {fileID: 4601817723680599757}
   l_hand: {fileID: 4601817723450955306}
   r_hand: {fileID: 4601817725298058075}
+  showControllers: 1
+  l_controllerModel: {fileID: 3683268327577239731}
+  r_controllerModel: {fileID: 3683268326674611512}
   scrollFactor: 0.2
 --- !u!1 &4601817723680599756
 GameObject:
@@ -1432,6 +1435,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1891392835673a14dbc850261789ce8c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
+--- !u!1 &3683268327577239731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
+  m_PrefabInstance: {fileID: 4601817723624586722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4059513116919077385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43a7761835cd6064796acec85ed2fb7e, type: 3}
@@ -1506,6 +1514,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92659a0585a153841bb448b08fbb1890, type: 3}
+--- !u!1 &3683268326674611512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 92659a0585a153841bb448b08fbb1890, type: 3}
+  m_PrefabInstance: {fileID: 4601817724869279849}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4059513115683022722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 92659a0585a153841bb448b08fbb1890, type: 3}
