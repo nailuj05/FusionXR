@@ -26,7 +26,6 @@ public class PID {
     public float CalcScalar(float target, float current, float deltaTime)
     {
         error = target - current;
-
         return CalcScalar(error, deltaTime);
     }
 

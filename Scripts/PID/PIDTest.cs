@@ -6,7 +6,7 @@ public enum PIDTestMode
     Force,
     Velocity,
     Position,
-    Rotation
+    AngularVelocity
 }
 
 public class PIDTest : MonoBehaviour {
@@ -19,23 +19,35 @@ public class PIDTest : MonoBehaviour {
 	public Transform current;
     public Rigidbody currentRB;
 
-    private PIDVector _PIDController;
-	
+    private PIDVector _PIDVector;
+    private PIDTorque _PIDTorque;
+
     private void Start()
     {
-        _PIDController = new PIDVector(PIDSetttings);
+        _PIDVector = new PIDVector(PIDSetttings);
+        _PIDTorque = new PIDTorque(PIDSetttings);
     }
 
     private void FixedUpdate()
     {
-        if (mode == PIDTestMode.Velocity)
-            currentRB.velocity = _PIDController.CalcVector(target.position, current.position, Time.deltaTime);
+        switch (mode)
+        {
+            case PIDTestMode.Velocity:
+                currentRB.velocity = _PIDVector.CalcVector(target.position, current.position, Time.fixedDeltaTime);
+                break;
 
-        else if (mode == PIDTestMode.Force)
-            currentRB.AddForce(_PIDController.CalcVector(target.position, current.position, Time.fixedDeltaTime), forceMode);
+            case PIDTestMode.Force:
+                currentRB.AddForce(_PIDVector.CalcVector(target.position, current.position, Time.fixedDeltaTime), forceMode);
+                break;
 
-        else if (mode == PIDTestMode.Position)
-            current.position += _PIDController.CalcVector(target.position, current.position, Time.deltaTime);
+            case PIDTestMode.Position:
+                current.position += _PIDVector.CalcVector(target.position, current.position, Time.fixedDeltaTime);
+                break;
+
+            case PIDTestMode.AngularVelocity:
+                currentRB.angularVelocity = _PIDTorque.CalcTorque(target.rotation, current.rotation, Time.fixedDeltaTime);
+                break;
+        }
     }
 }
 	

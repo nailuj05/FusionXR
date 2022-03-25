@@ -41,26 +41,25 @@ public class PIDFloat : PIDController
     }
 }
 
-public class PIDQuaternion : PIDController
+public class PIDTorque : PIDController
 {
-    private PID pid;
-    private PIDVector v;
+    PID pid;
 
-    public PIDQuaternion(PIDSettings settings)
+    public PIDTorque(PIDSettings settings)
     {
         pid = new PID(settings);
     }
 
-    Quaternion q, d;
-    public Quaternion CalcQuaternion(Quaternion target, Quaternion current, float deltaTime)
+    Quaternion d;
+    Vector3 angVel;
+    public Vector3 CalcTorque(Quaternion target, Quaternion current, float deltaTime)
     {
         d = Quaternion.Inverse(current) * target;
-        d.ToAngleAxis(out float angle, out Vector3 axis);
+        d.ToAngleAxis(out float angleError, out Vector3 axisError);
 
-        
+        angVel = axisError * pid.CalcScalar(angleError, deltaTime);
 
-
-        return q;
+        return angVel;
     }
 }
 
