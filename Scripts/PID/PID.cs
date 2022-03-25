@@ -22,9 +22,16 @@ public class PID {
         s = settings;
     }
 
-    float error, derivative, lastError, integral;
-	public float CalcScalar(float target, float current, float deltaTime) {
-		error = target - current;
+    float error;
+    public float CalcScalar(float target, float current, float deltaTime)
+    {
+        error = target - current;
+
+        return CalcScalar(error, deltaTime);
+    }
+
+    float derivative, lastError, integral;
+	public float CalcScalar(float error, float deltaTime) {
 		integral += error * deltaTime;
 		derivative = (error - lastError) / deltaTime;
 		lastError = error;
