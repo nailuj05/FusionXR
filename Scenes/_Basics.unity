@@ -1288,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
@@ -1321,6 +1321,14 @@ PrefabInstance:
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationDampener
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955307, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817723450955307, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723663873321, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalScale.x
@@ -1379,6 +1387,10 @@ PrefabInstance:
       value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.maxPDForce
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.slerpSpring
       value: 2500
       objectReference: {fileID: 0}
@@ -1401,6 +1413,10 @@ PrefabInstance:
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationDampener
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058076, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_RootOrder
@@ -3003,6 +3019,7 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
+    maxPDForce: 1500
     positionSpring: 3000
     positionDamper: 250
     maxJointForce: 1500
@@ -10402,6 +10419,7 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
+    maxPDForce: 1500
     positionSpring: 3000
     positionDamper: 250
     maxJointForce: 1500
@@ -10821,6 +10839,7 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
+    maxPDForce: 1500
     positionSpring: 3000
     positionDamper: 250
     maxJointForce: 1500

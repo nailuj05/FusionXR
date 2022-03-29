@@ -399,7 +399,7 @@ Rigidbody:
   m_AngularDrag: 0.03
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &2130366297943922197
@@ -505,8 +505,6 @@ MonoBehaviour:
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 0
-  pinchState: 0
-  grabState: 0
   handState: 0
 --- !u!1 &2449426691043358700
 GameObject:
