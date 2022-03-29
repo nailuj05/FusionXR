@@ -374,6 +374,9 @@ namespace Fusion.XR
                 case TrackingMode.FixedJoint:
                     driver = new FixedJointDriver();
                     break;
+                case TrackingMode.PDForce:
+                    driver = new PDForceDriver();
+                    break;
                 default:
                     Debug.LogError("No matching TrackDriver was setup for the given trackingMode enum, defaulting to a Kinematic Driver. Define a matching TrackDriver and declare it in Utilities.cs");
                     break;

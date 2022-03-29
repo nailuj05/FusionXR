@@ -410,4 +410,33 @@ namespace Fusion.XR
 
         }
     }
+
+    public class PDForceDriver : TrackDriver
+    {
+        private Rigidbody rb;
+        private Vector3 lastPos;
+
+        public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
+        {
+            objectToTrack = assignedObjectToTrack;
+            trackingBase = assignedTrackingBase;
+
+            rb = objectToTrack.GetComponent<Rigidbody>();
+            lastPos = objectToTrack.position;
+        }
+
+        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        {
+            Vector3 initVel = (targetPosition - lastPos) / Time.fixedDeltaTime;
+            Vector3 acceleration = (initVel - rb.velocity) / Time.fixedDeltaTime;
+            Vector3 f = rb.mass * acceleration;
+            rb.AddForce(f);
+            lastPos = targetPosition;
+        }
+
+        public override void EndTrack()
+        {
+            
+        }
+    }
 }

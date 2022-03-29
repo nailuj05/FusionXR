@@ -92,7 +92,7 @@ namespace Fusion.XR
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             targetPosition = followObject.TransformPoint(positionOffset);
             targetRotation = followObject.rotation * Quaternion.Euler(rotationOffset);
