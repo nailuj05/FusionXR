@@ -151,7 +151,7 @@ namespace Fusion.XR
         {
             if (hasAttachedObject)
             {
-                trackDriver.UpdateTrack(transform.position, transform.rotation);
+                trackDriver.UpdateTrackFixed(transform.position, transform.rotation);
             }
         }
 

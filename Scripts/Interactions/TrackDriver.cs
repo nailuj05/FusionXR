@@ -27,6 +27,10 @@ namespace Fusion.XR
         [SerializeField] public float forceDampener   = -10f;
         [SerializeField] public float maxForceClamp   = 150f;
 
+        //Force PD 
+        [Header("PD Force")]
+        [SerializeField] public float maxPDForce = 1500f;
+
         //Active Joint Tracking
         [Header("Active Joint Tracking")]
         [SerializeField] public float positionSpring = 3000;
@@ -422,6 +426,10 @@ namespace Fusion.XR
         private Rigidbody rb;
         private Vector3 lastPos;
 
+        private Vector3 targetPosition;
+        private Quaternion targetRotation;
+        private Quaternion lastRot;
+
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
             objectToTrack = assignedObjectToTrack;
@@ -438,11 +446,26 @@ namespace Fusion.XR
             Vector3 f = rb.mass * acceleration;
             rb.AddForce(f);
             lastPos = targetPosition;
+
+            Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
+
+            deltaRotation.ToAngleAxis(out var angle, out var axis);
+
+            if (angle > 180f)
+            {
+                angle -= 360;
+            }
+
+            if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
+            {
+                rb.AddTorque(axis * (angle * trackingBase.rotationPower * Mathf.Deg2Rad), ForceMode.VelocityChange);
+                rb.AddTorque(-rb.angularVelocity * trackingBase.rotationDampener, ForceMode.VelocityChange);
+            }
         }
 
         public override void EndTrack()
         {
-            
+
         }
     }
 }
