@@ -28,10 +28,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingMode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grabReference
       value: 
       objectReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -40,44 +36,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grabMask.m_Bits
-      value: 768
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackedController
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.limit
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.maxPDForce
-      value: 750
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.slerpSpring
-      value: 2500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.rotationPower
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.positionDamper
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.positionSpring
-      value: 2500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.positionStrength
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.rotationDampener
-      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: hand
