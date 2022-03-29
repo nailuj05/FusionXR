@@ -48,7 +48,7 @@ MonoBehaviour:
   player: {fileID: 4601817725372166383}
   leftHand: {fileID: 4601817725243021552}
   rightHand: {fileID: 4601817723680599757}
-  l_hand: {fileID: 0}
+  l_hand: {fileID: 8761339241101605528}
   r_hand: {fileID: 4601817725298058075}
   showControllers: 1
   l_controllerModel: {fileID: 3683268327577239731}
