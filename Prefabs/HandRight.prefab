@@ -982,6 +982,7 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
+    maxPDForce: 750
     positionSpring: 3000
     positionDamper: 250
     maxJointForce: 1500
