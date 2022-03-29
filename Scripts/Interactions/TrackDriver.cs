@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.UIElements;
-using UnityEditor.UIElements;
 
 namespace Fusion.XR
 {
@@ -54,7 +52,15 @@ namespace Fusion.XR
 
         public abstract void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase);
 
-        public abstract void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation);
+        public virtual void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
+        {
+
+        }
+
+        public virtual void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        {
+
+        }
 
         public abstract void EndTrack();
     }
@@ -91,7 +97,7 @@ namespace Fusion.XR
             rb = objectToTrack.GetComponent<Rigidbody>();
         }
 
-        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             //Track Position
             Vector3 deltaVelocity = (targetPosition - objectToTrack.position) * trackingBase.positionStrength;
@@ -138,7 +144,7 @@ namespace Fusion.XR
             UpdateHandJointDrives();
         }
 
-        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             TrackPositionRotation(targetPosition, targetRotation);
             //UpdateTargetVelocity(targetPosition);
@@ -247,7 +253,7 @@ namespace Fusion.XR
             }
         }
 
-        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             if (joint == null)
                 SetupJoint(targetPosition, targetRotation);
@@ -325,7 +331,7 @@ namespace Fusion.XR
             }
         }
 
-        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             if (joint == null)
                 SetupJoint(targetPosition, targetRotation);
@@ -378,7 +384,7 @@ namespace Fusion.XR
             trackerRigidbody = trackingBase.tracker.GetComponent<Rigidbody>();
         }
 
-        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             //Track Position
             Vector3 velocity = trackerRigidbody.GetPointVelocity(targetPosition);
@@ -425,7 +431,7 @@ namespace Fusion.XR
             lastPos = objectToTrack.position;
         }
 
-        public override void UpdateTrack(Vector3 targetPosition, Quaternion targetRotation)
+        public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             Vector3 initVel = (targetPosition - lastPos) / Time.fixedDeltaTime;
             Vector3 acceleration = (initVel - rb.velocity) / Time.fixedDeltaTime;

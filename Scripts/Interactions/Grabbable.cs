@@ -72,7 +72,7 @@ namespace Fusion.XR
                 targetRotation = attachedHands[0].targetRotation * Quaternion.Inverse(offsetRot);
 
                 //Apply Target Transformation to hand
-                attachedHands[0].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
+                attachedHands[0].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
             }
             else //If there is two hands grabbing 
             {
@@ -95,8 +95,8 @@ namespace Fusion.XR
                 targetRotation = Quaternion.Lerp(rotTargets[0], rotTargets[1], 0.5f);
 
                 //Apply Target Transformation to hands
-                attachedHands[0].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
-                attachedHands[1].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
+                attachedHands[0].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
+                attachedHands[1].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
             }
         }
 

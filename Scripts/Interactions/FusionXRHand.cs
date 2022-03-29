@@ -92,12 +92,17 @@ namespace Fusion.XR
             }
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
             targetPosition = followObject.TransformPoint(positionOffset);
             targetRotation = followObject.rotation * Quaternion.Euler(rotationOffset);
 
             trackDriver.UpdateTrack(targetPosition, targetRotation);
+        }
+
+        private void FixedUpdate()
+        {
+            trackDriver.UpdateTrackFixed(targetPosition, targetRotation);
         }
 
         #endregion
