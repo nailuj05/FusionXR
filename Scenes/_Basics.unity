@@ -1264,7 +1264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955287, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955304, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1280,7 +1280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955305, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: useFingerColliders
@@ -1293,7 +1293,7 @@ PrefabInstance:
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
-      objectReference: {fileID: 1262116621}
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955306, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.limit
       value: 1.1
@@ -1368,7 +1368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058074, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: useFingerColliders
@@ -1388,7 +1388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.maxPDForce
-      value: 150
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.slerpSpring
@@ -1473,6 +1473,18 @@ PrefabInstance:
     - target: {fileID: 5221161576313746134, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605530, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.059
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605530, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605530, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.516
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -2594,11 +2606,6 @@ MonoBehaviour:
   grabableType: 0
   TwoHandedMode: 0
   GrabPoints: []
---- !u!4 &1262116621 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4601817724137427187, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-  m_PrefabInstance: {fileID: 772687355}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1266934370
 GameObject:
   m_ObjectHideFlags: 0

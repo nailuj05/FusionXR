@@ -14383,6 +14383,7 @@ MonoBehaviour:
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
   poseLerpSpeed: 3
+  useFingerColliders: 0
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
@@ -14401,7 +14402,15 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    handBaseCenter: {x: 0, y: 0, z: 0}
+    handBaseSize: {x: 0, y: 0, z: 0}
+    fingerLength: 0
+    fingerDirection: 1
+    fingerMass: 0
+    fingerDrag: 0
+    fingerAngularDrag: 0
     fingerBones: []
+    hand: {fileID: 0}
   fingers:
   - {fileID: 264374322}
   - {fileID: 1414057438}
@@ -14412,8 +14421,6 @@ MonoBehaviour:
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 1
-  pinchState: 0
-  grabState: 0
   handState: 0
 --- !u!114 &1477895416
 MonoBehaviour:
@@ -14441,6 +14448,7 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
+    maxPDForce: 1500
     positionSpring: 5000
     positionDamper: 150
     maxJointForce: 5000
@@ -15443,6 +15451,9 @@ MonoBehaviour:
   rightHand: {fileID: 105709719}
   l_hand: {fileID: 1901853100}
   r_hand: {fileID: 1477895416}
+  showControllers: 1
+  l_controllerModel: {fileID: 0}
+  r_controllerModel: {fileID: 0}
   scrollFactor: 0.2
 --- !u!1 &1590845138
 GameObject:
@@ -15817,11 +15828,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4601817725372166383, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
   m_PrefabInstance: {fileID: 1609038548}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1609038550 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4601817723450955304, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-  m_PrefabInstance: {fileID: 1609038548}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1609038551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15852,7 +15858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 2
   head: {fileID: 1449884235}
-  hand: {fileID: 1609038550}
+  hand: {fileID: 0}
   movementDirection: 0
   turnMode: 0
   turnSpeed: 5
@@ -18354,6 +18360,7 @@ MonoBehaviour:
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
   poseLerpSpeed: 3
+  useFingerColliders: 0
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
@@ -18372,7 +18379,15 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    handBaseCenter: {x: 0, y: 0, z: 0}
+    handBaseSize: {x: 0, y: 0, z: 0}
+    fingerLength: 0
+    fingerDirection: 1
+    fingerMass: 0
+    fingerDrag: 0
+    fingerAngularDrag: 0
     fingerBones: []
+    hand: {fileID: 0}
   fingers:
   - {fileID: 1151883301}
   - {fileID: 974679993}
@@ -18383,8 +18398,6 @@ MonoBehaviour:
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 0
-  pinchState: 0
-  grabState: 0
   handState: 0
 --- !u!114 &1901853100
 MonoBehaviour:
@@ -18412,6 +18425,7 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
+    maxPDForce: 1500
     positionSpring: 5000
     positionDamper: 150
     maxJointForce: 5000
@@ -22147,6 +22161,7 @@ MonoBehaviour:
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
   poseLerpSpeed: 2
+  useFingerColliders: 0
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
@@ -22165,7 +22180,15 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    handBaseCenter: {x: 0, y: 0, z: 0}
+    handBaseSize: {x: 0, y: 0, z: 0}
+    fingerLength: 0
+    fingerDirection: 1
+    fingerMass: 0
+    fingerDrag: 0
+    fingerAngularDrag: 0
     fingerBones: []
+    hand: {fileID: 0}
   fingers:
   - {fileID: 4601817724513403013}
   - {fileID: 4601817724372603755}
@@ -22176,8 +22199,6 @@ MonoBehaviour:
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 0
-  pinchState: 0
-  grabState: 0
   handState: 0
 --- !u!114 &4601817723382300430
 MonoBehaviour:
@@ -22205,6 +22226,7 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
+    maxPDForce: 1500
     positionSpring: 4500
     positionDamper: 250
     maxJointForce: 4000
@@ -22458,6 +22480,9 @@ MonoBehaviour:
   rightHand: {fileID: 4601817723616118761}
   l_hand: {fileID: 4601817723382300430}
   r_hand: {fileID: 4601817725228337791}
+  showControllers: 1
+  l_controllerModel: {fileID: 0}
+  r_controllerModel: {fileID: 0}
   scrollFactor: 0.2
 --- !u!1 &4601817723454243786
 GameObject:
@@ -25020,6 +25045,7 @@ MonoBehaviour:
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
   poseLerpSpeed: 2
+  useFingerColliders: 0
   isAttached: 0
   attachedObj: {fileID: 0}
   poseLocked: 0
@@ -25038,7 +25064,15 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    handBaseCenter: {x: 0, y: 0, z: 0}
+    handBaseSize: {x: 0, y: 0, z: 0}
+    fingerLength: 0
+    fingerDirection: 1
+    fingerMass: 0
+    fingerDrag: 0
+    fingerAngularDrag: 0
     fingerBones: []
+    hand: {fileID: 0}
   fingers:
   - {fileID: 4601817723825627037}
   - {fileID: 4601817723909583977}
@@ -25049,8 +25083,6 @@ MonoBehaviour:
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   hand: 1
-  pinchState: 0
-  grabState: 0
   handState: 0
 --- !u!114 &4601817725228337791
 MonoBehaviour:
@@ -25078,6 +25110,7 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
+    maxPDForce: 1500
     positionSpring: 4500
     positionDamper: 250
     maxJointForce: 4000
