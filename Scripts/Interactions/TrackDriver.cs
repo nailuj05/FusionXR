@@ -441,10 +441,10 @@ namespace Fusion.XR
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
-            Vector3 initVel = (targetPosition - lastPos) / Time.fixedDeltaTime;
+            Vector3 initVel = (targetPosition - objectToTrack.position) / Time.fixedDeltaTime;
             Vector3 acceleration = (initVel - rb.velocity) / Time.fixedDeltaTime;
             Vector3 f = rb.mass * acceleration;
-            rb.AddForce(f);
+            rb.AddForce(f.ClampVector(trackingBase.maxPDForce));
             lastPos = targetPosition;
 
             Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
