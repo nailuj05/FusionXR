@@ -104,12 +104,12 @@ namespace Fusion.XR
 
             if(hand == Hand.Left)
             {
-                prevHand.transform.GetChild(0).localScale = new Vector3(-1, 1, 1);
+                handPoser.renderHand.localScale = new Vector3(-1, 1, 1);
                 handPoser.palm = prevHand.GetChildByName("palmL").transform;
             }
             if (hand == Hand.Right)
             {
-                prevHand.transform.GetChild(0).localScale = new Vector3(1, 1, 1);
+                handPoser.renderHand.localScale = new Vector3(1, 1, 1);
                 handPoser.palm = prevHand.GetChildByName("palmR").transform;
             }
 
