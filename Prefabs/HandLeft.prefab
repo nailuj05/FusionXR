@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: handBaseCenter.z
       value: -0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: handPosingDriver
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_RootOrder
       value: 0

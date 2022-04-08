@@ -1030,7 +1030,7 @@ MonoBehaviour:
   smoothAttachSpeed: 0.5
   palm: {fileID: 6313628541362307769}
   renderHand: {fileID: 8215354825842168174}
-  handPosingDriver: 1
+  handPosingDriver: 0
   grabbingDriver: 1
   fingerSettings:
     offset: {x: 0, y: 0, z: 0}
