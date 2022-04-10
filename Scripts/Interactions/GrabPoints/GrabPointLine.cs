@@ -31,6 +31,8 @@ namespace Fusion.XR
                 GrabPointAlign.AlignPoint(transform, hand);
             }
 
+            UpdateAlignedPoint();
+
             return this;
         }
 

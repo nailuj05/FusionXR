@@ -10,6 +10,7 @@ namespace Fusion.XR
         {
             AlignPoint(transform, hand);
 
+            UpdateAlignedPoint();
             return this;
         }
 

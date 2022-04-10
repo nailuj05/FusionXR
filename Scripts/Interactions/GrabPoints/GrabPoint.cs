@@ -65,12 +65,6 @@ namespace Fusion.XR
             }
         }
 
-        public void Update()
-        {
-            if (Application.isPlaying)
-                UpdateAlignedPoint();
-        }
-
         public void UpdateAlignedPoint()
         {
             if (currentHand == Hand.Left & alignForLeftHand)
@@ -105,6 +99,8 @@ namespace Fusion.XR
 
         public virtual GrabPoint GetAligned(Transform hand)
         {
+            //This needs to be called in all overrides aswell for the alignment to work
+            UpdateAlignedPoint();
             return this;
         }
 
