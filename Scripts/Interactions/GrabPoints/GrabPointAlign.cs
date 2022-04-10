@@ -6,28 +6,37 @@ namespace Fusion.XR
 {
     public class GrabPointAlign : GrabPoint
     {
+        public bool allowFlip = true;
+
         public override GrabPoint GetAligned(Transform hand)
         {
-            AlignPoint(transform, hand);
+            AlignPoint(transform, hand, allowFlip);
 
             UpdateAlignedPoint();
             return this;
         }
 
-        public static void AlignPoint(Transform point, Transform hand)
+        public static void AlignPoint(Transform point, Transform hand, bool allowFlip)
         {
             var right = point.right;
+            var handRight = hand.right;
             var ogRot = point.rotation;
             var forward = Vector3.ProjectOnPlane(hand.forward, point.right);
+
+            Debug.DrawRay(hand.position, hand.right, Color.red, 10f);
 
             point.rotation = Quaternion.LookRotation(forward, point.up);
 
             //If the hand is upside down recalculate with inverted right axis
             if (Vector3.Dot(right, point.right) < 0)
             {
-                //Debug.Log("Wrong way");
                 point.rotation = ogRot;
                 point.rotation = Quaternion.LookRotation(forward, -point.up);
+            }
+
+            if (Vector3.Dot(handRight, point.right) < 0)
+            {
+                point.localEulerAngles += new Vector3(0, 0, 180);
             }
         }
     }

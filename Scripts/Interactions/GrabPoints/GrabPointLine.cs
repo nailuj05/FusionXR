@@ -8,6 +8,7 @@ namespace Fusion.XR
     public class GrabPointLine : GrabPoint
     {
         public bool alignHand = true;
+        public bool allowFlip = true;
 
         [Header("Line Start/End | Defined in parent space")]
         public Vector3 lineStart;
@@ -28,7 +29,7 @@ namespace Fusion.XR
             //Align rotation
             if (alignHand)
             {
-                GrabPointAlign.AlignPoint(transform, hand);
+                GrabPointAlign.AlignPoint(transform, hand, allowFlip);
             }
 
             UpdateAlignedPoint();
