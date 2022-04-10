@@ -23,8 +23,6 @@ namespace Fusion.XR
             var ogRot = point.rotation;
             var forward = Vector3.ProjectOnPlane(hand.forward, point.right);
 
-            Debug.DrawRay(hand.position, hand.right, Color.red, 10f);
-
             point.rotation = Quaternion.LookRotation(forward, point.up);
 
             //If the hand is upside down recalculate with inverted right axis
