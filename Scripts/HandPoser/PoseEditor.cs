@@ -41,10 +41,13 @@ namespace Fusion.XR
             {
                 if (Selection.gameObjects.Length == 0) return;
 
-                if (editor.gameObject != Selection.gameObjects[0] & editor.isEditingPose)
+                if (editor.gameObject != Selection.gameObjects[0] && editor.isEditingPose)
                 {
-                    editor.isEditingPose = false;
-                    editor.RemovePoserHand();
+                    if(Selection.gameObjects[0].TryGetComponent<PoseEditor>(out PoseEditor p))
+                    {
+                        editor.isEditingPose = false;
+                        editor.RemovePoserHand();
+                    }
                 }
             }
         }
