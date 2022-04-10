@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.positionStrength
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: hand
       value: 0
@@ -51,6 +55,10 @@ PrefabInstance:
       propertyPath: debugMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grabReference
+      value: 
+      objectReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: handBaseSize.x
       value: 0.08
@@ -63,6 +71,10 @@ PrefabInstance:
       propertyPath: handBaseSize.z
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinchReference
+      value: 
+      objectReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: fingerDirection
       value: 1

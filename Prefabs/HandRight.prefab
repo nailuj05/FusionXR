@@ -974,7 +974,7 @@ MonoBehaviour:
   rotationOffset: {x: 45, y: 0, z: -90}
   trackingMode: 1
   trackingBase:
-    positionStrength: 15
+    positionStrength: 25
     rotationStrength: 35
     rotationPower: 35
     rotationDampener: 0.5
@@ -997,7 +997,7 @@ MonoBehaviour:
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabRange: 0.1
-  grabbedTrackingMode: 3
+  grabbedTrackingMode: 5
   palm: {fileID: 6313628541362307769}
   reachDist: 0.1
   grabMask:
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   handAwait: {fileID: 11400000, guid: 4ad07f40a729d264b807d241a8e39880, type: 2}
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
-  poseLerpSpeed: 2
+  poseLerpSpeed: 3.5
   useFingerColliders: 0
   isAttached: 0
   attachedObj: {fileID: 0}
