@@ -63,6 +63,20 @@ namespace Fusion.XR
             SetTargetRotationInternal(joint, targetWorldRotation, startWorldRotation, Space.World);
         }
 
+        public static void SetTargetRotation(this ConfigurableJoint joint, Quaternion target, Quaternion startRot, Space space)
+        {
+            Vector3 right = joint.axis;
+            Vector3 forward = Vector3.Cross(joint.axis, joint.secondaryAxis).normalized;
+            Vector3 up = Vector3.Cross(forward, right).normalized;
+            Quaternion localToJointSpace = Quaternion.LookRotation(forward, up);
+            if (space == Space.World)
+            {
+                Quaternion worldToLocal = Quaternion.Inverse(joint.transform.parent.rotation);
+                target = worldToLocal * target;
+            }
+            joint.targetRotation = Quaternion.Inverse(localToJointSpace) * Quaternion.Inverse(target) * startRot * localToJointSpace;
+        }
+
         static void SetTargetRotationInternal(ConfigurableJoint joint, Quaternion targetRotation, Quaternion startRotation, Space space)
         {
             // Calculate the rotation expressed by the joint's axis and secondary axis
@@ -96,6 +110,11 @@ namespace Fusion.XR
 
     public static class Extensions
     {
+        public static Quaternion InverseTransformRotation(this Transform t, Quaternion rot)
+        {
+            return rot * Quaternion.Inverse(t.rotation);
+        }
+
         public static List<Transform> GetParentsFromTo(this Transform transform, Transform to)
         {
             List<Transform> transforms = new List<Transform>();
