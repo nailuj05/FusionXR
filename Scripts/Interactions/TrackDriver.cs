@@ -46,6 +46,9 @@ namespace Fusion.XR
 
         [HideInInspector] public GameObject tracker;
         [HideInInspector] public Transform palm;
+
+        [HideInInspector] public Quaternion startRot;
+        [HideInInspector] public Quaternion startRotLocal;
     }
 
     public abstract class TrackDriver
@@ -287,8 +290,8 @@ namespace Fusion.XR
         private void SetupJoint(Vector3 targetPosition, Quaternion targetRotation)
         {
             joint = objectRB.gameObject.AddComponent<ConfigurableJoint>();
-            
-            joint.anchor = objectRB.transform.InverseTransformPoint(trackerRB.position);
+
+            joint.anchor = Vector3.zero; objectRB.transform.InverseTransformPoint(trackerRB.position);
             joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedBody = trackerRB;

@@ -986,11 +986,13 @@ MonoBehaviour:
     positionSpring: 3000
     positionDamper: 250
     maxJointForce: 1500
-    slerpSpring: 3000
+    slerpSpring: 1500
     slerpDamper: 250
     slerpMaxForce: 1500
     adjustAnchor: 1
     limit: 0.7
+    startRot: {x: 0, y: 0, z: 0, w: 0}
+    startRotLocal: {x: 0, y: 0, z: 0, w: 0}
     tracker: {fileID: 0}
     palm: {fileID: 0}
   rb: {fileID: 0}
