@@ -1269,7 +1269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723373849411, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: showControllers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817723450955287, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_IsActive
@@ -1400,12 +1400,12 @@ PrefabInstance:
       value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.maxPDForce
-      value: 750
+      propertyPath: grabbedTrackingMode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.slerpSpring
-      value: 2500
+      propertyPath: trackingBase.maxPDForce
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationPower
@@ -1499,6 +1499,10 @@ PrefabInstance:
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 539375038}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: grabbedTrackingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605529, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
       value: 1
@@ -2496,6 +2500,8 @@ MonoBehaviour:
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    startRot: {x: 0, y: 0, z: 0, w: 0}
+    startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
   grabReference: {fileID: 0}
   pinchReference: {fileID: 0}
@@ -3193,6 +3199,8 @@ MonoBehaviour:
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    startRot: {x: 0, y: 0, z: 0, w: 0}
+    startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   attachedObject: {fileID: 0}
 --- !u!54 &1408044856
 Rigidbody:
@@ -4906,31 +4914,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.98
+      value: 0.8299737
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.191
+      value: -0.19099998
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.304
+      value: -1.3201686
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.27059844
+      value: -0.6123713
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.27059847
+      value: 0.6123712
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6532814
+      value: 0.3535554
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6532813
+      value: 0.35355544
       objectReference: {fileID: 0}
     - target: {fileID: 4044798231639497073, guid: 2c029e55426eadc4685c196e00ab5a9d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10624,6 +10632,8 @@ MonoBehaviour:
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    startRot: {x: 0, y: 0, z: 0, w: 0}
+    startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -11044,6 +11054,8 @@ MonoBehaviour:
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    startRot: {x: 0, y: 0, z: 0, w: 0}
+    startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
   grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}

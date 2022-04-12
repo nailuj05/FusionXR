@@ -111,6 +111,9 @@ namespace Fusion.XR
             originalInterpolation = rb.interpolation;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
 
+            //hand.transform.position = hand.grabPosition.position;
+            //hand.transform.rotation = hand.grabPosition.rotation;
+
             ///Setup and Start Track Driver
             hand.grabbedTrackDriver = Utils.DriverFromEnum(mode);
             hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
