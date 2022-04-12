@@ -86,6 +86,9 @@ namespace Fusion.XR
             pinchReference.action.started += OnPinched;
             pinchReference.action.canceled += OnPinchedCancelled;
 
+            trackingBase.startRot = transform.rotation;
+            trackingBase.startRotLocal = transform.localRotation;
+
             if (useHandPoser)
             {
                 handPoser = GetComponent<HandPoser>();
