@@ -265,7 +265,6 @@ namespace Fusion.XR
             if (joint == null)
                 SetupJoint(targetPosition, targetRotation);
 
-            //Track Rotation
             Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
 
             deltaRotation.ToAngleAxis(out var angle, out var axis);
@@ -277,8 +276,7 @@ namespace Fusion.XR
 
             if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
             {
-                objectRB.AddTorque(axis * (angle * trackingBase.rotationPower * Mathf.Deg2Rad), ForceMode.VelocityChange);
-                objectRB.AddTorque(-objectRB.angularVelocity * trackingBase.rotationDampener, ForceMode.VelocityChange);
+                objectRB.angularVelocity = axis * angle * trackingBase.rotationStrength * Mathf.Deg2Rad;
             }
         }
 
@@ -289,12 +287,12 @@ namespace Fusion.XR
 
         private void SetupJoint(Vector3 targetPosition, Quaternion targetRotation)
         {
-            joint = objectRB.gameObject.AddComponent<ConfigurableJoint>();
+            joint = trackerRB.gameObject.AddComponent<ConfigurableJoint>();
 
-            joint.anchor = Vector3.zero; objectRB.transform.InverseTransformPoint(trackerRB.position);
+            joint.anchor = Vector3.zero; //objectRB.transform.InverseTransformPoint(trackerRB.position);
             joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
             joint.autoConfigureConnectedAnchor = false;
-            joint.connectedBody = trackerRB;
+            joint.connectedBody = objectRB;
             joint.connectedAnchor = Vector3.zero;
 
             joint.rotationDriveMode = RotationDriveMode.Slerp;
