@@ -36,10 +36,9 @@ namespace Fusion.XR
         public InputActionReference pinchReference;
 
         [Header("Grabbing")]
-        public float grabRange = 0.1f;
         public TrackingMode grabbedTrackingMode;
         public Transform palm;
-        [SerializeField] private float reachDist = 0.1f; //, joinDist = 0.05f;
+        [SerializeField] private float reachDist = 0.1f;
 
         public LayerMask grabMask = 768;
 
