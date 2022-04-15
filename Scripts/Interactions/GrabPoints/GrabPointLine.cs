@@ -29,7 +29,7 @@ namespace Fusion.XR
             //Align rotation
             if (alignHand)
             {
-                GrabPointAlign.AlignPoint(transform, hand, allowFlip);
+                GrabPointAlign.AlignPoint(this, transform, hand, allowFlip);
             }
 
             UpdateAlignedPoint();

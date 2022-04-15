@@ -104,6 +104,17 @@ namespace Fusion.XR
             return this;
         }
 
+        public Transform GetAlignedTransform()
+        {
+            UpdateAlignedPoint();
+
+            if(currentHand == Hand.Left & alignForLeftHand)
+            {
+                return AlignedTransform;
+            }
+            return transform;
+        }
+
         private void OnDrawGizmos()
         {
             if (!(TryGetComponent<PoseEditor>(out PoseEditor pe) && pe.isEditingPose))
