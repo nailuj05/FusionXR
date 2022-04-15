@@ -28,7 +28,7 @@ namespace Fusion.XR
             //Align rotation
             if (alignHand)
             {
-                AlignPoint(transform, hand, allowFlip);
+                AlignPoint(transform, hand);
             }
 
             UpdateAlignedPoint();
