@@ -5,10 +5,9 @@ using UnityEngine;
 namespace Fusion.XR
 {
     [ExecuteAlways]
-    public class GrabPointLine : GrabPoint
+    public class GrabPointLine : GrabPointAlign
     {
         public bool alignHand = true;
-        public bool allowFlip = true;
 
         [Header("Line Start/End | Defined in parent space")]
         public Vector3 lineStart;
@@ -29,7 +28,7 @@ namespace Fusion.XR
             //Align rotation
             if (alignHand)
             {
-                GrabPointAlign.AlignPoint(this, transform, hand, allowFlip);
+                AlignPoint(transform, hand, allowFlip);
             }
 
             UpdateAlignedPoint();

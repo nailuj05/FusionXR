@@ -10,13 +10,13 @@ namespace Fusion.XR
 
         public override GrabPoint GetAligned(Transform hand)
         {
-            AlignPoint(this, transform, hand, allowFlip);
+            AlignPoint(transform, hand, allowFlip);
 
             UpdateAlignedPoint();
             return this;
         }
 
-        public static void AlignPoint(GrabPoint gb, Transform point, Transform hand, bool allowFlip)
+        public void AlignPoint(Transform point, Transform hand, bool allowFlip)
         {
             var right = point.right;
             var handRight = hand.right;
@@ -32,7 +32,7 @@ namespace Fusion.XR
                 point.rotation = Quaternion.LookRotation(forward, -point.up);
             }
 
-            var al = gb.GetAlignedTransform();
+            var al = GetAlignedTransform();
             if (Vector3.Dot(handRight, al.right) < 0)
             {
                 point.localEulerAngles += new Vector3(0, 0, 180);

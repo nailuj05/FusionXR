@@ -1067,8 +1067,8 @@ MonoBehaviour:
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
   leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
-  alignHand: 1
   allowFlip: 1
+  alignHand: 1
   lineStart: {x: 0, y: 0, z: -0.2}
   lineEnd: {x: 0, y: 0, z: 0.2}
 --- !u!114 &258415807
@@ -6850,8 +6850,8 @@ MonoBehaviour:
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
   leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
-  alignHand: 1
   allowFlip: 1
+  alignHand: 1
   lineStart: {x: 0, y: 0, z: -0.2}
   lineEnd: {x: 0, y: 0, z: 0.2}
 --- !u!114 &3212452903457394747
