@@ -128,6 +128,7 @@ MonoBehaviour:
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
   leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
+  allowFlip: 1
   alignHand: 1
   lineStart: {x: 0, y: 0, z: -0.2}
   lineEnd: {x: 0, y: 0, z: 0.2}
@@ -229,6 +230,7 @@ MonoBehaviour:
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
   leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 11400000, guid: 8c6d4d6eeebd1314081195a4d2b80445, type: 2}
+  allowFlip: 1
   alignHand: 1
   lineStart: {x: 0, y: 0, z: -0.2}
   lineEnd: {x: 0, y: 0, z: 0.2}
@@ -459,7 +461,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2592707823930765582}
-  m_Mesh: {fileID: 8918077550557095614, guid: e502aba0e51966744855dddb431f5f17, type: 3}
+  m_Mesh: {fileID: 8918077550557095614, guid: 0a7be68e3733afd4f80c021138bb77ef, type: 3}
 --- !u!23 &2592707823930765576
 MeshRenderer:
   m_ObjectHideFlags: 0
