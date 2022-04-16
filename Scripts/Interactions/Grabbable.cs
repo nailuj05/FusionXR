@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace Fusion.XR
 {
@@ -27,6 +28,11 @@ namespace Fusion.XR
 
         private Rigidbody rb;
         private RigidbodyInterpolation originalInterpolation;
+
+        public bool overrideTrackingMode;
+
+        [SerializeField]
+        private TrackingMode customTrackingMode;
 
         //If 2 Handed:
         private Vector3 posOffset;
@@ -112,7 +118,9 @@ namespace Fusion.XR
             rb.interpolation = RigidbodyInterpolation.Interpolate;
 
             ///Setup and Start Track Driver
-            hand.grabbedTrackDriver = Utils.DriverFromEnum(mode);
+            var m = overrideTrackingMode ? customTrackingMode : mode;
+
+            hand.grabbedTrackDriver = Utils.DriverFromEnum(m);
             hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
 
             EnableOrDisableCollisions(gameObject, hand, true);
