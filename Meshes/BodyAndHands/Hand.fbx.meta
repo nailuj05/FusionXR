@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 92f4baa407f62d24996aeb9d01cd923e
+guid: 0487277d15351c04e9e9ccc947f28b0b
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 21100
   internalIDToNameTable:
   - first:
-      74: -623603649343465320
-    second: Scene
+      74: 1288345426803864665
+    second: Armature|Armature|r_hand_skeletal_lowres|BaseLayer
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -88,7 +88,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

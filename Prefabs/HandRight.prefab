@@ -991,14 +991,13 @@ MonoBehaviour:
     slerpMaxForce: 1500
     adjustAnchor: 1
     limit: 0.7
-    startRot: {x: 0, y: 0, z: 0, w: 0}
-    startRotLocal: {x: 0, y: 0, z: 0, w: 0}
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    startRot: {x: 0, y: 0, z: 0, w: 0}
+    startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
   grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  grabRange: 0.1
   grabbedTrackingMode: 5
   palm: {fileID: 6313628541362307769}
   reachDist: 0.1
@@ -1279,7 +1278,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 2424622706892375604, guid: 43d667ec83ca60e4298d60fa17beb50a, type: 3}
+  m_Mesh: {fileID: 2424622706892375604, guid: 0487277d15351c04e9e9ccc947f28b0b, type: 3}
   m_Bones:
   - {fileID: 507783739805568319}
   - {fileID: 267356349196996370}
