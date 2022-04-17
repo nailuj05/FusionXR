@@ -35,7 +35,7 @@ namespace Fusion.XR
         [Header("Active Joint Tracking")]
         [SerializeField] public float positionSpring = 3000;
         [SerializeField] public float positionDamper = 250;
-        [SerializeField] public float maxJointForce  = 1500;
+        [SerializeField] public float positionMaxForce  = 1500;
 
         [SerializeField] public float slerpSpring   = 3000;
         [SerializeField] public float slerpDamper   = 250;
@@ -209,7 +209,7 @@ namespace Fusion.XR
             var drive = new JointDrive();
             drive.positionSpring = trackingBase.positionSpring;
             drive.positionDamper = trackingBase.positionDamper;
-            drive.maximumForce = trackingBase.maxJointForce;
+            drive.maximumForce = trackingBase.positionMaxForce;
 
             activeJoint.xDrive = activeJoint.yDrive = activeJoint.zDrive = drive;
 
