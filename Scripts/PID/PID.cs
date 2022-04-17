@@ -3,6 +3,13 @@ using UnityEngine;
 [System.Serializable]
 public class PIDSettings
 {
+    public PIDSettings(float P = 0, float I = 0, float D = 0)
+    {
+        this.P = P;
+        this.I = I;
+        this.D = D;
+    }
+
     [SerializeField]
     public float P, I, D;
 }
