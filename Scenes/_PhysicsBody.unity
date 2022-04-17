@@ -354,6 +354,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &61369017
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +406,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &61369020
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -549,6 +553,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &64830875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -920,6 +926,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &89298467
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1868,6 +1876,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &219338870
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2077,6 +2087,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1001 &239993514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2091,7 +2103,7 @@ PrefabInstance:
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackedController
       value: 
-      objectReference: {fileID: 165805130}
+      objectReference: {fileID: 821950978}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.limit
       value: 1.2
@@ -2139,6 +2151,10 @@ PrefabInstance:
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.rotationDampener
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: debugMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_RootOrder
@@ -2272,6 +2288,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &247162023
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2890,6 +2908,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &354308489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,6 +2976,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &354308493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3069,6 +3091,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &372965726
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3353,7 +3377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d200b382a14c64459522c4ae63af6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigType: 1
+  rigType: 0
   mockRig: {fileID: 1589662060}
   xrRig: {fileID: 1775882139}
 --- !u!4 &443490240
@@ -3498,6 +3522,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &446333552
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3630,6 +3656,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &482686503
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3965,6 +3993,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &516412576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4126,6 +4156,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &576371417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4434,6 +4466,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &584124594
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4657,6 +4691,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &588589241
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4912,6 +4948,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &639560616
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5121,6 +5159,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &707986413
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5314,6 +5354,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &718271216
 GameObject:
   m_ObjectHideFlags: 0
@@ -5565,7 +5607,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: debugMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackingMode
@@ -5574,7 +5616,7 @@ PrefabInstance:
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackedController
       value: 
-      objectReference: {fileID: 1976586517}
+      objectReference: {fileID: 516412577}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackingBase.limit
       value: 1.2
@@ -5915,6 +5957,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &803561793
 GameObject:
   m_ObjectHideFlags: 0
@@ -6025,6 +6069,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &806011472
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6395,6 +6441,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &823021676
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6620,6 +6668,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &846993102
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6813,6 +6863,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &854901928
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6895,6 +6947,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &858601897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7202,6 +7256,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &890707046
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7728,6 +7784,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &973909683
 GameObject:
   m_ObjectHideFlags: 0
@@ -7937,6 +7995,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &977188419
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8943,6 +9003,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &1082943622
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9136,6 +9198,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!4 &1090878698 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2592707823930765581, guid: 3b8fed67691ed944c85eec2ed2d1bded, type: 3}
@@ -9574,6 +9638,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1118429196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9719,6 +9785,8 @@ MonoBehaviour:
   grabableType: 0
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1121965585
 GameObject:
   m_ObjectHideFlags: 0
@@ -9947,6 +10015,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1150902779
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10231,6 +10301,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &1175149008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10410,6 +10482,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1192251657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10724,6 +10798,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1203173899
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10884,6 +10960,8 @@ MonoBehaviour:
   grabableType: 0
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1232207949
 GameObject:
   m_ObjectHideFlags: 0
@@ -11046,6 +11124,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1280261517
 GameObject:
   m_ObjectHideFlags: 0
@@ -11326,6 +11406,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1313269121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11666,6 +11748,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1363473848
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12096,6 +12180,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1393588570
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12449,6 +12535,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!4 &1449884235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5221161575693523710, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -12618,6 +12706,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1466905050
 GameObject:
   m_ObjectHideFlags: 0
@@ -12781,6 +12871,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1479220203
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13107,6 +13199,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &1524718989
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13236,6 +13330,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &1546341003
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13429,6 +13525,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1570389011
 GameObject:
   m_ObjectHideFlags: 0
@@ -13541,7 +13639,7 @@ GameObject:
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1589662061
 Transform:
   m_ObjectHideFlags: 0
@@ -13709,6 +13807,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1001 &1609038548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14280,6 +14380,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1626637288
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14423,6 +14525,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &1627287035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14552,6 +14656,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &1646991223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14923,6 +15029,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1695096366
 GameObject:
   m_ObjectHideFlags: 0
@@ -15072,6 +15180,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1700315468
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15232,6 +15342,8 @@ MonoBehaviour:
   grabableType: 0
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1775882139
 GameObject:
   m_ObjectHideFlags: 0
@@ -15248,7 +15360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1775882140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15351,6 +15463,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &1782468072
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15587,6 +15701,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1790645498
 GameObject:
   m_ObjectHideFlags: 0
@@ -15789,6 +15905,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1798027764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15871,6 +15989,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!144 &1865015592
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -16370,6 +16490,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1936478735
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16560,6 +16682,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 1
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &1976586516
 GameObject:
   m_ObjectHideFlags: 0
@@ -16815,6 +16939,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!65 &1991131206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17256,6 +17382,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1 &2064906843
 GameObject:
   m_ObjectHideFlags: 0
@@ -17306,6 +17434,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &2064906846
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17990,6 +18120,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &942967980567569629
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18132,6 +18264,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!54 &1261982470280076694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18626,6 +18760,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!1001 &2592707822840024551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18975,6 +19111,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!33 &3271721535801329803
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -23981,6 +24119,8 @@ MonoBehaviour:
   grabableType: 1
   TwoHandedMode: 0
   GrabPoints: []
+  overrideTrackingMode: 0
+  customTrackingMode: 0
 --- !u!23 &8102081827079478780
 MeshRenderer:
   m_ObjectHideFlags: 0

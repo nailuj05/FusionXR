@@ -137,7 +137,7 @@ namespace Fusion.XR
         private Rigidbody jointRB;
         private Rigidbody objectRB;
 
-        private Vector3 lastControllerPos;
+        private Vector3 lastPos;
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
@@ -159,7 +159,10 @@ namespace Fusion.XR
 
         public override void EndTrack()
         {
-            DestroyJoint();
+            if (activeJoint != null)
+                Object.Destroy(activeJoint);
+
+            activeJoint = null;
         }
 
         private void SetupJoint()
@@ -185,14 +188,6 @@ namespace Fusion.XR
             activeJoint.rotationDriveMode = RotationDriveMode.Slerp;
         }
 
-        private void DestroyJoint()
-        {
-            if(activeJoint != null)
-                Object.Destroy(activeJoint);
-
-            activeJoint = null;
-        }
-
         private void TrackPositionRotation(Vector3 targetPos, Quaternion targetRot)
         {
             if (activeJoint != null && Time.frameCount % 10 == 0)
@@ -202,6 +197,8 @@ namespace Fusion.XR
 
             activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos) - activeJoint.anchor;
             activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;
+
+            UpdateTargetVelocity(targetPos);
         }
 
         private void UpdateHandJointDrives()
@@ -226,11 +223,10 @@ namespace Fusion.XR
 
         private void UpdateTargetVelocity(Vector3 targetPos)
         {
-            var currentControllerPos = objectRB.transform.InverseTransformPoint(targetPos);
-            var velocity = (currentControllerPos - lastControllerPos) / Time.fixedDeltaTime;
-            lastControllerPos = currentControllerPos;
+            var targetVelocity = (targetPos - lastPos) / Time.fixedDeltaTime;
+            lastPos = targetPos;
 
-            activeJoint.targetVelocity = velocity;
+            activeJoint.targetVelocity = targetVelocity;
         }
     }
 
