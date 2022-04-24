@@ -110,6 +110,17 @@ namespace Fusion.XR
 
     public static class Extensions
     {
+        public static void FlipCheck(this Quaternion q)
+        {
+            if (q.w < 0)
+            {
+                q.x = -q.x;
+                q.y = -q.y;
+                q.z = -q.z;
+                q.w = -q.w;
+            }
+        }
+
         public static Quaternion InverseTransformRotation(this Transform t, Quaternion rot)
         {
             return rot * Quaternion.Inverse(t.rotation);
