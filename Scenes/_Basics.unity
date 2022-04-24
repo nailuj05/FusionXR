@@ -1430,6 +1430,10 @@ PrefabInstance:
       value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.positionStrength
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.rotationDampener
       value: 1.5
       objectReference: {fileID: 0}
@@ -1516,6 +1520,10 @@ PrefabInstance:
     - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: grabbedTrackingMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.positionStrength
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605529, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
@@ -2508,7 +2516,7 @@ MonoBehaviour:
     maxPDForce: 1500
     positionSpring: 3000
     positionDamper: 250
-    maxJointForce: 1500
+    positionMaxForce: 1500
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
@@ -3208,7 +3216,7 @@ MonoBehaviour:
     maxPDForce: 1500
     positionSpring: 3000
     positionDamper: 250
-    maxJointForce: 1500
+    positionMaxForce: 1500
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
@@ -10659,7 +10667,7 @@ MonoBehaviour:
     maxPDForce: 1500
     positionSpring: 3000
     positionDamper: 250
-    maxJointForce: 1500
+    positionMaxForce: 1500
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
@@ -11080,7 +11088,7 @@ MonoBehaviour:
     maxPDForce: 1500
     positionSpring: 3000
     positionDamper: 250
-    maxJointForce: 1500
+    positionMaxForce: 1500
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500

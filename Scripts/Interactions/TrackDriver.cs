@@ -138,6 +138,7 @@ namespace Fusion.XR
         private Rigidbody objectRB;
 
         private Vector3 lastPos;
+        private Quaternion lastRot;
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
@@ -198,7 +199,7 @@ namespace Fusion.XR
             activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos) - activeJoint.anchor;
             activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;
 
-            UpdateTargetVelocity(targetPos);
+            UpdateTargetVelocity(targetPos, targetRot);
         }
 
         private void UpdateHandJointDrives()
@@ -221,12 +222,21 @@ namespace Fusion.XR
             activeJoint.slerpDrive = slerpDrive;
         }
 
-        private void UpdateTargetVelocity(Vector3 targetPos)
+        private void UpdateTargetVelocity(Vector3 targetPos, Quaternion targetRot)
         {
             var targetVelocity = (targetPos - lastPos) / Time.fixedDeltaTime;
             lastPos = targetPos;
 
-            activeJoint.targetVelocity = targetVelocity;
+            activeJoint.targetVelocity = jointRB.transform.TransformDirection(targetVelocity - jointRB.velocity);
+
+            var deltaRot = targetRot * Quaternion.Inverse(lastRot);
+            deltaRot.FlipCheck();
+
+            deltaRot.ToAngleAxis(out float angle, out Vector3 axis);
+            angle *= Mathf.Rad2Deg;
+            var targetAngularVelocity = axis * (angle / Time.fixedDeltaTime);
+
+            activeJoint.targetAngularVelocity = Quaternion.Inverse(jointRB.transform.rotation) * targetAngularVelocity;
         }
     }
 
