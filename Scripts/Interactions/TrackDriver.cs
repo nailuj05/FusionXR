@@ -114,12 +114,9 @@ namespace Fusion.XR
             //Track Rotation
             Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
 
-            deltaRotation.ToAngleAxis(out var angle, out var axis);
+            deltaRotation.FlipCheck();
 
-            if (angle > 180f)
-            {
-                angle -= 360;
-            }
+            deltaRotation.ToAngleAxis(out var angle, out var axis);
 
             if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
                 rb.angularVelocity = axis * (angle * trackingBase.rotationStrength * Mathf.Deg2Rad);
