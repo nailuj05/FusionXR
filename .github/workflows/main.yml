@@ -12,7 +12,7 @@ jobs:
       uses: FrostBanditTeam/extract-unity-package-action@1
       with:
         #Specify the unity project path, relative to the repo root.
-        unityProjectPath: './'
+        unityProjectPath: '/'
         #Optional: Set the directory to package, relative to the project.
         #packagePath: 'Assets'
         #Optional: Set the output path for the package.
