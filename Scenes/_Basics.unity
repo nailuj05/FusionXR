@@ -664,6 +664,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &313881361
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -985,6 +997,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &529904289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1246,6 +1270,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &772687355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2012,6 +2048,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!43 &983409491
 Mesh:
   m_ObjectHideFlags: 0
@@ -2451,6 +2499,7 @@ MonoBehaviour:
   player: {fileID: 0}
   leftHand: {fileID: 911174200}
   rightHand: {fileID: 1366268933}
+  hand: {fileID: 0}
   l_hand: {fileID: 1126147298}
   r_hand: {fileID: 822546835}
   showControllers: 1
@@ -2527,8 +2576,6 @@ MonoBehaviour:
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
-  grabReference: {fileID: 0}
-  pinchReference: {fileID: 0}
   grabbedTrackingMode: 0
   palm: {fileID: 0}
   reachDist: 0.1
@@ -2536,6 +2583,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   useHandPoser: 0
+  grabReference: {fileID: 0}
+  pinchReference: {fileID: 0}
+  OnGrabStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGrabEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1152668148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,6 +2838,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1266934370
 GameObject:
   m_ObjectHideFlags: 0
@@ -3452,6 +3525,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1460280213
 GameObject:
   m_ObjectHideFlags: 0
@@ -3749,6 +3834,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1575785947
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4196,6 +4293,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1949655610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,6 +4467,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1979489544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4489,6 +4610,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2082699869
 GameObject:
   m_ObjectHideFlags: 0
@@ -6720,6 +6853,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3185852257567913927
 GameObject:
   m_ObjectHideFlags: 0
@@ -8124,6 +8269,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!59 &5385675516306310529
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -8576,6 +8733,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!59 &5972630861854798395
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -9917,6 +10086,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &7810790100169656697
 Transform:
   m_ObjectHideFlags: 0
@@ -10678,8 +10859,6 @@ MonoBehaviour:
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
-  grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabbedTrackingMode: 0
   palm: {fileID: 8622627593758503776}
   reachDist: 0.1
@@ -10687,6 +10866,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   useHandPoser: 0
+  grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  OnGrabStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGrabEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &8622627593513699866
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11099,8 +11292,6 @@ MonoBehaviour:
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
-  grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabbedTrackingMode: 0
   palm: {fileID: 8622627593493029903}
   reachDist: 0.1
@@ -11108,6 +11299,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   useHandPoser: 0
+  grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  OnGrabStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGrabEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &8622627594202557812
 Rigidbody:
   m_ObjectHideFlags: 0

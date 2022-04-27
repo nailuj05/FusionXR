@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Fusion.XR
@@ -31,10 +32,6 @@ namespace Fusion.XR
         [HideInInspector]
         public Rigidbody rb;
 
-        [Header("Inputs")]
-        public InputActionReference grabReference;
-        public InputActionReference pinchReference;
-
         [Header("Grabbing")]
         public TrackingMode grabbedTrackingMode;
         public Transform palm;
@@ -61,6 +58,17 @@ namespace Fusion.XR
         /// This stores the actual grabPoint Component
         /// </summary>
         private GrabPoint grabPoint;
+
+        [Header("Inputs")]
+        public InputActionReference grabReference;
+        public InputActionReference pinchReference;
+
+        [Header("Events")]
+        public UnityEvent OnGrabStart;
+        public UnityEvent OnGrabEnd;
+
+        public UnityEvent OnPinchStart;
+        public UnityEvent OnPinchEnd;
 
         #endregion
 
@@ -112,22 +120,24 @@ namespace Fusion.XR
         #region Events
         private void OnGrabbed(InputAction.CallbackContext obj)
         {
+            OnGrabStart?.Invoke();
             GrabObject();
         }
 
         private void OnLetGo(InputAction.CallbackContext obj)
         {
+            OnGrabEnd?.Invoke();
             Release();
         }
 
         private void OnPinched(InputAction.CallbackContext obj)
         {
-
+            OnPinchStart?.Invoke();
         }
 
         private void OnPinchedCancelled(InputAction.CallbackContext obj)
         {
-
+            OnPinchEnd?.Invoke();
         }
 
         #endregion
@@ -135,13 +145,25 @@ namespace Fusion.XR
         #region DebugEvents
         public void DebugGrab()
         {
+            OnGrabStart?.Invoke();
             GrabObject();
         }
 
         public void DebugLetGo()
         {
+            OnGrabEnd?.Invoke();
             if (isGrabbing)
                 Release();
+        }
+
+        public void DebugPinchStart()
+        {
+            OnPinchStart.Invoke();
+        }
+
+        public void DebugPinchEnd()
+        {
+            OnPinchEnd.Invoke();
         }
         #endregion
 

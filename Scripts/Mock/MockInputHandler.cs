@@ -17,6 +17,7 @@ namespace Fusion.XR
 
         private Transform VRCamera;
 
+        public FusionXRHand hand;
         public FusionXRHand l_hand;
         public FusionXRHand r_hand;
 
@@ -24,6 +25,7 @@ namespace Fusion.XR
         public GameObject l_controllerModel;
         public GameObject r_controllerModel;
 
+        private HandPoser handPoser;
         private HandPoser l_handPoser;
         private HandPoser r_handPoser;
 
@@ -132,32 +134,26 @@ namespace Fusion.XR
 
             if (currentHand == leftHand)
             {
-                if (l_hand)
-                {
-                    if (Input.GetMouseButtonDown(1))
-                        l_hand.DebugGrab();
-                    if(Input.GetMouseButtonUp(1))
-                        l_hand.DebugLetGo();
-                }
-                if (l_handPoser)
-                {
-                    l_handPoser.SetPinchGrabDebug(mockPinch, mockGrab);
-                }
+                hand = l_hand;
+                handPoser = l_handPoser;
             }
-            else if(currentHand == rightHand)
+            else
             {
-                if (r_hand)
-                {
-                    if (Input.GetMouseButtonDown(1))
-                        r_hand.DebugGrab();
-                    if (Input.GetMouseButtonUp(1))
-                        r_hand.DebugLetGo();
-                }
-                if (r_handPoser)
-                {
-                    r_handPoser.SetPinchGrabDebug(mockPinch, mockGrab);
-                }
+                hand = r_hand;
+                handPoser = r_handPoser;
             }
+
+            if (Input.GetMouseButtonDown(1))
+                hand?.DebugGrab();
+            else if(Input.GetMouseButtonUp(1))
+                hand?.DebugLetGo();
+
+            if (Input.GetMouseButtonDown(0))
+                hand?.DebugPinchStart();
+            else if (Input.GetMouseButtonUp(0))
+                hand?.DebugPinchEnd();
+
+            handPoser?.SetPinchGrabDebug(mockPinch, mockGrab);
             #endregion
         }
     }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+using UnityEngine.Events;
 
 namespace Fusion.XR
 {
@@ -33,6 +33,13 @@ namespace Fusion.XR
 
         [SerializeField]
         private TrackingMode customTrackingMode;
+
+        [Header("Events")]
+        public UnityEvent OnGrab;
+        public UnityEvent OnRelease;
+
+        public UnityEvent OnPinchStart;
+        public UnityEvent OnPinchEnd;
 
         //If 2 Handed:
         private Vector3 posOffset;
@@ -125,6 +132,10 @@ namespace Fusion.XR
 
             EnableOrDisableCollisions(gameObject, hand, true);
 
+            OnGrab?.Invoke();
+            hand.OnPinchStart.AddListener(delegate { OnPinchStart?.Invoke(); });
+            hand.OnPinchEnd.AddListener(delegate { OnPinchEnd?.Invoke(); });
+
             ///This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
             isGrabbed = true;
         }
@@ -136,6 +147,10 @@ namespace Fusion.XR
             rb.interpolation = originalInterpolation;
 
             RemoveHand(hand);
+
+            OnRelease?.Invoke();
+
+            hand.OnPinchStart.RemoveAllListeners();
 
             //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
             hand.grabbedTrackDriver.EndTrack();

@@ -309,7 +309,6 @@ namespace Fusion.XR
             {
                 foreach (GrabPoint currentGrabPoint in grabbable.grabPoints)
                 {
-                    //TODO FIX
                     if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand, grabbable.twoHandedMode)) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
