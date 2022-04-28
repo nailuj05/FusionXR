@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class AntiClipping : MonoBehaviour
 {
     [Header("Layers")]
-    [SerializeField] LayerMask detectionLayers;
+    [SerializeField] LayerMask detectionLayers = int.MaxValue;
 
     [Header("Events")]
     public UnityEvent ClippingStart;
