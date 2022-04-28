@@ -186,7 +186,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -300,7 +299,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -356,6 +354,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &61369017
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +418,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &61369020
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -448,7 +470,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -555,6 +576,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &64830875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -579,7 +612,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -752,6 +784,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 2
   m_AntialiasingQuality: 1
@@ -858,7 +891,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -928,6 +960,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &89298467
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -944,50 +988,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &90476577
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 90476578}
-  - component: {fileID: 90476579}
-  m_Layer: 0
-  m_Name: TableLeg
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &90476578
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90476577}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48, y: -0.754, z: 0.347}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 543450652928026628}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &90476579
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90476577}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &90654320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,7 +1093,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1211,7 +1210,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1307,7 +1305,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1403,7 +1400,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1641,7 +1637,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1878,6 +1873,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &219338870
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1918,7 +1925,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2003,7 +2009,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2089,6 +2094,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &239993514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2290,6 +2307,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &247162023
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2314,7 +2343,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2808,7 +2836,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2910,6 +2937,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &354308489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2978,6 +3017,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &354308493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3002,7 +3053,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3093,6 +3143,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &372965726
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3133,7 +3195,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3260,7 +3321,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3468,7 +3528,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3524,6 +3583,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &446333552
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3587,7 +3658,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3658,6 +3728,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &482686503
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3825,7 +3907,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3909,7 +3990,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3995,6 +4075,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &516412576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,7 +4164,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4158,6 +4249,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &576371417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4215,7 +4318,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4468,6 +4570,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &584124594
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4492,7 +4606,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4531,50 +4644,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584124590}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &585363913
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 585363914}
-  - component: {fileID: 585363915}
-  m_Layer: 0
-  m_Name: TableLeg (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &585363914
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 585363913}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.473, y: -0.754, z: 0.347}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 543450652928026628}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &585363915
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 585363913}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &588589235
 GameObject:
   m_ObjectHideFlags: 0
@@ -4622,7 +4691,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4693,6 +4761,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &588589241
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4894,7 +4974,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4950,6 +5029,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &639560616
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5161,6 +5252,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &707986413
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5185,7 +5288,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5270,7 +5372,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5356,6 +5457,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &718271216
 GameObject:
   m_ObjectHideFlags: 0
@@ -5399,7 +5512,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5559,7 +5671,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5788,7 +5899,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5873,7 +5983,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5959,50 +6068,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
---- !u!1 &803561793
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 803561794}
-  - component: {fileID: 803561795}
-  m_Layer: 0
-  m_Name: TableLeg (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &803561794
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803561793}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48, y: 0.743, z: 0.347}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 543450652928026628}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &803561795
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803561793}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &806011468
 GameObject:
   m_ObjectHideFlags: 0
@@ -6071,6 +6148,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &806011472
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6095,7 +6184,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6223,7 +6311,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6321,7 +6408,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6443,6 +6529,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &823021676
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6483,7 +6581,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6579,7 +6676,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6670,6 +6766,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &846993102
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6711,7 +6819,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6809,7 +6916,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6865,6 +6971,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &854901928
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6949,6 +7067,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &858601897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6973,7 +7103,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7055,7 +7184,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7151,7 +7279,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7258,6 +7385,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &890707046
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7282,7 +7421,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7378,7 +7516,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7700,7 +7837,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7786,6 +7922,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &973909683
 GameObject:
   m_ObjectHideFlags: 0
@@ -7843,7 +7991,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7941,7 +8088,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7997,6 +8143,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &977188419
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8075,7 +8233,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -8157,7 +8314,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -8270,7 +8426,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -8352,7 +8507,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -8467,6 +8621,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -8645,7 +8800,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -8741,7 +8895,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -8838,7 +8991,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -8893,50 +9045,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!1 &1075482939
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1075482940}
-  - component: {fileID: 1075482941}
-  m_Layer: 0
-  m_Name: TableLeg (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1075482940
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075482939}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.473, y: 0.743, z: 0.347}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 543450652928026628}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1075482941
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075482939}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1082943618
 GameObject:
   m_ObjectHideFlags: 0
@@ -9005,6 +9113,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1082943622
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9029,7 +9149,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -9114,7 +9233,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -9200,6 +9318,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1090878698 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2592707823930765581, guid: 3b8fed67691ed944c85eec2ed2d1bded, type: 3}
@@ -9486,7 +9616,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -9584,7 +9713,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -9640,6 +9768,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1118429196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9717,7 +9857,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -9787,6 +9926,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1121965585
 GameObject:
   m_ObjectHideFlags: 0
@@ -9844,7 +9995,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -9926,7 +10076,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10017,6 +10166,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1150902779
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10057,7 +10218,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10196,7 +10356,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10303,6 +10462,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1175149008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10327,7 +10498,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10413,7 +10583,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10484,6 +10653,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1192251657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10729,7 +10910,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10800,6 +10980,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1203173899
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10892,7 +11084,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10962,6 +11153,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1232207949
 GameObject:
   m_ObjectHideFlags: 0
@@ -11056,7 +11259,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11126,6 +11328,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1280261517
 GameObject:
   m_ObjectHideFlags: 0
@@ -11169,7 +11383,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11251,7 +11464,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11337,7 +11549,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11408,6 +11619,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1313269121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11628,7 +11851,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11750,6 +11972,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1363473848
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11791,7 +12025,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11897,7 +12130,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12025,7 +12257,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12111,7 +12342,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12182,6 +12412,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1393588570
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12302,7 +12544,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12451,7 +12692,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12537,6 +12777,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1449884235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5221161575693523710, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -12622,7 +12874,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12708,6 +12959,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1466905050
 GameObject:
   m_ObjectHideFlags: 0
@@ -12782,7 +13045,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12873,6 +13135,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1479220203
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12913,7 +13187,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13012,7 +13285,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13094,7 +13366,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13201,6 +13472,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1524718989
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13225,7 +13508,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13332,6 +13614,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1546341003
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13356,7 +13650,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13441,7 +13734,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13527,6 +13819,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1570389011
 GameObject:
   m_ObjectHideFlags: 0
@@ -13584,7 +13888,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13671,6 +13974,7 @@ MonoBehaviour:
   player: {fileID: 443490236}
   leftHand: {fileID: 1338051153}
   rightHand: {fileID: 105709719}
+  hand: {fileID: 0}
   l_hand: {fileID: 749233176}
   r_hand: {fileID: 239993515}
   showControllers: 1
@@ -13723,7 +14027,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13809,6 +14112,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1609038548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14129,7 +14444,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14225,7 +14539,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14311,7 +14624,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14382,6 +14694,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1626637288
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14527,6 +14851,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1627287035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14551,7 +14887,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14658,6 +14993,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1646991223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14682,7 +15029,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14764,7 +15110,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14860,7 +15205,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14945,7 +15289,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -15031,6 +15374,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1695096366
 GameObject:
   m_ObjectHideFlags: 0
@@ -15111,7 +15466,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -15182,6 +15536,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1700315468
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15274,7 +15640,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -15344,6 +15709,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1775882139
 GameObject:
   m_ObjectHideFlags: 0
@@ -15465,6 +15842,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1782468072
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15489,7 +15878,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -15617,7 +16005,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -15703,6 +16090,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1790645498
 GameObject:
   m_ObjectHideFlags: 0
@@ -15836,7 +16235,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -15907,6 +16305,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1798027764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15991,6 +16401,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!144 &1865015592
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -16077,7 +16499,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -16181,7 +16602,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -16255,7 +16675,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -16351,7 +16770,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -16436,7 +16854,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -16492,6 +16909,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1936478735
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16614,7 +17043,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -16684,6 +17112,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1976586516
 GameObject:
   m_ObjectHideFlags: 0
@@ -16941,6 +17381,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1991131206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16965,7 +17417,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -17061,7 +17512,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -17161,7 +17611,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -17298,7 +17747,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -17384,6 +17832,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2064906843
 GameObject:
   m_ObjectHideFlags: 0
@@ -17436,6 +17896,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &2064906846
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17477,7 +17949,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -17575,7 +18046,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -17733,7 +18203,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -17797,7 +18266,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -17897,24 +18365,11 @@ Transform:
   m_Father: {fileID: 279476819}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &543450652928026628
+--- !u!4 &543450652928026628 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+  m_PrefabInstance: {fileID: 2600520946863441826}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148719088318}
-  m_LocalRotation: {x: -0.5000008, y: 0.49999925, z: 0.49999928, w: 0.5000007}
-  m_LocalPosition: {x: 1.2250003, y: -1.05, z: -0.45500022}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 90476578}
-  - {fileID: 585363914}
-  - {fileID: 803561794}
-  - {fileID: 1075482940}
-  m_Father: {fileID: 1784969799}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!23 &757601096318319681
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17926,7 +18381,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -18020,55 +18474,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &919132148719088318
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 543450652928026628}
-  - component: {fileID: 3469287836911773601}
-  - component: {fileID: 1711813856338465643}
-  - component: {fileID: 919132148719088319}
-  - component: {fileID: 919132148719088320}
-  m_Layer: 10
-  m_Name: TabelLarge
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &919132148719088319
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148719088318}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1192689, y: 1.6784027, z: 0.054033637}
-  m_Center: {x: 0.0143607855, y: -0.015521467, z: 0.7056075}
---- !u!54 &919132148719088320
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148719088318}
-  serializedVersion: 2
-  m_Mass: 20
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &942967980567569626
 GameObject:
   m_ObjectHideFlags: 0
@@ -18122,6 +18527,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &942967980567569629
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18164,7 +18581,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -18266,6 +18682,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1261982470280076694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18307,7 +18735,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -18458,7 +18885,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -18501,7 +18927,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -18511,48 +18936,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1891392835673a14dbc850261789ce8c, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!23 &1711813856338465643
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148719088318}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: c37b8c6d0014d8049b6d46cf81963cda, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18607,7 +18990,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -18649,7 +19031,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -18762,6 +19143,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2592707822840024551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18819,6 +19212,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b8fed67691ed944c85eec2ed2d1bded, type: 3}
+--- !u!1001 &2600520946863441826
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1784969799}
+    m_Modifications:
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2250003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.45500022
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.49999925
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49999928
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566015466560073638, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942963629827880220, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
+      propertyPath: m_Name
+      value: TabelLarge
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4116c24c0282534c90ca8d82ec08dac, type: 3}
 --- !u!23 &2631141613007132695
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18830,7 +19280,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -19113,6 +19562,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!33 &3271721535801329803
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -19198,14 +19659,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!33 &3469287836911773601
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148719088318}
-  m_Mesh: {fileID: -5495902117074765545, guid: 791feae669880b643a28fbc5ac44e325, type: 3}
 --- !u!1 &3471250409052252230
 GameObject:
   m_ObjectHideFlags: 0
@@ -19357,7 +19810,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -19437,7 +19889,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -19653,7 +20104,7 @@ MonoBehaviour:
     maxPDForce: 1500
     positionSpring: 4500
     positionDamper: 250
-    maxJointForce: 4000
+    positionMaxForce: 1500
     slerpSpring: 1500
     slerpDamper: 250
     slerpMaxForce: 1500
@@ -19664,8 +20115,6 @@ MonoBehaviour:
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
-  grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabbedTrackingMode: 3
   palm: {fileID: 4601817724575980482}
   reachDist: 0.1
@@ -19673,6 +20122,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   useHandPoser: 1
+  grabReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  pinchReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  OnGrabStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGrabEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &4601817723382300431
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19903,6 +20366,7 @@ MonoBehaviour:
   player: {fileID: 4601817725437680075}
   leftHand: {fileID: 4601817725308547540}
   rightHand: {fileID: 4601817723616118761}
+  hand: {fileID: 0}
   l_hand: {fileID: 4601817723382300430}
   r_hand: {fileID: 4601817725228337791}
   showControllers: 1
@@ -21630,7 +22094,6 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -21815,7 +22278,6 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -22256,6 +22718,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -22538,7 +23001,7 @@ MonoBehaviour:
     maxPDForce: 1500
     positionSpring: 4500
     positionDamper: 250
-    maxJointForce: 4000
+    positionMaxForce: 1500
     slerpSpring: 1500
     slerpDamper: 250
     slerpMaxForce: 1500
@@ -22549,8 +23012,6 @@ MonoBehaviour:
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
-  grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabbedTrackingMode: 3
   palm: {fileID: 4601817723820258994}
   reachDist: 0.1
@@ -22558,6 +23019,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   useHandPoser: 1
+  grabReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  pinchReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  OnGrabStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGrabEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4601817725258491520
 GameObject:
   m_ObjectHideFlags: 0
@@ -22697,7 +23172,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -23107,7 +23581,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -23345,7 +23818,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -23426,6 +23898,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 2
   m_AntialiasingQuality: 1
@@ -23949,7 +24422,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -24008,7 +24480,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -24121,6 +24592,18 @@ MonoBehaviour:
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPinchEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!23 &8102081827079478780
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24132,7 +24615,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
