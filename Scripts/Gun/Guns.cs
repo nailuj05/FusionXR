@@ -25,10 +25,10 @@ public class Guns : MonoBehaviour
     public float fireRate = 1f;
     private float nextRate = 0f;
     public Vector3 recoil;
+    public Vector3 twoHandedRecoil;
     public Grabbable grabScript;
     public GrabPoint rightHandPoint;
     public GrabPoint leftHandPoint;
-    public GrabPoint slideHandPoint;
     public DistanceReader slideDistanceReader;
     public bool hasMag;
     private bool objectGrabbed;
@@ -112,7 +112,14 @@ public class Guns : MonoBehaviour
             {
                 nextRate = Time.time + fireRate;
                 Instantiate(fireAudio, firePoint);
-                rb.AddRelativeForce(recoil);
+                if(grabScript.attachedHands.Count >= 2)
+                {
+                    rb.AddRelativeForce(twoHandedRecoil);
+                }
+                else
+                {
+                    rb.AddRelativeForce(recoil);
+                }
                 if(isAutomatic == false) 
                 {
                     canShoot = false;
