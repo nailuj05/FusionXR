@@ -151,7 +151,7 @@ namespace Fusion.XR
         {
             if (hasAttachedObject)
             {
-                trackDriver.UpdateTrack(transform.position, transform.rotation);
+                trackDriver.UpdateTrackFixed(transform.position, transform.rotation);
             }
         }
 
@@ -175,10 +175,10 @@ namespace Fusion.XR
             attachedTrackingBase.tracker = gameObject;
             attachedTrackingBase.palm = transform;
 
-            trackDriver = Utils.DriverFromEnum(attachedTrackingMode);
-            trackDriver.StartTrack(objectToAttach.transform, attachedTrackingBase);
-
             attachedObject = objectToAttach;
+
+            trackDriver = Utils.DriverFromEnum(attachedTrackingMode);
+            trackDriver.StartTrack(attachedObject.transform, attachedTrackingBase);
 
             if (attachedObject.TryGetComponent(out Grabbable grabbable))
             {
@@ -229,7 +229,7 @@ namespace Fusion.XR
         public virtual bool CheckAttachementRequirements(GameObject obj)
         {
             //Check if already attached
-            if (obj.tag == "Attached") { Debug.Log("Already attached"); return false; }
+            if (obj.tag == "Attached") return false;
 
             //Check Tags
             bool tagCorrect = Utils.ObjectMatchesTags(obj, tagMask);

@@ -28,6 +28,13 @@ namespace Fusion.XR
         [Range(0.5f, 5f)]
         public float poseLerpSpeed = 0.1f;
 
+        public bool useFingerColliders;
+
+        private void OnValidate()
+        {
+            if (fingerSettings.fingerDirection > 2) fingerSettings.fingerDirection = 2;
+        }
+
         [Header("Attachment")]
         //Whether the Renderhand is attached to something of following the controller
         [SerializeField] private bool isAttached;
@@ -58,16 +65,10 @@ namespace Fusion.XR
         public Hand hand;
 
         private HandPose currentPose;
-        private List<Quaternion[]> lastHandState;
-
-        private float currentLerp;
 
         [Header("Debug Hand State")]
         private float pinchValue;
         private float grabValue;
-
-        public float pinchState;
-        public float grabState;
 
         public HandState handState = HandState.open;
 
@@ -77,7 +78,8 @@ namespace Fusion.XR
             UpdateDriverAndTracking(handPosingDriver);
 
             currentPose = handOpen;
-            lastHandState = SavePose();
+
+            UpdateColliders();
         }
 
         public void Update()
@@ -101,8 +103,6 @@ namespace Fusion.XR
                 }
             }
 
-            FingerUpdate();
-
             #region HandState
             if (!poseLocked)
             {
@@ -112,11 +112,11 @@ namespace Fusion.XR
                     if (handState == HandState.open)
                         return;
 
-                    pinchState = grabState = 0;
-
                     handState = HandState.open;
 
                     SetPoseTarget(handOpen);
+
+                    return;
                 }
                 //Grabbing
                 if (pinchValue > 0 && grabValue > 0)
@@ -124,11 +124,11 @@ namespace Fusion.XR
                     if (handState == HandState.grab)
                         return;
 
-                    pinchState = grabState = 1;
-
                     handState = HandState.grab;
 
                     SetPoseTarget(handClosed);
+
+                    return;
                 }
                 //Pinching
                 if (pinchValue > 0 && grabValue == 0)
@@ -136,12 +136,11 @@ namespace Fusion.XR
                     if (handState == HandState.pinch)
                         return;
 
-                    pinchState = 1;
-                    grabState = 0;
-
                     handState = HandState.pinch;
 
                     SetPoseTarget(handPinch);
+
+                    return;
                 }
                 //Pointing
                 if (pinchValue == 0 && grabValue > 0)
@@ -149,15 +148,49 @@ namespace Fusion.XR
                     if (handState == HandState.point)
                         return;
 
-                    pinchState = 0;
-                    grabState = 1;
-
                     handState = HandState.point;
 
                     SetPoseTarget(handPoint);
+
+                    return;
                 }
             }
             #endregion
+        }
+
+        private void LateUpdate()
+        {
+            FingerUpdate();
+        }
+
+        public void UpdateColliders()
+        {
+            if(TryGetComponent(out Collider collider))
+            {
+                collider.enabled = !useFingerColliders;
+            }
+
+            if (useFingerColliders)
+            {
+                var b = gameObject.AddComponent<BoxCollider>();
+                b.center = fingerSettings.handBaseCenter;
+                b.size   = fingerSettings.handBaseSize;
+
+                foreach (Finger f in fingers)
+                {
+                    for (int i = 0; i < f.fingerBones.Length; i++)
+                    {
+                        var c = f.fingerBones[i].gameObject.AddComponent<CapsuleCollider>();
+
+                        c.gameObject.layer = LayerMask.NameToLayer("Fingers");
+
+                        c.center = Finger.GetFingerCollisionOffset(i, f.fingerTrackingBase) * 0.5f;
+                        c.direction = fingerSettings.fingerDirection;
+                        c.radius = fingerSettings.radius / c.transform.lossyScale.magnitude;
+                        c.height = Finger.GetFingerLength(i, f.fingerTrackingBase);
+                    }
+                }
+            }
         }
 
         public void PlaceRenderHand()
@@ -193,51 +226,32 @@ namespace Fusion.XR
 
 #region Posing Functions
 
-        public void AttachHand(Transform attachmentPoint)
+        public void AttachHand(Transform attachmentPoint, HandPose pose = null, bool customPose = false)
         {
-            AttachHand(attachmentPoint, handClosed, false);
-        }
-
-        public void AttachHand(Transform attachmentPoint, HandPose pose)
-        {
-            AttachHand(attachmentPoint, pose, true);
-        }
-
-        public void AttachHand(Transform attachmentPoint, HandPose pose, bool customPose)
-        {
-            //Debug.Log($"Attaching with {pose} custom: {customPose}");
             poseLocked = true;
             isAttached = true;
             attachLerp = 0;
             attachedObj = attachmentPoint;
 
-            //Whether we should use default or Kinematic tracking (for predfined poses)
             UpdateTracking(customPose ? FingerTrackingMode.Kinematic : grabbingDriver);
 
             RotateToPose(handAwait);
+
+            if (pose is null) pose = handClosed;
 
             SetPoseTarget(pose);
         }
 
         private void SetPoseTarget(HandPose pose)
         {
-            lastHandState = SavePose();
             currentPose = pose;
-
-            currentLerp = 0;
         }
 
         private void FingerUpdate()
         {
-            //This right?
-            currentLerp += currentLerp <= 1f ? Time.deltaTime * poseLerpSpeed : 0;
-
-            if (currentLerp >= 1)
-                return;
-
             for (int i = 0; i < fingers.Length; i++)
             {
-                fingers[i].FingerUpdate(lastHandState[i], currentPose.GetRotationByIndex(i), currentLerp);
+                fingers[i].FingerUpdate(currentPose.GetRotationByIndex(i), poseLerpSpeed * 50 * Time.deltaTime);
             }
         }
 
@@ -248,6 +262,7 @@ namespace Fusion.XR
 
             attachedObj = null;
 
+            //TODO: Rotate or Lerp to Pose?
             //SetPoseTarget(handOpen);
             RotateToPose(handOpen);
 
@@ -267,10 +282,19 @@ namespace Fusion.XR
             {
                 //Create a new Tracking Base with the same values as "Finger Settings", won't work with a pointer to Finger Settings
                 FingerTrackingBase trackingBase = new FingerTrackingBase();
-                trackingBase.fingerBones = finger.fingerBones;
-                trackingBase.collMask = fingerSettings.collMask;
-                trackingBase.offset = fingerSettings.offset;
-                trackingBase.radius = fingerSettings.radius;
+
+                trackingBase.fingerBones        = finger.fingerBones;
+                trackingBase.collMask           = fingerSettings.collMask;
+                trackingBase.offset             = fingerSettings.offset;
+                trackingBase.radius             = fingerSettings.radius;
+                trackingBase.hand               = GetComponent<Rigidbody>();
+                trackingBase.handBaseCenter     = fingerSettings.handBaseCenter;
+                trackingBase.handBaseSize       = fingerSettings.handBaseSize;
+                trackingBase.fingerLength       = fingerSettings.fingerLength;
+                trackingBase.fingerDirection    = fingerSettings.fingerDirection;
+                trackingBase.fingerMass         = fingerSettings.fingerMass;
+                trackingBase.fingerDrag         = fingerSettings.fingerDrag;
+                trackingBase.fingerAngularDrag  = fingerSettings.fingerAngularDrag;
 
                 finger.ChangeTrackingBase(trackingBase);
             }

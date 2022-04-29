@@ -30,10 +30,117 @@ namespace Fusion.XR
             GUI.enabled = true;
         }
     }
-    #endif
+#endif
+
+    #region ConfigJointExtensions
+
+    //Grabbed from https://gist.github.com/mstevenson/4958837#file-configurablejointextensions-cs-L13
+    public static class ConfigurableJointExtensions
+    {
+        /// <summary>
+        /// Sets a joint's targetRotation to match a given local rotation.
+        /// The joint transform's local rotation must be cached on Start and passed into this method.
+        /// </summary>
+        public static void SetTargetRotationLocal(this ConfigurableJoint joint, Quaternion targetLocalRotation, Quaternion startLocalRotation)
+        {
+            if (joint.configuredInWorldSpace)
+            {
+                Debug.LogError("SetTargetRotationLocal should not be used with joints that are configured in world space. For world space joints, use SetTargetRotation.", joint);
+            }
+            SetTargetRotationInternal(joint, targetLocalRotation, startLocalRotation, Space.Self);
+        }
+
+        /// <summary>
+        /// Sets a joint's targetRotation to match a given world rotation.
+        /// The joint transform's world rotation must be cached on Start and passed into this method.
+        /// </summary>
+        public static void SetTargetRotation(this ConfigurableJoint joint, Quaternion targetWorldRotation, Quaternion startWorldRotation)
+        {
+            if (!joint.configuredInWorldSpace)
+            {
+                Debug.LogError("SetTargetRotation must be used with joints that are configured in world space. For local space joints, use SetTargetRotationLocal.", joint);
+            }
+            SetTargetRotationInternal(joint, targetWorldRotation, startWorldRotation, Space.World);
+        }
+
+        public static void SetTargetRotation(this ConfigurableJoint joint, Quaternion target, Quaternion startRot, Space space)
+        {
+            Vector3 right = joint.axis;
+            Vector3 forward = Vector3.Cross(joint.axis, joint.secondaryAxis).normalized;
+            Vector3 up = Vector3.Cross(forward, right).normalized;
+            Quaternion localToJointSpace = Quaternion.LookRotation(forward, up);
+            if (space == Space.World)
+            {
+                Quaternion worldToLocal = Quaternion.Inverse(joint.transform.parent.rotation);
+                target = worldToLocal * target;
+            }
+            joint.targetRotation = Quaternion.Inverse(localToJointSpace) * Quaternion.Inverse(target) * startRot * localToJointSpace;
+        }
+
+        static void SetTargetRotationInternal(ConfigurableJoint joint, Quaternion targetRotation, Quaternion startRotation, Space space)
+        {
+            // Calculate the rotation expressed by the joint's axis and secondary axis
+            var right = joint.axis;
+            var forward = Vector3.Cross(joint.axis, joint.secondaryAxis).normalized;
+            var up = Vector3.Cross(forward, right).normalized;
+            Quaternion worldToJointSpace = Quaternion.LookRotation(forward, up);
+
+            // Transform into world space
+            Quaternion resultRotation = Quaternion.Inverse(worldToJointSpace);
+
+            // Counter-rotate and apply the new local rotation.
+            // Joint space is the inverse of world space, so we need to invert our value
+            if (space == Space.World)
+            {
+                resultRotation *= startRotation * Quaternion.Inverse(targetRotation);
+            }
+            else
+            {
+                resultRotation *= Quaternion.Inverse(targetRotation) * startRotation;
+            }
+
+            // Transform back into joint space
+            resultRotation *= worldToJointSpace;
+
+            // Set target rotation to our newly calculated rotation
+            joint.targetRotation = resultRotation;
+        }
+    } 
+    #endregion
 
     public static class Extensions
     {
+        public static void FlipCheck(this Quaternion q)
+        {
+            if (q.w < 0)
+            {
+                q.x = -q.x;
+                q.y = -q.y;
+                q.z = -q.z;
+                q.w = -q.w;
+            }
+        }
+
+        public static Quaternion InverseTransformRotation(this Transform t, Quaternion rot)
+        {
+            return rot * Quaternion.Inverse(t.rotation);
+        }
+
+        public static List<Transform> GetParentsFromTo(this Transform transform, Transform to)
+        {
+            List<Transform> transforms = new List<Transform>();
+            Transform currentParent = transform;
+
+            while(currentParent != to && currentParent.parent != null)
+            {
+                currentParent = currentParent.parent;
+                Debug.Log(currentParent);
+                transforms.Add(currentParent);
+            }
+
+            return transforms;
+        }
+
         public static Vector3 ClampVector(this Vector3 vector, float maxLength)
         {
             if (vector.magnitude < maxLength) return vector;
@@ -202,7 +309,6 @@ namespace Fusion.XR
             {
                 foreach (GrabPoint currentGrabPoint in grabbable.grabPoints)
                 {
-                    //TODO FIX
                     if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand, grabbable.twoHandedMode)) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
@@ -297,6 +403,9 @@ namespace Fusion.XR
                 case TrackingMode.FixedJoint:
                     driver = new FixedJointDriver();
                     break;
+                case TrackingMode.PDForce:
+                    driver = new PDForceDriver();
+                    break;
                 default:
                     Debug.LogError("No matching TrackDriver was setup for the given trackingMode enum, defaulting to a Kinematic Driver. Define a matching TrackDriver and declare it in Utilities.cs");
                     break;
@@ -317,6 +426,9 @@ namespace Fusion.XR
                     break;
                 case FingerTrackingMode.CollisionTest:
                     driver = new CollisionTestDriver();
+                    break;
+                case FingerTrackingMode.Joint:
+                    driver = new JointDriver();
                     break;
                 default:
                     Debug.LogError("No matching FingerDriver was setup for the given FingerTrackingMode enum, defaulting to a Kinematic Driver. Define a matching FingerDriver and declare it in Utilities.cs");

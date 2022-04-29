@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Fusion.XR
 {
     [ExecuteAlways]
-    public class GrabPointLine : GrabPoint
+    public class GrabPointLine : GrabPointAlign
     {
         public bool alignHand = true;
 
@@ -28,8 +28,10 @@ namespace Fusion.XR
             //Align rotation
             if (alignHand)
             {
-                GrabPointAlign.AlignPoint(transform, hand);
+                AlignPoint(transform, hand);
             }
+
+            UpdateAlignedPoint();
 
             return this;
         }

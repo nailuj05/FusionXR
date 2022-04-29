@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Fusion.XR
 {
@@ -27,6 +28,18 @@ namespace Fusion.XR
 
         private Rigidbody rb;
         private RigidbodyInterpolation originalInterpolation;
+
+        public bool overrideTrackingMode;
+
+        [SerializeField]
+        private TrackingMode customTrackingMode;
+
+        [Header("Events")]
+        public UnityEvent OnGrab;
+        public UnityEvent OnRelease;
+
+        public UnityEvent OnPinchStart;
+        public UnityEvent OnPinchEnd;
 
         //If 2 Handed:
         private Vector3 posOffset;
@@ -72,7 +85,7 @@ namespace Fusion.XR
                 targetRotation = attachedHands[0].targetRotation * Quaternion.Inverse(offsetRot);
 
                 //Apply Target Transformation to hand
-                attachedHands[0].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
+                attachedHands[0].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
             }
             else //If there is two hands grabbing 
             {
@@ -95,8 +108,8 @@ namespace Fusion.XR
                 targetRotation = Quaternion.Lerp(rotTargets[0], rotTargets[1], 0.5f);
 
                 //Apply Target Transformation to hands
-                attachedHands[0].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
-                attachedHands[1].grabbedTrackDriver.UpdateTrack(targetPosition, targetRotation);
+                attachedHands[0].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
+                attachedHands[1].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
             }
         }
 
@@ -112,10 +125,16 @@ namespace Fusion.XR
             rb.interpolation = RigidbodyInterpolation.Interpolate;
 
             ///Setup and Start Track Driver
-            hand.grabbedTrackDriver = Utils.DriverFromEnum(mode);
+            var m = overrideTrackingMode ? customTrackingMode : mode;
+
+            hand.grabbedTrackDriver = Utils.DriverFromEnum(m);
             hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
 
             EnableOrDisableCollisions(gameObject, hand, true);
+
+            OnGrab?.Invoke();
+            hand.OnPinchStart.AddListener(delegate { OnPinchStart?.Invoke(); });
+            hand.OnPinchEnd.AddListener(delegate { OnPinchEnd?.Invoke(); });
 
             ///This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
             isGrabbed = true;
@@ -128,6 +147,10 @@ namespace Fusion.XR
             rb.interpolation = originalInterpolation;
 
             RemoveHand(hand);
+
+            OnRelease?.Invoke();
+
+            hand.OnPinchStart.RemoveAllListeners();
 
             //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
             hand.grabbedTrackDriver.EndTrack();

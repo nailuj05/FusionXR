@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Fusion.XR
@@ -31,15 +32,10 @@ namespace Fusion.XR
         [HideInInspector]
         public Rigidbody rb;
 
-        [Header("Inputs")]
-        public InputActionReference grabReference;
-        public InputActionReference pinchReference;
-
         [Header("Grabbing")]
-        public float grabRange = 0.1f;
         public TrackingMode grabbedTrackingMode;
         public Transform palm;
-        [SerializeField] private float reachDist = 0.1f; //, joinDist = 0.05f;
+        [SerializeField] private float reachDist = 0.1f;
 
         public LayerMask grabMask = 768;
 
@@ -62,6 +58,17 @@ namespace Fusion.XR
         /// This stores the actual grabPoint Component
         /// </summary>
         private GrabPoint grabPoint;
+
+        [Header("Inputs")]
+        public InputActionReference grabReference;
+        public InputActionReference pinchReference;
+
+        [Header("Events")]
+        public UnityEvent OnGrabStart;
+        public UnityEvent OnGrabEnd;
+
+        public UnityEvent OnPinchStart;
+        public UnityEvent OnPinchEnd;
 
         #endregion
 
@@ -86,13 +93,16 @@ namespace Fusion.XR
             pinchReference.action.started += OnPinched;
             pinchReference.action.canceled += OnPinchedCancelled;
 
+            trackingBase.startRot = transform.rotation;
+            trackingBase.startRotLocal = transform.localRotation;
+
             if (useHandPoser)
             {
                 handPoser = GetComponent<HandPoser>();
             }
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             targetPosition = followObject.TransformPoint(positionOffset);
             targetRotation = followObject.rotation * Quaternion.Euler(rotationOffset);
@@ -100,27 +110,34 @@ namespace Fusion.XR
             trackDriver.UpdateTrack(targetPosition, targetRotation);
         }
 
+        private void FixedUpdate()
+        {
+            trackDriver.UpdateTrackFixed(targetPosition, targetRotation);
+        }
+
         #endregion
 
         #region Events
         private void OnGrabbed(InputAction.CallbackContext obj)
         {
+            OnGrabStart?.Invoke();
             GrabObject();
         }
 
         private void OnLetGo(InputAction.CallbackContext obj)
         {
+            OnGrabEnd?.Invoke();
             Release();
         }
 
         private void OnPinched(InputAction.CallbackContext obj)
         {
-
+            OnPinchStart?.Invoke();
         }
 
         private void OnPinchedCancelled(InputAction.CallbackContext obj)
         {
-
+            OnPinchEnd?.Invoke();
         }
 
         #endregion
@@ -128,13 +145,25 @@ namespace Fusion.XR
         #region DebugEvents
         public void DebugGrab()
         {
+            OnGrabStart?.Invoke();
             GrabObject();
         }
 
         public void DebugLetGo()
         {
+            OnGrabEnd?.Invoke();
             if (isGrabbing)
                 Release();
+        }
+
+        public void DebugPinchStart()
+        {
+            OnPinchStart.Invoke();
+        }
+
+        public void DebugPinchEnd()
+        {
+            OnPinchEnd.Invoke();
         }
         #endregion
 
@@ -146,7 +175,6 @@ namespace Fusion.XR
             if (isGrabbing)
                 return;
 
-            isGrabbing = true;
             grabPoint = null;
             generatedGrabPoint = false;
 
@@ -155,6 +183,8 @@ namespace Fusion.XR
 
             if (closestGrabbable == null)
                 return;
+
+            isGrabbing = true;
 
             ///Get grabbable component and possible grab points
             grabbedGrabbable = closestGrabbable.GetComponentInParent<IGrabbable>();
@@ -189,9 +219,10 @@ namespace Fusion.XR
         ///A function so it can also be called from a grabbable that wants to switch hands
         public void Release()
         {
+            if (!isGrabbing) return;
             isGrabbing = false;
-            
-            //Destory the grabPoint, unlock if needed
+
+            //Destroy the grabPoint, unlock if needed
             if (generatedGrabPoint)
             {
                 if(grabPosition != null)
@@ -260,14 +291,14 @@ namespace Fusion.XR
             {
                 foreach (Collider coll in nearObjects)
                 {
-                    if(Utils.ObjectMatchesLayermask(coll.gameObject, grabMask))
+                    if (!Utils.ObjectMatchesLayermask(coll.gameObject, grabMask))
+                        continue;
+
+                    if ((coll.transform.position - transform.position).sqrMagnitude < Distance)
                     {
-                        if ((coll.transform.position - transform.position).sqrMagnitude < Distance)
-                        {
-                            closestColl = coll;
-                            ClosestGameObj = coll.gameObject;
-                            Distance = (coll.transform.position - transform.position).sqrMagnitude;
-                        }
+                        closestColl = coll;
+                        ClosestGameObj = coll.gameObject;
+                        Distance = (coll.transform.position - transform.position).sqrMagnitude;
                     }
                 }
             }

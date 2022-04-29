@@ -17,15 +17,20 @@ namespace Fusion.XR
 
         private Transform VRCamera;
 
+        public FusionXRHand hand;
         public FusionXRHand l_hand;
         public FusionXRHand r_hand;
 
+        public bool showControllers = true;
+        public GameObject l_controllerModel;
+        public GameObject r_controllerModel;
+
+        private HandPoser handPoser;
         private HandPoser l_handPoser;
         private HandPoser r_handPoser;
 
         private float mockPinch;
         private float mockGrab;
-
 
         private Transform currentHand;
 
@@ -44,6 +49,9 @@ namespace Fusion.XR
 
             l_handPoser = l_hand.GetComponent<HandPoser>();
             r_handPoser = r_hand.GetComponent<HandPoser>();
+
+            r_controllerModel.SetActive(showControllers);
+            l_controllerModel.SetActive(showControllers);
         }
 
         private void Update()
@@ -121,39 +129,31 @@ namespace Fusion.XR
             float pinchTarget = Input.GetMouseButton(0) ? 1 : 0;
             float grabTarget = Input.GetMouseButton(1) ? 1 : 0;
 
-            mockPinch = Mathf.MoveTowards(mockPinch, pinchTarget, Time.deltaTime * 3);
-            mockGrab = Mathf.MoveTowards(mockGrab, grabTarget, Time.deltaTime * 3);
+            mockPinch = pinchTarget;
+            mockGrab = grabTarget;
 
             if (currentHand == leftHand)
             {
-                //Apply mock Pinch/Grab to Hand/HandPoser here
-                if (l_hand)
-                {
-                    if (Input.GetMouseButtonDown(1))
-                        l_hand.DebugGrab();
-                    if(Input.GetMouseButtonUp(1))
-                        l_hand.DebugLetGo();
-                }
-                if (l_handPoser)
-                {
-                    l_handPoser.SetPinchGrabDebug(mockPinch, mockGrab);
-                }
+                hand = l_hand;
+                handPoser = l_handPoser;
             }
-            else if(currentHand == rightHand)
+            else
             {
-                //Apply mock Pinch/Grab to Hand/HandPoser here
-                if (r_hand)
-                {
-                    if (Input.GetMouseButtonDown(1))
-                        r_hand.DebugGrab();
-                    if (Input.GetMouseButtonUp(1))
-                        r_hand.DebugLetGo();
-                }
-                if (r_handPoser)
-                {
-                    r_handPoser.SetPinchGrabDebug(mockPinch, mockGrab);
-                }
+                hand = r_hand;
+                handPoser = r_handPoser;
             }
+
+            if (Input.GetMouseButtonDown(1))
+                hand?.DebugGrab();
+            else if(Input.GetMouseButtonUp(1))
+                hand?.DebugLetGo();
+
+            if (Input.GetMouseButtonDown(0))
+                hand?.DebugPinchStart();
+            else if (Input.GetMouseButtonUp(0))
+                hand?.DebugPinchEnd();
+
+            handPoser?.SetPinchGrabDebug(mockPinch, mockGrab);
             #endregion
         }
     }

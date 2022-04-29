@@ -18,7 +18,8 @@ namespace Fusion.XR
         ActiveJoint = 2,
         PassiveJoint = 3,
         Force = 4,
-        FixedJoint = 5
+        FixedJoint = 5,
+        PDForce = 6
     }
 
     public enum TwoHandedModes
@@ -47,7 +48,7 @@ namespace Fusion.XR
     {
         Kinematic = 0,
         CollisionTest = 1,
-        //ActiveJoint = 2
+        Joint = 2
     }
 
     //Used by Movement

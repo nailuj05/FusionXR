@@ -10,15 +10,14 @@ namespace Fusion.XR
         public Transform[] fingerBones;
 
         public FingerDriver fingerDriver;
-        private FingerTrackingBase fingerTrackingBase;
+        public FingerTrackingBase fingerTrackingBase { get; private set; }
 
-        public void FingerUpdate(Quaternion[] lastTargetRotations, Quaternion[] targetRotations, float currentLerp)
+        public void FingerUpdate(Quaternion[] targetRotations, float step)
         {
-            fingerDriver.UpdateTrack(lastTargetRotations, targetRotations, currentLerp);
+            fingerDriver.UpdateTrack(targetRotations, step);
         }
 
         //Rotate to Pose instantly rotates to the pose
-
         public void RotateToPose(Quaternion[] rotations)
         {
             for (int i = 0; i < fingerBones.Length; i++)
@@ -73,6 +72,18 @@ namespace Fusion.XR
                 else
                     fingerBones[i] = fingerBones[i - 1].GetChild(0);
             }
+        }
+
+        public static float GetFingerLength(int fingerIndex, FingerTrackingBase trackingBase)
+        {
+            float fingerLength = trackingBase.fingerLength;
+
+            if (fingerIndex < trackingBase.fingerBones.Length - 1)
+            {
+                fingerLength = Vector3.Distance(trackingBase.fingerBones[fingerIndex].position, trackingBase.fingerBones[fingerIndex + 1].position) + trackingBase.radius;
+            }
+
+            return fingerLength;
         }
 
         public static Vector3 GetFingerCollisionOffset(int fingerIndex, FingerTrackingBase trackingBase)

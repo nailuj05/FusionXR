@@ -29,12 +29,6 @@ namespace Fusion.XR
         {
             if (!isEditingPose) return;
 
-            //TODO Update LeftHand
-            //if(TryGetComponent<GrabPoint>(out GrabPoint gb))
-            //{
-            //    handPoser.attachedObj = gb.AlignedTransform;
-            //}
-
             if(isEditingPose)
             {
                 GetComponent<GrabPoint>()?.UpdateAlignedPoint();
@@ -47,10 +41,13 @@ namespace Fusion.XR
             {
                 if (Selection.gameObjects.Length == 0) return;
 
-                if (editor.gameObject != Selection.gameObjects[0] & editor.isEditingPose)
+                if (editor.gameObject != Selection.gameObjects[0] && editor.isEditingPose)
                 {
-                    editor.isEditingPose = false;
-                    editor.RemovePoserHand();
+                    if(Selection.gameObjects[0].TryGetComponent<PoseEditor>(out PoseEditor p))
+                    {
+                        editor.isEditingPose = false;
+                        editor.RemovePoserHand();
+                    }
                 }
             }
         }
@@ -110,12 +107,12 @@ namespace Fusion.XR
 
             if(hand == Hand.Left)
             {
-                prevHand.transform.GetChild(0).localScale = new Vector3(-1, 1, 1);
+                handPoser.renderHand.localScale = new Vector3(-1, 1, 1);
                 handPoser.palm = prevHand.GetChildByName("palmL").transform;
             }
             if (hand == Hand.Right)
             {
-                prevHand.transform.GetChild(0).localScale = new Vector3(1, 1, 1);
+                handPoser.renderHand.localScale = new Vector3(1, 1, 1);
                 handPoser.palm = prevHand.GetChildByName("palmR").transform;
             }
 
