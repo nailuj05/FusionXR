@@ -41,9 +41,13 @@ namespace Fusion.XR
         [SerializeField] public float slerpDamper   = 250;
         [SerializeField] public float slerpMaxForce = 1500;
 
+        [SerializeField] public float massScale = 1;
+        [SerializeField] public float connectedMassScale = 1;
+
         [SerializeField] public bool adjustAnchor = true;
         [SerializeField] public float limit = 0.7f;
 
+        //References (hidden)
         [HideInInspector] public GameObject tracker;
         [HideInInspector] public Transform palm;
 
@@ -155,7 +159,7 @@ namespace Fusion.XR
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             TrackPositionRotation(targetPosition, targetRotation);
-            //UpdateTargetVelocity(targetPosition);
+            UpdateTargetVelocity(targetPosition, targetRotation);
         }
 
         public override void EndTrack()
@@ -187,6 +191,9 @@ namespace Fusion.XR
             activeJoint.enablePreprocessing = false;
 
             activeJoint.rotationDriveMode = RotationDriveMode.Slerp;
+
+            activeJoint.massScale = trackingBase.massScale;
+            activeJoint.connectedMassScale = trackingBase.connectedMassScale;
         }
 
         private void TrackPositionRotation(Vector3 targetPos, Quaternion targetRot)
@@ -198,8 +205,6 @@ namespace Fusion.XR
 
             activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos) - activeJoint.anchor;
             activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;
-
-            UpdateTargetVelocity(targetPos, targetRot);
         }
 
         private void UpdateHandJointDrives()

@@ -2224,6 +2224,10 @@ PrefabInstance:
       propertyPath: trackingBase.rotationDampener
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.connectedMassScale
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: debugMode
       value: 1
@@ -2559,7 +2563,7 @@ Transform:
   - {fileID: 997258489}
   - {fileID: 576371418}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &303472562
 GameObject:
@@ -3515,7 +3519,7 @@ Transform:
   - {fileID: 239993516}
   - {fileID: 954945681}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &443490241
 MonoBehaviour:
@@ -5892,6 +5896,10 @@ PrefabInstance:
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackingBase.rotationDampener
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.connectedMassScale
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983678, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: m_Name
@@ -16236,7 +16244,7 @@ Transform:
   - {fileID: 219338868}
   - {fileID: 1150902777}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1785427992
 GameObject:
@@ -20468,6 +20476,8 @@ MonoBehaviour:
     slerpSpring: 1500
     slerpDamper: 250
     slerpMaxForce: 1500
+    massScale: 1
+    connectedMassScale: 1
     adjustAnchor: 1
     limit: 1
     tracker: {fileID: 0}
@@ -23370,6 +23380,8 @@ MonoBehaviour:
     slerpSpring: 1500
     slerpDamper: 250
     slerpMaxForce: 1500
+    massScale: 1
+    connectedMassScale: 1
     adjustAnchor: 1
     limit: 1
     tracker: {fileID: 0}
