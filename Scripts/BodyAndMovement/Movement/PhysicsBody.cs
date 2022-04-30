@@ -99,7 +99,7 @@ namespace Fusion.XR
             //Setup Joints and Drives
             Chest.WakeUp();
 
-            HeadJoint = SetupJoint(LocoSphere, Head);
+            HeadJoint = SetupJoint(Chest, Head);
             UpdateJointDrive(ChestJoint);
             UpdateJointDrive(LegsJoint);
 
@@ -142,16 +142,14 @@ namespace Fusion.XR
 
         #region Body
 
+        Vector3 lastHeadPos;
         private void UpdateHead()
         {
-            var targetPos = new Vector3(0, -(localHeight - LocoSphereCollider.radius), 0);//-LocoSphere.transform.InverseTransformPoint(cameraPos);
+            var targetPos = new Vector3(0, (localHeight) * (1 - chestPercent * retractAmount), 0);
 
-            HeadJoint.connectedAnchor = targetPos;
-            HeadJoint.xMotion = HeadJoint.yMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
-            //HeadJoint.targetPosition = targetPos;
-            //UpdateTargetVelocity(HeadJoint, Head, targetPos, ref lastTargetPos);
-
-            //lastTargetPos = targetPos;
+            HeadJoint.targetPosition = targetPos;
+            HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
+            UpdateTargetVelocity(HeadJoint, Head, targetPos, ref lastHeadPos);
         }
 
         Vector3 lastChestPos;
