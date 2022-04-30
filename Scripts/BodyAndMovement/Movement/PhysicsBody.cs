@@ -159,7 +159,7 @@ namespace Fusion.XR
         {
             heightPercent = chestPercent;
 
-            var targetPos = new Vector3(0, -(localHeight * chestPercent * retractAmount + LocoSphereCollider.radius), 0);
+            var targetPos = new Vector3(0, -(localHeight - LocoSphereCollider.radius) * chestPercent * retractAmount, 0);
             ChestJoint.targetPosition = targetPos;
             UpdateTargetVelocity(ChestJoint, Chest, targetPos, ref lastChestPos);
 

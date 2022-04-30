@@ -7948,6 +7948,7 @@ MonoBehaviour:
   jointStrength: 10000
   jointDampener: 250
   jointMaxStrength: Infinity
+  targetVelocityDampener: 0.5
   FenderHeight: 0.1
   retractSpeed: 3
   Head: {fileID: 347880587}
@@ -11005,6 +11006,7 @@ MonoBehaviour:
   jointStrength: 1000
   jointDampener: 250
   jointMaxStrength: 1000
+  targetVelocityDampener: 0.5
   FenderHeight: 0.1
   retractSpeed: 2
   Head: {fileID: 668176726}
