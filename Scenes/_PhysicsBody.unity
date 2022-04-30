@@ -7940,14 +7940,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   chestPercent: 0.8
-  legsPercent: 0.5
+  legsPercent: 0.2
   heightAdjustmentFactor: 0.05
   LocoSphereCollDetector: {fileID: 597530007}
   isGrounded: 0
   walkedCollider: {fileID: 0}
-  jointStrength: 10000
-  jointDampener: 250
-  jointMaxStrength: Infinity
+  jointStrength: 5000
+  jointDampener: 800
+  jointMaxStrength: 1500
   targetVelocityDampener: 0.5
   FenderHeight: 0.1
   retractSpeed: 3
@@ -9611,7 +9611,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1092194093}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.125
   m_Height: 0.4
   m_Direction: 1
@@ -12463,7 +12463,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1374541667}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.11
   m_Height: 0.5
   m_Direction: 1
