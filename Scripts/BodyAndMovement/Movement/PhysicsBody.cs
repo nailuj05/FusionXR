@@ -24,6 +24,7 @@ namespace Fusion.XR
         public float jointStrength = 5000;
         public float jointDampener = 500;
         public float jointMaxStrength = 1000;
+        [Range(0.1f, 1f)] public float targetVelocityDampener = 0.5f;
 
         [Header("Tracking Settings")]
         public float FenderHeight = 0.1f;
@@ -305,7 +306,7 @@ namespace Fusion.XR
             var targetVelocity = (targetPos - lastTargetPos) / Time.fixedDeltaTime;
             lastTargetPos = targetPos;
 
-            joint.targetVelocity = joint.transform.TransformDirection(targetVelocity - jointRB.velocity) * 0.5f;
+            joint.targetVelocity = joint.transform.TransformDirection(targetVelocity - jointRB.velocity) * targetVelocityDampener;
         }
 
         private Vector3 GetCameraInRigSpace()
