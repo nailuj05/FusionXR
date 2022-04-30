@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  TwoHandedMode: 0
+  TwoHandedMode: 1
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0
@@ -10669,8 +10669,12 @@ MonoBehaviour:
   detectionLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  volume: {fileID: 0}
-  smoothTime: 0.1
+  ClippingStart:
+    m_PersistentCalls:
+      m_Calls: []
+  ClippingEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8622627593387649076
 MonoBehaviour:
   m_ObjectHideFlags: 0
