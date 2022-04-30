@@ -98,7 +98,7 @@ namespace Fusion.XR
             //Setup Joints and Drives
             Chest.WakeUp();
 
-            HeadJoint = SetupJoint(Chest, Head);
+            HeadJoint = SetupJoint(LocoSphere, Head);
             UpdateJointDrive(ChestJoint);
             UpdateJointDrive(LegsJoint);
 
@@ -129,6 +129,11 @@ namespace Fusion.XR
 
             PlaceFender();
 
+            //Update Drives
+            UpdateJointDrive(HeadJoint);
+            UpdateJointDrive(ChestJoint);
+            UpdateJointDrive(LegsJoint);
+
             //Adjust for HMD (Playspace) Movement
             HandleHMDMovement();
             HandleHMDRotation();
@@ -138,25 +143,38 @@ namespace Fusion.XR
 
         private void UpdateHead()
         {
-            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
+            var targetPos = new Vector3(0, -(localHeight - LocoSphereCollider.radius), 0);//-LocoSphere.transform.InverseTransformPoint(cameraPos);
+
+            HeadJoint.connectedAnchor = targetPos;
+            HeadJoint.xMotion = HeadJoint.yMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
+            //HeadJoint.targetPosition = targetPos;
+            //UpdateTargetVelocity(HeadJoint, Head, targetPos, ref lastTargetPos);
+
+            //lastTargetPos = targetPos;
         }
 
+        Vector3 lastChestPos;
         private void UpdateChest()
         {
             heightPercent = chestPercent;
 
-            ChestJoint.targetPosition = new Vector3(0, -localHeight * heightPercent * retractAmount - LocoSphereCollider.radius, 0);
+            var targetPos = new Vector3(0, -(localHeight * chestPercent * retractAmount + LocoSphereCollider.radius), 0);
+            ChestJoint.targetPosition = targetPos;
+            UpdateTargetVelocity(ChestJoint, Chest, targetPos, ref lastChestPos);
 
-            ChestCol.height = actualHeight - (actualHeight * heightPercent - LocoSphereCollider.radius);
+            //ChestCol.height = actualHeight - (actualHeight * heightPercent - LocoSphereCollider.radius);
         }
 
+        Vector3 lastLegsPos;
         private void UpdateLegs()
         {
-            heightPercent = (chestPercent * legsPercent * retractAmount);
+            //heightPercent = (chestPercent * legsPercent * retractAmount);
+            
+            var targetPos = new Vector3(0, localHeight * legsPercent, 0);
+            LegsJoint.targetPosition = targetPos;
+            UpdateTargetVelocity(LegsJoint, Legs, targetPos, ref lastLegsPos);
 
-            LegsJoint.targetPosition = new Vector3(0, localHeight * heightPercent, 0);
-
-            LegsCol.height = actualHeight * heightPercent + LocoSphereCollider.radius;
+            //LegsCol.height = actualHeight * heightPercent + LocoSphereCollider.radius;
         }
 
         private void PlaceFender()
@@ -277,10 +295,18 @@ namespace Fusion.XR
         {
             gameObject.transform.position = coll.transform.TransformPoint(coll.center);
             gameObject.transform.localScale = new Vector3(coll.radius * 2, coll.height / 2, coll.radius * 2);
-        }  
+        }
         #endregion
 
         #region Helper Functions
+
+        private void UpdateTargetVelocity(ConfigurableJoint joint, Rigidbody jointRB, Vector3 targetPos, ref Vector3 lastTargetPos)
+        {
+            var targetVelocity = (targetPos - lastTargetPos) / Time.fixedDeltaTime;
+            lastTargetPos = targetPos;
+
+            joint.targetVelocity = joint.transform.TransformDirection(targetVelocity - jointRB.velocity) * 0.5f;
+        }
 
         private Vector3 GetCameraInRigSpace()
         {
@@ -305,14 +331,14 @@ namespace Fusion.XR
             rb.velocity = vel;
         }
 
-        JointDrive drive;
+        JointDrive l_drive;
         private void UpdateJointDrive(ConfigurableJoint joint)
         {
-            drive.positionSpring = jointStrength;
-            drive.positionDamper = jointDampener;
-            drive.maximumForce = jointMaxStrength;
+            l_drive.positionSpring = jointStrength;
+            l_drive.positionDamper = jointDampener;
+            l_drive.maximumForce = jointMaxStrength;
 
-            joint.xDrive = joint.yDrive = joint.zDrive = drive;
+            joint.xDrive = joint.yDrive = joint.zDrive = l_drive;
             joint.xMotion = joint.zMotion = ConfigurableJointMotion.Locked;
         }
 
