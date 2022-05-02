@@ -29,4 +29,12 @@ public class health : MonoBehaviour
             //healthNumber -= damageNumber;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.GetComponent<BluntDamage>() != null && collision.gameObject.GetComponent<BluntDamage>().minVel <= collision.gameObject.GetComponent<BluntDamage>().vel)
+        {
+            healthNumber -= collision.gameObject.GetComponent<BluntDamage>().damage;
+        }
+    }
 }

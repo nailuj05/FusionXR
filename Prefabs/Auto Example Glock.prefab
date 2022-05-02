@@ -122,6 +122,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   canBeGrabbed: 1
   axis: {x: 0, y: 0, z: 0}
+  shouldRelease: 0
   lineStart: {x: 0, y: 0.001, z: 0}
   lineEnd: {x: 0, y: 0.001, z: -0.07}
 --- !u!114 &2396677317898866613
@@ -260,27 +261,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAutomatic: 1
-  debug: 0
+  damage: 1
+  forceOfBullet: 50
+  fireRate: 0.1
+  recoil: {x: 0, y: 0, z: -2000}
+  twoHandedRecoil: {x: 0, y: 0, z: -1000}
   rb: {fileID: 8478408485152236002}
-  magEjectButton: {fileID: -670592759565266399, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   firePoint: {fileID: 8533457094655658440}
   ejectPoint: {fileID: 8533457093087224869}
   fireAudio: {fileID: 9113775524615118840, guid: d35c357cf947a5e47b3bcb367bf85f01, type: 3}
   fakeMag: {fileID: 8533457094442613680}
-  newMag: {fileID: 2368746241334906229, guid: da7c3b9774a7f76448687a948655c65d, type: 3}
-  damage: 1
-  forceOfBullet: 50
-  slideBackDistance: 0.11
-  slideUpDistance: 0.09
-  fireRate: 0.1
-  recoil: {x: 0, y: 0, z: -2000}
-  twoHandedRecoil: {x: 0, y: 0, z: -1000}
+  newMag: {fileID: 9113063968155506195, guid: da7c3b9774a7f76448687a948655c65d, type: 3}
+  Slide: {fileID: 2396677317898866606}
   grabScript: {fileID: 8478408485152235996}
   rightHandPoint: {fileID: 8533457093312118837}
   leftHandPoint: {fileID: 8533457093379825705}
   slideDistanceReader: {fileID: 2396677317898866613}
+  magId: 1
+  lockBackSlide: 1
+  slideBackDistance: 0.11
+  slideUpDistance: 0.09
+  magEjectButton: {fileID: -670592759565266399, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  debug: 0
   hasMag: 0
   bullets: 0
+  originalBullets: 0
   onFire:
     m_PersistentCalls:
       m_Calls:
