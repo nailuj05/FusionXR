@@ -35,10 +35,10 @@ public class Guns : MonoBehaviour
     public float slideBackDistance;
     public float slideUpDistance;
     public InputActionReference magEjectButton;
-    [Header("Debug DO NOT MODIFY")]
+    [Header("Debug")]
     public bool debug;
     private float nextRate = 0f;
-    public bool hasMag;
+    [ReadOnly] public bool hasMag;
     private bool objectGrabbed;
     private bool shoot;
     private bool canShoot;
@@ -47,8 +47,8 @@ public class Guns : MonoBehaviour
     private bool wasBack;
     private bool bulletLoaded;
     private bool magIsGold;
-    public float bullets;
-    public float originalBullets;
+    [ReadOnly] public float bullets;
+    [ReadOnly] public float originalBullets;
     [SerializeField] private UnityEvent onFire;
     // Start is called before the first frame update
     public void Start()
