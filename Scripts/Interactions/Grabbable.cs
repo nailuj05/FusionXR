@@ -148,7 +148,8 @@ namespace Fusion.XR
 
             RemoveHand(hand);
 
-            OnRelease?.Invoke();
+            if(!isGrabbed)
+                OnRelease?.Invoke();
 
             hand.OnPinchStart.RemoveAllListeners();
 
