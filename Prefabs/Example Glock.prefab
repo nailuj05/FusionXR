@@ -503,7 +503,6 @@ MonoBehaviour:
     m_Bits: 4294967295
   canBeGrabbed: 1
   axis: {x: 0, y: 0, z: 0}
-  shouldRelease: 0
   lineStart: {x: 0, y: 0.001, z: 0}
   lineEnd: {x: 0, y: 0.001, z: -0.07}
 --- !u!114 &141425787668988725
@@ -634,7 +633,10 @@ MonoBehaviour:
   slideUpDistance: 0.09
   magEjectButton: {fileID: -670592759565266399, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   debug: 0
+  WasFired: 0
   hasMag: 0
+  bulletLoaded: 0
+  canShoot: 0
   bullets: 0
   originalBullets: 0
   onFire:
@@ -697,7 +699,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 141425787708829721}
         m_TargetAssemblyTypeName: Guns, Assembly-CSharp
-        m_MethodName: nofire
+        m_MethodName: noFire
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

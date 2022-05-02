@@ -6,7 +6,6 @@ public class MagData : MonoBehaviour
 {
     public int magId;
     public float bullets;
-    public bool goldenMag; // Doesnt Function
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +26,6 @@ public class MagData : MonoBehaviour
             other.gameObject.GetComponent<Guns>().bullets += bullets;
             other.gameObject.GetComponent<Guns>().originalBullets = bullets;
             other.gameObject.GetComponent<Guns>().hasMag = true;
-            //other.gameObject.GetComponent<Guns>().magIsGold = goldenMag;
-
         }
     }
 }
