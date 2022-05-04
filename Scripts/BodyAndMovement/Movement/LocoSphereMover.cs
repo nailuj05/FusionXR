@@ -66,11 +66,19 @@ namespace Fusion.XR
 
         private void FixedUpdate()
         {
-            LocoSphere.freezeRotation = true;
-
+            LocoSphere.freezeRotation = false;
+            
             currentTorque = UpdateTorqueAcceleration();
 
+            if(currentTorque <= 0.01f)
+            {
+                LocoSphere.freezeRotation = true;
+            }
+
+
             ApplyTorque();
+
+            print($"{currentMove} | {currentTorque}");
         }
 
         public override void Move(Vector3 direction)
@@ -122,11 +130,7 @@ namespace Fusion.XR
                 torqueVec = Vector3.Cross(currentMove, Vector3.down);
 
                 LocoSphere.AddTorque(torqueVec * currentTorque, forceMode);
-
-                LocoSphere.freezeRotation = false;
             }
-
-            currentMove = Vector3.zero;
         } 
         #endregion
     } 

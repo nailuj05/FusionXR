@@ -192,6 +192,10 @@ namespace Fusion.XR
 
                 QueueMove(movementInput.normalized * playerSpeed);
             }
+            else
+            {
+                QueueMove(Vector3.zero);
+            }
         }
 
         /// <summary>

@@ -109,7 +109,7 @@ namespace Fusion.XR
             PlaceFender();
 
             //Interpolate all RBs
-            Head.interpolation = Chest.interpolation = Legs.interpolation = LocoSphere.interpolation = RigidbodyInterpolation.Extrapolate;
+            Head.interpolation = Chest.interpolation = Legs.interpolation = LocoSphere.interpolation = RigidbodyInterpolation.Interpolate;
 
             ToggleDebugObjects(renderDebugObjects);
         }
@@ -145,10 +145,10 @@ namespace Fusion.XR
         Vector3 lastHeadPos;
         private void UpdateHead()
         {
-            var targetPos = new Vector3(0, (localHeight) * (1 - chestPercent * retractAmount), 0);
+            var targetPos = new Vector3(0, (localHeight) * (1 - chestPercent) * retractAmount, 0);
 
             HeadJoint.targetPosition = targetPos;
-            HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
+            //HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
             UpdateTargetVelocity(HeadJoint, Head, targetPos, ref lastHeadPos);
         }
 
@@ -250,6 +250,10 @@ namespace Fusion.XR
                 Legs.MovePosition(Legs.position + delta);
                 Head.MovePosition(Head.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
+
+                //var axis = Vector3.Cross(delta, Vector3.down).normalized;
+                //LocoSphere.angularVelocity += axis * (delta.magnitude / Time.fixedDeltaTime) / LocoSphereCollider.radius;
+                //LocoSphere.AddTorque(Vector3.Cross(delta, Vector3.down) / Time.fixedDeltaTime * LocoSphere.mass, ForceMode.VelocityChange);
 
                 XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
