@@ -30,7 +30,7 @@ namespace Fusion.XR
         private float decelerationTime = 0.33f;
 
         [SerializeField]
-        private AnimationCurve decelerationCurve = AnimationCurve.EaseInOut(0, 1, 0.5f, 0);
+        private float deceleration = 0.1f;
 
         [Header("Crouch and Jump")]
         [SerializeField]
@@ -76,21 +76,22 @@ namespace Fusion.XR
 
             if (isMoving)
             {
-                currentTorque = torque;
+                LocoSphere.angularVelocity = LocoSphere.angularVelocity.ClampVector(playerSpeed / body.LocoSphereCollider.radius);
+
+                currentTorque = UpdateTorqueAcceleration();
+
+                ApplyTorque();
             }
             else
             {
                 currentTorque = 0;
-                LocoSphere.angularVelocity *= 0.1f;
+                LocoSphere.angularVelocity *= deceleration;
 
                 if(LocoSphere.angularVelocity.sqrMagnitude < 1f)
                 {
                     LocoSphere.freezeRotation = true;
                 }
             }
-
-
-            ApplyTorque();
 
             print($"{isMoving} | {currentMove} | {currentTorque} | {LocoSphere.angularVelocity.magnitude}");
         }
@@ -121,20 +122,10 @@ namespace Fusion.XR
         #region Torque
         private float UpdateTorqueAcceleration()
         {
-            if (currentMove.sqrMagnitude > 0)
-            {
-                timeSinceMoveStarted += Time.fixedDeltaTime / accelerationTime;
-                timeSinceMoveEnded = 0;
+            timeSinceMoveStarted += Time.fixedDeltaTime / accelerationTime;
+            timeSinceMoveEnded = 0;
 
-                return accelerationCurve.Evaluate(timeSinceMoveStarted) * torque;
-            }
-            else
-            {
-                timeSinceMoveEnded += Time.fixedDeltaTime / decelerationTime;
-                timeSinceMoveStarted = 0;
-
-                return decelerationCurve.Evaluate(timeSinceMoveEnded) * torque;
-            }
+            return accelerationCurve.Evaluate(timeSinceMoveStarted) * torque;
         }
 
         private void ApplyTorque()
