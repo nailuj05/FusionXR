@@ -92,7 +92,7 @@ namespace Fusion.XR
 
             ApplyTorque();
 
-            print($"{isMoving} | {currentTorque} | {LocoSphere.angularVelocity.magnitude}");
+            print($"{isMoving} | {currentMove} | {currentTorque} | {LocoSphere.angularVelocity.magnitude}");
         }
 
         public override void Move(Vector3 direction)
