@@ -50,6 +50,8 @@ namespace Fusion.XR
         private Vector3 torqueVec;
         private Vector3 vel;
 
+        private bool isMoving;
+
         private float currentTorque;
 
         private float timeSinceMoveStarted = 0;
@@ -67,18 +69,30 @@ namespace Fusion.XR
         private void FixedUpdate()
         {
             LocoSphere.freezeRotation = false;
-            
-            currentTorque = UpdateTorqueAcceleration();
 
-            if(currentTorque <= 0.01f)
+            isMoving = Vector3.ProjectOnPlane(currentMove, Vector3.up).sqrMagnitude > 0.1f;
+
+            //currentTorque = UpdateTorqueAcceleration();
+
+            if (isMoving)
             {
-                LocoSphere.freezeRotation = true;
+                currentTorque = torque;
+            }
+            else
+            {
+                currentTorque = 0;
+                LocoSphere.angularVelocity *= 0.1f;
+
+                if(LocoSphere.angularVelocity.sqrMagnitude < 1f)
+                {
+                    LocoSphere.freezeRotation = true;
+                }
             }
 
 
             ApplyTorque();
 
-            print($"{currentMove} | {currentTorque}");
+            print($"{isMoving} | {currentTorque} | {LocoSphere.angularVelocity.magnitude}");
         }
 
         public override void Move(Vector3 direction)
