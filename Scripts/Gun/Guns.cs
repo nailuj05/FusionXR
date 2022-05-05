@@ -9,8 +9,9 @@ using UnityEngine.Events;
 
 public class Guns : MonoBehaviour
 {
+    enum firingModes { Semi, Auto, Bolt };
     [Header("Gun Atributes")]
-    public bool isAutomatic;
+    [SerializeField] firingModes FiringModes;
     public float damage;
     public float forceOfBullet;
     public float fireRate = 1f;
@@ -50,7 +51,7 @@ public class Guns : MonoBehaviour
     void Update()
     {
         #region TonOfIfStatments
-        if(WasFired == true && isAutomatic == true)
+        if(WasFired == true && FiringModes == firingModes.Auto)
         {
             fire();
         }
@@ -110,7 +111,6 @@ public class Guns : MonoBehaviour
             // Ejects the mag
             if (magEjectButton.action.triggered && hasMag == true)
             {
-                Debug.Log("Tried to eject");
                 hasMag = false;
                 Instantiate(newMag, ejectPoint.position, ejectPoint.rotation);
                 if (bullets >= 1)
@@ -152,14 +152,13 @@ public class Guns : MonoBehaviour
             {
                 rb.AddRelativeForce(recoil);
             }
-            // Checks if the gun is Automatic or not
-            if (isAutomatic == false)
+            // Checks if the Firemode is bolt action or not apon firing
+            if(FiringModes == firingModes.Bolt)
             {
-                canShoot = false;
-            }
-            else
+                bulletLoaded = false;
+            } else
             {
-                canShoot = true;
+                bulletLoaded = true;
             }
             // Removes a bullet appon shooting once
             bullets -= 1;
