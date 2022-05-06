@@ -24,6 +24,7 @@ namespace Fusion.XR
         public float jointStrength = 5000;
         public float jointDampener = 500;
         public float jointMaxStrength = 1000;
+        [Range(0.1f, 1f)] public float targetVelocityDampener = 0.5f;
 
         [Header("Tracking Settings")]
         public float FenderHeight = 0.1f;
@@ -107,8 +108,13 @@ namespace Fusion.XR
             UpdateLegs();
             PlaceFender();
 
+            //Setup all joint positions correctly
+            lastHeadPos = HeadJoint.anchor;
+            lastChestPos = ChestJoint.anchor;
+            lastLegsPos = LegsJoint.anchor;
+
             //Interpolate all RBs
-            Head.interpolation = Chest.interpolation = Legs.interpolation = LocoSphere.interpolation = RigidbodyInterpolation.Extrapolate;
+            Head.interpolation = Chest.interpolation = Legs.interpolation = LocoSphere.interpolation = RigidbodyInterpolation.Interpolate;
 
             ToggleDebugObjects(renderDebugObjects);
         }
@@ -129,6 +135,11 @@ namespace Fusion.XR
 
             PlaceFender();
 
+            //Update Drives
+            UpdateJointDrive(HeadJoint);
+            UpdateJointDrive(ChestJoint);
+            UpdateJointDrive(LegsJoint);
+
             //Adjust for HMD (Playspace) Movement
             HandleHMDMovement();
             HandleHMDRotation();
@@ -136,27 +147,38 @@ namespace Fusion.XR
 
         #region Body
 
+        Vector3 lastHeadPos;
         private void UpdateHead()
         {
-            HeadJoint.targetPosition = Chest.transform.InverseTransformPoint(cameraPos);
+            var targetPos = new Vector3(0, (localHeight) * (1 - chestPercent) * retractAmount, 0);
+
+            HeadJoint.targetPosition = targetPos;
+            //HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
+            UpdateTargetVelocity(HeadJoint, Head, ref lastHeadPos);
         }
 
+        Vector3 lastChestPos;
         private void UpdateChest()
         {
             heightPercent = chestPercent;
 
-            ChestJoint.targetPosition = new Vector3(0, -localHeight * heightPercent * retractAmount - LocoSphereCollider.radius, 0);
+            var targetPos = new Vector3(0, -(localHeight - LocoSphereCollider.radius) * chestPercent * retractAmount, 0);
+            ChestJoint.targetPosition = targetPos;
+            UpdateTargetVelocity(ChestJoint, Chest, ref lastChestPos);
 
-            ChestCol.height = actualHeight - (actualHeight * heightPercent - LocoSphereCollider.radius);
+            //ChestCol.height = actualHeight - (actualHeight * heightPercent - LocoSphereCollider.radius);
         }
 
+        Vector3 lastLegsPos;
         private void UpdateLegs()
         {
-            heightPercent = (chestPercent * legsPercent * retractAmount);
+            //heightPercent = (chestPercent * legsPercent * retractAmount);
+            
+            var targetPos = new Vector3(0, localHeight * legsPercent, 0);
+            LegsJoint.targetPosition = targetPos;
+            UpdateTargetVelocity(LegsJoint, Legs, ref lastLegsPos);
 
-            LegsJoint.targetPosition = new Vector3(0, localHeight * heightPercent, 0);
-
-            LegsCol.height = actualHeight * heightPercent + LocoSphereCollider.radius;
+            //LegsCol.height = actualHeight * heightPercent + LocoSphereCollider.radius;
         }
 
         private void PlaceFender()
@@ -234,6 +256,10 @@ namespace Fusion.XR
                 Head.MovePosition(Head.position + delta);
                 LocoSphere.MovePosition(LocoSphere.position + delta);
 
+                //var axis = Vector3.Cross(delta, Vector3.down).normalized;
+                //LocoSphere.angularVelocity += axis * (delta.magnitude / Time.fixedDeltaTime) / LocoSphereCollider.radius;
+                //LocoSphere.AddTorque(Vector3.Cross(delta, Vector3.down) / Time.fixedDeltaTime * LocoSphere.mass, ForceMode.VelocityChange);
+
                 XRRig.transform.localPosition -= Chest.transform.InverseTransformDirection(delta);
             }
         }
@@ -277,10 +303,18 @@ namespace Fusion.XR
         {
             gameObject.transform.position = coll.transform.TransformPoint(coll.center);
             gameObject.transform.localScale = new Vector3(coll.radius * 2, coll.height / 2, coll.radius * 2);
-        }  
+        }
         #endregion
 
         #region Helper Functions
+
+        private void UpdateTargetVelocity(ConfigurableJoint joint, Rigidbody jointRB, ref Vector3 lastJointPos)
+        {
+            var targetVelocity = (joint.anchor - lastJointPos) / Time.fixedDeltaTime;
+            lastJointPos = joint.anchor;
+
+            joint.targetVelocity = joint.transform.TransformDirection(targetVelocity) * targetVelocityDampener;
+        }
 
         private Vector3 GetCameraInRigSpace()
         {
@@ -305,14 +339,14 @@ namespace Fusion.XR
             rb.velocity = vel;
         }
 
-        JointDrive drive;
+        JointDrive l_drive;
         private void UpdateJointDrive(ConfigurableJoint joint)
         {
-            drive.positionSpring = jointStrength;
-            drive.positionDamper = jointDampener;
-            drive.maximumForce = jointMaxStrength;
+            l_drive.positionSpring = jointStrength;
+            l_drive.positionDamper = jointDampener;
+            l_drive.maximumForce = jointMaxStrength;
 
-            joint.xDrive = joint.yDrive = joint.zDrive = drive;
+            joint.xDrive = joint.yDrive = joint.zDrive = l_drive;
             joint.xMotion = joint.zMotion = ConfigurableJointMotion.Locked;
         }
 

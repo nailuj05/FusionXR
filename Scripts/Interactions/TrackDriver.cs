@@ -41,9 +41,13 @@ namespace Fusion.XR
         [SerializeField] public float slerpDamper   = 250;
         [SerializeField] public float slerpMaxForce = 1500;
 
+        [SerializeField] public float massScale = 1;
+        [SerializeField] public float connectedMassScale = 1;
+
         [SerializeField] public bool adjustAnchor = true;
         [SerializeField] public float limit = 0.7f;
 
+        //References (hidden)
         [HideInInspector] public GameObject tracker;
         [HideInInspector] public Transform palm;
 
@@ -137,7 +141,7 @@ namespace Fusion.XR
         private Rigidbody jointRB;
         private Rigidbody objectRB;
 
-        private Vector3 lastPos;
+        private Vector3 lastPos, lastHeadPos;
         private Quaternion lastRot;
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
@@ -150,12 +154,14 @@ namespace Fusion.XR
 
             SetupJoint();
             UpdateHandJointDrives();
+
+            lastPos = jointRB.transform.InverseTransformPoint(objectRB.position);
         }
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             TrackPositionRotation(targetPosition, targetRotation);
-            //UpdateTargetVelocity(targetPosition);
+            UpdateTargetVelocity(targetPosition, targetRotation);
         }
 
         public override void EndTrack()
@@ -187,6 +193,9 @@ namespace Fusion.XR
             activeJoint.enablePreprocessing = false;
 
             activeJoint.rotationDriveMode = RotationDriveMode.Slerp;
+
+            activeJoint.massScale = trackingBase.massScale;
+            activeJoint.connectedMassScale = trackingBase.connectedMassScale;
         }
 
         private void TrackPositionRotation(Vector3 targetPos, Quaternion targetRot)
@@ -198,8 +207,6 @@ namespace Fusion.XR
 
             activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos) - activeJoint.anchor;
             activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;
-
-            UpdateTargetVelocity(targetPos, targetRot);
         }
 
         private void UpdateHandJointDrives()
@@ -224,11 +231,13 @@ namespace Fusion.XR
 
         private void UpdateTargetVelocity(Vector3 targetPos, Quaternion targetRot)
         {
-            var targetVelocity = (targetPos - lastPos) / Time.fixedDeltaTime;
-            lastPos = targetPos;
+            //TargetVelocity
+            var jointRelativePos = jointRB.transform.InverseTransformPoint(targetPos);
+            var targetVelocity = (jointRelativePos - lastPos) / Time.fixedDeltaTime;
+            lastPos = jointRelativePos;
+            activeJoint.targetVelocity = targetVelocity;
 
-            activeJoint.targetVelocity = jointRB.transform.TransformDirection(targetVelocity - jointRB.velocity);
-
+            //TargetAngularVelocity
             var deltaRot = targetRot * Quaternion.Inverse(lastRot);
             deltaRot.FlipCheck();
 
