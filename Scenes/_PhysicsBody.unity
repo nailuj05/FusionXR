@@ -3695,10 +3695,9 @@ GameObject:
   - component: {fileID: 482686498}
   - component: {fileID: 482686500}
   - component: {fileID: 482686499}
-  - component: {fileID: 482686501}
   - component: {fileID: 482686503}
   - component: {fileID: 482686502}
-  - component: {fileID: 482686504}
+  - component: {fileID: 482686501}
   m_Layer: 0
   m_Name: Ladder (2)
   m_TagString: Untagged
@@ -3771,8 +3770,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482686497}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &482686501
-CapsuleCollider:
+--- !u!65 &482686501
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3781,10 +3780,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.07454508, z: 0.0000000018626451}
 --- !u!114 &482686502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3830,21 +3828,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &482686504
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 482686497}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &492995989
 GameObject:
   m_ObjectHideFlags: 0
@@ -4778,10 +4761,9 @@ GameObject:
   - component: {fileID: 588589236}
   - component: {fileID: 588589238}
   - component: {fileID: 588589237}
-  - component: {fileID: 588589239}
   - component: {fileID: 588589241}
   - component: {fileID: 588589240}
-  - component: {fileID: 588589242}
+  - component: {fileID: 588589239}
   m_Layer: 0
   m_Name: Ladder (1)
   m_TagString: Untagged
@@ -4854,8 +4836,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588589235}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &588589239
-CapsuleCollider:
+--- !u!65 &588589239
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4864,10 +4846,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.07454508, z: 0.0000000018626451}
 --- !u!114 &588589240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4913,21 +4894,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &588589242
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588589235}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &597530003
 GameObject:
   m_ObjectHideFlags: 0
@@ -10695,10 +10661,9 @@ GameObject:
   - component: {fileID: 1192251652}
   - component: {fileID: 1192251654}
   - component: {fileID: 1192251653}
-  - component: {fileID: 1192251655}
   - component: {fileID: 1192251657}
   - component: {fileID: 1192251656}
-  - component: {fileID: 1192251658}
+  - component: {fileID: 1192251655}
   m_Layer: 0
   m_Name: Ladder (4)
   m_TagString: Untagged
@@ -10771,8 +10736,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192251651}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &1192251655
-CapsuleCollider:
+--- !u!65 &1192251655
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10781,10 +10746,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.074545555, z: 0.0000000018626451}
 --- !u!114 &1192251656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10830,21 +10794,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1192251658
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1192251651}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1193097965
 GameObject:
   m_ObjectHideFlags: 0
@@ -11001,10 +10950,9 @@ GameObject:
   - component: {fileID: 1203173894}
   - component: {fileID: 1203173896}
   - component: {fileID: 1203173895}
-  - component: {fileID: 1203173897}
   - component: {fileID: 1203173899}
   - component: {fileID: 1203173898}
-  - component: {fileID: 1203173900}
+  - component: {fileID: 1203173897}
   m_Layer: 0
   m_Name: Ladder (3)
   m_TagString: Untagged
@@ -11077,8 +11025,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203173893}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &1203173897
-CapsuleCollider:
+--- !u!65 &1203173897
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11087,10 +11035,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.074545555, z: -0.00000023655593}
 --- !u!114 &1203173898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11136,21 +11083,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1203173900
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203173893}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1215180858
 GameObject:
   m_ObjectHideFlags: 0
@@ -11645,10 +11577,9 @@ GameObject:
   - component: {fileID: 1313269116}
   - component: {fileID: 1313269118}
   - component: {fileID: 1313269117}
-  - component: {fileID: 1313269119}
   - component: {fileID: 1313269121}
   - component: {fileID: 1313269120}
-  - component: {fileID: 1313269122}
+  - component: {fileID: 1313269119}
   m_Layer: 0
   m_Name: Ladder (6)
   m_TagString: Untagged
@@ -11721,8 +11652,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313269115}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &1313269119
-CapsuleCollider:
+--- !u!65 &1313269119
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11731,10 +11662,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.07454508, z: 0.0000000018626451}
 --- !u!114 &1313269120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11780,21 +11710,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1313269122
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1313269115}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1316299730
 GameObject:
   m_ObjectHideFlags: 0
@@ -12443,10 +12358,9 @@ GameObject:
   - component: {fileID: 1393588565}
   - component: {fileID: 1393588567}
   - component: {fileID: 1393588566}
-  - component: {fileID: 1393588568}
   - component: {fileID: 1393588570}
   - component: {fileID: 1393588569}
-  - component: {fileID: 1393588571}
+  - component: {fileID: 1393588568}
   m_Layer: 0
   m_Name: Ladder (7)
   m_TagString: Untagged
@@ -12519,8 +12433,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393588564}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &1393588568
-CapsuleCollider:
+--- !u!65 &1393588568
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -12529,10 +12443,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.07454508, z: 0.0000000018626451}
 --- !u!114 &1393588569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12578,21 +12491,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1393588571
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393588564}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1397856200
 GameObject:
   m_ObjectHideFlags: 0
@@ -14740,10 +14638,9 @@ GameObject:
   - component: {fileID: 1626637283}
   - component: {fileID: 1626637285}
   - component: {fileID: 1626637284}
-  - component: {fileID: 1626637286}
   - component: {fileID: 1626637288}
   - component: {fileID: 1626637287}
-  - component: {fileID: 1626637289}
+  - component: {fileID: 1626637286}
   m_Layer: 0
   m_Name: Ladder (5)
   m_TagString: Untagged
@@ -14816,8 +14713,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626637282}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &1626637286
-CapsuleCollider:
+--- !u!65 &1626637286
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -14826,10 +14723,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.07454508, z: 0.0000000018626451}
 --- !u!114 &1626637287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14875,21 +14771,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1626637289
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626637282}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1626981157
 GameObject:
   m_ObjectHideFlags: 0
@@ -15588,10 +15469,9 @@ GameObject:
   - component: {fileID: 1700315463}
   - component: {fileID: 1700315465}
   - component: {fileID: 1700315464}
-  - component: {fileID: 1700315466}
   - component: {fileID: 1700315468}
   - component: {fileID: 1700315467}
-  - component: {fileID: 1700315469}
+  - component: {fileID: 1700315466}
   m_Layer: 0
   m_Name: Ladder (9)
   m_TagString: Untagged
@@ -15664,8 +15544,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700315462}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &1700315466
-CapsuleCollider:
+--- !u!65 &1700315466
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -15674,10 +15554,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.07454508, z: 0.0000000018626451}
 --- !u!114 &1700315467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15723,21 +15602,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1700315469
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700315462}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1709840890
 GameObject:
   m_ObjectHideFlags: 0
@@ -16361,10 +16225,9 @@ GameObject:
   - component: {fileID: 1798027759}
   - component: {fileID: 1798027761}
   - component: {fileID: 1798027760}
-  - component: {fileID: 1798027762}
   - component: {fileID: 1798027764}
   - component: {fileID: 1798027763}
-  - component: {fileID: 1798027765}
+  - component: {fileID: 1798027762}
   m_Layer: 0
   m_Name: Ladder (8)
   m_TagString: Untagged
@@ -16437,8 +16300,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798027758}
   m_Mesh: {fileID: -7387706064836869012, guid: 5084cec3e479b264eba5f52de08f651f, type: 3}
---- !u!136 &1798027762
-CapsuleCollider:
+--- !u!65 &1798027762
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -16447,10 +16310,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.07454508, z: 0.0000000018626451}
 --- !u!114 &1798027763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16496,21 +16358,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1798027765
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798027758}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1865015589
 GameObject:
   m_ObjectHideFlags: 0
@@ -18724,10 +18571,9 @@ GameObject:
   - component: {fileID: 458743521046462048}
   - component: {fileID: 3598960320916451781}
   - component: {fileID: 1591710283928405263}
-  - component: {fileID: 942967980567569627}
   - component: {fileID: 942967980567569629}
   - component: {fileID: 942967980567569628}
-  - component: {fileID: 942967980567569630}
+  - component: {fileID: 942967980567569627}
   m_Layer: 0
   m_Name: Ladder
   m_TagString: Untagged
@@ -18735,8 +18581,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!136 &942967980567569627
-CapsuleCollider:
+--- !u!65 &942967980567569627
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -18745,10 +18591,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.04
-  m_Height: 0.48
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.105, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49472356, y: 0.14909108, z: 0.08960757}
+  m_Center: {x: -0.000000007450581, y: -0.07454508, z: 0.0000000018626451}
 --- !u!114 &942967980567569628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18794,21 +18639,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &942967980567569630
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942967980567569626}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!23 &1039226958325031569
 MeshRenderer:
   m_ObjectHideFlags: 0

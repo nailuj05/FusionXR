@@ -154,6 +154,8 @@ namespace Fusion.XR
 
             SetupJoint();
             UpdateHandJointDrives();
+
+            lastPos = jointRB.transform.InverseTransformPoint(objectRB.position);
         }
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)

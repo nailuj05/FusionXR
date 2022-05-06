@@ -108,6 +108,11 @@ namespace Fusion.XR
             UpdateLegs();
             PlaceFender();
 
+            //Setup all joint positions correctly
+            lastHeadPos = HeadJoint.anchor;
+            lastChestPos = ChestJoint.anchor;
+            lastLegsPos = LegsJoint.anchor;
+
             //Interpolate all RBs
             Head.interpolation = Chest.interpolation = Legs.interpolation = LocoSphere.interpolation = RigidbodyInterpolation.Interpolate;
 

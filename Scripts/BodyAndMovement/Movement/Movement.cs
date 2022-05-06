@@ -57,6 +57,7 @@ namespace Fusion.XR
         {
             //Subscribe to Movement Actions
             movementAction.action.performed += PreprocessInput;
+            movementAction.action.canceled += PreprocessInput;
             turnAction.action.started += (c) => { isTurning = true; context = c; };
             turnAction.action.canceled += (c) => isTurning = false;
 
