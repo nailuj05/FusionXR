@@ -7851,9 +7851,9 @@ MonoBehaviour:
   isGrounded: 0
   walkedCollider: {fileID: 0}
   jointStrength: 5000
-  jointDampener: 500
+  jointDampener: 250
   jointMaxStrength: 1500
-  targetVelocityDampener: 0.5
+  targetVelocityDampener: 1
   FenderHeight: 0.1
   retractSpeed: 3
   Head: {fileID: 347880587}
@@ -7867,7 +7867,7 @@ MonoBehaviour:
   LocoSphereCollider: {fileID: 597530005}
   ChestJoint: {fileID: 304071421}
   LegsJoint: {fileID: 1108629390}
-  renderDebugObjects: 0
+  renderDebugObjects: 1
   d_LocoSphere: {fileID: 1386785163}
   d_Fender: {fileID: 1915011035}
   d_Legs: {fileID: 1654769649}

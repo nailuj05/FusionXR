@@ -92,8 +92,6 @@ namespace Fusion.XR
                     LocoSphere.freezeRotation = true;
                 }
             }
-
-            print($"{isMoving} | {currentMove} | {currentTorque} | {LocoSphere.angularVelocity.magnitude}");
         }
 
         public override void Move(Vector3 direction)

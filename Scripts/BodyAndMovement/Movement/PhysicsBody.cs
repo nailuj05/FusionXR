@@ -149,7 +149,7 @@ namespace Fusion.XR
 
             HeadJoint.targetPosition = targetPos;
             //HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
-            UpdateTargetVelocity(HeadJoint, Head, targetPos, ref lastHeadPos);
+            UpdateTargetVelocity(HeadJoint, Head, ref lastHeadPos);
         }
 
         Vector3 lastChestPos;
@@ -159,7 +159,7 @@ namespace Fusion.XR
 
             var targetPos = new Vector3(0, -(localHeight - LocoSphereCollider.radius) * chestPercent * retractAmount, 0);
             ChestJoint.targetPosition = targetPos;
-            UpdateTargetVelocity(ChestJoint, Chest, targetPos, ref lastChestPos);
+            UpdateTargetVelocity(ChestJoint, Chest, ref lastChestPos);
 
             //ChestCol.height = actualHeight - (actualHeight * heightPercent - LocoSphereCollider.radius);
         }
@@ -171,7 +171,7 @@ namespace Fusion.XR
             
             var targetPos = new Vector3(0, localHeight * legsPercent, 0);
             LegsJoint.targetPosition = targetPos;
-            UpdateTargetVelocity(LegsJoint, Legs, targetPos, ref lastLegsPos);
+            UpdateTargetVelocity(LegsJoint, Legs, ref lastLegsPos);
 
             //LegsCol.height = actualHeight * heightPercent + LocoSphereCollider.radius;
         }
@@ -303,12 +303,12 @@ namespace Fusion.XR
 
         #region Helper Functions
 
-        private void UpdateTargetVelocity(ConfigurableJoint joint, Rigidbody jointRB, Vector3 targetPos, ref Vector3 lastTargetPos)
+        private void UpdateTargetVelocity(ConfigurableJoint joint, Rigidbody jointRB, ref Vector3 lastJointPos)
         {
-            var targetVelocity = (targetPos - lastTargetPos) / Time.fixedDeltaTime;
-            lastTargetPos = targetPos;
+            var targetVelocity = (joint.anchor - lastJointPos) / Time.fixedDeltaTime;
+            lastJointPos = joint.anchor;
 
-            joint.targetVelocity = joint.transform.TransformDirection(targetVelocity - jointRB.velocity) * targetVelocityDampener;
+            joint.targetVelocity = joint.transform.TransformDirection(targetVelocity) * targetVelocityDampener;
         }
 
         private Vector3 GetCameraInRigSpace()
