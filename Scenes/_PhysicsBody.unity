@@ -7817,9 +7817,9 @@ MonoBehaviour:
   isGrounded: 0
   walkedCollider: {fileID: 0}
   jointStrength: 5000
-  jointDampener: 250
+  jointDampener: 500
   jointMaxStrength: 1500
-  targetVelocityDampener: 1
+  targetVelocityDampener: 0.8
   FenderHeight: 0.1
   retractSpeed: 3
   Head: {fileID: 347880587}

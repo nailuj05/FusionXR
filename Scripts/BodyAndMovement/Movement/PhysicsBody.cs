@@ -152,9 +152,13 @@ namespace Fusion.XR
         {
             var targetPos = new Vector3(0, (localHeight) * (1 - chestPercent) * retractAmount, 0);
 
-            HeadJoint.targetPosition = targetPos;
+            //HeadJoint.targetPosition = targetPos;
             //HeadJoint.xMotion = HeadJoint.zMotion = ConfigurableJointMotion.Locked;
-            UpdateTargetVelocity(HeadJoint, Head, ref lastHeadPos);
+            //UpdateTargetVelocity(HeadJoint, Head, ref lastHeadPos);
+
+            //HeadJoint.connectedAnchor = new Vector3(0, -(localHeight) * (1 - chestPercent) * retractAmount, 0);
+            //HeadJoint.anchor = Chest.transform.InverseTransformPoint(LocoSphere.position + Vector3.up * (localHeight - LocoSphereCollider.radius) * retractAmount);
+            HeadJoint.connectedAnchor = -Chest.transform.InverseTransformPoint(LocoSphere.position + Vector3.up * (localHeight - LocoSphereCollider.radius) * retractAmount);
         }
 
         Vector3 lastChestPos;
