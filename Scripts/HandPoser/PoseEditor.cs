@@ -7,6 +7,7 @@ using UnityEditor;
 
 namespace Fusion.XR
 {
+#if UNITY_EDITOR
     [ExecuteInEditMode] [System.Serializable]
     public class PoseEditor : MonoBehaviour
     {
@@ -131,7 +132,6 @@ namespace Fusion.XR
         }
     }
 
-#if UNITY_EDITOR
     [CustomEditor(typeof(PoseEditor))]
     public class PoseEditorWindow : Editor
     {
