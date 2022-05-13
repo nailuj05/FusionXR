@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEditor;
+using Valve.VR;
 
 namespace Fusion.XR
 {
@@ -62,16 +63,29 @@ namespace Fusion.XR
         public bool debugMode;
         public InputActionReference pinchReference;
         public InputActionReference grabReference;
+        public SteamVR_Action_Boolean grabAction;
+        public SteamVR_Action_Boolean pinchAction;
         public Hand hand;
 
         private HandPose currentPose;
-
+        private FusionXRHand fusionXR;
+        
         [Header("Debug Hand State")]
         private float pinchValue;
         private float grabValue;
 
         public HandState handState = HandState.open;
-
+        private void Awake()
+        {
+            fusionXR = GetComponent<FusionXRHand>();
+            if (fusionXR.controlType == ControlInputType.PogoPins)
+            {
+                grabAction.onStateDown += (action, source) => grabValue = 1f;
+                grabAction.onStateUp += (action, source) => grabValue = 0f;
+                pinchAction.onStateDown += (action, source) => pinchValue = 1f;
+                pinchAction.onStateUp += (action, source) => pinchValue = 0f;
+            }
+        }
         void Start()
         {
             //Default Setup and tracking Base Config
@@ -86,8 +100,11 @@ namespace Fusion.XR
         {
             if (!debugMode)
             {
-                pinchValue = pinchReference.action.ReadValue<float>();
-                grabValue = grabReference.action.ReadValue<float>();
+                if (fusionXR.controlType == ControlInputType.XR)
+                {
+                    pinchValue = pinchReference.action.ReadValue<float>();
+                    grabValue = grabReference.action.ReadValue<float>();
+                }
             }
 
             if (isAttached)
