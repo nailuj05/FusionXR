@@ -57,6 +57,7 @@ namespace Fusion.XR
         {
             //Subscribe to Movement Actions
             movementAction.action.performed += PreprocessInput;
+            movementAction.action.canceled += PreprocessInput;
             turnAction.action.started += (c) => { isTurning = true; context = c; };
             turnAction.action.canceled += (c) => isTurning = false;
 
@@ -191,6 +192,10 @@ namespace Fusion.XR
                 //Debug.DrawRay(currentMovementDirection.position, movementInput, Color.red, 0.1f);
 
                 QueueMove(movementInput.normalized * playerSpeed);
+            }
+            else
+            {
+                QueueMove(Vector3.zero);
             }
         }
 
