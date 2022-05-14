@@ -171,12 +171,6 @@ public class Guns : MonoBehaviour
                     // Applies force to the shot rigidbody
                     shot.collider.gameObject.GetComponent<Rigidbody>().AddForce(firePoint.forward * forceOfBullet, ForceMode.Impulse);
                 }
-                // Null Check
-                if (shot.collider.gameObject.GetComponent<health>() != null)
-                {
-                    // Damages the shot object
-                    shot.collider.gameObject.GetComponent<health>().healthNumber -= damage;
-                }
 
             }
             if (debug == true)
