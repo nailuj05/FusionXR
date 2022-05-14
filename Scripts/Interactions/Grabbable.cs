@@ -188,7 +188,6 @@ namespace Fusion.XR
                     //This will also call the release function on this grabable, with this structure the hand can also be forced to release whatever it is holding
                     currentHands[0].Release();
                 }
-
                 currentHands.Add(hand);
             }
             else if (mode == TwoHandedModes.Average) //Case: Averaging Between Hands;

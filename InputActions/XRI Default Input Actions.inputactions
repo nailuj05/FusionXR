@@ -546,6 +546,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MagEject",
+                    "type": "Button",
+                    "id": "646f510a-3e23-4e40-b551-ba54576dcb23",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -821,6 +829,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa1669cc-41f5-4804-98fe-28dea354c1b6",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MagEject",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

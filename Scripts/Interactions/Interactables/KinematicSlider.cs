@@ -6,6 +6,8 @@ namespace Fusion.XR
 {
     public class KinematicSlider : KinematicInteractable
     {
+        public bool shouldRelease;
+
         public Vector3 lineStart;
         public Vector3 lineEnd;
 
@@ -30,6 +32,16 @@ namespace Fusion.XR
         protected override void InteractionEnd()
         {
 
+        }
+
+        public void yesCanBeGrabbed()
+        {
+            canBeGrabbed = true;
+        }
+
+        public void noCanBeGrabbed()
+        {
+            canBeGrabbed = false;
         }
 
 #if UNITY_EDITOR
