@@ -280,7 +280,15 @@ namespace Fusion.XR
 
                         if (!hasCustomPose)
                         {
-                            AssetDatabase.CreateAsset(poseEditor.pose, path);
+                            try
+                            {
+                                AssetDatabase.CreateAsset(poseEditor.pose, path);
+                                Debug.Log("Saving new Pose");
+                            }
+                            catch
+                            {
+                                Debug.Log("Saving");
+                            }
                         }
 
                         AssetDatabase.Refresh();
