@@ -54,10 +54,11 @@ namespace Fusion.XR
             try
             {
                 gameObject.layer = LayerMask.NameToLayer(grabableType.ToString());
+                gameObject.tag = "Grabable";
             }
             catch
             {
-                Debug.LogError("Layers need to be setup correctly!");
+                Debug.LogError("Layers and Tags need to be setup correctly!");
             }
 
             rb = GetComponent<Rigidbody>();
