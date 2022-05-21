@@ -101,9 +101,4 @@ namespace Fusion.XR
         Y,
         Z
     }
-    public enum ControlInputType
-    {
-        XR,
-        PogoPins
-    }
 }
