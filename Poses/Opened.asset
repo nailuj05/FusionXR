@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af63aeab2ffc01d4e91b328c91632fb0, type: 3}
   m_Name: Opened
   m_EditorClassIdentifier: 
+  isLeftHand: 0
   thumbRots:
   - {x: 0.016950853, y: 0.9456793, z: -0.30871055, w: 0.10050468}
   - {x: -0.14529923, y: 0.2924775, z: -0.09139538, w: 0.9407401}
