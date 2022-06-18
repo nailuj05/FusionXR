@@ -347,7 +347,7 @@ namespace Fusion.XR
             catch
             {
                 Debug.Log("Target and Tracking Object need to have a Rigidbody attached, " +
-                    "this should be used for grabbing, not for moving the hand (Use Active Joint Tracking for that");
+                    "this should be used for grabbing, not for moving the hand (Use Active Joint Tracking for that)");
             }
         }
 

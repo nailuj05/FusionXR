@@ -15,10 +15,16 @@ namespace Fusion.XR
         public bool isGrabbing = false;
 
         private TestGrabbable currentGrabbable;
+        private GameObject grabPoint;
 
         public TrackingMode mode;
         public TrackingBase trackingBase;
         private TrackDriver driver;
+
+        [HideInInspector]
+        public Vector3 targetPosition;
+        [HideInInspector]
+        public Quaternion targetRotation;
 
         public Transform controller;
 
@@ -39,6 +45,9 @@ namespace Fusion.XR
         {
             driver.UpdateTrack(controller.position, controller.rotation);
 
+            targetPosition = controller.position;
+            targetRotation = controller.rotation;
+
             if (isGrabbing)
                 return;
 
@@ -55,7 +64,7 @@ namespace Fusion.XR
         {
             var nextGrabbable = nextGrab.GetComponent<TestGrabbable>();
 
-            var grabPoint = nextGrabbable.GetClosestGrabPoint(palm.position);
+            grabPoint = nextGrabbable.GetClosestGrabPoint(palm.position);
             if (!grabPoint)
             {
                 grabPoint = new GameObject("GrabPoint");
@@ -66,6 +75,18 @@ namespace Fusion.XR
 
             isGrabbing = true;
             currentGrabbable = nextGrabbable;
+
+            StartCoroutine(Grab(currentGrabbable));
+        }
+
+        private IEnumerator Grab(TestGrabbable grabbable)
+        {
+            GetComponentInChildren<Collider>().enabled = false;
+            transform.position = grabPoint.transform.position;
+            transform.rotation = grabPoint.transform.rotation;
+            yield return null;
+
+            grabbable.Grab(this);
         }
 
         private void OnDrawGizmos()
