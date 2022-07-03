@@ -53,7 +53,7 @@ namespace Fusion.XR
         {
             try
             {
-                gameObject.layer = LayerMask.NameToLayer(grabableType.ToString());
+                SetLayer(gameObject, grabableType.ToString());
             }
             catch
             {
@@ -161,6 +161,16 @@ namespace Fusion.XR
 
         #region Functions
 
+        void SetLayer(GameObject obj, string layer)
+        {
+            obj.layer = LayerMask.NameToLayer(layer);
+
+            for (int i = 0; i < obj.transform.childCount; i++)
+            {
+                SetLayer(obj.transform.GetChild(i).gameObject, layer);
+            }
+        }
+
         //For returning the transform and the GrabPoint
         public GrabPoint GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand)
         {
@@ -211,7 +221,7 @@ namespace Fusion.XR
 
         public static void EnableOrDisableCollisions(GameObject obj, FusionXRHand hand, bool disable)
         {
-            foreach (Collider coll in obj.GetComponents<Collider>())
+            foreach (Collider coll in obj.GetComponentsInChildren<Collider>())
             {
                 Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, disable);
             }
