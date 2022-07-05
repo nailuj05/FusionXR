@@ -130,7 +130,7 @@ namespace Fusion.XR
             hand.grabbedTrackDriver = Utils.DriverFromEnum(m);
             hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
 
-            EnableOrDisableCollisions(gameObject, hand, true);
+            ToggleHandCollisions(hand, false);
 
             OnGrab?.Invoke();
             hand.OnPinchStart.AddListener(delegate { OnPinchStart?.Invoke(); });
@@ -142,7 +142,7 @@ namespace Fusion.XR
 
         public virtual void Release(FusionXRHand hand)
         {
-            EnableOrDisableCollisions(gameObject, hand, false);
+            ToggleHandCollisions(hand, true);
 
             rb.interpolation = originalInterpolation;
 
@@ -219,11 +219,11 @@ namespace Fusion.XR
             }
         }
 
-        public static void EnableOrDisableCollisions(GameObject obj, FusionXRHand hand, bool disable)
+        public static void ToggleHandCollisions(FusionXRHand hand, bool enable)
         {
-            foreach (Collider coll in obj.GetComponentsInChildren<Collider>())
+            foreach (Collider coll in hand.GetComponentsInChildren<Collider>())
             {
-                Physics.IgnoreCollision(hand.GetComponent<Collider>(), coll, disable);
+                coll.enabled = enable;
             }
         }
 

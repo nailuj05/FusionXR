@@ -56,7 +56,7 @@ namespace Fusion.XR
         {
             Grabbable.ManageNewHand(hand, attachedHands, twoHandedMode);
 
-            Grabbable.EnableOrDisableCollisions(gameObject, hand, true);
+            Grabbable.ToggleHandCollisions(hand, false);
 
             isGrabbed = true;
             isInteracting = true;
@@ -66,7 +66,7 @@ namespace Fusion.XR
 
         public void Release(FusionXRHand hand)
         {
-            Grabbable.EnableOrDisableCollisions(gameObject, hand, false);
+            Grabbable.ToggleHandCollisions(hand, true);
 
             attachedHands.Remove(hand);
 
