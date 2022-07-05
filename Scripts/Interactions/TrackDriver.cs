@@ -349,6 +349,8 @@ namespace Fusion.XR
                 Debug.Log("Target and Tracking Object need to have a Rigidbody attached, " +
                     "this should be used for grabbing, not for moving the hand (Use Active Joint Tracking for that)");
             }
+
+            SetupJoint(Vector3.zero, Quaternion.identity);
         }
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
@@ -366,7 +368,7 @@ namespace Fusion.XR
         {
             if (!objectRB.isKinematic)
             {
-                objectRB.transform.rotation = targetRotation;
+                //objectRB.transform.rotation = targetRotation;
             }
 
             joint = objectRB.gameObject.AddComponent<FixedJoint>();

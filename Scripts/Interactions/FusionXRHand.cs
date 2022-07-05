@@ -201,6 +201,9 @@ namespace Fusion.XR
                 generatedGrabPoint = true;
             }
 
+            transform.position = grabPosition.position;
+            transform.rotation = grabPosition.rotation;
+
             grabbedGrabbable.Grab(this, grabbedTrackingMode, trackingBase);
 
             if (!useHandPoser)
