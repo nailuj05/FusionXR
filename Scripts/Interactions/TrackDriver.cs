@@ -48,8 +48,10 @@ namespace Fusion.XR
         [SerializeField] public float limit = 0.7f;
 
         //References (hidden)
-        [HideInInspector] public GameObject tracker;
+        [HideInInspector] public Transform tracker;
         [HideInInspector] public Transform palm;
+
+        [HideInInspector] public Vector3 rotationOffset;
 
         [HideInInspector] public Quaternion startRot;
         [HideInInspector] public Quaternion startRotLocal;
@@ -273,26 +275,18 @@ namespace Fusion.XR
                 Debug.Log("Target and Tracking Object need to have a Rigidbody attached, " +
                     "this should be used for grabbing, not for moving the hand (Use Active Joint Tracking for that");
             }
+
+            SetupJoint();
         }
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
-            if (joint == null)
-                SetupJoint(targetPosition, targetRotation);
+            //TODO FIX WEIRD ROTATION HERE!!
+            Debug.Log(trackingBase.rotationOffset);
+            //* Quaternion.Euler(-trackingBase.rotationOffset)
+            Quaternion deltaRotation = Quaternion.Inverse(trackingBase.tracker.rotation) * targetRotation;
 
-            Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
-
-            deltaRotation.ToAngleAxis(out var angle, out var axis);
-
-            if (angle > 180f)
-            {
-                angle -= 360;
-            }
-
-            if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
-            {
-                objectRB.angularVelocity = axis * angle * trackingBase.rotationStrength * Mathf.Deg2Rad;
-            }
+            joint.SetTargetRotationLocal(deltaRotation, initalRotation);
         }
 
         public override void EndTrack()
@@ -300,11 +294,11 @@ namespace Fusion.XR
             DestroyJoint();
         }
 
-        private void SetupJoint(Vector3 targetPosition, Quaternion targetRotation)
+        private void SetupJoint()
         {
             joint = trackerRB.gameObject.AddComponent<ConfigurableJoint>();
 
-            joint.anchor = Vector3.zero; //objectRB.transform.InverseTransformPoint(trackerRB.position);
+            joint.anchor = Vector3.zero;
             joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedBody = objectRB;
@@ -312,8 +306,16 @@ namespace Fusion.XR
 
             joint.rotationDriveMode = RotationDriveMode.Slerp;
 
+            var drive = joint.slerpDrive;
+            drive.positionSpring = trackingBase.slerpSpring;
+            drive.positionDamper = trackingBase.slerpDamper;
+            drive.maximumForce = trackingBase.slerpMaxForce;
+            joint.slerpDrive = drive;
+
             joint.enableCollision = false;
             joint.enablePreprocessing = false;
+
+            initalRotation = trackerRB.transform.localRotation;
         }
 
         private void DestroyJoint()

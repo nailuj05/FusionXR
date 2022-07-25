@@ -31,7 +31,7 @@ namespace Fusion.XR
         private void Start()
         {
             driver = Utils.DriverFromEnum(mode);
-            trackingBase.tracker = this.gameObject;
+            trackingBase.tracker = this.transform;
             trackingBase.palm = palm;
             driver.StartTrack(transform, trackingBase);
         }

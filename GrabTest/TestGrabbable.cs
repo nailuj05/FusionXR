@@ -38,7 +38,7 @@ public class TestGrabbable : MonoBehaviour
         grabber = g;
         isGrabbed = true;
 
-        trackingBase.tracker = grabber.gameObject;
+        trackingBase.tracker = grabber.transform;
         trackingBase.palm = grabber.palm;
         grabDriver = Utils.DriverFromEnum(TrackingMode.FixedJoint);
         grabDriver.StartTrack(transform, trackingBase);

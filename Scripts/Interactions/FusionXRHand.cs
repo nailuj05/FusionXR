@@ -82,7 +82,8 @@ namespace Fusion.XR
             var newTrackDriver = Utils.DriverFromEnum(trackingMode);
             trackDriver = ChangeTrackDriver(newTrackDriver);
 
-            trackingBase.tracker = this.gameObject;
+            trackingBase.tracker = this.transform;
+            trackingBase.rotationOffset = rotationOffset;
             trackingBase.palm = palm;
             trackDriver.StartTrack(transform, trackingBase);
 

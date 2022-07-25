@@ -172,7 +172,7 @@ namespace Fusion.XR
         {
             //Debug.Log($"Attach object: {objectToAttach.name}");
 
-            attachedTrackingBase.tracker = gameObject;
+            attachedTrackingBase.tracker = transform;
             attachedTrackingBase.palm = transform;
 
             attachedObject = objectToAttach;

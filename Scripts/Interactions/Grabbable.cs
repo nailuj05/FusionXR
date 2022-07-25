@@ -123,6 +123,7 @@ namespace Fusion.XR
 
             originalInterpolation = rb.interpolation;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
             ///Setup and Start Track Driver
             var m = overrideTrackingMode ? customTrackingMode : mode;

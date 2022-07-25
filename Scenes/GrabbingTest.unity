@@ -417,6 +417,7 @@ MonoBehaviour:
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   isGrabbed: 0
@@ -1703,9 +1704,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1768931510}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: grabbedTrackingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1724,19 +1733,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000104308114
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1744,7 +1753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 360
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1763,9 +1772,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 2098479986}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: grabbedTrackingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605529, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
       value: 1
@@ -2143,6 +2160,7 @@ MonoBehaviour:
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -2700,8 +2718,8 @@ MonoBehaviour:
   GrabPoints:
   - {fileID: 576436186}
   - {fileID: 1384368762}
-  overrideTrackingMode: 0
-  customTrackingMode: 0
+  overrideTrackingMode: 1
+  customTrackingMode: 3
   OnGrab:
     m_PersistentCalls:
       m_Calls: []
