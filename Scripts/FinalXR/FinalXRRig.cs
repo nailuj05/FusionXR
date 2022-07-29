@@ -7,7 +7,10 @@ public class FinalXRRig : MonoBehaviour
     public Rigidbody head;
     public Rigidbody locosphere;
 
-    public Transform h;
+    private void Awake()
+    {
+        
+    }
 
     private void FixedUpdate()
     {
