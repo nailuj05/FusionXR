@@ -721,7 +721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &212611172
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1713,7 +1713,7 @@ PrefabInstance:
       objectReference: {fileID: 1768931510}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: grabbedTrackingMode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725372166368, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_RootOrder
@@ -1781,7 +1781,7 @@ PrefabInstance:
       objectReference: {fileID: 2098479986}
     - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: grabbedTrackingMode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605529, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
@@ -2290,6 +2290,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2592707823930765579, guid: 3b8fed67691ed944c85eec2ed2d1bded, type: 3}
+      propertyPath: m_Drag
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592707823930765579, guid: 3b8fed67691ed944c85eec2ed2d1bded, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592707823930765579, guid: 3b8fed67691ed944c85eec2ed2d1bded, type: 3}
+      propertyPath: m_AngularDrag
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2592707823930765581, guid: 3b8fed67691ed944c85eec2ed2d1bded, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2612,8 +2624,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148949539402}
-  m_LocalRotation: {x: -0.6830128, y: 0.6830127, z: 0.18301263, w: 0.18301271}
-  m_LocalPosition: {x: -0.28, y: 1.019, z: -0.776}
+  m_LocalRotation: {x: -0.0000001477375, y: 0.9659259, z: 0.25881898, w: 0.000000104308114}
+  m_LocalPosition: {x: -0.28, y: 1.388, z: -0.923}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 834442817}
@@ -2621,7 +2633,7 @@ Transform:
   - {fileID: 1384368760}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -150, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: -150, y: 0, z: 180}
 --- !u!23 &764135070805553178
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2741,9 +2753,9 @@ Rigidbody:
   m_GameObject: {fileID: 919132148949539402}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_Drag: 3
+  m_AngularDrag: 3
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
