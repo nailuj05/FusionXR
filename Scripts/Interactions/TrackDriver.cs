@@ -282,11 +282,9 @@ namespace Fusion.XR
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             //TODO FIX WEIRD ROTATION HERE!!
-            Debug.Log(trackingBase.rotationOffset);
-            //* Quaternion.Euler(-trackingBase.rotationOffset)
             Quaternion deltaRotation = Quaternion.Inverse(trackingBase.tracker.rotation) * targetRotation;
 
-            joint.SetTargetRotationLocal(deltaRotation, initalRotation);
+            //joint.SetTargetRotationLocal(deltaRotation, initalRotation);
         }
 
         public override void EndTrack()
@@ -300,9 +298,10 @@ namespace Fusion.XR
 
             joint.anchor = Vector3.zero;
             joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
+            joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedBody = objectRB;
-            joint.connectedAnchor = Vector3.zero;
+            joint.connectedAnchor = objectRB.transform.InverseTransformPoint(trackerRB.position);
 
             joint.rotationDriveMode = RotationDriveMode.Slerp;
 
