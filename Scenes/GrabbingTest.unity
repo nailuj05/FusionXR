@@ -2730,7 +2730,7 @@ MonoBehaviour:
   GrabPoints:
   - {fileID: 576436186}
   - {fileID: 1384368762}
-  overrideTrackingMode: 1
+  overrideTrackingMode: 0
   customTrackingMode: 3
   OnGrab:
     m_PersistentCalls:
