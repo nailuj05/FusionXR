@@ -1705,12 +1705,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingMode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1768931510}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.limit
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: grabbedTrackingMode
       value: 3
@@ -1773,12 +1777,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingMode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 2098479986}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.limit
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: grabbedTrackingMode
       value: 3

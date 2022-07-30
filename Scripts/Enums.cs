@@ -26,7 +26,7 @@ namespace Fusion.XR
     {
         SwitchHand = 0,
         Average = 1,
-        //AttachHand = 2
+        JointRotation = 2
     }
 
     public enum GrabbableType
