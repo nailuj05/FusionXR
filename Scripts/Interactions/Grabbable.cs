@@ -206,6 +206,10 @@ namespace Fusion.XR
             {
                 currentHands.Add(hand);
             }
+            else if (mode == TwoHandedModes.JointRotation) //Case: Averaging Between Hands;
+            {
+                currentHands.Add(hand);
+            }
         }
 
         void RemoveHand(FusionXRHand hand)
