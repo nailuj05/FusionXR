@@ -284,7 +284,7 @@ namespace Fusion.XR
             //TODO FIX WEIRD ROTATION HERE!!
             Quaternion deltaRotation = Quaternion.Inverse(trackingBase.tracker.rotation) * targetRotation;
 
-            joint.SetTargetRotationLocal(targetRotation, initalRotation);
+            joint.SetTargetRotationLocal(deltaRotation, initalRotation);
         }
 
         public override void EndTrack()

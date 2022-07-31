@@ -84,6 +84,7 @@ namespace Fusion.XR
                 targetPosition = attachedHands[0].targetPosition - transform.TransformVector(offsetPos);
                 targetRotation = attachedHands[0].targetRotation * Quaternion.Inverse(offsetRot);
 
+
                 //Apply Target Transformation to hand
                 attachedHands[0].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
             }
