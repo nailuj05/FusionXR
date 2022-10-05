@@ -115,6 +115,7 @@ namespace Fusion.XR
             return transform;
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (!(TryGetComponent<PoseEditor>(out PoseEditor pe) && pe.isEditingPose))
@@ -135,6 +136,7 @@ namespace Fusion.XR
                 Gizmos.color = new Color(0, 1, 0, .5f);
                 Gizmos.DrawMesh(hand, transform.TransformPoint(adjustedPalmOffset), transform.rotation, scale * 0.01f);
             }
-        }
+        } 
+#endif
     }
 }
