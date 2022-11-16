@@ -2569,10 +2569,13 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    massScale: 1
+    connectedMassScale: 1
     adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
@@ -3293,10 +3296,13 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    massScale: 1
+    connectedMassScale: 1
     adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   attachedObject: {fileID: 0}
@@ -10856,10 +10862,13 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    massScale: 1
+    connectedMassScale: 1
     adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
@@ -11289,10 +11298,13 @@ MonoBehaviour:
     slerpSpring: 3000
     slerpDamper: 250
     slerpMaxForce: 1500
+    massScale: 1
+    connectedMassScale: 1
     adjustAnchor: 1
     limit: 0.7
     tracker: {fileID: 0}
     palm: {fileID: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
   rb: {fileID: 0}
