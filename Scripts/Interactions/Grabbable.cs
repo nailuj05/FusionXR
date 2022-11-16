@@ -28,6 +28,7 @@ namespace Fusion.XR
 
         private Rigidbody rb;
         private RigidbodyInterpolation originalInterpolation;
+        private bool originalKinematicMode;
 
         public bool overrideTrackingMode;
 
@@ -123,8 +124,10 @@ namespace Fusion.XR
             ManageNewHand(hand, attachedHands, twoHandedMode);
 
             originalInterpolation = rb.interpolation;
+            originalKinematicMode = rb.isKinematic;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            rb.isKinematic = false;
 
             ///Setup and Start Track Driver
             var m = overrideTrackingMode ? customTrackingMode : mode;
@@ -147,6 +150,7 @@ namespace Fusion.XR
             ToggleHandCollisions(hand, true);
 
             rb.interpolation = originalInterpolation;
+            rb.isKinematic = originalKinematicMode;
 
             RemoveHand(hand);
 
