@@ -1533,7 +1533,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.516
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4601817725372166373, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+    - {fileID: 5221161576313746135, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+    - {fileID: 5221161575355319749, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+    - {fileID: 5221161576132970560, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
 --- !u!1 &814818070
 GameObject:
@@ -10992,6 +10996,42 @@ MonoBehaviour:
   m_AnimateModel: 0
   m_ModelSelectTransition: 
   m_ModelDeSelectTransition: 
+  m_HideControllerModel: 0
+  <anchorControlDeadzone>k__BackingField: 0
+  <anchorControlOffAxisDeadzone>k__BackingField: 0
+  m_SelectInteractionState:
+    m_Active: 0
+    m_ActivatedThisFrame: 0
+    m_DeactivatedThisFrame: 0
+  m_ActivateInteractionState:
+    m_Active: 0
+    m_ActivatedThisFrame: 0
+    m_DeactivatedThisFrame: 0
+  m_UIPressInteractionState:
+    m_Active: 0
+    m_ActivatedThisFrame: 0
+    m_DeactivatedThisFrame: 0
+  m_ControllerState:
+    time: 0
+    poseDataFlags: 3
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
+    selectInteractionState:
+      m_Active: 0
+      m_ActivatedThisFrame: 0
+      m_DeactivatedThisFrame: 0
+    activateInteractionState:
+      m_Active: 0
+      m_ActivatedThisFrame: 0
+      m_DeactivatedThisFrame: 0
+    uiPressInteractionState:
+      m_Active: 0
+      m_ActivatedThisFrame: 0
+      m_DeactivatedThisFrame: 0
+  m_CreateControllerState: 1
+  m_ModelAnimator: {fileID: 0}
+  m_HasWarnedAnimatorMissing: 0
+  m_PerformSetup: 1
   m_PositionAction:
     m_UseReference: 1
     m_Action:
@@ -11081,6 +11121,8 @@ MonoBehaviour:
       m_SingletonActionBindings: []
     m_Reference: {fileID: 7779212132400271959, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
+  m_HasCheckedDisabledTrackingInputReferenceActions: 0
+  m_HasCheckedDisabledInputReferenceActions: 0
 --- !u!4 &8622627593686399628
 Transform:
   m_ObjectHideFlags: 0
@@ -11674,6 +11716,9 @@ MonoBehaviour:
   m_CameraGameObject: {fileID: 8622627593387649081}
   m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 1.36144
+  <currentTrackingOriginMode>k__BackingField: 0
+  m_CameraInitialized: 0
+  m_CameraInitializing: 0
   m_TrackingSpace: 3
   m_TrackingOriginMode: -2147483648
 --- !u!1 &8622627594991174600
@@ -11862,6 +11907,42 @@ MonoBehaviour:
   m_AnimateModel: 0
   m_ModelSelectTransition: 
   m_ModelDeSelectTransition: 
+  m_HideControllerModel: 0
+  <anchorControlDeadzone>k__BackingField: 0
+  <anchorControlOffAxisDeadzone>k__BackingField: 0
+  m_SelectInteractionState:
+    m_Active: 0
+    m_ActivatedThisFrame: 0
+    m_DeactivatedThisFrame: 0
+  m_ActivateInteractionState:
+    m_Active: 0
+    m_ActivatedThisFrame: 0
+    m_DeactivatedThisFrame: 0
+  m_UIPressInteractionState:
+    m_Active: 0
+    m_ActivatedThisFrame: 0
+    m_DeactivatedThisFrame: 0
+  m_ControllerState:
+    time: 0
+    poseDataFlags: 3
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
+    selectInteractionState:
+      m_Active: 0
+      m_ActivatedThisFrame: 0
+      m_DeactivatedThisFrame: 0
+    activateInteractionState:
+      m_Active: 0
+      m_ActivatedThisFrame: 0
+      m_DeactivatedThisFrame: 0
+    uiPressInteractionState:
+      m_Active: 0
+      m_ActivatedThisFrame: 0
+      m_DeactivatedThisFrame: 0
+  m_CreateControllerState: 1
+  m_ModelAnimator: {fileID: 0}
+  m_HasWarnedAnimatorMissing: 0
+  m_PerformSetup: 1
   m_PositionAction:
     m_UseReference: 1
     m_Action:
@@ -11951,6 +12032,8 @@ MonoBehaviour:
       m_SingletonActionBindings: []
     m_Reference: {fileID: 875253871413052681, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
+  m_HasCheckedDisabledTrackingInputReferenceActions: 0
+  m_HasCheckedDisabledInputReferenceActions: 0
 --- !u!4 &8622627595051251697
 Transform:
   m_ObjectHideFlags: 0
