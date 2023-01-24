@@ -16,7 +16,6 @@ namespace Fusion.XR
         Kinematic = 0,
         Velocity = 1,
         ActiveJoint = 2,
-        PassiveJoint = 3,
         Force = 4,
         FixedJoint = 5,
         PDForce = 6

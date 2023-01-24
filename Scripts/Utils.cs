@@ -394,9 +394,6 @@ namespace Fusion.XR
                 case TrackingMode.ActiveJoint:
                     driver = new ActiveJointDriver();
                     break;
-                case TrackingMode.PassiveJoint:
-                    driver = new PassiveJointDriver();
-                    break;
                 case TrackingMode.Force:
                     driver = new ForceDriver();
                     break;
