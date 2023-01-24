@@ -1430,48 +1430,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 1939265241}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.limit
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: grabbedTrackingMode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.maxPDForce
-      value: 750
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.adjustAnchor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.rotationPower
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.positionDamper
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.positionSpring
-      value: 2500
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.positionStrength
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.rotationDampener
-      value: 1.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058076, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_Constraints
@@ -1546,17 +1510,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 539375038}
-    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: grabbedTrackingMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingBase.positionStrength
       value: 25

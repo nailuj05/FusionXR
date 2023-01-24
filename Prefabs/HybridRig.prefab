@@ -48,6 +48,7 @@ MonoBehaviour:
   player: {fileID: 4601817725372166383}
   leftHand: {fileID: 4601817725243021552}
   rightHand: {fileID: 4601817723680599757}
+  hand: {fileID: 0}
   l_hand: {fileID: 8761339241101605528}
   r_hand: {fileID: 4601817725298058075}
   showControllers: 1
@@ -484,8 +485,12 @@ MonoBehaviour:
   detectionLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  volume: {fileID: 0}
-  smoothTime: 0.1
+  ClippingStart:
+    m_PersistentCalls:
+      m_Calls: []
+  ClippingEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4601817725288485342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,8 +1041,12 @@ MonoBehaviour:
   detectionLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  volume: {fileID: 0}
-  smoothTime: 0.1
+  ClippingStart:
+    m_PersistentCalls:
+      m_Calls: []
+  ClippingEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5221161576132970565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1253,10 @@ PrefabInstance:
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 4601817724137427187}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grabbedTrackingMode
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983678, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: m_Name
       value: HandLeft
@@ -1488,6 +1501,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grabMask.m_Bits
       value: 768
       objectReference: {fileID: 0}
@@ -1495,6 +1512,42 @@ PrefabInstance:
       propertyPath: trackedController
       value: 
       objectReference: {fileID: 4601817724023232920}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.limit
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grabbedTrackingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.slerpDamper
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.slerpSpring
+      value: 3500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.adjustAnchor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.rotationPower
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.positionDamper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.positionSpring
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.rotationDampener
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: debugMode
       value: 1

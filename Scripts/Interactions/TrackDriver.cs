@@ -151,7 +151,10 @@ namespace Fusion.XR
             objectToTrack = assignedObjectToTrack;
             trackingBase = assignedTrackingBase;
 
-            jointRB = Object.FindObjectOfType<Player>().Rigidbody;
+            jointRB = Object.FindObjectOfType<Player>().Rigidbody; 
+            jointRB = new GameObject("ActiveJointDriverTempObject").AddComponent<Rigidbody>();
+            jointRB.isKinematic = true;
+            jointRB.transform.rotation = Quaternion.identity;
             objectRB = objectToTrack.GetComponent<Rigidbody>();
 
             SetupJoint();
@@ -188,7 +191,7 @@ namespace Fusion.XR
             activeJoint.xMotion = activeJoint.yMotion = activeJoint.zMotion = ConfigurableJointMotion.Limited;
 
             var limit = new SoftJointLimit();
-            limit.limit = trackingBase.limit;
+            limit.limit = 1000; //trackingBase.limit;
             activeJoint.linearLimit = limit;
 
             activeJoint.enableCollision = false;
@@ -200,6 +203,7 @@ namespace Fusion.XR
             activeJoint.connectedMassScale = trackingBase.connectedMassScale;
         }
 
+        Quaternion prevRot;
         private void TrackPositionRotation(Vector3 targetPos, Quaternion targetRot)
         {
             if (activeJoint != null && Time.frameCount % 10 == 0)
@@ -208,7 +212,7 @@ namespace Fusion.XR
             }
 
             activeJoint.targetPosition = jointRB.transform.InverseTransformPoint(targetPos) - activeJoint.anchor;
-            activeJoint.targetRotation = Quaternion.Inverse(jointRB.rotation) * targetRot;
+            activeJoint.targetRotation = targetRot * Quaternion.Euler(0, 180, 0);
         }
 
         private void UpdateHandJointDrives()
@@ -238,16 +242,6 @@ namespace Fusion.XR
             var targetVelocity = (jointRelativePos - lastPos) / Time.fixedDeltaTime;
             lastPos = jointRelativePos;
             activeJoint.targetVelocity = targetVelocity;
-
-            //TargetAngularVelocity
-            var deltaRot = targetRot * Quaternion.Inverse(lastRot);
-            deltaRot.FlipCheck();
-
-            deltaRot.ToAngleAxis(out float angle, out Vector3 axis);
-            angle *= Mathf.Rad2Deg;
-            var targetAngularVelocity = axis * (angle / Time.fixedDeltaTime);
-
-            activeJoint.targetAngularVelocity = Quaternion.Inverse(jointRB.transform.rotation) * targetAngularVelocity;
         }
     }
 
