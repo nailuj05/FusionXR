@@ -16,7 +16,7 @@ namespace Fusion.XR
         [Header("Stabber")]
         public Axis axis = Axis.Z;
 
-        [Tooltip("The collider that will be used for stabbing, if not assigned the script will grip the collider automatically")]
+        [Tooltip("The collider that will be used for stabbing, if not assigned the script will grab the collider automatically")]
         public BoxCollider stabCollider;
 
         public float requiredImpactVelocity;

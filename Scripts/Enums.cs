@@ -38,8 +38,8 @@ namespace Fusion.XR
     public enum HandState
     {
         open = 0,
-        grip = 1,
-        trigger = 2,
+        grab = 1,
+        pinch = 2,
         point = 3
     }
 

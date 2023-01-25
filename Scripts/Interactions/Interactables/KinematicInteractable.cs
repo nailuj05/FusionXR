@@ -19,7 +19,7 @@ namespace Fusion.XR
 
         [SerializeField]
         public GrabPoint[] GrabPoints;
-        public GrabPoint[] gripPoints { get { return GrabPoints; } set { GrabPoints = value; } }
+        public GrabPoint[] grabPoints { get { return GrabPoints; } set { GrabPoints = value; } }
 
         public List<FusionXRHand> attachedHands { get; private set; } = new List<FusionXRHand>();
         #endregion
@@ -27,7 +27,7 @@ namespace Fusion.XR
         [SerializeField]
         protected bool allowCollisionInteraction = false;
 
-        [SerializeField] [Tooltip("Used to filter which objects can interact besides gripbing the interactable")]
+        [SerializeField] [Tooltip("Used to filter which objects can interact besides grabbing the interactable")]
         protected LayerMask interactionLayers = ~0;
 
         [SerializeField]
@@ -130,12 +130,12 @@ namespace Fusion.XR
         //For returning the transform and the GrabPoint
         public GrabPoint GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand)
         {
-            GrabPoint gripPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
+            GrabPoint grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
 
-            if (gripPoint != null)
+            if (grabPoint != null)
             {
-                gripPoint.BlockGrabPoint();
-                return gripPoint;
+                grabPoint.BlockGrabPoint();
+                return grabPoint;
             }
             else
             {

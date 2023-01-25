@@ -11,8 +11,8 @@ namespace Fusion.XR
 
         public override bool IsGrabPossible(Transform handTransform, Hand hand, TwoHandedModes twoHandedMode)
         {
-            //If hands match or both hands are accepted and if the grip Point is free or can be switched
-            if (((int)hand == (int)gripPointType || gripPointType == GrabPointType.Both) && (isActive || twoHandedMode == TwoHandedModes.SwitchHand))
+            //If hands match or both hands are accepted and if the grab Point is free or can be switched
+            if (((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && (isActive || twoHandedMode == TwoHandedModes.SwitchHand))
             {
                 if(Vector3.Distance(transform.position, handTransform.position) <= reachDistance)
                 {

@@ -61,9 +61,9 @@ namespace Fusion.XR
 
             handPoser = prevHand.GetComponent<HandPoser>();
 
-            if(TryGetComponent(out GrabPoint gripPoint))
+            if(TryGetComponent(out GrabPoint grabPoint))
             {
-                handPoser.attachedObj = gripPoint.AlignedTransform;
+                handPoser.attachedObj = grabPoint.AlignedTransform;
             }
             else
             {
@@ -189,22 +189,22 @@ namespace Fusion.XR
 
                     if (poseEditor.GetComponent<GrabPoint>() != null)
                     {
-                        GrabPoint gripPoint = poseEditor.GetComponent<GrabPoint>();
-                        poseEditor.SwitchHand(gripPoint.gripPointType);
+                        GrabPoint grabPoint = poseEditor.GetComponent<GrabPoint>();
+                        poseEditor.SwitchHand(grabPoint.grabPointType);
 
-                        if (gripPoint.hasCustomPose)
+                        if (grabPoint.hasCustomPose)
                         {
-                            poseEditor.pose = gripPoint.pose;
+                            poseEditor.pose = grabPoint.pose;
                             poseEditor.LoadPose();
-                            poseEditor.displayName = gripPoint.pose.name;
+                            poseEditor.displayName = grabPoint.pose.name;
                         }
 
-                        if (gripPoint.gripPointType == GrabPointType.Right)
+                        if (grabPoint.grabPointType == GrabPointType.Right)
                         {
                             rightStyle.normal = new GUIStyleState() { background = Texture2D.whiteTexture };
                             leftStyle.normal = new GUIStyleState() { background = Texture2D.grayTexture };
                         }
-                        else if (gripPoint.gripPointType == GrabPointType.Left)
+                        else if (grabPoint.grabPointType == GrabPointType.Left)
                         {
                             leftStyle.normal = new GUIStyleState() { background = Texture2D.whiteTexture };
                             rightStyle.normal = new GUIStyleState() { background = Texture2D.grayTexture };

@@ -1155,10 +1155,6 @@ PrefabInstance:
       value: bd279dc0-3e8f-4b36-8829-8b9b61b07e0e
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_Id
-      value: b06779a9-8d87-4fa9-aa7d-bd3b11429776
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_Id
       value: b06779a9-8d87-4fa9-aa7d-bd3b11429776
       objectReference: {fileID: 0}
@@ -1167,19 +1163,7 @@ PrefabInstance:
       value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_Name
-      value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_Name
-      value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_Id
-      value: b06779a9-8d87-4fa9-aa7d-bd3b11429776
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_Name
       value: Pinch
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
@@ -1187,24 +1171,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Id
       value: 635dbf37-67ab-4c44-abac-965f680d82e4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 96493b1f-8fd5-4765-89d0-65096cf99605
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Id
@@ -1215,44 +1187,20 @@ PrefabInstance:
       value: <XRController>{LeftHand}/grip
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <XRController>{LeftHand}/grip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Path
       value: <XRController>{LeftHand}/trigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 96493b1f-8fd5-4765-89d0-65096cf99605
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Action
       value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <XRController>{LeftHand}/trigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Action
       value: Pinch
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: grab.m_Id
       value: bd279dc0-3e8f-4b36-8829-8b9b61b07e0e
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_Id
-      value: b06779a9-8d87-4fa9-aa7d-bd3b11429776
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_Id
@@ -1263,25 +1211,13 @@ PrefabInstance:
       value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_Name
-      value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_Name
-      value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_Id
-      value: b06779a9-8d87-4fa9-aa7d-bd3b11429776
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_Name
       value: Pinch
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackedController
       value: 
-      objectReference: {fileID: 5221161576132970564}
+      objectReference: {fileID: 4601817724137427187}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: grabbedTrackingMode
       value: 3
@@ -1291,24 +1227,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Id
       value: 635dbf37-67ab-4c44-abac-965f680d82e4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 96493b1f-8fd5-4765-89d0-65096cf99605
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Id
@@ -1319,35 +1243,15 @@ PrefabInstance:
       value: <XRController>{LeftHand}/grip
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <XRController>{LeftHand}/grip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Path
       value: <XRController>{LeftHand}/trigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 96493b1f-8fd5-4765-89d0-65096cf99605
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Action
       value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <XRController>{LeftHand}/trigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Action
       value: Pinch
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983678, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
@@ -1598,10 +1502,6 @@ PrefabInstance:
       value: de6bf914-2d75-4880-939b-1f709505c2bd
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_Id
-      value: 9014e28d-2180-4425-9857-c55852b200b1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_Id
       value: 386262c7-201a-46e4-a0e6-772d36819363
       objectReference: {fileID: 0}
@@ -1610,24 +1510,12 @@ PrefabInstance:
       value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_Name
-      value: Grip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_Name
       value: Pinch
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingMode
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_Id
-      value: 5ba6e899-c007-4afa-b984-3feabf309cdd
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_Name
-      value: Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grabMask.m_Bits
@@ -1678,24 +1566,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Id
       value: f91738a2-9cf8-46c1-b4b6-7a2a357afbc6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 222cf7b1-d87d-4780-9fd1-a45a449c45bd
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Id
@@ -1706,36 +1582,16 @@ PrefabInstance:
       value: <XRController>{RightHand}/grip
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <XRController>{RightHand}/grip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Path
       value: <XRController>{RightHand}/trigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Id
-      value: ce526902-b1b0-481c-b010-1c3b4489c647
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Action
       value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Grip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Action
       value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <XRController>{RightHand}/trigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: debugMode
@@ -1746,10 +1602,6 @@ PrefabInstance:
       value: de6bf914-2d75-4880-939b-1f709505c2bd
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_Id
-      value: 9014e28d-2180-4425-9857-c55852b200b1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_Id
       value: 386262c7-201a-46e4-a0e6-772d36819363
       objectReference: {fileID: 0}
@@ -1758,16 +1610,8 @@ PrefabInstance:
       value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_Name
-      value: Grip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_Name
       value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_Id
-      value: 5ba6e899-c007-4afa-b984-3feabf309cdd
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: handBaseSize.x
@@ -1780,10 +1624,6 @@ PrefabInstance:
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: handBaseSize.z
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_Name
-      value: Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: fingerDirection
@@ -1802,24 +1642,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Id
       value: f91738a2-9cf8-46c1-b4b6-7a2a357afbc6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 222cf7b1-d87d-4780-9fd1-a45a449c45bd
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Id
@@ -1830,36 +1658,16 @@ PrefabInstance:
       value: <XRController>{RightHand}/grip
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <XRController>{RightHand}/grip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Path
       value: <XRController>{RightHand}/trigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Id
-      value: ce526902-b1b0-481c-b010-1c3b4489c647
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Action
       value: Grab
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: grip.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Grip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Action
       value: Pinch
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <XRController>{RightHand}/trigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trigger.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_RootOrder

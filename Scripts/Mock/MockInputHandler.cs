@@ -127,11 +127,11 @@ namespace Fusion.XR
             #endregion
 
             #region Hands (Poser and Grabbing)
-            float triggerTarget = Input.GetMouseButton(0) ? 1 : 0;
-            float gripTarget = Input.GetMouseButton(1) ? 1 : 0;
+            float pinchTarget = Input.GetMouseButton(0) ? 1 : 0;
+            float grabTarget = Input.GetMouseButton(1) ? 1 : 0;
 
-            mockPinch = triggerTarget;
-            mockGrab = gripTarget;
+            mockPinch = pinchTarget;
+            mockGrab = grabTarget;
 
             if (currentHand == leftHand)
             {

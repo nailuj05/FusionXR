@@ -5,42 +5,42 @@ using Fusion.XR;
 
 public class TestGrabbable : MonoBehaviour
 {
-    public GameObject[] gripPoints;
+    public GameObject[] grabPoints;
 
     public TrackingBase trackingBase;
-    private TrackDriver gripDriver;
+    private TrackDriver grabDriver;
 
-    private TestGrabber gripber;
+    private TestGrabber grabber;
 
     public bool isGrabbed;
 
     public GameObject GetClosestGrabPoint(Vector3 pos)
     {
-        if(gripPoints.Length > 0)
-            return Utils.ClosestGameObject(gripPoints, pos);
+        if(grabPoints.Length > 0)
+            return Utils.ClosestGameObject(grabPoints, pos);
         return null;
     }
 
     private void Update()
     {
         if(isGrabbed)
-            gripDriver.UpdateTrack(gripber.targetPosition, gripber.targetRotation);
+            grabDriver.UpdateTrack(grabber.targetPosition, grabber.targetRotation);
     }
 
     private void FixedUpdate()
     {
         if(isGrabbed)
-            gripDriver.UpdateTrackFixed(gripber.targetPosition, gripber.targetRotation);
+            grabDriver.UpdateTrackFixed(grabber.targetPosition, grabber.targetRotation);
     }
 
     public void Grab(TestGrabber g)
     {
-        gripber = g;
+        grabber = g;
         isGrabbed = true;
 
-        trackingBase.tracker = gripber.transform;
-        trackingBase.palm = gripber.palm;
-        gripDriver = Utils.DriverFromEnum(TrackingMode.FixedJoint);
-        gripDriver.StartTrack(transform, trackingBase);
+        trackingBase.tracker = grabber.transform;
+        trackingBase.palm = grabber.palm;
+        grabDriver = Utils.DriverFromEnum(TrackingMode.FixedJoint);
+        grabDriver.StartTrack(transform, trackingBase);
     }
 }

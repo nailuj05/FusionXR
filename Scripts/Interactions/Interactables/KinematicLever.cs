@@ -8,7 +8,7 @@ namespace Fusion.XR
     {
         public Vector2 minMaxClamp = new Vector2(-45f, 45f);
 
-        private Vector3 gripPosition = Vector3.zero;
+        private Vector3 grabPosition = Vector3.zero;
 
         private float offsetAngle = 0f;
 
@@ -21,9 +21,9 @@ namespace Fusion.XR
         {
             if (attachedHands.Count == 0) return;
 
-            gripPosition = attachedHands[0].gripPosition.position;
+            grabPosition = attachedHands[0].grabPosition.position;
 
-            offsetAngle = Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(gripPosition), axis);
+            offsetAngle = Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(grabPosition), axis);
 
             startAngle = transform.localEulerAngles;
         }
@@ -32,7 +32,7 @@ namespace Fusion.XR
 
         protected override void InteractionUpdate()
         {
-            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(gripPosition), axis);
+            var angle = offsetAngle - Vector3.SignedAngle(LocalAngleSetup(GetMeanPosition()), LocalAngleSetup(grabPosition), axis);
 
             angle = Mathf.Clamp(angle, minMaxClamp.x, minMaxClamp.y);
 

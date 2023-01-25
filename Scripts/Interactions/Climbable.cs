@@ -22,12 +22,12 @@ namespace Fusion.XR
 
         //    if (attachedHands.Count > 1)
         //    {
-        //        //Take the velocity of the gripbing hand
+        //        //Take the velocity of the grabbing hand
         //        deltaVelocity = attachedHands[0].rb.velocity;
         //    }
         //    else
         //    {
-        //        //Average the Velocity between the 2 hands gripbing the object
+        //        //Average the Velocity between the 2 hands grabbing the object
         //        deltaVelocity = Vector3.Lerp(attachedHands[0].rb.velocity, attachedHands[0].rb.velocity, 0.5f);
         //    }
 
