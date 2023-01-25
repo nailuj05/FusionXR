@@ -534,10 +534,10 @@ GameObject:
   - component: {fileID: 4601817725372166368}
   - component: {fileID: 4601817725372166374}
   - component: {fileID: 4601817725372166372}
-  - component: {fileID: 4601817725372166375}
-  - component: {fileID: 4601817725372166371}
-  - component: {fileID: 4601817725372166370}
-  - component: {fileID: 1718852702228879623}
+  - component: {fileID: 7134510402042608600}
+  - component: {fileID: 769189446518580833}
+  - component: {fileID: 6026547987715125670}
+  - component: {fileID: 3439805600863467242}
   m_Layer: 3
   m_Name: HybridRig
   m_TagString: Untagged
@@ -592,11 +592,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftHand: {fileID: 8761339241101605528}
   RightHand: {fileID: 4601817725298058075}
-  movement: {fileID: 4601817725372166370}
-  movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  collisionAdjuster: {fileID: 1718852702228879623}
---- !u!54 &4601817725372166375
+  movement: {fileID: 6026547987715125670}
+  movementAction:
+    m_Name: Movement
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8e87d8a5-240a-4e33-9122-065de3afd816
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b94df85f-6ce8-47f5-8697-2ad3c13215cb
+      m_Path: <XRController>{LeftHand}/joystick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 0
+  turnAction:
+    m_Name: Turn
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 271b323c-6d2d-4ab4-a568-76974f0f3d39
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7796a132-249b-4d73-8628-d4055bb060b8
+      m_Path: <XRController>{RightHand}/joystick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 0
+  collisionAdjuster: {fileID: 3439805600863467242}
+--- !u!54 &7134510402042608600
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -604,15 +634,15 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4601817725372166383}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
+  m_Interpolate: 0
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &4601817725372166371
+--- !u!136 &769189446518580833
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -626,7 +656,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4601817725372166370
+--- !u!114 &6026547987715125670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -638,22 +668,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bb5e71266297b438f5c4b7cb525a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 1.5
-  head: {fileID: 5221161575693523710}
+  playerSpeed: 2
+  head: {fileID: 4601817725283271947}
   hand: {fileID: 8761339241101605530}
   movementDirection: 0
   turnMode: 0
-  turnSpeed: 20
+  turnSpeed: 5
   turnAngle: 45
   turnCooldown: 0.3
-  movementAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  turnAction: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  movementAction:
+    m_Name: Movement
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8e87d8a5-240a-4e33-9122-065de3afd816
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b94df85f-6ce8-47f5-8697-2ad3c13215cb
+      m_Path: <XRController>{LeftHand}/joystick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 0
+  turnAction:
+    m_Name: Turn
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 271b323c-6d2d-4ab4-a568-76974f0f3d39
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7796a132-249b-4d73-8628-d4055bb060b8
+      m_Path: <XRController>{RightHand}/joystick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 0
   activationThreshold: 0.1
   canMove: 1
   usesCustomGravity: 0
   gravity: {x: 0, y: -9.81, z: 0}
-  rb: {fileID: 0}
---- !u!114 &1718852702228879623
+  rb: {fileID: 7134510402042608600}
+--- !u!114 &3439805600863467242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -666,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XRRig: {fileID: 5221161576313746133}
-  VRCamera: {fileID: 0}
+  VRCamera: {fileID: 4601817725283271947}
   CollisionRadius: 0.2
   _localHeight: 0
 --- !u!1 &5221161575355319610
@@ -1086,6 +1146,74 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4601817725372166368}
     m_Modifications:
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: debugMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_Id
+      value: bd279dc0-3e8f-4b36-8829-8b9b61b07e0e
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_Id
+      value: b06779a9-8d87-4fa9-aa7d-bd3b11429776
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_Name
+      value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_Name
+      value: Pinch
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 635dbf37-67ab-4c44-abac-965f680d82e4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 96493b1f-8fd5-4765-89d0-65096cf99605
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <XRController>{LeftHand}/grip
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <XRController>{LeftHand}/trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983676, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Pinch
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_Id
+      value: bd279dc0-3e8f-4b36-8829-8b9b61b07e0e
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_Id
+      value: b06779a9-8d87-4fa9-aa7d-bd3b11429776
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_Name
+      value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_Name
+      value: Pinch
+      objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackedController
       value: 
@@ -1093,6 +1221,38 @@ PrefabInstance:
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: grabbedTrackingMode
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 635dbf37-67ab-4c44-abac-965f680d82e4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 96493b1f-8fd5-4765-89d0-65096cf99605
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <XRController>{LeftHand}/grip
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <XRController>{LeftHand}/trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Pinch
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983678, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: m_Name
@@ -1338,6 +1498,22 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_Id
+      value: de6bf914-2d75-4880-939b-1f709505c2bd
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_Id
+      value: 386262c7-201a-46e4-a0e6-772d36819363
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_Name
+      value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_Name
+      value: Pinch
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingMode
       value: 2
       objectReference: {fileID: 0}
@@ -1348,14 +1524,14 @@ PrefabInstance:
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackedController
       value: 
-      objectReference: {fileID: 4601817724023232920}
+      objectReference: {fileID: 5221161575355319609}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.limit
       value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grabbedTrackingMode
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.slerpDamper
@@ -1385,9 +1561,57 @@ PrefabInstance:
       propertyPath: trackingBase.rotationDampener
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Id
+      value: f91738a2-9cf8-46c1-b4b6-7a2a357afbc6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 984094dc-15f4-4fd9-886a-afde28ca415c
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <XRController>{RightHand}/grip
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <XRController>{RightHand}/trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Pinch
+      objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: debugMode
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_Id
+      value: de6bf914-2d75-4880-939b-1f709505c2bd
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_Id
+      value: 386262c7-201a-46e4-a0e6-772d36819363
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_Name
+      value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_Name
+      value: Pinch
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: handBaseSize.x
@@ -1413,21 +1637,53 @@ PrefabInstance:
       propertyPath: handBaseCenter.z
       value: -0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Id
+      value: f91738a2-9cf8-46c1-b4b6-7a2a357afbc6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 984094dc-15f4-4fd9-886a-afde28ca415c
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <XRController>{RightHand}/grip
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <XRController>{RightHand}/trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: grab.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066357, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: pinch.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Pinch
+      objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0554
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.486
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.516
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066358, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_LocalRotation.w

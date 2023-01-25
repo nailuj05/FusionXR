@@ -47,8 +47,8 @@ namespace Fusion.XR
         }
 
         public Movement movement;
-        public InputActionReference movementAction;
-        public InputActionReference turnAction;
+        public InputAction movementAction;
+        public InputAction turnAction;
 
         public CollisionAdjuster collisionAdjuster;
     }

@@ -8,6 +8,8 @@ namespace Fusion.XR
 {
     public class HandPoser : MonoBehaviour
     {
+        public Hand hand;
+
         [Header("Poses")]
 
         [Tooltip("The Pose of an open Hand")]
@@ -60,9 +62,8 @@ namespace Fusion.XR
         [Header("Hand State")]
         [Tooltip("Debug Mode is used to control the grab and pinch values form script, rather than using controller data")]
         public bool debugMode;
-        public InputActionReference pinchReference;
-        public InputActionReference grabReference;
-        public Hand hand;
+        public InputAction grab;
+        public InputAction pinch;
 
         private HandPose currentPose;
 
@@ -80,14 +81,17 @@ namespace Fusion.XR
             currentPose = handOpen;
 
             UpdateColliders();
+
+            grab.Enable();
+            pinch.Enable();
         }
 
         public void Update()
         {
             if (!debugMode)
             {
-                pinchValue = pinchReference.action.ReadValue<float>();
-                grabValue = grabReference.action.ReadValue<float>();
+                pinchValue = pinch.ReadValue<float>();
+                grabValue = grab.ReadValue<float>();
             }
 
             if (isAttached)

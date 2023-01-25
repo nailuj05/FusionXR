@@ -34,7 +34,7 @@ namespace Fusion.XR
 
         [Header("Crouch and Jump")]
         [SerializeField]
-        private InputActionReference jumpReference;
+        private InputAction jump;
 
         [SerializeField] [ReadOnly]
         private PlayerState playerState = PlayerState.Standing;
@@ -62,8 +62,9 @@ namespace Fusion.XR
         {
             body = GetComponent<PhysicsBody>();
 
-            jumpReference.action.started += OnCrouch;
-            jumpReference.action.canceled += OnJump;
+            jump.Enable();
+            jump.started += OnCrouch;
+            jump.canceled += OnJump;
         }
 
         private void FixedUpdate()

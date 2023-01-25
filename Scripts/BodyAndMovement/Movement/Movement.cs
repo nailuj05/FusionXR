@@ -25,8 +25,8 @@ namespace Fusion.XR
 
         private Transform currentMovementDirection => GetMovementDirection(movementDirection);
 
-        public InputActionReference movementAction;
-        public InputActionReference turnAction;
+        public InputAction movementAction;
+        public InputAction turnAction;
 
         [Range(0.05f, 0.9f)]
         public float activationThreshold = 0.1f;
@@ -55,11 +55,14 @@ namespace Fusion.XR
 
         private void Start()
         {
+            movementAction.Enable();
+            turnAction.Enable();
+
             //Subscribe to Movement Actions
-            movementAction.action.performed += PreprocessInput;
-            movementAction.action.canceled += PreprocessInput;
-            turnAction.action.started += (c) => { isTurning = true; context = c; };
-            turnAction.action.canceled += (c) => isTurning = false;
+            movementAction.performed += PreprocessInput;
+            movementAction.canceled += PreprocessInput;
+            turnAction.started += (c) => { isTurning = true; context = c; };
+            turnAction.canceled += (c) => isTurning = false;
 
             head = Player.main.head;
             hand = Player.main.LeftHand.trackedController;
@@ -170,7 +173,7 @@ namespace Fusion.XR
 
         #region Queuing, Processing, Overrides
 
-        public virtual void PreprocessInput(InputAction.CallbackContext obj) { PreprocessInput(movementAction.action.ReadValue<Vector2>()); }
+        public virtual void PreprocessInput(InputAction.CallbackContext obj) { PreprocessInput(movementAction.ReadValue<Vector2>()); }
 
         Vector3 movementInput;
 

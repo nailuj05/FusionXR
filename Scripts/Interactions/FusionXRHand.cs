@@ -60,8 +60,8 @@ namespace Fusion.XR
         private GrabPoint grabPoint;
 
         [Header("Inputs")]
-        public InputActionReference grabReference;
-        public InputActionReference pinchReference;
+        public InputAction grab;
+        public InputAction pinch;
 
         [Header("Events")]
         public UnityEvent OnGrabStart;
@@ -88,11 +88,14 @@ namespace Fusion.XR
             trackDriver.StartTrack(transform, trackingBase);
 
             ///Subscribe to the actions
-            grabReference.action.started += OnGrabbed;
-            grabReference.action.canceled += OnLetGo;
+            grab.Enable();
+            pinch.Enable();
 
-            pinchReference.action.started += OnPinched;
-            pinchReference.action.canceled += OnPinchedCancelled;
+            grab.started += OnGrabbed;
+            grab.canceled += OnLetGo;
+
+            pinch.started += OnPinched;
+            pinch.canceled += OnPinchedCancelled;
 
             trackingBase.startRot = transform.rotation;
             trackingBase.startRotLocal = transform.localRotation;
