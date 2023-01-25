@@ -60,15 +60,15 @@ namespace Fusion.XR
         private GrabPoint grabPoint;
 
         [Header("Inputs")]
-        public InputAction grab;
-        public InputAction pinch;
+        public InputAction grip;
+        public InputAction trigger;
 
         [Header("Events")]
-        public UnityEvent OnGrabStart;
-        public UnityEvent OnGrabEnd;
+        public UnityEvent OnGripStart;
+        public UnityEvent OnGripEnd;
 
-        public UnityEvent OnPinchStart;
-        public UnityEvent OnPinchEnd;
+        public UnityEvent OnTriggerStart;
+        public UnityEvent OnTriggerEnd;
 
         #endregion
 
@@ -88,14 +88,14 @@ namespace Fusion.XR
             trackDriver.StartTrack(transform, trackingBase);
 
             ///Subscribe to the actions
-            grab.Enable();
-            pinch.Enable();
+            grip.Enable();
+            trigger.Enable();
 
-            grab.started += OnGrabbed;
-            grab.canceled += OnLetGo;
+            grip.started += OnGrabbed;
+            grip.canceled += OnLetGo;
 
-            pinch.started += OnPinched;
-            pinch.canceled += OnPinchedCancelled;
+            trigger.started += OnPinched;
+            trigger.canceled += OnPinchedCancelled;
 
             trackingBase.startRot = transform.rotation;
             trackingBase.startRotLocal = transform.localRotation;
@@ -124,24 +124,24 @@ namespace Fusion.XR
         #region Events
         private void OnGrabbed(InputAction.CallbackContext obj)
         {
-            OnGrabStart?.Invoke();
+            OnGripStart?.Invoke();
             GrabObject();
         }
 
         private void OnLetGo(InputAction.CallbackContext obj)
         {
-            OnGrabEnd?.Invoke();
+            OnGripEnd?.Invoke();
             Release();
         }
 
         private void OnPinched(InputAction.CallbackContext obj)
         {
-            OnPinchStart?.Invoke();
+            OnTriggerStart?.Invoke();
         }
 
         private void OnPinchedCancelled(InputAction.CallbackContext obj)
         {
-            OnPinchEnd?.Invoke();
+            OnTriggerEnd?.Invoke();
         }
 
         #endregion
@@ -149,25 +149,25 @@ namespace Fusion.XR
         #region DebugEvents
         public void DebugGrab()
         {
-            OnGrabStart?.Invoke();
+            OnGripStart?.Invoke();
             GrabObject();
         }
 
         public void DebugLetGo()
         {
-            OnGrabEnd?.Invoke();
+            OnGripEnd?.Invoke();
             if (isGrabbing)
                 Release();
         }
 
         public void DebugPinchStart()
         {
-            OnPinchStart.Invoke();
+            OnTriggerStart.Invoke();
         }
 
         public void DebugPinchEnd()
         {
-            OnPinchEnd.Invoke();
+            OnTriggerEnd.Invoke();
         }
         #endregion
 

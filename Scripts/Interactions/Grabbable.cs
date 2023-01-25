@@ -138,8 +138,8 @@ namespace Fusion.XR
             ToggleHandCollisions(hand, false);
 
             OnGrab?.Invoke();
-            hand.OnPinchStart.AddListener(delegate { OnPinchStart?.Invoke(); });
-            hand.OnPinchEnd.AddListener(delegate { OnPinchEnd?.Invoke(); });
+            hand.OnTriggerStart.AddListener(delegate { OnPinchStart?.Invoke(); });
+            hand.OnTriggerEnd.AddListener(delegate { OnPinchEnd?.Invoke(); });
 
             ///This needs to be called at the end, if not the releasing Hand will set "isGrabbed" to false and it will stay that way
             isGrabbed = true;
@@ -157,7 +157,7 @@ namespace Fusion.XR
             if(!isGrabbed)
                 OnRelease?.Invoke();
 
-            hand.OnPinchStart.RemoveAllListeners();
+            hand.OnTriggerStart.RemoveAllListeners();
 
             //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
             hand.grabbedTrackDriver.EndTrack();

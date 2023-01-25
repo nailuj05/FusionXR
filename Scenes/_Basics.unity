@@ -893,11 +893,6 @@ MonoBehaviour:
   leftHandAddedRotation: {x: 0, y: 0, z: 0}
   leftHandAddedPosition: {x: 0, y: 0, z: 0}
   pose: {fileID: 0}
---- !u!4 &628098911 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5221161576132970564, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-  m_PrefabInstance: {fileID: 772687355}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &713184332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,14 +1222,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackedController
-      value: 
-      objectReference: {fileID: 628098911}
-    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-      propertyPath: trackingBase.positionStrength
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605530, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.059
@@ -1246,30 +1233,6 @@ PrefabInstance:
     - target: {fileID: 8761339241101605530, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.516
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: XRRig
-      value: 
-      objectReference: {fileID: 1665659398}
-    - target: {fileID: 0}
-      propertyPath: p_XRRig
-      value: 
-      objectReference: {fileID: 1763441204}
-    - target: {fileID: 0}
-      propertyPath: turnAction.m_Id
-      value: 1b3284e1-2082-46ea-ae62-3cb33c947807
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: turnAction.m_Name
-      value: Turn
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: movementAction.m_Id
-      value: 524d0523-a477-4d47-adba-6676a0074a61
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: movementAction.m_Name
-      value: Movement
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
@@ -2688,16 +2651,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!4 &1665659398 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5221161576313746133, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-  m_PrefabInstance: {fileID: 772687355}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1763441204 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4601817723373849410, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
-  m_PrefabInstance: {fileID: 772687355}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1778558027
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,8 +62,8 @@ namespace Fusion.XR
         [Header("Hand State")]
         [Tooltip("Debug Mode is used to control the grab and pinch values form script, rather than using controller data")]
         public bool debugMode;
-        public InputAction grab;
-        public InputAction pinch;
+        public InputAction grip;
+        public InputAction trigger;
 
         private HandPose currentPose;
 
@@ -82,16 +82,16 @@ namespace Fusion.XR
 
             UpdateColliders();
 
-            grab.Enable();
-            pinch.Enable();
+            grip.Enable();
+            trigger.Enable();
         }
 
         public void Update()
         {
             if (!debugMode)
             {
-                pinchValue = pinch.ReadValue<float>();
-                grabValue = grab.ReadValue<float>();
+                pinchValue = trigger.ReadValue<float>();
+                grabValue = grip.ReadValue<float>();
             }
 
             if (isAttached)
