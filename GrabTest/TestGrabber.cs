@@ -10,12 +10,12 @@ namespace Fusion.XR
         public Transform palm;
         public float radius;
 
-        public LayerMask grabMask;
+        public LayerMask gripMask;
 
         public bool isGrabbing = false;
 
         private TestGrabbable currentGrabbable;
-        private GameObject grabPoint;
+        private GameObject gripPoint;
 
         public TrackingMode mode;
         public TrackingBase trackingBase;
@@ -51,7 +51,7 @@ namespace Fusion.XR
             if (isGrabbing)
                 return;
 
-            GameObject[] possibleGrabs = Physics.OverlapSphere(palm.position, radius, grabMask).Select(x => x.gameObject).ToArray();
+            GameObject[] possibleGrabs = Physics.OverlapSphere(palm.position, radius, gripMask).Select(x => x.gameObject).ToArray();
     
             if (possibleGrabs.Length > 0)
             {
@@ -64,13 +64,13 @@ namespace Fusion.XR
         {
             var nextGrabbable = nextGrab.GetComponent<TestGrabbable>();
 
-            grabPoint = nextGrabbable.GetClosestGrabPoint(palm.position);
-            if (!grabPoint)
+            gripPoint = nextGrabbable.GetClosestGrabPoint(palm.position);
+            if (!gripPoint)
             {
-                grabPoint = new GameObject("GrabPoint");
-                grabPoint.transform.parent = nextGrab.transform;
-                grabPoint.transform.position = nextGrab.GetComponent<Collider>().ClosestPoint(palm.position);
-                grabPoint.transform.rotation = transform.rotation;
+                gripPoint = new GameObject("GrabPoint");
+                gripPoint.transform.parent = nextGrab.transform;
+                gripPoint.transform.position = nextGrab.GetComponent<Collider>().ClosestPoint(palm.position);
+                gripPoint.transform.rotation = transform.rotation;
             }
 
             isGrabbing = true;
@@ -79,14 +79,14 @@ namespace Fusion.XR
             StartCoroutine(Grab(currentGrabbable));
         }
 
-        private IEnumerator Grab(TestGrabbable grabbable)
+        private IEnumerator Grab(TestGrabbable gripbable)
         {
             GetComponentInChildren<Collider>().enabled = false;
-            transform.position = grabPoint.transform.position;
-            transform.rotation = grabPoint.transform.rotation;
+            transform.position = gripPoint.transform.position;
+            transform.rotation = gripPoint.transform.rotation;
             yield return null;
 
-            grabbable.Grab(this);
+            gripbable.Grab(this);
         }
 
         private void OnDrawGizmos()

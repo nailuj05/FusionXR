@@ -33,35 +33,35 @@ namespace Fusion.XR
         public Rigidbody rb;
 
         [Header("Grabbing")]
-        public TrackingMode grabbedTrackingMode;
+        public TrackingMode gripbedTrackingMode;
         public Transform palm;
         [SerializeField] private float reachDist = 0.1f;
 
-        public LayerMask grabMask = 768;
+        public LayerMask gripMask = 768;
 
         private bool isGrabbing;
         private bool generatedGrabPoint;
-        private IGrabbable grabbedGrabbable;
+        private IGrabbable gripbedGrabbable;
 
         public bool useHandPoser;
         private HandPoser handPoser;
 
         [HideInInspector]
-        public TrackDriver grabbedTrackDriver;
+        public TrackDriver gripbedTrackDriver;
 
         /// <summary>
-        /// This stores the Transform of the grabPoint, doesn't matter wether it is generated or not
+        /// This stores the Transform of the gripPoint, doesn't matter wether it is generated or not
         /// </summary>
-        public Transform grabPosition { get; private set; }
+        public Transform gripPosition { get; private set; }
 
         /// <summary>
-        /// This stores the actual grabPoint Component
+        /// This stores the actual gripPoint Component
         /// </summary>
-        private GrabPoint grabPoint;
+        private GrabPoint gripPoint;
 
         [Header("Inputs")]
-        public InputAction grab;
-        public InputAction pinch;
+        public InputAction grip;
+        public InputAction trigger;
 
         [Header("Events")]
         public UnityEvent OnGrabStart;
@@ -88,14 +88,14 @@ namespace Fusion.XR
             trackDriver.StartTrack(transform, trackingBase);
 
             ///Subscribe to the actions
-            grab.Enable();
-            pinch.Enable();
+            grip.Enable();
+            trigger.Enable();
 
-            grab.started += OnGrabbed;
-            grab.canceled += OnLetGo;
+            grip.started += OnGrabbed;
+            grip.canceled += OnLetGo;
 
-            pinch.started += OnPinched;
-            pinch.canceled += OnPinchedCancelled;
+            trigger.started += OnPinched;
+            trigger.canceled += OnPinchedCancelled;
 
             trackingBase.startRot = transform.rotation;
             trackingBase.startRotLocal = transform.localRotation;
@@ -175,14 +175,14 @@ namespace Fusion.XR
         ///Always with a defined GrabPoint, if there is none, overload will generate one
         void GrabObject()
         {
-            ///Return if already grabbing
+            ///Return if already gripbing
             if (isGrabbing)
                 return;
 
-            grabPoint = null;
+            gripPoint = null;
             generatedGrabPoint = false;
 
-            ///Check for grabbable in Range, if none return
+            ///Check for gripbable in Range, if none return
             GameObject closestGrabbable = ClosestGrabbable(out Collider closestColl);
 
             if (closestGrabbable == null)
@@ -190,63 +190,63 @@ namespace Fusion.XR
 
             isGrabbing = true;
 
-            ///Get grabbable component and possible grab points
-            grabbedGrabbable = closestGrabbable.GetComponentInParent<IGrabbable>();
+            ///Get gripbable component and possible grip points
+            gripbedGrabbable = closestGrabbable.GetComponentInParent<IGrabbable>();
 
-            grabPoint = grabbedGrabbable.GetClosestGrabPoint(transform.position, transform, hand);
+            gripPoint = gripbedGrabbable.GetClosestGrabPoint(transform.position, transform, hand);
 
-            grabPosition = grabPoint?.AlignedTransform;
+            gripPosition = gripPoint?.AlignedTransform;
 
             ///Generate a GrabPoint if there is no given one
-            //TODO: What if no grab Point should be generated and we just can't grab it?
-            if (grabPosition == null)
+            //TODO: What if no grip Point should be generated and we just can't grip it?
+            if (gripPosition == null)
             {
-                grabPosition = GenerateGrabPoint(closestColl, grabbedGrabbable);
+                gripPosition = GenerateGrabPoint(closestColl, gripbedGrabbable);
                 generatedGrabPoint = true;
             }
 
-            transform.position = grabPosition.position;
-            transform.rotation = grabPosition.rotation;
+            transform.position = gripPosition.position;
+            transform.rotation = gripPosition.rotation;
 
-            grabbedGrabbable.Grab(this, grabbedTrackingMode, trackingBase);
+            gripbedGrabbable.Grab(this, gripbedTrackingMode, trackingBase);
 
             if (!useHandPoser)
                 return;
 
-            if (!generatedGrabPoint && grabPoint.hasCustomPose)
+            if (!generatedGrabPoint && gripPoint.hasCustomPose)
             {
-                handPoser.AttachHand(grabPosition, grabPoint.pose, true);
+                handPoser.AttachHand(gripPosition, gripPoint.pose, true);
             }
             else
             {
-                handPoser.AttachHand(grabPosition);
+                handPoser.AttachHand(gripPosition);
             }
         }
 
-        ///A function so it can also be called from a grabbable that wants to switch hands
+        ///A function so it can also be called from a gripbable that wants to switch hands
         public void Release()
         {
             if (!isGrabbing) return;
             isGrabbing = false;
 
-            //Destroy the grabPoint, unlock if needed
+            //Destroy the gripPoint, unlock if needed
             if (generatedGrabPoint)
             {
-                if(grabPosition != null)
-                    Destroy(grabPosition.gameObject);
+                if(gripPosition != null)
+                    Destroy(gripPosition.gameObject);
             }
-            else if(grabPoint != null)
+            else if(gripPoint != null)
             {
                 //Release the GrabPoint to unlock it
-                grabPoint.ReleaseGrabPoint();
+                gripPoint.ReleaseGrabPoint();
             }
 
             //Release the Grabbable and reset the hand
-            if (grabbedGrabbable != null)
+            if (gripbedGrabbable != null)
             {
-                grabbedGrabbable.Release(this);
-                grabbedGrabbable.GameObject.GetComponent<Rigidbody>().velocity = rb.velocity;   //NOTE: Apply Better velocity for throwing here
-                grabbedGrabbable = null;
+                gripbedGrabbable.Release(this);
+                gripbedGrabbable.GameObject.GetComponent<Rigidbody>().velocity = rb.velocity;   //NOTE: Apply Better velocity for throwing here
+                gripbedGrabbable = null;
             }
 
             if (useHandPoser)
@@ -255,10 +255,10 @@ namespace Fusion.XR
             }
         }
 
-        public Transform GenerateGrabPoint(Collider closestCollider, IGrabbable grabbable)
+        public Transform GenerateGrabPoint(Collider closestCollider, IGrabbable gripbable)
         {
-            Transform grabSpot = new GameObject().transform;
-            grabSpot.position = closestCollider.ClosestPoint(palm.position);
+            Transform gripSpot = new GameObject().transform;
+            gripSpot.position = closestCollider.ClosestPoint(palm.position);
 
             //Raycasting to find GrabSpots Normal
             RaycastHit hit;
@@ -266,22 +266,22 @@ namespace Fusion.XR
             Ray ray = new Ray(palm.position - dir, dir);
 
             //TODO: Better ignore mask
-            if (Physics.Raycast(ray, out hit, 1f, ~grabMask))
+            if (Physics.Raycast(ray, out hit, 1f, ~gripMask))
             {
-                grabSpot.parent = grabbable.Transform;
-                grabSpot.localPosition = grabbedGrabbable.Transform.InverseTransformPoint(hit.point);
-                grabSpot.position = closestCollider.ClosestPoint(hit.point);
+                gripSpot.parent = gripbable.Transform;
+                gripSpot.localPosition = gripbedGrabbable.Transform.InverseTransformPoint(hit.point);
+                gripSpot.position = closestCollider.ClosestPoint(hit.point);
 
                 var n = Vector3.Project(dir, hit.normal);
-                grabSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), n);
+                gripSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), n);
             }
             else
             {
-                grabSpot.localRotation = transform.rotation;
-                grabSpot.parent = grabbable.Transform;
+                gripSpot.localRotation = transform.rotation;
+                gripSpot.parent = gripbable.Transform;
             }
 
-            return grabSpot;
+            return gripSpot;
         }
 
         //TODO: remove redunant find closest gameobject
@@ -298,7 +298,7 @@ namespace Fusion.XR
             {
                 foreach (Collider coll in nearObjects)
                 {
-                    if (!Utils.ObjectMatchesLayermask(coll.gameObject, grabMask))
+                    if (!Utils.ObjectMatchesLayermask(coll.gameObject, gripMask))
                         continue;
 
                     if ((coll.transform.position - transform.position).sqrMagnitude < Distance)

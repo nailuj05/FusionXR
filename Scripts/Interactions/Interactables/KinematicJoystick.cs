@@ -8,7 +8,7 @@ namespace Fusion.XR
     {
         public float Rad = 10;
 
-        private Vector3 grabPosition = Vector3.zero;
+        private Vector3 gripPosition = Vector3.zero;
 
         private Vector3 initialAxis;
 
@@ -25,22 +25,22 @@ namespace Fusion.XR
 
             isInteracting = true;
 
-            grabPosition = attachedHands[0].grabPosition.position;
+            gripPosition = attachedHands[0].gripPosition.position;
 
             initialAxis = transform.parent.InverseTransformDirection(transform.TransformDirection(axis)).normalized;
         }
 
         protected override void InteractionUpdate()
         {
-            var grabDir = GetMeanPosition() - transform.position;
+            var gripDir = GetMeanPosition() - transform.position;
 
 
-            Debug.DrawRay(transform.position, grabDir);
+            Debug.DrawRay(transform.position, gripDir);
             Debug.DrawRay(transform.position, transform.parent.TransformDirection(initialAxis), Color.blue);
 
-            //transform.rotation = Quaternion.FromToRotation(transform.parent.TransformDirection(initialAxis), grabDir);
+            //transform.rotation = Quaternion.FromToRotation(transform.parent.TransformDirection(initialAxis), gripDir);
             //transform.localRotation = initialRot;
-            var rot = Quaternion.FromToRotation(Vector3.up, grabDir);
+            var rot = Quaternion.FromToRotation(Vector3.up, gripDir);
                 
             transform.rotation = rot;
         }

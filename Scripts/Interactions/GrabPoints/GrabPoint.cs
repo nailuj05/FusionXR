@@ -38,7 +38,7 @@ namespace Fusion.XR
             }
         }
 
-        public GrabPointType grabPointType;
+        public GrabPointType gripPointType;
         public bool alignForLeftHand = false;
         private Transform tempLeftTransform;
 
@@ -54,8 +54,8 @@ namespace Fusion.XR
         {
             ChangeCurrentHand(hand);
 
-            //If hands match or both hands are accepted and if the grab Point is free or can be switched
-            if (((int)hand == (int)grabPointType || grabPointType == GrabPointType.Both) && (isActive || twoHandedMode == TwoHandedModes.SwitchHand))
+            //If hands match or both hands are accepted and if the grip Point is free or can be switched
+            if (((int)hand == (int)gripPointType || gripPointType == GrabPointType.Both) && (isActive || twoHandedMode == TwoHandedModes.SwitchHand))
             {
                 return true;
             }
@@ -125,7 +125,7 @@ namespace Fusion.XR
                 Vector3 scale = transform.localScale;
                 Vector3 adjustedPalmOffset = palmOffset;
 
-                if (grabPointType == GrabPointType.Left)
+                if (gripPointType == GrabPointType.Left)
                 {
                     scale -= 2 * Vector3.right;
 

@@ -7,7 +7,7 @@ namespace Fusion.XR
 {
     public class Grabbable : MonoBehaviour, IGrabbable
     {
-        public GrabbableType grabableType = GrabbableType.Interactables;
+        public GrabbableType gripableType = GrabbableType.Interactables;
 
         #region IGrabbable Implementation
         public Transform Transform { get { return transform; } }
@@ -21,7 +21,7 @@ namespace Fusion.XR
 
         [SerializeField]
         GrabPoint[] GrabPoints;
-        public GrabPoint[] grabPoints { get { return GrabPoints; } set { GrabPoints = value; } }
+        public GrabPoint[] gripPoints { get { return GrabPoints; } set { GrabPoints = value; } }
 
         public List<FusionXRHand> attachedHands { get; private set; } = new List<FusionXRHand>();
         #endregion
@@ -54,7 +54,7 @@ namespace Fusion.XR
         {
             try
             {
-                SetLayer(gameObject, grabableType.ToString());
+                SetLayer(gameObject, gripableType.ToString());
             }
             catch
             {
@@ -75,11 +75,11 @@ namespace Fusion.XR
 
             int handsCount = attachedHands.Count;
 
-            if (handsCount == 1) //If there is one hand grabbing
+            if (handsCount == 1) //If there is one hand gripbing
             {
                 //Get GrabPoint Offsets
-                Vector3 offsetPos = attachedHands[0].grabPosition.localPosition;
-                Quaternion offsetRot = attachedHands[0].grabPosition.localRotation;
+                Vector3 offsetPos = attachedHands[0].gripPosition.localPosition;
+                Quaternion offsetRot = attachedHands[0].gripPosition.localRotation;
 
                 //Delta Vector/Quaternion from Grabbable (+ offset) to hand
                 targetPosition = attachedHands[0].targetPosition - transform.TransformVector(offsetPos);
@@ -87,9 +87,9 @@ namespace Fusion.XR
 
 
                 //Apply Target Transformation to hand
-                attachedHands[0].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
+                attachedHands[0].gripbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
             }
-            else //If there is two hands grabbing 
+            else //If there is two hands gripbing 
             {
                 Vector3[] posTargets = new Vector3[handsCount];
                 Quaternion[] rotTargets = new Quaternion[handsCount];
@@ -97,8 +97,8 @@ namespace Fusion.XR
                 for (int i = 0; i < handsCount; i++)
                 {
                     //Get GrabPoint Offsets
-                    Vector3 offsetPos = attachedHands[i].grabPosition.localPosition;
-                    Quaternion offsetRot = attachedHands[i].grabPosition.localRotation;
+                    Vector3 offsetPos = attachedHands[i].gripPosition.localPosition;
+                    Quaternion offsetRot = attachedHands[i].gripPosition.localRotation;
 
                     //Delta Vector/Quaternion from Grabbable (+ offset) to hand
                     posTargets[i] = attachedHands[i].targetPosition - transform.TransformVector(offsetPos);
@@ -110,8 +110,8 @@ namespace Fusion.XR
                 targetRotation = Quaternion.Lerp(rotTargets[0], rotTargets[1], 0.5f);
 
                 //Apply Target Transformation to hands
-                attachedHands[0].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
-                attachedHands[1].grabbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
+                attachedHands[0].gripbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
+                attachedHands[1].gripbedTrackDriver.UpdateTrackFixed(targetPosition, targetRotation);
             }
         }
 
@@ -132,8 +132,8 @@ namespace Fusion.XR
             ///Setup and Start Track Driver
             var m = overrideTrackingMode ? customTrackingMode : mode;
 
-            hand.grabbedTrackDriver = Utils.DriverFromEnum(m);
-            hand.grabbedTrackDriver.StartTrack(transform, trackingBase);
+            hand.gripbedTrackDriver = Utils.DriverFromEnum(m);
+            hand.gripbedTrackDriver.StartTrack(transform, trackingBase);
 
             ToggleHandCollisions(hand, false);
 
@@ -159,8 +159,8 @@ namespace Fusion.XR
 
             hand.OnPinchStart.RemoveAllListeners();
 
-            //If the releasing hand was the last one grabbing the object, end the tracking/trackDriver
-            hand.grabbedTrackDriver.EndTrack();
+            //If the releasing hand was the last one gripbing the object, end the tracking/trackDriver
+            hand.gripbedTrackDriver.EndTrack();
         }
 
         #endregion
@@ -180,13 +180,13 @@ namespace Fusion.XR
         //For returning the transform and the GrabPoint
         public GrabPoint GetClosestGrabPoint(Vector3 point, Transform handTransform, Hand desiredHand)
         {
-            GrabPoint grabPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
+            GrabPoint gripPoint = Utils.ClosestGrabPoint(this, point, handTransform, desiredHand);
 
-            if (grabPoint != null)
+            if (gripPoint != null)
             {
-                grabPoint = grabPoint.GetAligned(handTransform);
-                grabPoint.BlockGrabPoint();
-                return grabPoint;
+                gripPoint = gripPoint.GetAligned(handTransform);
+                gripPoint.BlockGrabPoint();
+                return gripPoint;
             }
             else
             {
@@ -201,7 +201,7 @@ namespace Fusion.XR
                 //The order of these operations is critical, if the next hand is added before the last one released the "if" will fail
                 if (currentHands.Count > 0)
                 {
-                    //This will also call the release function on this grabable, with this structure the hand can also be forced to release whatever it is holding
+                    //This will also call the release function on this gripable, with this structure the hand can also be forced to release whatever it is holding
                     currentHands[0].Release();
                 }
 

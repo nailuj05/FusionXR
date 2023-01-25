@@ -14,7 +14,7 @@ namespace Fusion.XR
 
         bool isGrabbed { get; }
 
-        GrabPoint[] grabPoints { get; }
+        GrabPoint[] gripPoints { get; }
 
         List<FusionXRHand> attachedHands { get; }
 

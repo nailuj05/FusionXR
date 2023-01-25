@@ -18,7 +18,7 @@ namespace Fusion.XR
         [Tooltip("The Pose of an closed Hand")]
         public HandPose handClosed;
 
-        [Tooltip("The Pose of an even more open (strechted open) Hand to be called just before grabbing")]
+        [Tooltip("The Pose of an even more open (strechted open) Hand to be called just before gripbing")]
         public HandPose handAwait;
 
         [Tooltip("The Pose of an Hand Pinching with Thump and Index Finger")]
@@ -42,7 +42,7 @@ namespace Fusion.XR
         [SerializeField] private bool isAttached;
         //The Object the Renderhand is following if it is attached
         [HideInInspector] public Transform attachedObj;
-        //Whether the hand is grabbing something and the pose should not be overridden by the HandState
+        //Whether the hand is gripbing something and the pose should not be overridden by the HandState
         [SerializeField] private bool poseLocked;
 
         [Tooltip("The hand will smoothly move to its attachement Point allowing better proc fingerplacement")]
@@ -55,21 +55,21 @@ namespace Fusion.XR
 
         [Header("Fingers")]
         public FingerTrackingMode handPosingDriver = FingerTrackingMode.Kinematic;
-        public FingerTrackingMode grabbingDriver = FingerTrackingMode.CollisionTest;
+        public FingerTrackingMode gripbingDriver = FingerTrackingMode.CollisionTest;
         public FingerTrackingBase fingerSettings = new FingerTrackingBase();
         public Finger[] fingers;
 
         [Header("Hand State")]
-        [Tooltip("Debug Mode is used to control the grab and pinch values form script, rather than using controller data")]
+        [Tooltip("Debug Mode is used to control the grip and trigger values form script, rather than using controller data")]
         public bool debugMode;
-        public InputAction grab;
-        public InputAction pinch;
+        public InputAction grip;
+        public InputAction trigger;
 
         private HandPose currentPose;
 
         [Header("Debug Hand State")]
-        private float pinchValue;
-        private float grabValue;
+        private float triggerValue;
+        private float gripValue;
 
         public HandState handState = HandState.open;
 
@@ -82,16 +82,16 @@ namespace Fusion.XR
 
             UpdateColliders();
 
-            grab.Enable();
-            pinch.Enable();
+            grip.Enable();
+            trigger.Enable();
         }
 
         public void Update()
         {
             if (!debugMode)
             {
-                pinchValue = pinch.ReadValue<float>();
-                grabValue = grab.ReadValue<float>();
+                triggerValue = trigger.ReadValue<float>();
+                gripValue = grip.ReadValue<float>();
             }
 
             if (isAttached)
@@ -111,7 +111,7 @@ namespace Fusion.XR
             if (!poseLocked)
             {
                 //Open Hand
-                if (pinchValue == 0 && grabValue == 0)
+                if (triggerValue == 0 && gripValue == 0)
                 {
                     if (handState == HandState.open)
                         return;
@@ -123,31 +123,31 @@ namespace Fusion.XR
                     return;
                 }
                 //Grabbing
-                if (pinchValue > 0 && grabValue > 0)
+                if (triggerValue > 0 && gripValue > 0)
                 {
-                    if (handState == HandState.grab)
+                    if (handState == HandState.grip)
                         return;
 
-                    handState = HandState.grab;
+                    handState = HandState.grip;
 
                     SetPoseTarget(handClosed);
 
                     return;
                 }
                 //Pinching
-                if (pinchValue > 0 && grabValue == 0)
+                if (triggerValue > 0 && gripValue == 0)
                 {
-                    if (handState == HandState.pinch)
+                    if (handState == HandState.trigger)
                         return;
 
-                    handState = HandState.pinch;
+                    handState = HandState.trigger;
 
                     SetPoseTarget(handPinch);
 
                     return;
                 }
                 //Pointing
-                if (pinchValue == 0 && grabValue > 0)
+                if (triggerValue == 0 && gripValue > 0)
                 {
                     if (handState == HandState.point)
                         return;
@@ -222,10 +222,10 @@ namespace Fusion.XR
             attachLerp += Time.deltaTime / smoothAttachSpeed;
         }
 
-        public void SetPinchGrabDebug(float pinch, float grab)
+        public void SetPinchGrabDebug(float trigger, float grip)
         {
-            pinchValue = pinch;
-            grabValue = grab;
+            triggerValue = trigger;
+            gripValue = grip;
         }
 
 #region Posing Functions
@@ -237,7 +237,7 @@ namespace Fusion.XR
             attachLerp = 0;
             attachedObj = attachmentPoint;
 
-            UpdateTracking(customPose ? FingerTrackingMode.Kinematic : grabbingDriver);
+            UpdateTracking(customPose ? FingerTrackingMode.Kinematic : gripbingDriver);
 
             RotateToPose(handAwait);
 
@@ -364,7 +364,7 @@ namespace Fusion.XR
 
             if (GUILayout.Button("UpdateFingerGizmos"))
             {
-                handPoser.UpdateDriverAndTracking(handPoser.grabbingDriver);
+                handPoser.UpdateDriverAndTracking(handPoser.gripbingDriver);
             }
         }
     }

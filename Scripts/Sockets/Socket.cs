@@ -21,10 +21,10 @@ namespace Fusion.XR
         public float attractionRange = 0.1f;
         public Vector3 attractionZoneOffset = Vector3.zero;
 
-        [Tooltip("Should a grabbable forcefully detach if it is still grabbed?")]
+        [Tooltip("Should a gripbable forcefully detach if it is still gripbed?")]
         public bool forceDetach;
 
-        [Tooltip("Should the socket release the object if the player grabs it?")]
+        [Tooltip("Should the socket release the object if the player grips it?")]
         public bool canBeGrabbed = true;
 
         [Tooltip("Should a hologram of the possible attachment be shown?")]
@@ -87,18 +87,18 @@ namespace Fusion.XR
 
             if (CheckAttachementRequirements(newColl.gameObject))
             {
-                if(newColl.TryGetComponent(out IGrabbable grabbable) && grabbable.isGrabbed)
+                if(newColl.TryGetComponent(out IGrabbable gripbable) && gripbable.isGrabbed)
                 {
                     if (forceDetach)
                     {
-                        for(int i = grabbable.attachedHands.Count - 1; i >= 0; i--)
+                        for(int i = gripbable.attachedHands.Count - 1; i >= 0; i--)
                         {
-                            grabbable.attachedHands[i].Release();
+                            gripbable.attachedHands[i].Release();
                         }
                     }
                     else
                     {
-                        possibleAttachObjects.Add(grabbable);
+                        possibleAttachObjects.Add(gripbable);
                         return;
                     }
                 }
@@ -118,7 +118,7 @@ namespace Fusion.XR
 
             for (int i = 0; i < possibleAttachObjects.Count; i++)
             {
-                //Check whether a grabbable has been released
+                //Check whether a gripbable has been released
                 if (!possibleAttachObjects[i].isGrabbed)
                 {
                     //Check if the object is still possible to attach
@@ -137,8 +137,8 @@ namespace Fusion.XR
 
         private void OnTriggerExit(Collider exitingColl)
         {
-            if (exitingColl.TryGetComponent(out IGrabbable grabbable) && possibleAttachObjects.Contains(grabbable))
-                possibleAttachObjects.Remove(grabbable);
+            if (exitingColl.TryGetComponent(out IGrabbable gripbable) && possibleAttachObjects.Contains(gripbable))
+                possibleAttachObjects.Remove(gripbable);
 
             if (hasAttachedObject && exitingColl.gameObject == attachedObject)
             {
@@ -180,14 +180,14 @@ namespace Fusion.XR
             trackDriver = Utils.DriverFromEnum(attachedTrackingMode);
             trackDriver.StartTrack(attachedObject.transform, attachedTrackingBase);
 
-            if (attachedObject.TryGetComponent(out Grabbable grabbable))
+            if (attachedObject.TryGetComponent(out Grabbable gripbable))
             {
-                if (possibleAttachObjects.Contains(grabbable))
+                if (possibleAttachObjects.Contains(gripbable))
                 {
-                    possibleAttachObjects.Remove(grabbable);
+                    possibleAttachObjects.Remove(gripbable);
                 }
 
-                attachedGrabbable = grabbable;
+                attachedGrabbable = gripbable;
             }
 
             //Tag the attached GameObject as "Attached"

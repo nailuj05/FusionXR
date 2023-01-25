@@ -300,16 +300,16 @@ namespace Fusion.XR
             return linePnt + (lineDir * d).ClampVector(lineLength * 0.5f);
         }
 
-        public static GrabPoint ClosestGrabPoint(IGrabbable grabbable, Vector3 point, Transform handTransform, Hand desiredHand)
+        public static GrabPoint ClosestGrabPoint(IGrabbable gripbable, Vector3 point, Transform handTransform, Hand desiredHand)
         {
             GrabPoint closestGrabPoint = null;
             float distance = float.MaxValue;
 
-            if (grabbable.grabPoints != null)
+            if (gripbable.gripPoints != null)
             {
-                foreach (GrabPoint currentGrabPoint in grabbable.grabPoints)
+                foreach (GrabPoint currentGrabPoint in gripbable.gripPoints)
                 {
-                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand, grabbable.twoHandedMode)) //Check if the GrabPoint is for the correct Hand and if it isActive
+                    if (currentGrabPoint.IsGrabPossible(handTransform, desiredHand, gripbable.twoHandedMode)) //Check if the GrabPoint is for the correct Hand and if it isActive
                     {
                         if ((currentGrabPoint.transform.position - point).sqrMagnitude < distance) //Check if next Point is closer than last Point
                         {
