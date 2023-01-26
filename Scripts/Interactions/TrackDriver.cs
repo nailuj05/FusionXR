@@ -29,7 +29,13 @@ namespace Fusion.XR
 
         //Force PD 
         [Header("PD Force")]
-        [SerializeField] public float maxPDForce = 1500f;
+        [SerializeField] public float forceSpring = 5000;
+        [SerializeField] public float forceDamper = 500;
+        [SerializeField] public float maxForce = 1500;
+        
+        [SerializeField] public float torqueSpring = 10;
+        [SerializeField] public float torqueDamper = 1;
+        [SerializeField] public float maxTorque = 10;
 
         //Active Joint Tracking
         [Header("Active Joint Tracking")]
@@ -362,11 +368,9 @@ namespace Fusion.XR
     public class PDForceDriver : TrackDriver
     {
         private Rigidbody rb;
-        private Vector3 lastPos;
 
-        private Vector3 targetPosition;
-        private Quaternion targetRotation;
-        private Quaternion lastRot;
+        Vector3 force, torque, lastPos, targetVelocity, targetAngularVelocity;
+        Quaternion lastRot;
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
@@ -374,36 +378,69 @@ namespace Fusion.XR
             trackingBase = assignedTrackingBase;
 
             rb = objectToTrack.GetComponent<Rigidbody>();
-            lastPos = objectToTrack.position;
         }
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
-            Vector3 initVel = (targetPosition - objectToTrack.position) / Time.fixedDeltaTime;
-            Vector3 acceleration = (initVel - rb.velocity) / Time.fixedDeltaTime;
-            Vector3 f = rb.mass * acceleration;
-            rb.AddForce(f.ClampVector(trackingBase.maxPDForce));
-            lastPos = targetPosition;
-
-            Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
-
-            deltaRotation.ToAngleAxis(out var angle, out var axis);
-
-            if (angle > 180f)
-            {
-                angle -= 360;
-            }
-
-            if (Mathf.Abs(axis.sqrMagnitude) != Mathf.Infinity)
-            {
-                rb.AddTorque(axis * (angle * trackingBase.rotationPower * Mathf.Deg2Rad), ForceMode.VelocityChange);
-                rb.AddTorque(-rb.angularVelocity * trackingBase.rotationDampener, ForceMode.VelocityChange);
-            }
+            CalculateTargetVelocity(targetPosition);
+            CalculateTargetAngularVelocity(targetRotation);
+            CalculateForce(targetPosition);
+            CalculateTorque(targetRotation);
         }
 
         public override void EndTrack()
         {
 
+        }
+
+        void CalculateTargetVelocity(Vector3 targetPosition)
+        {
+            targetVelocity = (targetPosition - lastPos) / Time.fixedDeltaTime;
+            lastPos = targetPosition;
+        }
+
+        void CalculateTargetAngularVelocity(Quaternion targetRotation)
+        {
+            Quaternion rotDelta = targetRotation * Quaternion.Inverse(lastRot);
+            lastRot = targetRotation;
+            rotDelta.ToAngleAxis(out float xMag, out Vector3 x);
+            targetAngularVelocity = xMag * x * Mathf.Deg2Rad / Time.fixedDeltaTime;
+        }
+
+        void CalculateForce(Vector3 targetPosition)
+        {
+            Vector3 positionDelta = targetPosition - trackingBase.tracker.position;
+            Vector3 spring = trackingBase.forceSpring * positionDelta;
+
+            Vector3 velocityDelta = targetVelocity - rb.velocity;
+            Vector3 damper = trackingBase.forceDamper * velocityDelta;
+
+            force = spring + damper;
+            force = Vector3.ClampMagnitude(force, trackingBase.maxForce);
+
+            rb.AddForce(force);
+        }
+
+        void CalculateTorque(Quaternion targetRotation)
+        {
+            Quaternion rotationDelta = targetRotation * Quaternion.Inverse(trackingBase.tracker.rotation);
+            rotationDelta.ToAngleAxis(out float angle, out Vector3 axis);
+
+            if (angle > 180f)
+                angle -= 360;
+
+            if (Mathf.Abs(axis.sqrMagnitude) == Mathf.Infinity)
+                return;
+
+            Vector3 spring = trackingBase.torqueSpring * angle * axis * Mathf.Deg2Rad;
+
+            Vector3 angularVelocityDelta = targetAngularVelocity - rb.angularVelocity;
+            Vector3 damper = trackingBase.torqueDamper * angularVelocityDelta;
+
+            torque = spring + damper;
+            torque = Vector3.ClampMagnitude(torque, trackingBase.maxTorque);
+
+            rb.AddTorque(torque);
         }
     }
 }

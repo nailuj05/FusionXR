@@ -1287,6 +1287,50 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.maxForce
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.maxTorque
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.forceDamper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.forceSpring
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.slerpDamper
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.slerpSpring
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.torqueDamper
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.torqueSpring
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.slerpMaxForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.positionDamper
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+      propertyPath: trackingBase.positionSpring
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: grab.m_SingletonActionBindings.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1646,28 +1690,56 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.maxForce
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.maxTorque
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.forceDamper
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.forceSpring
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.slerpDamper
-      value: 400
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.slerpSpring
-      value: 3500
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.adjustAnchor
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.torqueDamper
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.torqueSpring
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.rotationPower
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.slerpMaxForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.positionDamper
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.positionSpring
-      value: 2500
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.rotationDampener
