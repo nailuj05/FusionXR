@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5221161575693523710}
   m_Father: {fileID: 4601817725372166368}
@@ -81,6 +82,7 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.13052616, z: -0, w: 0.9914449}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4601817724023232920}
   m_Father: {fileID: 4601817725288485343}
@@ -112,6 +114,7 @@ Transform:
   m_LocalRotation: {x: -0.37365, y: -0, z: 0.000000011175871, w: 0.92756975}
   m_LocalPosition: {x: -0.00000048428774, y: -0.029899478, z: 0.49638787}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4059513115683022722}
   m_Father: {fileID: 4601817723680599757}
@@ -143,6 +146,7 @@ Transform:
   m_LocalRotation: {x: -0.36324367, y: 0.000000007450579, z: -0.000000014901158, w: 0.93169415}
   m_LocalPosition: {x: 0.00000013411045, y: -0.03929794, z: 0.49771726}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4059513116919077385}
   m_Father: {fileID: 4601817725243021552}
@@ -174,6 +178,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4601817725283271947}
   m_Father: {fileID: 5221161576313746133}
@@ -208,6 +213,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5221161576132970564}
   m_RootOrder: 0
@@ -301,6 +307,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0.13052596, z: -0, w: 0.99144495}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4601817724137427187}
   m_Father: {fileID: 4601817725288485343}
@@ -337,6 +344,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4601817724379515042}
   m_RootOrder: 0
@@ -406,6 +414,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TrackingType: 0
   m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Main Camera - TPD - Position
+      m_Type: 0
+      m_ExpectedControlType: Vector3
+      m_Id: 9b45bf0b-de49-4402-95fe-5d92d1b916bf
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 4bf0047a-6c27-4d74-a4cf-045c275e6536
+        m_Path: <XRHMD>/centerEyePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Main Camera - TPD - Position
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_RotationInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Main Camera - TPD - Rotation
+      m_Type: 0
+      m_ExpectedControlType: Quaternion
+      m_Id: 28a65984-b87c-4489-b56f-1ba14f6efdad
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 00417369-6e36-48b5-a02c-665c35830e2f
+        m_Path: <XRHMD>/centerEyeRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Main Camera - TPD - Rotation
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_PositionAction:
     m_Name: Main Camera - TPD - Position
     m_Type: 0
@@ -422,6 +470,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Main Camera - TPD - Position
       m_Flags: 0
+    m_Flags: 0
   m_RotationAction:
     m_Name: Main Camera - TPD - Rotation
     m_Type: 0
@@ -438,6 +487,8 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Main Camera - TPD - Rotation
       m_Flags: 0
+    m_Flags: 0
+  m_HasMigratedActions: 1
 --- !u!114 &4601817725283271949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,6 +511,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -517,6 +569,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.100000024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4601817725243021552}
   - {fileID: 4601817723680599757}
@@ -555,6 +608,7 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.000000104308114, z: -0, w: -1}
   m_LocalPosition: {x: -0.715, y: 0, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5221161576313746133}
   - {fileID: 4601817723373849410}
@@ -575,7 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d200b382a14c64459522c4ae63af6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigType: 1
+  rigType: 0
   mockRig: {fileID: 4601817723373849409}
   xrRig: {fileID: 5221161576313746134}
 --- !u!114 &4601817725372166372
@@ -609,6 +663,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Movement
       m_Flags: 0
+    m_Flags: 0
   turnAction:
     m_Name: Turn
     m_Type: 0
@@ -625,6 +680,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Turn
       m_Flags: 0
+    m_Flags: 0
   collisionAdjuster: {fileID: 3439805600863467242}
 --- !u!54 &7134510402042608600
 Rigidbody:
@@ -692,6 +748,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Movement
       m_Flags: 0
+    m_Flags: 0
   turnAction:
     m_Name: Turn
     m_Type: 0
@@ -708,6 +765,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Turn
       m_Flags: 0
+    m_Flags: 0
   activationThreshold: 0.1
   canMove: 1
   usesCustomGravity: 0
@@ -756,6 +814,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5221161575651839213}
   m_Father: {fileID: 5221161576313746133}
@@ -775,6 +834,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TrackingType: 0
   m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Position
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8da8a254-548f-4ad3-8716-3c36d0a870b0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 4dfb1b15-f145-4b59-9105-4e96724b6225
+        m_Path: <XRController>{RightHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_RotationInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Rotation
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: d6c4fe07-c4cc-449f-8f3f-b77dab7e8493
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: e3cec4bd-5b41-4ed4-a99d-6d9c18460b87
+        m_Path: <XRController>{RightHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_PositionAction:
     m_Name: Position
     m_Type: 0
@@ -791,6 +890,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Position
       m_Flags: 0
+    m_Flags: 0
   m_RotationAction:
     m_Name: Rotation
     m_Type: 0
@@ -807,6 +907,8 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Rotation
       m_Flags: 0
+    m_Flags: 0
+  m_HasMigratedActions: 1
 --- !u!1 &5221161575651839214
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +937,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5221161575355319609}
   m_RootOrder: 0
@@ -919,6 +1022,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4601817725288485343}
   m_Father: {fileID: 4601817723373849410}
@@ -997,6 +1101,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 2
   m_AntialiasingQuality: 1
@@ -1055,6 +1160,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4601817725218505347}
   m_Father: {fileID: 5221161576313746133}
@@ -1074,6 +1180,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TrackingType: 0
   m_UpdateType: 0
+  m_PositionInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Position
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8da8a254-548f-4ad3-8716-3c36d0a870b0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 4dfb1b15-f145-4b59-9105-4e96724b6225
+        m_Path: <XRController>{LeftHand}/devicePosition
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Position
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_RotationInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Rotation
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: d6c4fe07-c4cc-449f-8f3f-b77dab7e8493
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: e3cec4bd-5b41-4ed4-a99d-6d9c18460b87
+        m_Path: <XRController>{LeftHand}/deviceRotation
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Rotation
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   m_PositionAction:
     m_Name: Position
     m_Type: 0
@@ -1090,6 +1236,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Position
       m_Flags: 0
+    m_Flags: 0
   m_RotationAction:
     m_Name: Rotation
     m_Type: 0
@@ -1106,6 +1253,8 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Rotation
       m_Flags: 0
+    m_Flags: 0
+  m_HasMigratedActions: 1
 --- !u!1 &5221161576313746134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1281,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4601817724379515042}
   - {fileID: 5221161576132970564}
@@ -1444,11 +1594,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
---- !u!4 &8761339241101605530 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6825679646560983679, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-  m_PrefabInstance: {fileID: 2823520467165159653}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8761339241101605528 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
@@ -1460,6 +1605,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde0ab0e0e48c714fa47402b36df239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8761339241101605530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6825679646560983679, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
+  m_PrefabInstance: {fileID: 2823520467165159653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4601817723624586722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1635,7 +1785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066355, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: m_Mass
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grab.m_Id
