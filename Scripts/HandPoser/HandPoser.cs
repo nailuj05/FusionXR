@@ -201,12 +201,12 @@ namespace Fusion.XR
         {
             if (Application.isPlaying)
             {
-                renderHand.transform.position = attachedObj.TransformPoint(-palm.localPosition);
+                renderHand.transform.position = attachedObj.position + attachedObj.TransformDirection(-palm.localPosition);
                 renderHand.transform.rotation = attachedObj.transform.rotation;
             }
             else
             {
-                renderHand.transform.position = attachedObj.TransformPoint(-palm.localPosition);
+                renderHand.transform.position = attachedObj.position + attachedObj.TransformDirection(-palm.localPosition);
                 renderHand.transform.rotation = attachedObj.transform.rotation;
             }
         }
