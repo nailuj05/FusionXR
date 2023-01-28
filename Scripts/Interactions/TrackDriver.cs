@@ -256,7 +256,7 @@ namespace Fusion.XR
         private Rigidbody objectRB;
         private Rigidbody trackerRB;
 
-        private FixedJoint joint;
+        private ConfigurableJoint joint;
 
         private Quaternion initalRotation;
 
@@ -297,12 +297,15 @@ namespace Fusion.XR
                 //objectRB.transform.rotation = targetRotation;
             }
 
-            joint = objectRB.gameObject.AddComponent<FixedJoint>();
+            joint = trackerRB.gameObject.AddComponent<ConfigurableJoint>();
 
-            joint.anchor = Vector3.zero;
+            joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
+            joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
+
             joint.autoConfigureConnectedAnchor = false;
-            joint.connectedBody = trackerRB;
-            joint.connectedAnchor = Vector3.zero;
+            joint.anchor = trackerRB.transform.InverseTransformPoint(trackingBase.palm.position);
+            joint.connectedBody = objectRB;
+            joint.connectedAnchor = objectRB.transform.InverseTransformPoint(trackingBase.palm.position);
 
             joint.enableCollision = false;
             joint.enablePreprocessing = false;

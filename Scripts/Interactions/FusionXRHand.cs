@@ -268,11 +268,13 @@ namespace Fusion.XR
             //TODO: Better ignore mask
             if (Physics.Raycast(ray, out hit, 1f, ~grabMask))
             {
+                Debug.Log("Raycast Hit");
                 grabSpot.parent = grabbable.Transform;
                 grabSpot.localPosition = grabbedGrabbable.Transform.InverseTransformPoint(hit.point);
                 grabSpot.position = closestCollider.ClosestPoint(hit.point);
 
-                var n = Vector3.Project(dir, hit.normal);
+                var n = Vector3.Cross(hit.normal, transform.forward);
+                n = Vector3.Project(transform.up, n).normalized;
                 grabSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), n);
             }
             else

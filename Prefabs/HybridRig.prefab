@@ -1431,11 +1431,7 @@ PrefabInstance:
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackedController
       value: 
-      objectReference: {fileID: 5221161576132970564}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: grabbedTrackingMode
-      value: 3
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4601817724137427187}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackingBase.maxForce
       value: 1500
