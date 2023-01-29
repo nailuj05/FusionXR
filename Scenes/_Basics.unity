@@ -1528,7 +1528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackingMode
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: trackedController
@@ -2704,7 +2704,7 @@ MonoBehaviour:
     rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
-    grabbedWeight: 1
+    grabbedMass: 1
   attachedObject: {fileID: 0}
 --- !u!54 &1408044856
 Rigidbody:
@@ -2964,7 +2964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabableType: 0
-  TwoHandedMode: 0
+  TwoHandedMode: 1
   GrabPoints: []
   overrideTrackingMode: 0
   customTrackingMode: 0

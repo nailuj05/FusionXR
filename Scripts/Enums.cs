@@ -24,8 +24,7 @@ namespace Fusion.XR
     public enum TwoHandedModes
     {
         SwitchHand = 0,
-        Average = 1,
-        JointRotation = 2
+        Average = 1
     }
 
     public enum GrabbableType
