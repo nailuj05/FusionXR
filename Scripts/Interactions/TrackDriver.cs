@@ -375,7 +375,7 @@ namespace Fusion.XR
         private Rigidbody rb;
 
         Vector3 force, torque, lastPos, targetVelocity, targetAngularVelocity;
-        Quaternion lastRot;
+        Quaternion lastRotation;
 
         public override void StartTrack(Transform assignedObjectToTrack, TrackingBase assignedTrackingBase)
         {
@@ -383,14 +383,14 @@ namespace Fusion.XR
             trackingBase = assignedTrackingBase;
 
             rb = objectToTrack.GetComponent<Rigidbody>();
+            rb.inertiaTensor = new Vector3(0.2f, 0.2f, 0.2f);
         }
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
-            CalculateTargetVelocity(targetPosition);
-            CalculateTargetAngularVelocity(targetRotation);
-            CalculateForce(targetPosition);
-            CalculateTorque(targetRotation);
+            CalculateVelocities(targetPosition, targetRotation);
+            //ApplyForce(targetPosition);
+            ApplyTorque(targetRotation);
         }
 
         public override void EndTrack()
@@ -398,21 +398,18 @@ namespace Fusion.XR
 
         }
 
-        void CalculateTargetVelocity(Vector3 targetPosition)
+        void CalculateVelocities(Vector3 targetPosition, Quaternion targetRotation)
         {
             targetVelocity = (targetPosition - lastPos) / Time.fixedDeltaTime;
             lastPos = targetPosition;
+
+            Quaternion rotationDelta = targetRotation * Quaternion.Inverse(lastRotation);
+            lastRotation = targetRotation;
+            rotationDelta.ToAngleAxis(out float angle, out Vector3 axis);
+            targetAngularVelocity = angle * axis * Mathf.Deg2Rad / Time.fixedDeltaTime;
         }
 
-        void CalculateTargetAngularVelocity(Quaternion targetRotation)
-        {
-            Quaternion rotDelta = targetRotation * Quaternion.Inverse(lastRot);
-            lastRot = targetRotation;
-            rotDelta.ToAngleAxis(out float xMag, out Vector3 x);
-            targetAngularVelocity = xMag * x * Mathf.Deg2Rad / Time.fixedDeltaTime;
-        }
-
-        void CalculateForce(Vector3 targetPosition)
+        void ApplyForce(Vector3 targetPosition)
         {
             Vector3 positionDelta = targetPosition - trackingBase.tracker.position;
             Vector3 spring = trackingBase.forceSpring * positionDelta;
@@ -426,7 +423,7 @@ namespace Fusion.XR
             rb.AddForce(force);
         }
 
-        void CalculateTorque(Quaternion targetRotation)
+        void ApplyTorque(Quaternion targetRotation)
         {
             Quaternion rotationDelta = targetRotation * Quaternion.Inverse(trackingBase.tracker.rotation);
             rotationDelta.ToAngleAxis(out float angle, out Vector3 axis);

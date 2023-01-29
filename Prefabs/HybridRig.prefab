@@ -1437,10 +1437,6 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trackingBase.maxTorque
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackingBase.forceDamper
       value: 500
       objectReference: {fileID: 0}
@@ -1459,10 +1455,6 @@ PrefabInstance:
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackingBase.torqueDamper
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trackingBase.torqueSpring
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackingBase.slerpMaxForce
@@ -1779,10 +1771,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066355, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: m_Mass
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grab.m_Id
       value: de6bf914-2d75-4880-939b-1f709505c2bd
@@ -1808,10 +1796,6 @@ PrefabInstance:
       value: Pinch
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trigger.m_Id
       value: 92f09cbe-af5b-4fd2-b22a-980b5001b517
       objectReference: {fileID: 0}
@@ -1826,7 +1810,7 @@ PrefabInstance:
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackedController
       value: 
-      objectReference: {fileID: 5221161575355319609}
+      objectReference: {fileID: 4601817724023232920}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.limit
       value: 1.1
@@ -1854,6 +1838,10 @@ PrefabInstance:
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.adjustAnchor
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
+      propertyPath: trackingBase.torqueSpring
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.rotationPower

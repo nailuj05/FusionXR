@@ -974,7 +974,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6313628543173066359}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 1.5
   m_Drag: 0.5
   m_AngularDrag: 0.03
   m_UseGravity: 0
@@ -998,7 +998,7 @@ MonoBehaviour:
   trackedController: {fileID: 0}
   positionOffset: {x: 0, y: 0, z: 0.06}
   rotationOffset: {x: 45, y: 0, z: -90}
-  trackingMode: 1
+  trackingMode: 2
   trackingBase:
     positionStrength: 25
     rotationStrength: 35
@@ -1011,7 +1011,7 @@ MonoBehaviour:
     forceSpring: 5000
     forceDamper: 500
     maxForce: 1000
-    torqueSpring: 25
+    torqueSpring: 20
     torqueDamper: 1
     maxTorque: 20
     positionSpring: 3000
@@ -1029,7 +1029,7 @@ MonoBehaviour:
     rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
-    grabbedWeight: 0
+    grabbedMass: 1
   rb: {fileID: 0}
   grabbedTrackingMode: 5
   palm: {fileID: 6313628541362307769}
