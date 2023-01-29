@@ -258,24 +258,15 @@ namespace Fusion.XR
         public Transform GenerateGrabPoint(Collider closestCollider, IGrabbable grabbable)
         {
             Transform grabSpot = new GameObject().transform;
-            grabSpot.position = closestCollider.ClosestPoint(palm.position);
 
-            //Raycasting to find GrabSpots Normal
-            RaycastHit hit;
-            var dir = palm.position - closestCollider.bounds.center;
-            Ray ray = new Ray(palm.position - dir, dir);
+            Vector3 dir = closestCollider.ClosestPoint(palm.position) - palm.position;
 
-            //TODO: Better ignore mask
-            if (Physics.Raycast(ray, out hit, 1f, ~grabMask))
+            if(Physics.Raycast(palm.position, dir, out RaycastHit hit, 0.1f, grabMask))
             {
-                Debug.Log("Raycast Hit");
                 grabSpot.parent = grabbable.Transform;
-                grabSpot.localPosition = grabbedGrabbable.Transform.InverseTransformPoint(hit.point);
-                grabSpot.position = closestCollider.ClosestPoint(hit.point);
+                grabSpot.position = hit.point;
 
-                var n = Vector3.Cross(hit.normal, transform.forward);
-                n = Vector3.Project(transform.up, n).normalized;
-                grabSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), n);
+                grabSpot.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), hit.normal);
             }
             else
             {
