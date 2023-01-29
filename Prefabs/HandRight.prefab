@@ -1008,8 +1008,8 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
-    forceSpring: 5000
-    forceDamper: 500
+    forceSpring: 2500
+    forceDamper: 100
     maxForce: 1000
     torqueSpring: 20
     torqueDamper: 1

@@ -1437,14 +1437,6 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trackingBase.forceDamper
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
-      propertyPath: trackingBase.forceSpring
-      value: 4000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825679646560983677, guid: 931ef09a29cd5434aae778c18f7217cf, type: 3}
       propertyPath: trackingBase.slerpDamper
       value: 1000
       objectReference: {fileID: 0}
@@ -1818,14 +1810,6 @@ PrefabInstance:
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: grabbedTrackingMode
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.forceDamper
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
-      propertyPath: trackingBase.forceSpring
-      value: 4000
       objectReference: {fileID: 0}
     - target: {fileID: 6313628543173066356, guid: 955278b9f8783274681ec2d0fd1c9645, type: 3}
       propertyPath: trackingBase.slerpDamper

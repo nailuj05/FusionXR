@@ -1526,6 +1526,34 @@ PrefabInstance:
       propertyPath: debugMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingMode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.maxForce
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.maxTorque
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.forceDamper
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.forceSpring
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.torqueDamper
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601817725298058075, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.torqueSpring
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4601817725298058076, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_Constraints
       value: 0
@@ -1593,6 +1621,34 @@ PrefabInstance:
     - target: {fileID: 5221161576313746134, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingMode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.maxForce
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.maxTorque
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.forceDamper
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.forceSpring
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.torqueDamper
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761339241101605528, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
+      propertyPath: trackingBase.torqueSpring
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8761339241101605529, guid: 0d55946f3a17f7a4480f4574720170f4, type: 3}
       propertyPath: debugMode
