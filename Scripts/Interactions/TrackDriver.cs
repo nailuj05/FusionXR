@@ -61,6 +61,8 @@ namespace Fusion.XR
 
         [HideInInspector] public Quaternion startRot;
         [HideInInspector] public Quaternion startRotLocal;
+
+        [HideInInspector] public float grabbedMass = 1;
     }
 
     public abstract class TrackDriver
@@ -440,7 +442,7 @@ namespace Fusion.XR
             Vector3 angularVelocityDelta = targetAngularVelocity - rb.angularVelocity;
             Vector3 damper = trackingBase.torqueDamper * angularVelocityDelta;
 
-            torque = spring + damper;
+            torque = (spring + damper) * trackingBase.grabbedMass;
             torque = Vector3.ClampMagnitude(torque, trackingBase.maxTorque);
 
             rb.AddTorque(torque);

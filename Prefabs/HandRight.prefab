@@ -1010,10 +1010,10 @@ MonoBehaviour:
     maxForceClamp: 150
     forceSpring: 5000
     forceDamper: 500
-    maxForce: 1500
-    torqueSpring: 10
+    maxForce: 1000
+    torqueSpring: 25
     torqueDamper: 1
-    maxTorque: 10
+    maxTorque: 20
     positionSpring: 3000
     positionDamper: 250
     positionMaxForce: 1500
@@ -1029,6 +1029,7 @@ MonoBehaviour:
     rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
+    grabbedWeight: 0
   rb: {fileID: 0}
   grabbedTrackingMode: 5
   palm: {fileID: 6313628541362307769}
