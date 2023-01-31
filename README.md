@@ -16,12 +16,11 @@ https://github.com/nailuj05/FusionXR/wiki
 ## Setup
 The project is currently in *full development*, if you are reading this you are invited as a alpha tester. Currently I am not testing on other versions of Unity or the XR Plugins. 
 For testing I'd recommend using the same setup as I do:
-- Unity Version: **2021.1.16f1** (newer 2021 versions should work though)
+- Unity Version: **2021.3.15f1** (newer 2021 versions should work though)
 - URP Render Pipeline: **11.0.0**
 
 ### Plugins:
 - Open XR: **1.3.1**
-- XR Interaction Toolkit: **1.0.0-pre.8**
 - Animation Rigging: **1.1.1**
 (- Text Mesh Pro: 3.0.6)
 
