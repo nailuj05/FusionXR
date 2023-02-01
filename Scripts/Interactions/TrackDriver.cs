@@ -11,6 +11,7 @@ namespace Fusion.XR
     [System.Serializable]
     public class TrackingBase
     {
+        
         //Velocity Tracking
         [Header("Velocity Tracking")]
         [SerializeField] public float positionStrength = 15f;
@@ -389,7 +390,7 @@ namespace Fusion.XR
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
             CalculateVelocities(targetPosition, targetRotation);
-            //ApplyForce(targetPosition);
+            ApplyForce(targetPosition);
             ApplyTorque(targetRotation);
         }
 
@@ -439,7 +440,7 @@ namespace Fusion.XR
             Vector3 angularVelocityDelta = targetAngularVelocity - rb.angularVelocity;
             Vector3 damper = trackingBase.torqueDamper * angularVelocityDelta;
 
-            torque = (spring + damper) * trackingBase.grabbedMass;
+            torque = spring + damper;
             torque = Vector3.ClampMagnitude(torque, trackingBase.maxTorque);
 
             rb.AddTorque(torque);
