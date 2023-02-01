@@ -11,6 +11,7 @@ namespace Fusion.XR
     [System.Serializable]
     public class TrackingBase
     {
+        
         //Velocity Tracking
         [Header("Velocity Tracking")]
         [SerializeField] public float positionStrength = 15f;
