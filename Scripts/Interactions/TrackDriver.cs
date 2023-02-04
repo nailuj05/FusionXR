@@ -124,7 +124,7 @@ namespace Fusion.XR
             //Track Position
             Vector3 deltaVelocity = (targetPosition - objectToTrack.position) * trackingBase.positionStrength;
 
-            rb.velocity = deltaVelocity;
+            rb.velocity = deltaVelocity + (Vector3)Player.main?.Rigidbody?.velocity;
 
             //Track Rotation
             Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);
