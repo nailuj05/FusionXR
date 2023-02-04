@@ -121,6 +121,8 @@ namespace Fusion.XR
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
+            rb.centerOfMass = rb.transform.InverseTransformPoint(targetPosition);
+
             //Track Position
             Vector3 deltaVelocity = (targetPosition - objectToTrack.position) * trackingBase.positionStrength;
 
@@ -218,6 +220,8 @@ namespace Fusion.XR
         Quaternion prevRot;
         private void TrackPositionRotation(Vector3 targetPos, Quaternion targetRot)
         {
+            jointRB.centerOfMass = jointRB.transform.InverseTransformPoint(targetPos);
+
             if (activeJoint != null && Time.frameCount % 10 == 0)
             {
                 UpdateHandJointDrives();
@@ -405,6 +409,8 @@ namespace Fusion.XR
             CalculateVelocities(targetPosition, targetRotation);
             ApplyForce(targetPosition);
             ApplyTorque(targetRotation);
+
+            rb.centerOfMass = rb.transform.InverseTransformPoint(targetPosition);
         }
 
         public override void EndTrack()
