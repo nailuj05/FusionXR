@@ -72,6 +72,9 @@ namespace Fusion.XR
             }
 
             if (showPreview) InitPrevObject();
+
+            //Set as Non Player Config
+            attachedTrackingBase.nonPlayerConfig = true;
         }
 
         private void Update()

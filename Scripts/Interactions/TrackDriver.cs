@@ -63,7 +63,7 @@ namespace Fusion.XR
         [HideInInspector] public Quaternion startRot;
         [HideInInspector] public Quaternion startRotLocal;
 
-        [HideInInspector] public float grabbedMass = 1;
+        [HideInInspector] public bool nonPlayerConfig = false;
     }
 
     public abstract class TrackDriver
@@ -124,7 +124,10 @@ namespace Fusion.XR
             //Track Position
             Vector3 deltaVelocity = (targetPosition - objectToTrack.position) * trackingBase.positionStrength;
 
-            rb.velocity = deltaVelocity + (Vector3)Player.main?.Rigidbody?.velocity;
+            rb.velocity = deltaVelocity;
+
+            if(!trackingBase.nonPlayerConfig)
+                rb.velocity += (Vector3)Player.main?.Rigidbody?.velocity;
 
             //Track Rotation
             Quaternion deltaRotation = targetRotation * Quaternion.Inverse(objectToTrack.rotation);

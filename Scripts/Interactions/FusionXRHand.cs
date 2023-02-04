@@ -208,7 +208,6 @@ namespace Fusion.XR
             transform.position = grabPosition.position;
             transform.rotation = grabPosition.rotation;
 
-            trackingBase.grabbedMass = grabbedGrabbable.GameObject.GetComponent<Rigidbody>().mass;
             grabbedGrabbable.Grab(this, grabbedTrackingMode, trackingBase);
 
             if (!useHandPoser)
@@ -229,8 +228,6 @@ namespace Fusion.XR
         {
             if (!isGrabbing) return;
             isGrabbing = false;
-
-            trackingBase.grabbedMass = 1;
 
             //Destroy the grabPoint, unlock if needed
             if (generatedGrabPoint)
