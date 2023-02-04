@@ -208,6 +208,9 @@ namespace Fusion.XR
             transform.position = grabPosition.position;
             transform.rotation = grabPosition.rotation;
 
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
             grabbedGrabbable.Grab(this, grabbedTrackingMode, trackingBase);
 
             if (!useHandPoser)

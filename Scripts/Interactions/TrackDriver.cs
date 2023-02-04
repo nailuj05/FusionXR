@@ -262,7 +262,8 @@ namespace Fusion.XR
         private Rigidbody objectRB;
         private Rigidbody trackerRB;
 
-        private ConfigurableJoint joint;
+        private ConfigurableJoint joint1;
+        private ConfigurableJoint joint2;
 
         private Quaternion initalRotation;
 
@@ -287,7 +288,7 @@ namespace Fusion.XR
 
         public override void UpdateTrackFixed(Vector3 targetPosition, Quaternion targetRotation)
         {
-            if (joint == null)
+            if (joint1 == null)
                 SetupJoint(targetPosition, targetRotation);
         }
 
@@ -303,26 +304,35 @@ namespace Fusion.XR
                 //objectRB.transform.rotation = targetRotation;
             }
 
-            joint = trackerRB.gameObject.AddComponent<ConfigurableJoint>();
+            joint1 = trackerRB.gameObject.AddComponent<ConfigurableJoint>();
+            joint2 = objectRB.gameObject.AddComponent<ConfigurableJoint>();
 
-            joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Locked;
-            joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Locked;
+            joint1.xMotion = joint1.yMotion = joint1.zMotion = ConfigurableJointMotion.Locked;
+            joint2.xMotion = joint2.yMotion = joint2.zMotion = ConfigurableJointMotion.Locked;
+            joint1.angularXMotion = joint1.angularYMotion = joint1.angularZMotion = ConfigurableJointMotion.Locked;
+            joint2.angularXMotion = joint2.angularYMotion = joint2.angularZMotion = ConfigurableJointMotion.Locked;
 
-            joint.autoConfigureConnectedAnchor = false;
-            joint.anchor = trackerRB.transform.InverseTransformPoint(trackingBase.palm.position);
-            joint.connectedBody = objectRB;
-            joint.connectedAnchor = objectRB.transform.InverseTransformPoint(trackingBase.palm.position);
+            joint1.connectedBody = objectRB;
+            joint2.connectedBody = trackerRB;
 
-            joint.enableCollision = false;
-            joint.enablePreprocessing = false;
+            //joint1.autoConfigureConnectedAnchor = false;
+            //joint1.anchor = trackerRB.transform.InverseTransformPoint(trackingBase.palm.position);
+            //joint1.connectedAnchor = objectRB.transform.InverseTransformPoint(trackingBase.palm.position);
+
+            joint1.enableCollision = joint2.enableCollision = false;
+            joint1.enablePreprocessing = joint2.enablePreprocessing = false;
         }
 
         private void DestroyJoint()
         {
-            if (joint != null)
-                Object.Destroy(joint);
+            if (joint1 != null)
+            {
+                Object.Destroy(joint1);
+                Object.Destroy(joint2);
+            }
 
-            joint = null;
+            joint1 = null;
+            joint2 = null;
         }
     }
 
@@ -405,6 +415,7 @@ namespace Fusion.XR
         void CalculateVelocities(Vector3 targetPosition, Quaternion targetRotation)
         {
             targetVelocity = (targetPosition - lastPos) / Time.fixedDeltaTime;
+
             lastPos = targetPosition;
 
             Quaternion rotationDelta = targetRotation * Quaternion.Inverse(lastRotation);

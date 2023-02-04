@@ -2747,7 +2747,7 @@ MonoBehaviour:
     rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
-    grabbedMass: 1
+    nonPlayerConfig: 0
   attachedObject: {fileID: 0}
 --- !u!54 &1408044856
 Rigidbody:
