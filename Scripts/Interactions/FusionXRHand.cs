@@ -39,7 +39,7 @@ namespace Fusion.XR
 
         public LayerMask grabMask = 768;
 
-        private bool isGrabbing;
+        public bool isGrabbing { get; private set; }
         private bool generatedGrabPoint;
         private IGrabbable grabbedGrabbable;
 
