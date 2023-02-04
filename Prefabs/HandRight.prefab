@@ -1008,28 +1008,28 @@ MonoBehaviour:
     forceRotationMultiplier: 35
     forceDampener: -10
     maxForceClamp: 150
-    forceSpring: 2500
-    forceDamper: 100
-    maxForce: 1000
-    torqueSpring: 20
-    torqueDamper: 1
-    maxTorque: 20
-    positionSpring: 3000
-    positionDamper: 250
+    forceSpring: 1200
+    forceDamper: 120
+    maxForce: 600
+    torqueSpring: 100
+    torqueDamper: 10
+    maxTorque: 50
+    positionSpring: 10000
+    positionDamper: 1000
     positionMaxForce: 1500
-    slerpSpring: 1500
-    slerpDamper: 250
-    slerpMaxForce: 1500
+    slerpSpring: 10000
+    slerpDamper: 1000
+    slerpMaxForce: 1000
     massScale: 1
     connectedMassScale: 1
-    adjustAnchor: 1
-    limit: 0.7
+    adjustAnchor: 0
+    limit: 1.1
     tracker: {fileID: 0}
     palm: {fileID: 0}
     rotationOffset: {x: 0, y: 0, z: 0}
     startRot: {x: 0, y: 0, z: 0, w: 0}
     startRotLocal: {x: 0, y: 0, z: 0, w: 0}
-    grabbedMass: 1
+    nonPlayerConfig: 0
   rb: {fileID: 0}
   grabbedTrackingMode: 5
   palm: {fileID: 6313628541362307769}
@@ -1039,22 +1039,38 @@ MonoBehaviour:
     m_Bits: 768
   useHandPoser: 1
   grip:
-    m_Name: 
+    m_Name: Grip
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 581becd0-cfe5-47af-a979-7f67b1c2cd33
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 43fb0c2b-4b9d-4b6c-be16-8b6343780e5f
+      m_Path: <XRController>{RightHand}/grip
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Grip
+      m_Flags: 0
     m_Flags: 0
   trigger:
-    m_Name: 
+    m_Name: Trigger
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 0a618afe-d161-4473-ac04-3db6b517c0fd
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f55c5f5a-099e-4dad-99e0-994ddcd59922
+      m_Path: <XRController>{RightHand}/trigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Trigger
+      m_Flags: 0
     m_Flags: 0
   OnGripStart:
     m_PersistentCalls:
@@ -1086,7 +1102,7 @@ MonoBehaviour:
   handAwait: {fileID: 11400000, guid: 4ad07f40a729d264b807d241a8e39880, type: 2}
   handPinch: {fileID: 11400000, guid: 7d476d494bc367342953758553cb5591, type: 2}
   handPoint: {fileID: 11400000, guid: 6e864dd055a2c454db96abb80e492b17, type: 2}
-  poseLerpSpeed: 3.5
+  poseLerpSpeed: 5
   useFingerColliders: 0
   isAttached: 0
   attachedObj: {fileID: 0}
@@ -1121,24 +1137,40 @@ MonoBehaviour:
   - {fileID: 840642523804224480}
   - {fileID: 1420367625493237257}
   - {fileID: 1358680824118784895}
-  debugMode: 0
+  debugMode: 1
   grip:
-    m_Name: 
+    m_Name: Grip
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 3bb58917-479e-4dc9-aa53-043b767bab0b
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 0580a6db-cd25-4f5c-9aab-57c90d618dbe
+      m_Path: <XRController>{RightHand}/grip
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Grip
+      m_Flags: 0
     m_Flags: 0
   trigger:
-    m_Name: 
+    m_Name: Trigger
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: bb76f887-1279-46fa-b604-a61d3434abd8
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 74f70f79-6062-482f-a8c2-d0bb439ac0eb
+      m_Path: <XRController>{RightHand}/trigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Trigger
+      m_Flags: 0
     m_Flags: 0
   handState: 0
 --- !u!1 &6745261486087858439
