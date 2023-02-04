@@ -10,6 +10,8 @@ namespace Fusion.XR
         [Tooltip("The position from which the distance is measured (parent space)")]
         [SerializeField] private Vector3 initialPosition;
         private Vector3 initialPositionGlobal => transform.parent.TransformPoint(initialPosition);
+        [SerializeField] private float maxDistance = 0.6f;
+        [SerializeField] private bool normalize;
 
         [ReadOnly] public float distance;
 
@@ -25,6 +27,8 @@ namespace Fusion.XR
         private void Update()
         {
             distance = Vector3.Distance(transform.position, initialPositionGlobal);
+
+            distance = normalize ? distance / maxDistance : distance;
 
             if(distance != lastDistance)
             {
