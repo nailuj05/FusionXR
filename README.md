@@ -1,5 +1,5 @@
 # FusionXR
-A all in one VR Toolkit.
+An all in one VR Toolkit.
 
 This has the goal of setting a open standard for VR. Many Problems already have solutions, so why figure them out yourself?
 My goal is it to compile a large set of tools so developers can focus on making games instead of worrying about interactions, systems, etc.
