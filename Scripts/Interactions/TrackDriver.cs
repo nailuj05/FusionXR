@@ -147,7 +147,7 @@ namespace Fusion.XR
 
         public override void EndTrack()
         {
-
+            rb.ResetCenterOfMass();
         }
     }
 
@@ -187,6 +187,8 @@ namespace Fusion.XR
         {
             if (activeJoint != null)
                 Object.Destroy(activeJoint);
+
+            jointRB.ResetCenterOfMass();
 
             activeJoint = null;
         }
@@ -415,7 +417,7 @@ namespace Fusion.XR
 
         public override void EndTrack()
         {
-
+            rb.ResetCenterOfMass();
         }
 
         void CalculateVelocities(Vector3 targetPosition, Quaternion targetRotation)
