@@ -20,9 +20,6 @@ namespace Fusion.XR
         public float turnAngle = 45;
         public float turnCooldown = 0.3f;
 
-        private bool isTurning;
-        private InputAction.CallbackContext context;
-
         private Transform currentMovementDirection => GetMovementDirection(movementDirection);
 
         public InputAction movementAction;
@@ -61,8 +58,7 @@ namespace Fusion.XR
             //Subscribe to Movement Actions
             movementAction.performed += PreprocessInput;
             movementAction.canceled += PreprocessInput;
-            turnAction.started += (c) => { isTurning = true; context = c; };
-            turnAction.canceled += (c) => isTurning = false;
+
 
             head = Player.main.head;
             hand = Player.main.LeftHand.trackedController;
@@ -78,19 +74,20 @@ namespace Fusion.XR
                 QueueMove(gravity);
             }
 
-            if (isTurning)
+            if (IsTurning())
                 Turn();
         }
 
         #region Turning
-        private void Turn()
+
+        private bool IsTurning()
         {
-            Turn(context);
+            return Mathf.Abs(turnAction.ReadValue<Vector2>().x) > activationThreshold;
         }
 
-        private void Turn(InputAction.CallbackContext obj)
+        private void Turn()
         {
-            Vector2 turnDirection = obj.ReadValue<Vector2>();
+            Vector2 turnDirection = turnAction.ReadValue<Vector2>();
 
             if (turnDirection.sqrMagnitude == 0) return;
 
