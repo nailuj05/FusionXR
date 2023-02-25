@@ -38,8 +38,9 @@ For testing I'd recommend using the same setup as I do:
 Tag X: **Attached**
 
 ### Physics Settings:
-- Default Solver Iterations: **10**
-- Default Solver Velocity Iterations: **10**
+I recommend setting the fixed time step to your framerate (1/90, 1/72, ....)
+- Default Solver Iterations: **15**
+- Default Solver Velocity Iterations: **15**
 - Default Max Angular Speed: **100**
 
 ### Layermask:
